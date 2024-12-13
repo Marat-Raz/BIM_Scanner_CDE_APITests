@@ -1,12 +1,12 @@
-package client;
+package client.account;
 
 import static io.restassured.RestAssured.given;
 
 import client.base.Client;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
-import usermodel.User;
-import usermodel.UserCredentials;
+import models.user.User;
+import models.user.UserCredentials;
 
 public class UserClient extends Client {
 
@@ -21,7 +21,7 @@ public class UserClient extends Client {
         .post(USER + "register/")
         .then();
   }
-
+/*
   @Step("Логин пользователя")
   public ValidatableResponse loginUser(UserCredentials userCredentials) {
     return given()
@@ -30,16 +30,16 @@ public class UserClient extends Client {
         .when()
         .post(USER + "login/")
         .then();
-  }
+  }*/
 
-  @Step("Обновление данных пользователя")
+ /* @Step("Обновление данных пользователя")
   public ValidatableResponse updateUser(User user, String accessToken) {
     return given()
         .spec(getBaseSpec())
         .header("authorization", accessToken)
         .body(user)
         .when()
-        .patch(USER + "user/")
+        .patch(USER + "models/")
         .then();
   }
 
@@ -49,7 +49,7 @@ public class UserClient extends Client {
         .spec(getBaseSpec())
         .header("authorization", accessToken)
         .when()
-        .delete(USER + "user/")
+        .delete(USER + "models/")
         .then();
-  }
+  }*/
 }

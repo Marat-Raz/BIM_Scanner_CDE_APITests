@@ -1,4 +1,4 @@
-package usermodel;
+package models.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 public class User {
 
-  private String name, login, password, email, phoneNumber;
-  private boolean isActive;
+  private String userName, emailAddress, password, appName;
+  //private boolean isActive;
 
 }
