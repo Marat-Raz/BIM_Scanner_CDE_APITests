@@ -1,4 +1,4 @@
-package client.account;
+package client;
 
 import static io.restassured.RestAssured.given;
 
@@ -6,14 +6,13 @@ import client.base.Client;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import models.user.User;
-import models.user.UserCredentials;
 
-public class UserClient extends Client {
+public class AccountClient extends Client {
 
   private static final String USER = "api/account/";
 
   @Step("Создание пользователя")
-  public ValidatableResponse createUser(User user) {
+  public ValidatableResponse registerUser(User user) {
     return given()
         .spec(getBaseSpec())
         .body(user)
@@ -42,14 +41,14 @@ public class UserClient extends Client {
         .patch(USER + "models/")
         .then();
   }
-
+*/
   @Step("Удаление пользователя")
-  public ValidatableResponse deleteUser(String accessToken) {
+  public ValidatableResponse deleteUser(String accessToken, String userId) {
     return given()
         .spec(getBaseSpec())
         .header("authorization", accessToken)
         .when()
         .delete(USER + "models/")
         .then();
-  }*/
+  }
 }

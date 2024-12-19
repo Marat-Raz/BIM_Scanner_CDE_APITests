@@ -1,4 +1,4 @@
-package client.token;
+package client;
 
 import static io.restassured.RestAssured.given;
 import client.base.Client;

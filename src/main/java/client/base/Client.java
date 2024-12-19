@@ -10,8 +10,8 @@ import io.restassured.specification.ResponseSpecification;
 
 public class Client {
 
-  public static final String BASE_URL = "https://cde-api.briodev.ru/";
-  public static final String TOKEN_BASE_URL = "https://cde-auth.dev.briodev.ru/";
+  public static final String BASE_URL = "https://cde-api.test.briodev.ru/";
+  public static final String TOKEN_BASE_URL = "https://cde-auth.test.briodev.ru/";
 
   protected RequestSpecification getBaseSpec() {
     return new RequestSpecBuilder()
