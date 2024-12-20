@@ -1,7 +1,6 @@
 package client.base;
 
 import static org.hamcrest.Matchers.containsString;
-
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.http.ContentType;

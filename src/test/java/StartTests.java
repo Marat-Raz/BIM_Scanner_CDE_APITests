@@ -47,7 +47,7 @@ public class StartTests {
   }
 
   @AfterEach
-  @Step("Удаление профиля пользователя")
+  @Step("Удаление пользователя")
   public void tearDown() {
     userClient = new UserClient();
     userClient.deleteUser(accessToken, userId);
