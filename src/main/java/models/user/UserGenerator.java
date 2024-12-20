@@ -2,9 +2,6 @@ package models.user;
 
 import static org.passay.CharacterCharacteristicsRule.ERROR_CODE;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.passay.CharacterData;
 import org.passay.CharacterRule;
@@ -57,5 +54,17 @@ public class UserGenerator {
     String password = gen.generatePassword(length, splCharRule, lowerCaseRule,
         upperCaseRule, digitRule);
     return password;
+  }
+
+  public static User getUserWithoutEmail() {
+    return new User(userName,null, password, appName);
+  }
+
+  public static User getUserWithoutPassword() {
+    return new User(userName, emailAddress, null, appName);
+  }
+
+  public static User getUserWithoutUserName() {
+    return new User(null, emailAddress, password, appName);
   }
 }

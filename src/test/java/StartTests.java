@@ -20,10 +20,10 @@ public class StartTests {
   static String accessToken;
   static TokenClient tokenClient = new TokenClient();
   User user;
-  AccountClient accountClient;
   String userId;
   ValidatableResponse baseResponse;
-  UserClient userClient;
+  UserClient userClient = new UserClient();
+  int statusCode;
 
 
   @BeforeAll
@@ -41,7 +41,6 @@ public class StartTests {
   @Step("Создание пользователя")
   public void setUp() {
     user = UserGenerator.getUser();
-    userClient = new UserClient();
     baseResponse = userClient.createUser(accessToken, user);
     userId = baseResponse.extract().path("id");
   }
@@ -49,8 +48,12 @@ public class StartTests {
   @AfterEach
   @Step("Удаление профиля пользователя")
   public void tearDown() {
-    userClient = new UserClient();
     userClient.deleteUser(accessToken, userId);
+  }
+
+  @Step("Получаем код ответа")
+  public int extractStatusCode(ValidatableResponse response) {
+    return response.extract().statusCode();
   }
 
 }
