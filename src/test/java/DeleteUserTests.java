@@ -1,4 +1,5 @@
 import static org.apache.http.HttpStatus.SC_BAD_REQUEST;
+import static org.apache.http.HttpStatus.SC_METHOD_NOT_ALLOWED;
 import static org.apache.http.HttpStatus.SC_NO_CONTENT;
 import static org.apache.http.HttpStatus.SC_UNAUTHORIZED;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -15,10 +16,6 @@ public class DeleteUserTests extends StartTests {
   ValidatableResponse deleteResponse;
   User testUser;
 
-  /* todo удалить пользователя
-   удалить пользователя без авторизации, т.е. без accessToken
-   удалить пользователя без его id
-   */
   @BeforeEach
   @Step("Создаем пользователя testUser")
   public void createTestUser() {
@@ -68,6 +65,16 @@ public class DeleteUserTests extends StartTests {
     assertEquals("Your request is not valid!", message);
     assertEquals("The following errors were detected during validation.\n"
         + " - The value '" + wrongId + "' is not valid.\n", details);
+  }
+
+  @Test
+  @DisplayName("Удалить пользователя testUser при отсутствующем id")
+  public void deleteTestUserWithoutIdTest() {
+    deleteResponse = userClient.deleteUserWithoutId(accessToken);
+    statusCode = extractStatusCode(deleteResponse);
+
+    assertEquals(SC_METHOD_NOT_ALLOWED, statusCode);
+
   }
 
 

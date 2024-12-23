@@ -8,10 +8,10 @@ import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.response.ValidatableResponse;
 import models.token.TokenBuilder;
+import models.user.User;
 import models.user.UserGenerator;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
-import models.user.User;
 import org.junit.jupiter.api.BeforeEach;
 
 
@@ -24,7 +24,7 @@ public class StartTests {
   String userId;
   ValidatableResponse baseResponse;
   UserClient userClient;
-
+  int statusCode;
 
   @BeforeAll
   @Step("Запуск Allure и логирования запросов по API, "
@@ -33,7 +33,8 @@ public class StartTests {
     RestAssured.filters(
         new RequestLoggingFilter(), new ResponseLoggingFilter(),
         new AllureRestAssured());
-    ValidatableResponse responseAdminToken = tokenClient.createToken(TokenBuilder.getTokenForAdminUser());
+    ValidatableResponse responseAdminToken = tokenClient.createToken(
+        TokenBuilder.getTokenForAdminUser());
     accessToken = responseAdminToken.extract().path("access_token");
   }
 
@@ -51,6 +52,11 @@ public class StartTests {
   public void tearDown() {
     userClient = new UserClient();
     userClient.deleteUser(accessToken, userId);
+  }
+
+  @Step("Получаем код ответа")
+  public int extractStatusCode(ValidatableResponse response) {
+    return response.extract().statusCode();
   }
 
 }

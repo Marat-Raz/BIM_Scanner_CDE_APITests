@@ -14,6 +14,7 @@ public class UserTest extends StartTests {
   boolean isSuccess;
   String userId;
   TokenClient tokenClient = new TokenClient();
+// todo Создать пользователя при не верном accessToken
 
   @Test
   @DisplayName("Создать уникального пользователя")
