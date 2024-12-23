@@ -1,12 +1,10 @@
 package client.base;
 
-import static org.hamcrest.Matchers.containsString;
-
+import io.qameta.allure.Step;
 import io.restassured.builder.RequestSpecBuilder;
-import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.http.ContentType;
+import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.RequestSpecification;
-import io.restassured.specification.ResponseSpecification;
 
 public class Client {
 
@@ -26,11 +24,4 @@ public class Client {
         .setBaseUri(TOKEN_BASE_URL)
         .build();
   }
-
-  public ResponseSpecification checkStatusCodeInResponse() {
-    return new ResponseSpecBuilder().expectStatusCode(200)
-        .expectBody(containsString("Success"))
-        .build();
-  }
-
 }
