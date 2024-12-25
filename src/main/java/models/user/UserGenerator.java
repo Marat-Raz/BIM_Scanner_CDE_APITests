@@ -12,7 +12,7 @@ public class UserGenerator {
 
   public static String userName = RandomStringUtils.randomAlphabetic(6, 256);
   public static String emailAddress = RandomStringUtils.randomAlphabetic(3, 247) + "@mail.com";
-  public static String password = generatePassayPassword(10, 2, 2, 2, 2);
+  public static String password = generatePassword(10, 2, 2, 2, 2);
   public static String appName = RandomStringUtils.randomAlphabetic(8);
 
   public static User getUser() {
@@ -24,7 +24,7 @@ public class UserGenerator {
     return new User(userName + 1, 2 + emailAddress, password + 3, appName + 4);
   }
 
-  public static String generatePassayPassword(int length, int lowerCase, int upperCase,
+  public static String generatePassword(int length, int lowerCase, int upperCase,
       int digitRuleNumb, int specialCharsNumb) {
     PasswordGenerator gen = new PasswordGenerator();
     CharacterData lowerCaseChars = EnglishCharacterData.LowerCase;
