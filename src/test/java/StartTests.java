@@ -24,6 +24,7 @@ public class StartTests {
   ValidatableResponse baseResponse;
   UserClient userClient = new UserClient();
   int statusCode;
+  UserGenerator userGenerator = new UserGenerator();
 
 
   @BeforeAll
@@ -40,7 +41,7 @@ public class StartTests {
   @BeforeEach
   @Step("Создание пользователя")
   public void setUp() {
-    user = UserGenerator.getUser();
+    user = userGenerator.getUser();
     baseResponse = userClient.createUser(accessToken, user);
     userId = baseResponse.extract().path("id");
   }

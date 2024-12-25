@@ -10,21 +10,21 @@ import org.passay.PasswordGenerator;
 
 public class UserGenerator {
 
-  public static String userName = RandomStringUtils.randomAlphabetic(6, 256);
-  public static String emailAddress = RandomStringUtils.randomAlphabetic(3, 247) + "@mail.com";
-  public static String password = generatePassayPassword(10, 2, 2, 2, 2);
-  public static String appName = RandomStringUtils.randomAlphabetic(8);
+  public String userName = RandomStringUtils.randomAlphabetic(6, 256);
+  public String emailAddress = RandomStringUtils.randomAlphabetic(3, 247) + "@mail.com";
+  public String password = generatePassayPassword(10, 2, 2, 2, 2);
+  public String appName = RandomStringUtils.randomAlphabetic(8);
 
-  public static User getUser() {
+  public User getUser() {
     return new User(userName, emailAddress, password, appName);
   }
 
 
-  public static User getNewUser() {
+  public User getNewUser() {
     return new User(userName + 1, 2 + emailAddress, password + 3, appName + 4);
   }
 
-  public static String generatePassayPassword(int length, int lowerCase, int upperCase,
+  public String generatePassayPassword(int length, int lowerCase, int upperCase,
       int digitRuleNumb, int specialCharsNumb) {
     PasswordGenerator gen = new PasswordGenerator();
     CharacterData lowerCaseChars = EnglishCharacterData.LowerCase;
@@ -56,11 +56,11 @@ public class UserGenerator {
     return password;
   }
 
-  public static User getUserWithoutEmail() {
+  public User getUserWithoutEmail() {
     return new User(userName,null, password, appName);
   }
 
-  public static User getUserWithoutPassword() {
+  public User getUserWithoutPassword() {
     return new User(userName, emailAddress, null, appName);
   }
 

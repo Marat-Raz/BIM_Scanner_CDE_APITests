@@ -6,6 +6,7 @@ import client.base.Client;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import models.user.User;
+import models.user.UserCredentials;
 
 public class UserClient extends Client {
 
@@ -22,13 +23,13 @@ public class UserClient extends Client {
   }
 
   @Step("Изменить данные пользователя") // todo уточнить по документации
-  public ValidatableResponse changeUser(String accessToken, User user, String id) {
+  public ValidatableResponse changeUser(String accessToken, UserCredentials userCredentials, String id) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(accessToken)
-        .body(user)
+        .body(userCredentials)
         .when()
-        .post(USERS + id)
+        .put(USERS + id)
         .then();
   }
 

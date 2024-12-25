@@ -24,7 +24,7 @@ public class ChangeUserData extends StartTests {
   @Tag(value = "smoke")
   @DisplayName("Изменить данные пользователя")
   public void changeUserDataTests() {
-    User newUser = UserGenerator.getNewUser();
+    User newUser = userGenerator.getNewUser();
     putResponse = userClient.changeUser(accessToken, UserCredentials.from(newUser), userId);
     int statusCode = putResponse.extract().statusCode();
 
