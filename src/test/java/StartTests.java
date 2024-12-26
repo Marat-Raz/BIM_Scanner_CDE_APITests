@@ -1,4 +1,5 @@
-import client.AccountClient;
+import static models.user.UserType.DEFAULT_USER;
+
 import client.TokenClient;
 import client.UserClient;
 import io.qameta.allure.Step;
@@ -9,7 +10,7 @@ import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.response.ValidatableResponse;
 import models.token.TokenBuilder;
 import models.user.User;
-import models.user.UserGenerator;
+import models.user.UserFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,12 +20,13 @@ public class StartTests {
 
   static String accessToken;
   static TokenClient tokenClient = new TokenClient();
-  User user;
-  AccountClient accountClient;
+  User defaultUser;
   String userId;
   ValidatableResponse baseResponse;
-  UserClient userClient;
   int statusCode;
+  UserClient userClient = new UserClient();
+  UserFactory userFactory = new UserFactory();
+
 
   @BeforeAll
   @Step("Запуск Allure и логирования запросов по API, "
@@ -41,16 +43,14 @@ public class StartTests {
   @BeforeEach
   @Step("Создание пользователя")
   public void setUp() {
-    user = UserGenerator.getUser();
-    userClient = new UserClient();
-    baseResponse = userClient.createUser(accessToken, user);
+    defaultUser = userFactory.createUser(DEFAULT_USER);
+    baseResponse = userClient.createUser(accessToken, defaultUser);
     userId = baseResponse.extract().path("id");
   }
 
   @AfterEach
   @Step("Удаление пользователя")
   public void tearDown() {
-    userClient = new UserClient();
     userClient.deleteUser(accessToken, userId);
   }
 

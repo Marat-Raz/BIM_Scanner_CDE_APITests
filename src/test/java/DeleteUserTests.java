@@ -1,3 +1,4 @@
+import static models.user.UserType.NEW_USER;
 import static org.apache.http.HttpStatus.SC_BAD_REQUEST;
 import static org.apache.http.HttpStatus.SC_METHOD_NOT_ALLOWED;
 import static org.apache.http.HttpStatus.SC_NO_CONTENT;
@@ -7,7 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import models.user.User;
-import models.user.UserGenerator;
 import org.junit.jupiter.api.*;
 
 public class DeleteUserTests extends StartTests {
@@ -19,7 +19,7 @@ public class DeleteUserTests extends StartTests {
   @BeforeEach
   @Step("Создаем пользователя testUser")
   public void createTestUser() {
-    testUser = UserGenerator.getNewUser();
+    testUser = userFactory.createUser(NEW_USER);
     ValidatableResponse response = userClient.createUser(accessToken, testUser);
     idTestUser = response.extract().path("id");
   }
@@ -74,8 +74,6 @@ public class DeleteUserTests extends StartTests {
     statusCode = extractStatusCode(deleteResponse);
 
     assertEquals(SC_METHOD_NOT_ALLOWED, statusCode);
-
   }
-
 
 }

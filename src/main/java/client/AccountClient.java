@@ -7,11 +7,11 @@ import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import models.user.User;
 
-public class AccountClient extends Client {
+public class AccountClient extends Client { // todo необходимо дописать остальные методы/ручки
 
   private static final String USER = "api/account/";
 
-  @Step("Создание пользователя")
+  @Step("Регистрация пользователя")
   public ValidatableResponse registerUser(User user) {
     return given()
         .spec(getBaseSpec())
