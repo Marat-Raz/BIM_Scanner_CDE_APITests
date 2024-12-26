@@ -1,4 +1,5 @@
-import client.AccountClient;
+import static models.user.UserType.DEFAULT_USER;
+
 import client.TokenClient;
 import client.UserClient;
 import io.qameta.allure.Step;
@@ -8,7 +9,7 @@ import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.response.ValidatableResponse;
 import models.token.TokenBuilder;
-import models.user.UserGenerator;
+import models.user.UserFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import models.user.User;
@@ -19,11 +20,12 @@ public class StartTests {
 
   static String accessToken;
   static TokenClient tokenClient = new TokenClient();
-  User user;
+  User defaultUser;
   String userId;
   ValidatableResponse baseResponse;
   UserClient userClient = new UserClient();
   int statusCode;
+  UserFactory userFactory;
 
 
   @BeforeAll
@@ -40,8 +42,8 @@ public class StartTests {
   @BeforeEach
   @Step("Создание пользователя")
   public void setUp() {
-    user = UserGenerator.getUser();
-    baseResponse = userClient.createUser(accessToken, user);
+    defaultUser = userFactory.createUser(DEFAULT_USER);
+    baseResponse = userClient.createUser(accessToken, defaultUser);
     userId = baseResponse.extract().path("id");
   }
 

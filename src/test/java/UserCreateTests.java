@@ -1,3 +1,6 @@
+import static models.user.UserType.USER_WITHOUT_EMAIL;
+import static models.user.UserType.USER_WITHOUT_NAME;
+import static models.user.UserType.USER_WITHOUT_PASSWORD;
 import static org.apache.http.HttpStatus.SC_BAD_REQUEST;
 import static org.apache.http.HttpStatus.SC_FORBIDDEN;
 import static org.apache.http.HttpStatus.SC_OK;
@@ -6,7 +9,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import io.restassured.response.ValidatableResponse;
 import models.user.User;
-import models.user.UserGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -28,14 +30,14 @@ public class UserCreateTests extends StartTests {
   @Test
   @DisplayName("Создать пользователя, который уже создан")
   public void createAnExistingUserTest() {
-    ValidatableResponse secondResponse = userClient.createUser(accessToken, user);
+    ValidatableResponse secondResponse = userClient.createUser(accessToken, defaultUser);
     statusCode = extractStatusCode(secondResponse);
     message = secondResponse.extract().path("error.message");
     errorCode = secondResponse.extract().path("error.code");
 
     assertEquals(SC_FORBIDDEN, statusCode);
-    assertEquals("Username '" + user.getUserName() +
-        "' is already taken., Email '" + user.getEmail() +
+    assertEquals("Username '" + defaultUser.getUserName() +
+        "' is already taken., Email '" + defaultUser.getEmail() +
         "' is already taken.", message);
     assertEquals("Volo.Abp.Identity:DuplicateUserName", errorCode);
   }
@@ -43,7 +45,7 @@ public class UserCreateTests extends StartTests {
   @Test
   @DisplayName("Создать пользователя и не заполнить одно из обязательных полей - email")
   public void createUserWithoutEmailTest() {
-    User getUserWithoutEmail = UserGenerator.getUserWithoutEmail();
+    User getUserWithoutEmail = userFactory.createUser(USER_WITHOUT_EMAIL);
     wrongResponse = userClient.createUser(accessToken, getUserWithoutEmail);
     message = wrongResponse.extract().path("error.message");
     details = wrongResponse.extract().path("error.details");
@@ -58,7 +60,7 @@ public class UserCreateTests extends StartTests {
   @Test
   @DisplayName("Создать пользователя и не заполнить одно из обязательных полей - password")
   public void createUserWithoutPasswordTest() {
-    User getUserWithoutPassword = UserGenerator.getUserWithoutPassword();
+    User getUserWithoutPassword = userFactory.createUser(USER_WITHOUT_PASSWORD);
     wrongResponse = userClient.createUser(accessToken, getUserWithoutPassword);
     message = wrongResponse.extract().path("error.message");
     details = wrongResponse.extract().path("error.details");
@@ -73,7 +75,7 @@ public class UserCreateTests extends StartTests {
   @Test
   @DisplayName("Создать пользователя и не заполнить одно из обязательных полей - userName")
   public void createUserWithoutNameTest() {
-    User getUserWithoutUserName = UserGenerator.getUserWithoutUserName();
+    User getUserWithoutUserName = userFactory.createUser(USER_WITHOUT_NAME);
     wrongResponse = userClient.createUser(accessToken, getUserWithoutUserName);
     message = wrongResponse.extract().path("error.message");
     details = wrongResponse.extract().path("error.details");
