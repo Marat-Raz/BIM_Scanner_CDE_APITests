@@ -6,9 +6,9 @@ public class UserCredentials {
   private String userName;
   private String email;
 
-  public UserCredentials(String userName, String password) {
+  public UserCredentials(String userName, String email) {
     this.userName = userName;
-    this.email = password;
+    this.email = email;
   }
 
   public String getUserName() {

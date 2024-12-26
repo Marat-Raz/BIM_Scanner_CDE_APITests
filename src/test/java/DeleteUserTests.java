@@ -1,2 +1,3 @@
-package PACKAGE_NAME;public class DeleteUserTests {
+public class DeleteUserTests extends StartTests {
+
 }
