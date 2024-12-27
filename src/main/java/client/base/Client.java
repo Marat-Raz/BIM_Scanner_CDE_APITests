@@ -8,6 +8,7 @@ public class Client {
 
   public static final String BASE_URL = "https://cde-api.test.briodev.ru/";
   public static final String TOKEN_BASE_URL = "https://cde-auth.test.briodev.ru/";
+  public static String ACCESS_TOKEN;
 
   protected RequestSpecification getBaseSpec() {
     return new RequestSpecBuilder()
