@@ -13,11 +13,12 @@ public class UserClient extends Client {
 
   @Step("Получить пользователя по id")
   public ValidatableResponse getUserById(String accessToken, String id) {
+    // todo добавить метод с отсутствующим id для негативных тестов
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(accessToken)
         .when()
-        .post(USERS + id)
+        .get(USERS + id)
         .then();
   }
 

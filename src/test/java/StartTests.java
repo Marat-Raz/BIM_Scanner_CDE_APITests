@@ -25,7 +25,9 @@ public class StartTests {
   ValidatableResponse baseResponse;
   UserClient userClient = new UserClient();
   int statusCode;
-  UserFactory userFactory;
+  UserFactory userFactory = new UserFactory();
+  String message;
+  String details;
 
 
   @BeforeAll
@@ -45,6 +47,7 @@ public class StartTests {
     defaultUser = userFactory.createUser(DEFAULT_USER);
     baseResponse = userClient.createUser(accessToken, defaultUser);
     userId = baseResponse.extract().path("id");
+
   }
 
   @AfterEach
