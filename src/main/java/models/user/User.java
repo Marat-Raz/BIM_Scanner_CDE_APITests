@@ -9,11 +9,9 @@ import lombok.Setter;
 @Setter
 public class User {
 
-  private String userName
-      , email, password, appName;
-/*  private String userName, name, surname, email, phoneNumber;
-  private boolean isActive, lockoutEnabled;
-  private String[] roleNames;
-  private String password;*/
+  private String userName;
+  private String email;
+  private String password;
+  private String appName;
 
 }

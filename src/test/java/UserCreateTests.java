@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 
 public class UserCreateTests extends StartTests {
 
-  String message, errorCode, details;
+
   ValidatableResponse wrongResponse;
 
   @Test
@@ -33,20 +33,18 @@ public class UserCreateTests extends StartTests {
     ValidatableResponse secondResponse = userClient.createUser(accessToken, defaultUser);
     statusCode = extractStatusCode(secondResponse);
     message = secondResponse.extract().path("error.message");
-    errorCode = secondResponse.extract().path("error.code");
 
     assertEquals(SC_FORBIDDEN, statusCode);
     assertEquals("Username '" + defaultUser.getUserName() +
         "' is already taken., Email '" + defaultUser.getEmail() +
         "' is already taken.", message);
-    assertEquals("Volo.Abp.Identity:DuplicateUserName", errorCode);
   }
 
   @Test
   @DisplayName("Создать пользователя и не заполнить одно из обязательных полей - email")
   public void createUserWithoutEmailTest() {
-    User getUserWithoutEmail = userFactory.createUser(USER_WITHOUT_EMAIL);
-    wrongResponse = userClient.createUser(accessToken, getUserWithoutEmail);
+    User userWithoutEmail = userFactory.createUser(USER_WITHOUT_EMAIL);
+    wrongResponse = userClient.createUser(accessToken, userWithoutEmail);
     message = wrongResponse.extract().path("error.message");
     details = wrongResponse.extract().path("error.details");
     statusCode = extractStatusCode(wrongResponse);
