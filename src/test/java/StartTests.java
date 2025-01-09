@@ -25,8 +25,9 @@ public class StartTests {
   ValidatableResponse baseResponse;
   UserClient userClient = new UserClient();
   int statusCode;
-  UserFactory userFactory;
-
+  UserFactory userFactory = new UserFactory();
+  String message;
+  String details;
 
   @BeforeAll
   @Step("Запуск Allure и логирования запросов по API, "
