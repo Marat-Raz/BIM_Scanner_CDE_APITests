@@ -9,6 +9,7 @@ import io.restassured.RestAssured;
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.response.ValidatableResponse;
+import models.error.ErrorRoot;
 import models.token.TokenBuilder;
 import models.user.UserFactory;
 import org.junit.jupiter.api.AfterEach;
@@ -19,15 +20,15 @@ import org.junit.jupiter.api.BeforeEach;
 
 public class StartTests {
 
-  static TokenClient tokenClient = new TokenClient();
-  User defaultUser;
-  String userId;
-  ValidatableResponse baseResponse;
-  UserClient userClient = new UserClient();
-  int statusCode;
-  UserFactory userFactory = new UserFactory();
+  private static TokenClient tokenClient = new TokenClient();
+  protected User defaultUser;
+  private String userId;
+  protected ValidatableResponse baseResponse;
+  protected UserClient userClient = new UserClient();
+  protected int statusCode;
+  protected UserFactory userFactory = new UserFactory();
+  protected ErrorRoot errorRoot;
   String message;
-  String details;
 
   @BeforeAll
   @Step("Запуск Allure и логирования запросов по API, "
@@ -50,7 +51,7 @@ public class StartTests {
 
   @AfterEach
   @Step("Удаление профиля пользователя")
-  public void tearDown() {
+  public void cleanData() {
     userClient.deleteUser(userId);
   }
 

@@ -9,6 +9,10 @@ import lombok.Setter;
 @Setter
 public class Project {
 
-  String name, description, imageUrl, responsibleId, completionTime;
+  String name;
+  String description;
+  String imageUrl;
+  String responsibleId;
+  String completionTime;
 
 }
