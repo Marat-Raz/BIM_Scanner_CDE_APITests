@@ -20,10 +20,10 @@ public class ProjectsClient extends Client {
   }
 
   @Step("Создать проект")
-  public ValidatableResponse createProject(String accessToken, Project project) {
+  public ValidatableResponse createProject(Project project) {
     return given()
         .spec(getBaseSpec())
-        .auth().oauth2(accessToken)
+        .auth().oauth2(ACCESS_TOKEN)
         .body(project)
         .when()
         .post(PROJECTS)
@@ -31,20 +31,20 @@ public class ProjectsClient extends Client {
   }
 
   @Step("Получить проект по его id")
-  public ValidatableResponse getProjectByItsId(String accessToken, String id) {
+  public ValidatableResponse getProjectByItsId(String id) {
     return given()
         .spec(getBaseSpec())
-        .auth().oauth2(accessToken)
+        .auth().oauth2(ACCESS_TOKEN)
         .when()
         .get(PROJECTS + id)
         .then();
   }
 
   @Step("Удалить проект по его id")
-  public ValidatableResponse deleteProjectByItsId(String accessToken, String id) {
+  public ValidatableResponse deleteProjectByItsId(String id) {
     return given()
         .spec(getBaseSpec())
-        .auth().oauth2(accessToken)
+        .auth().oauth2(ACCESS_TOKEN)
         .when()
         .delete(PROJECTS + id)
         .then();

@@ -12,20 +12,20 @@ public class UserClient extends Client {
   private static final String USERS = "/api/identity/users/";
 
   @Step("Получить пользователя по id")
-  public ValidatableResponse getUserById(String accessToken, String id) {
+  public ValidatableResponse getUserById(String id) {
     return given()
         .spec(getBaseSpec())
-        .auth().oauth2(accessToken)
+        .auth().oauth2(ACCESS_TOKEN)
         .when()
         .post(USERS + id)
         .then();
   }
 
   @Step("Изменить данные пользователя") // todo уточнить по документации
-  public ValidatableResponse changeUser(String accessToken, User user, String id) {
+  public ValidatableResponse changeUser(User user, String id) {
     return given()
         .spec(getBaseSpec())
-        .auth().oauth2(accessToken)
+        .auth().oauth2(ACCESS_TOKEN)
         .body(user)
         .when()
         .post(USERS + id)
@@ -33,31 +33,31 @@ public class UserClient extends Client {
   }
 
   @Step("Удалить пользователя по id")
-  public ValidatableResponse deleteUser(String accessToken, String id) {
+  public ValidatableResponse deleteUser(String id) {
     return given()
         .spec(getBaseSpec())
-        .auth().oauth2(accessToken)
+        .auth().oauth2(ACCESS_TOKEN)
         .when()
         .delete(USERS + id)
         .then();
   }
 
   @Step("Получить список пользователей по фильтрам")
-  public ValidatableResponse getListOfUsers(String accessToken, String filter, String sorting,
+  public ValidatableResponse getListOfUsers(String filter, String sorting,
       String skipCount, int maxResultCount) {
     return given()
         .spec(getBaseSpec())
-        .auth().oauth2(accessToken)
+        .auth().oauth2(ACCESS_TOKEN)
         .when()
         .delete(USERS + filter + sorting + skipCount + maxResultCount)
         .then();
   }
 
   @Step("Создать пользователя")
-  public ValidatableResponse createUser(String accessToken, User user) {
+  public ValidatableResponse createUser(User user) {
     return given()
         .spec(getBaseSpec())
-        .auth().oauth2(accessToken)
+        .auth().oauth2(ACCESS_TOKEN)
         .body(user)
         .when()
         .post(USERS)
@@ -65,54 +65,54 @@ public class UserClient extends Client {
   }
 
   @Step("Получить роли пользователя по его id")
-  public ValidatableResponse getUserRolesById(String accessToken, String id) {
+  public ValidatableResponse getUserRolesById(String id) {
     return given()
         .spec(getBaseSpec())
-        .auth().oauth2(accessToken)
+        .auth().oauth2(ACCESS_TOKEN)
         .when()
-        .post(USERS + id + "/roles")
+        .get(USERS + id + "/roles")
         .then();
   }
 
   @Step("Изменить роли пользователя по его id")
-  public ValidatableResponse getUserRolesById(String accessToken, String id, String roleNames) {
+  public ValidatableResponse putUserRolesById(String id, String roleNames) {
     //todo заменить параметр roleNames после добавления модели ролей
     return given()
         .spec(getBaseSpec())
-        .auth().oauth2(accessToken)
+        .auth().oauth2(ACCESS_TOKEN)
         .body(roleNames)
         .when()
-        .post(USERS + id + "/roles")
+        .put(USERS + id + "/roles")
         .then();
   }
 
   @Step("Получить список назначаемых пользователям ролей")
-  public ValidatableResponse getListOfRolesAssignedToUsers(String accessToken) {
+  public ValidatableResponse getListOfRolesAssignedToUsers() {
     return given()
         .spec(getBaseSpec())
-        .auth().oauth2(accessToken)
+        .auth().oauth2(ACCESS_TOKEN)
         .when()
-        .post(USERS + "/assignable-roles")
+        .get(USERS + "/assignable-roles")
         .then();
   }
 
   @Step("Получить пользователя по userName")
-  public ValidatableResponse getUserByUserName(String accessToken, String userName) {
+  public ValidatableResponse getUserByUserName(String userName) {
     return given()
         .spec(getBaseSpec())
-        .auth().oauth2(accessToken)
+        .auth().oauth2(ACCESS_TOKEN)
         .when()
-        .post(USERS + "/by-username/" + userName)
+        .get(USERS + "/by-username/" + userName)
         .then();
   }
 
   @Step("Получить пользователя по email")
-  public ValidatableResponse getUserByEmail(String accessToken, String email) {
+  public ValidatableResponse getUserByEmail(String email) {
     return given()
         .spec(getBaseSpec())
-        .auth().oauth2(accessToken)
+        .auth().oauth2(ACCESS_TOKEN)
         .when()
-        .post(USERS + "/by-email/" + email)
+        .get(USERS + "/by-email/" + email)
         .then();
   }
 

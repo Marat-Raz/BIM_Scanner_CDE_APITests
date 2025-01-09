@@ -2,6 +2,7 @@ import static models.user.UserType.DEFAULT_USER;
 
 import client.TokenClient;
 import client.UserClient;
+import client.base.Client;
 import io.qameta.allure.Step;
 import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
@@ -18,7 +19,6 @@ import org.junit.jupiter.api.BeforeEach;
 
 public class StartTests {
 
-  static String accessToken;
   static TokenClient tokenClient = new TokenClient();
   User defaultUser;
   String userId;
@@ -37,21 +37,21 @@ public class StartTests {
         new RequestLoggingFilter(), new ResponseLoggingFilter(),
         new AllureRestAssured());
     ValidatableResponse responseAdminToken = tokenClient.createToken(TokenBuilder.getTokenForAdminUser());
-    accessToken = responseAdminToken.extract().path("access_token");
+    Client.ACCESS_TOKEN = responseAdminToken.extract().path("access_token");;
   }
 
   @BeforeEach
   @Step("Создание пользователя")
   public void setUp() {
     defaultUser = userFactory.createUser(DEFAULT_USER);
-    baseResponse = userClient.createUser(accessToken, defaultUser);
+    baseResponse = userClient.createUser(defaultUser);
     userId = baseResponse.extract().path("id");
   }
 
   @AfterEach
   @Step("Удаление профиля пользователя")
   public void tearDown() {
-    userClient.deleteUser(accessToken, userId);
+    userClient.deleteUser(userId);
   }
 
   @Step("Получаем код ответа")

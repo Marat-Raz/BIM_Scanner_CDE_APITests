@@ -5,7 +5,6 @@ import static org.apache.http.HttpStatus.SC_BAD_REQUEST;
 import static org.apache.http.HttpStatus.SC_FORBIDDEN;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import io.restassured.response.ValidatableResponse;
 import models.user.User;
@@ -24,13 +23,12 @@ public class UserCreateTests extends StartTests {
   public void userSuccessCreateTest() {
     statusCode = baseResponse.extract().statusCode();
     assertEquals(SC_OK, statusCode);
-    assertNotNull(accessToken);
   }
 
   @Test
   @DisplayName("Создать пользователя, который уже создан")
   public void createAnExistingUserTest() {
-    ValidatableResponse secondResponse = userClient.createUser(accessToken, defaultUser);
+    ValidatableResponse secondResponse = userClient.createUser(defaultUser);
     statusCode = extractStatusCode(secondResponse);
     message = secondResponse.extract().path("error.message");
 
@@ -44,7 +42,7 @@ public class UserCreateTests extends StartTests {
   @DisplayName("Создать пользователя и не заполнить одно из обязательных полей - email")
   public void createUserWithoutEmailTest() {
     User userWithoutEmail = userFactory.createUser(USER_WITHOUT_EMAIL);
-    wrongResponse = userClient.createUser(accessToken, userWithoutEmail);
+    wrongResponse = userClient.createUser(userWithoutEmail);
     message = wrongResponse.extract().path("error.message");
     details = wrongResponse.extract().path("error.details");
     statusCode = extractStatusCode(wrongResponse);
@@ -59,7 +57,7 @@ public class UserCreateTests extends StartTests {
   @DisplayName("Создать пользователя и не заполнить одно из обязательных полей - password")
   public void createUserWithoutPasswordTest() {
     User getUserWithoutPassword = userFactory.createUser(USER_WITHOUT_PASSWORD);
-    wrongResponse = userClient.createUser(accessToken, getUserWithoutPassword);
+    wrongResponse = userClient.createUser(getUserWithoutPassword);
     message = wrongResponse.extract().path("error.message");
     details = wrongResponse.extract().path("error.details");
     statusCode = extractStatusCode(wrongResponse);
@@ -74,7 +72,7 @@ public class UserCreateTests extends StartTests {
   @DisplayName("Создать пользователя и не заполнить одно из обязательных полей - userName")
   public void createUserWithoutNameTest() {
     User getUserWithoutUserName = userFactory.createUser(USER_WITHOUT_NAME);
-    wrongResponse = userClient.createUser(accessToken, getUserWithoutUserName);
+    wrongResponse = userClient.createUser(getUserWithoutUserName);
     message = wrongResponse.extract().path("error.message");
     details = wrongResponse.extract().path("error.details");
     statusCode = extractStatusCode(wrongResponse);

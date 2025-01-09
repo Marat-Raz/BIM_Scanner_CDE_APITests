@@ -20,7 +20,7 @@ public class AccountClient extends Client { // todo необходимо доп�
         .post(USER + "register/")
         .then();
   }
-/*
+/* // Fixme
   @Step("Логин пользователя")
   public ValidatableResponse loginUser(UserCredentials userCredentials) {
     return given()
