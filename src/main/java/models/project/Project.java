@@ -14,6 +14,6 @@ public class Project {
   String description;
   String imageUrl;
   String responsibleId;
-  LocalDateTime completionTime;
+  String completionTime;
 
 }
