@@ -6,6 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class TokenBuilder {
+
   static String grant_type;
   static String username;
   static String password;

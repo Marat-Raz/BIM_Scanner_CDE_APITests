@@ -7,7 +7,13 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class RequestToken {
-  private String grant_type, username, password, scope, client_id, client_secret;
+
+  private String grant_type;
+  private String username;
+  private String password;
+  private String scope;
+  private String client_id;
+  private String client_secret;
 
   @Override
   public String toString() {

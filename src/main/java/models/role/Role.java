@@ -11,8 +11,11 @@ import lombok.Setter;
 public class Role {
 
   private String name;
-  private boolean isDefault, isStatic, isPublic;
-  private String concurrencyStamp, id;
+  private boolean isDefault;
+  private boolean isStatic;
+  private boolean isPublic;
+  private String concurrencyStamp;
+  private String id;
   private ArrayList extraProperties;
 
 }
