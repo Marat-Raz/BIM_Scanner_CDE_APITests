@@ -30,7 +30,7 @@ public class UserCreateTests extends StartTests {
   @Test
   @DisplayName("Создать пользователя, который уже создан")
   public void createAnExistingUserTest() {
-    ValidatableResponse secondResponse = userClient.createUser(accessToken, defaultUser);
+    ValidatableResponse secondResponse = userClient.createUser(defaultUser);
     statusCode = extractStatusCode(secondResponse);
     errorRoot = secondResponse.extract().body().as(ErrorRoot.class);
 
@@ -44,14 +44,8 @@ public class UserCreateTests extends StartTests {
   @DisplayName("Создать пользователя и не заполнить одно из обязательных полей - email")
   public void createUserWithoutEmailTest() {
     User userWithoutEmail = userFactory.createUser(USER_WITHOUT_EMAIL);
-<<<<<<< Updated upstream
-    wrongResponse = userClient.createUser(accessToken, userWithoutEmail);
-    message = wrongResponse.extract().path("error.message");
-    details = wrongResponse.extract().path("error.details");
-=======
     wrongResponse = userClient.createUser(userWithoutEmail);
     errorRoot = wrongResponse.extract().body().as(ErrorRoot.class);
->>>>>>> Stashed changes
     statusCode = extractStatusCode(wrongResponse);
 
     assertEquals(SC_BAD_REQUEST, statusCode);
@@ -63,16 +57,9 @@ public class UserCreateTests extends StartTests {
   @Test
   @DisplayName("Создать пользователя и не заполнить одно из обязательных полей - password")
   public void createUserWithoutPasswordTest() {
-<<<<<<< Updated upstream
-    User getUserWithoutPassword = userFactory.createUser(USER_WITHOUT_PASSWORD);
-    wrongResponse = userClient.createUser(accessToken, getUserWithoutPassword);
-    message = wrongResponse.extract().path("error.message");
-    details = wrongResponse.extract().path("error.details");
-=======
     User userWithoutPassword = userFactory.createUser(USER_WITHOUT_PASSWORD);
     wrongResponse = userClient.createUser(userWithoutPassword);
     errorRoot = wrongResponse.extract().body().as(ErrorRoot.class);
->>>>>>> Stashed changes
     statusCode = extractStatusCode(wrongResponse);
 
     assertEquals(SC_BAD_REQUEST, statusCode);
@@ -84,16 +71,9 @@ public class UserCreateTests extends StartTests {
   @Test
   @DisplayName("Создать пользователя и не заполнить одно из обязательных полей - userName")
   public void createUserWithoutNameTest() {
-<<<<<<< Updated upstream
-    User getUserWithoutUserName = userFactory.createUser(USER_WITHOUT_NAME);
-    wrongResponse = userClient.createUser(accessToken, getUserWithoutUserName);
-    message = wrongResponse.extract().path("error.message");
-    details = wrongResponse.extract().path("error.details");
-=======
     User userWithoutUserName = userFactory.createUser(USER_WITHOUT_NAME);
     wrongResponse = userClient.createUser(userWithoutUserName);
     errorRoot = wrongResponse.extract().body().as(ErrorRoot.class);
->>>>>>> Stashed changes
     statusCode = extractStatusCode(wrongResponse);
 
     assertEquals(SC_BAD_REQUEST, statusCode);
