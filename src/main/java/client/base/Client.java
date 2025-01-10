@@ -1,17 +1,14 @@
 package client.base;
 
-import static org.hamcrest.Matchers.containsString;
-
 import io.restassured.builder.RequestSpecBuilder;
-import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
-import io.restassured.specification.ResponseSpecification;
 
 public class Client {
 
   public static final String BASE_URL = "https://cde-api.test.briodev.ru/";
   public static final String TOKEN_BASE_URL = "https://cde-auth.test.briodev.ru/";
+  public static String ACCESS_TOKEN;
 
   protected RequestSpecification getBaseSpec() {
     return new RequestSpecBuilder()
@@ -26,11 +23,4 @@ public class Client {
         .setBaseUri(TOKEN_BASE_URL)
         .build();
   }
-
-  public ResponseSpecification checkStatusCodeInResponse() {
-    return new ResponseSpecBuilder().expectStatusCode(200)
-        .expectBody(containsString("Success"))
-        .build();
-  }
-
 }
