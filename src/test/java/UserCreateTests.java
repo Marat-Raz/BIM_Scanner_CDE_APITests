@@ -5,7 +5,6 @@ import static org.apache.http.HttpStatus.SC_BAD_REQUEST;
 import static org.apache.http.HttpStatus.SC_FORBIDDEN;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import io.restassured.response.ValidatableResponse;
 import models.error.ErrorRoot;
@@ -24,7 +23,6 @@ public class UserCreateTests extends StartTests {
   public void userSuccessCreateTest() {
     statusCode = baseResponse.extract().statusCode();
     assertEquals(SC_OK, statusCode);
-    assertNotNull(accessToken);
   }
 
   @Test

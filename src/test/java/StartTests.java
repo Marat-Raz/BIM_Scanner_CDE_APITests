@@ -2,6 +2,7 @@ import static models.user.UserType.DEFAULT_USER;
 
 import client.TokenClient;
 import client.UserClient;
+import client.base.Client;
 import io.qameta.allure.Step;
 import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
@@ -27,7 +28,7 @@ public class StartTests {
   protected int statusCode;
   protected UserFactory userFactory = new UserFactory();
   protected ErrorRoot errorRoot;
-  String message;
+  protected String message;
 
   @BeforeAll
   @Step("Запуск Allure и логирования запросов по API, "
@@ -37,7 +38,7 @@ public class StartTests {
         new RequestLoggingFilter(), new ResponseLoggingFilter(),
         new AllureRestAssured());
     ValidatableResponse responseAdminToken = tokenClient.createToken(TokenBuilder.getTokenForAdminUser());
-    accessToken = responseAdminToken.extract().path("access_token");
+    Client.ACCESS_TOKEN = responseAdminToken.extract().path("access_token");;
   }
 
   @BeforeEach
