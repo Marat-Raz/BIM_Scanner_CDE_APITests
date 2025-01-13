@@ -19,7 +19,6 @@ public class CreateProjectTests extends StartTests {
   ProjectsClient projectsClient = new ProjectsClient();
   ProjectFactory projectFactory = new ProjectFactory();
 
-
 /*
 // todo создать проект со всеми параметрами
 создать проект без обязательного поля
