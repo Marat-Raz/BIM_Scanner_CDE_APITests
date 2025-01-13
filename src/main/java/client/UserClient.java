@@ -43,10 +43,10 @@ public class UserClient extends Client {
   }
 
   @Step("Удалить пользователя по id")
-  public ValidatableResponse deleteUserWithoutId(String accessToken) {
+  public ValidatableResponse deleteUserWithoutId() {
     return given()
         .spec(getBaseSpec())
-        .auth().oauth2(accessToken)
+        .auth().oauth2(ACCESS_TOKEN)
         .when()
         .delete(USERS)
         .then();

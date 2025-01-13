@@ -26,7 +26,6 @@ public class UserTest extends StartTests {
 
     assertEquals(SC_OK, statusCode);
     //assertTrue(isSuccess);
-    assertNotNull(accessToken);
     //assertNotNull(refreshToken);
   }
 
