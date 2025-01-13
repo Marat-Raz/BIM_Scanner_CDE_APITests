@@ -1,15 +1,14 @@
 package client.base;
 
-import io.qameta.allure.Step;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
-import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.RequestSpecification;
 
 public class Client {
 
   public static final String BASE_URL = "https://cde-api.test.briodev.ru/";
   public static final String TOKEN_BASE_URL = "https://cde-auth.test.briodev.ru/";
+  public static String ACCESS_TOKEN;
 
   protected RequestSpecification getBaseSpec() {
     return new RequestSpecBuilder()
