@@ -8,5 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ErrorRoot {
+
   public Error error;
+
 }

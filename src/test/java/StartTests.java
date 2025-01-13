@@ -22,7 +22,7 @@ public class StartTests {
 
   private static TokenClient tokenClient = new TokenClient();
   protected User defaultUser;
-  private String userId;
+  protected String userId;
   protected ValidatableResponse baseResponse;
   protected UserClient userClient = new UserClient();
   protected int statusCode;

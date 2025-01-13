@@ -7,6 +7,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ValidationError {
+
   public String message;
   public ArrayList<String> members;
+
 }
