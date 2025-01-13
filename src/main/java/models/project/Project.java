@@ -12,7 +12,6 @@ public class Project {
 
   String name;
   String description;
-  String imageUrl;
   String responsibleId;
   String completionTime;
 
