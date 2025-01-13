@@ -11,23 +11,23 @@ import org.junit.jupiter.api.*;
 
 public class DeleteUserTests extends StartTests {
 
-  String idTestUser;
-  ValidatableResponse deleteResponse;
-  User testUser;
+  private String testUserId;
+  private ValidatableResponse deleteResponse;
+  private User testUser;
 
   @BeforeEach
   @Step("Создаем пользователя testUser")
   public void createTestUser() {
     testUser = userFactory.createUser(NEW_USER);
     ValidatableResponse response = userClient.createUser(testUser);
-    idTestUser = response.extract().path("id");
+    testUserId = response.extract().path("id");
   }
 
   @AfterEach
   @Step("Удаляем пользователя testUser")
   public void deleteTestUser() {
     if (testUser != null) {
-      deleteResponse = userClient.deleteUser(idTestUser);
+      deleteResponse = userClient.deleteUser(testUserId);
     }
   }
 
@@ -35,7 +35,7 @@ public class DeleteUserTests extends StartTests {
   @Tag(value = "smoke")
   @DisplayName("Удалить пользователя testUser")
   public void deleteTestUserTest() {
-    deleteResponse = userClient.deleteUser(idTestUser);
+    deleteResponse = userClient.deleteUser(testUserId);
     statusCode = extractStatusCode(deleteResponse);
     testUser = null; // чтобы в @AfterEach повторно не удалять этого пользователя
 
