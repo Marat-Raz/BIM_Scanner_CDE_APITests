@@ -14,10 +14,10 @@ import org.junit.jupiter.api.Test;
 
 public class GetProjectByItsIdTests extends StartTests {
 
-  ValidatableResponse getProjectResponse;
-  ValidatableResponse createProjectResponse;
-  ProjectFactory projectFactory = new ProjectFactory();
-  ProjectsClient projectsClient = new ProjectsClient();
+  private ValidatableResponse getProjectResponse;
+  private ValidatableResponse createProjectResponse;
+  private ProjectFactory projectFactory = new ProjectFactory();
+  private ProjectsClient projectsClient = new ProjectsClient();
   private String projectId;
   private String requestProjectId;
 

@@ -47,7 +47,7 @@ public class UserFactory {
     CharacterRule digitalRule = new CharacterRule(digitalChars);
     digitalRule.setNumberOfCharacters(digitalRuleNumber);
 
-    CharacterData specialChars = new MyCharacterData();
+    CharacterData specialChars = new SpecialCharacterData();
     CharacterRule specialCharRule = new CharacterRule(specialChars);
     specialCharRule.setNumberOfCharacters(specialCharsNumber);
 
@@ -56,7 +56,7 @@ public class UserFactory {
     return password;
   }
 
-  private class MyCharacterData implements CharacterData {
+  private class SpecialCharacterData implements CharacterData {
 
     @Override
     public String getErrorCode() {

@@ -10,10 +10,11 @@ import models.project.Project;
 public class ProjectsClient extends Client {
   private static final String PROJECTS = "api/projects/";
 
-  @Step("Получить список проектов")
+  @Step("Получить список всех проектов")
   public ValidatableResponse getListOfProjects() {
     return given()
         .spec(getBaseSpec())
+        .auth().oauth2(ACCESS_TOKEN)
         .when()
         .get(PROJECTS)
         .then();
