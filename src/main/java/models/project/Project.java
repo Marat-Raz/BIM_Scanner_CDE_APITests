@@ -10,9 +10,9 @@ import lombok.Setter;
 @Setter
 public class Project {
 
-  String name;
-  String description;
-  String responsibleId;
-  String completionTime;
+  protected String name;
+  protected String description;
+  protected String responsibleId;
+  protected String completionTime;
 
 }

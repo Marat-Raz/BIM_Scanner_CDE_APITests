@@ -20,7 +20,7 @@ public class ProjectsClient extends Client {
         .then();
   }
 
-  @Step("Получить список всех проектов DEFAULT_USER")
+  @Step("Получить список всех проектов по токену для любого пользователя")
   public ValidatableResponse getListOfProjects(String token) {
     return given()
         .spec(getBaseSpec())
@@ -67,6 +67,16 @@ public class ProjectsClient extends Client {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(DEFAULT_USER_ACCESS_TOKEN)
+        .when()
+        .delete(PROJECTS + id)
+        .then();
+  }
+
+  @Step("Удалить проект по его id с любым токеном")
+  public ValidatableResponse deleteProjectByItsId(String token, String id) {
+    return given()
+        .spec(getBaseSpec())
+        .auth().oauth2(token)
         .when()
         .delete(PROJECTS + id)
         .then();

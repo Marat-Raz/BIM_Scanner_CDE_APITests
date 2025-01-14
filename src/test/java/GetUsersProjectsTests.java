@@ -28,7 +28,7 @@ public class GetUsersProjectsTests extends StartTests {
 
   @BeforeAll
   @Step("Создать несколько проектов от имени ADMIN")
-  public static void createProjects() {
+  public static void createProjects() { // todo рассмотреть вынос этого метода в Steps
     for (int i = 0; i < numberOfProjects; i++) {
       projectList.add(projectFactory.createProject(RANDOM_PROJECT));
     }
