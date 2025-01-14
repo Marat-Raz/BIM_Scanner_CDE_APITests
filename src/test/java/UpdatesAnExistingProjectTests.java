@@ -6,13 +6,13 @@ import client.ProjectsClient;
 import client.base.Client;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
+import java.util.ArrayList;
+import java.util.List;
 import models.project.Project;
 import models.project.ProjectFactory;
 import models.project.ProjectWithConcurrencyStamp;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import models.project.ServerResponseProject;
+import org.junit.jupiter.api.*;
 
 public class UpdatesAnExistingProjectTests extends StartTests {
 
@@ -21,6 +21,9 @@ public class UpdatesAnExistingProjectTests extends StartTests {
   private static ValidatableResponse createProjectResponse;
   private static String projectId;
   private static String concurrencyStamp;
+  private static ValidatableResponse getAllProjectResponse;
+  private static List<ServerResponseProject> serverResponseProjectList = new ArrayList<>();
+  private static ValidatableResponse deleteProjectResponse;
   private ValidatableResponse putProjectResponse;
   ProjectWithConcurrencyStamp projectWithConcurrencyStamp;
 
@@ -31,6 +34,18 @@ public class UpdatesAnExistingProjectTests extends StartTests {
     createProjectResponse = projectsClient.createProject(Client.ADMIN_ACCESS_TOKEN, project);
     projectId = createProjectResponse.extract().path("id");
     concurrencyStamp = createProjectResponse.extract().path("concurrencyStamp");
+  }
+
+  @AfterAll
+  @Step("Получить все проекты в системе и удалить все проекты всех пользователей после тестов")
+  public static void deleteAllProjects() {
+    getAllProjectResponse = projectsClient.getListOfProjects(Client.ADMIN_ACCESS_TOKEN);
+    serverResponseProjectList = List.of(getAllProjectResponse.extract().body()
+        .as(ServerResponseProject[].class));
+    for (ServerResponseProject project : serverResponseProjectList) {
+      deleteProjectResponse = projectsClient.deleteProjectByItsId(Client.ADMIN_ACCESS_TOKEN,
+          project.getId());
+    }
   }
 
   @Test
