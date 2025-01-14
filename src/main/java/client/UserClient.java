@@ -15,7 +15,7 @@ public class UserClient extends Client {
   public ValidatableResponse getUserById(String id) {
     return given()
         .spec(getBaseSpec())
-        .auth().oauth2(ACCESS_TOKEN)
+        .auth().oauth2(DEFAULT_USER_ACCESS_TOKEN)
         .when()
         .post(USERS + id)
         .then();
@@ -25,7 +25,7 @@ public class UserClient extends Client {
   public ValidatableResponse changeUser(User user, String id) {
     return given()
         .spec(getBaseSpec())
-        .auth().oauth2(ACCESS_TOKEN)
+        .auth().oauth2(DEFAULT_USER_ACCESS_TOKEN)
         .body(user)
         .when()
         .post(USERS + id)
@@ -36,7 +36,7 @@ public class UserClient extends Client {
   public ValidatableResponse deleteUser(String id) {
     return given()
         .spec(getBaseSpec())
-        .auth().oauth2(ACCESS_TOKEN)
+        .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
         .delete(USERS + id)
         .then();
@@ -47,7 +47,7 @@ public class UserClient extends Client {
       String skipCount, int maxResultCount) {
     return given()
         .spec(getBaseSpec())
-        .auth().oauth2(ACCESS_TOKEN)
+        .auth().oauth2(DEFAULT_USER_ACCESS_TOKEN)
         .when()
         .delete(USERS + filter + sorting + skipCount + maxResultCount)
         .then();
@@ -57,7 +57,7 @@ public class UserClient extends Client {
   public ValidatableResponse createUser(User user) {
     return given()
         .spec(getBaseSpec())
-        .auth().oauth2(ACCESS_TOKEN)
+        .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .body(user)
         .when()
         .post(USERS)
@@ -68,7 +68,7 @@ public class UserClient extends Client {
   public ValidatableResponse getUserRolesById(String id) {
     return given()
         .spec(getBaseSpec())
-        .auth().oauth2(ACCESS_TOKEN)
+        .auth().oauth2(DEFAULT_USER_ACCESS_TOKEN)
         .when()
         .get(USERS + id + "/roles")
         .then();
@@ -79,7 +79,7 @@ public class UserClient extends Client {
     //todo заменить параметр roleNames после добавления модели ролей
     return given()
         .spec(getBaseSpec())
-        .auth().oauth2(ACCESS_TOKEN)
+        .auth().oauth2(DEFAULT_USER_ACCESS_TOKEN)
         .body(roleNames)
         .when()
         .put(USERS + id + "/roles")
@@ -90,7 +90,7 @@ public class UserClient extends Client {
   public ValidatableResponse getListOfRolesAssignedToUsers() {
     return given()
         .spec(getBaseSpec())
-        .auth().oauth2(ACCESS_TOKEN)
+        .auth().oauth2(DEFAULT_USER_ACCESS_TOKEN)
         .when()
         .get(USERS + "/assignable-roles")
         .then();
@@ -100,7 +100,7 @@ public class UserClient extends Client {
   public ValidatableResponse getUserByUserName(String userName) {
     return given()
         .spec(getBaseSpec())
-        .auth().oauth2(ACCESS_TOKEN)
+        .auth().oauth2(DEFAULT_USER_ACCESS_TOKEN)
         .when()
         .get(USERS + "/by-username/" + userName)
         .then();
@@ -110,7 +110,7 @@ public class UserClient extends Client {
   public ValidatableResponse getUserByEmail(String email) {
     return given()
         .spec(getBaseSpec())
-        .auth().oauth2(ACCESS_TOKEN)
+        .auth().oauth2(DEFAULT_USER_ACCESS_TOKEN)
         .when()
         .get(USERS + "/by-email/" + email)
         .then();

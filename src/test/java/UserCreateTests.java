@@ -1,5 +1,5 @@
 import static models.user.UserType.USER_WITHOUT_EMAIL;
-import static models.user.UserType.USER_WITHOUT_NAME;
+import static models.user.UserType.USER_WITHOUT_USERNAME;
 import static models.user.UserType.USER_WITHOUT_PASSWORD;
 import static org.apache.http.HttpStatus.SC_BAD_REQUEST;
 import static org.apache.http.HttpStatus.SC_FORBIDDEN;
@@ -69,7 +69,7 @@ public class UserCreateTests extends StartTests {
   @Test
   @DisplayName("Создать пользователя и не заполнить одно из обязательных полей - userName")
   public void createUserWithoutNameTest() {
-    User userWithoutUserName = userFactory.createUser(USER_WITHOUT_NAME);
+    User userWithoutUserName = userFactory.createUser(USER_WITHOUT_USERNAME);
     wrongResponse = userClient.createUser(userWithoutUserName);
     errorRoot = wrongResponse.extract().body().as(ErrorRoot.class);
     statusCode = extractStatusCode(wrongResponse);
