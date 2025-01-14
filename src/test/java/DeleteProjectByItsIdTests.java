@@ -23,7 +23,7 @@ public class DeleteProjectByItsIdTests extends StartTests {
   private ValidatableResponse getAllProjectResponse;
   private ValidatableResponse deleteProjectResponse;
   private static ArrayList<Project> projectList = new ArrayList<Project>();
-  private static List<ServerResponseProject> serverResponseProjecttList = new ArrayList<>();
+  private static List<ServerResponseProject> serverResponseProjectList = new ArrayList<>();
 
 
   @BeforeAll
@@ -42,9 +42,9 @@ public class DeleteProjectByItsIdTests extends StartTests {
   @DisplayName("Удалить все проекты пользователя ADMIN")
   public void getUserByIdTest() {
     getAllProjectResponse = projectsClient.getListOfProjects(Client.ADMIN_ACCESS_TOKEN);
-    serverResponseProjecttList = List.of(getAllProjectResponse.extract().body()
+    serverResponseProjectList = List.of(getAllProjectResponse.extract().body()
         .as(ServerResponseProject[].class));
-    for (ServerResponseProject project : serverResponseProjecttList) {
+    for (ServerResponseProject project : serverResponseProjectList) {
       deleteProjectResponse = projectsClient.deleteProjectByItsId(Client.ADMIN_ACCESS_TOKEN,
           project.getId());
       statusCode = extractStatusCode(deleteProjectResponse);
