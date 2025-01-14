@@ -33,7 +33,7 @@ public class GetProjectByItsIdTests extends StartTests {
   @Test
   @Tag(value = "smoke")
   @DisplayName("Получить проект по id")
-  public void getUserByIdTest() {
+  public void getProjectByIdTest() {
     getProjectResponse = projectsClient.getProjectByItsId(projectId);
     requestProjectId = getProjectResponse.extract().path("id");
 

@@ -6,6 +6,7 @@ import client.base.Client;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import models.project.Project;
+import models.project.ProjectWithConcurrencyStamp;
 
 public class ProjectsClient extends Client {
   private static final String PROJECTS = "api/projects/";
@@ -79,6 +80,30 @@ public class ProjectsClient extends Client {
         .auth().oauth2(token)
         .when()
         .delete(PROJECTS + id)
+        .then();
+  }
+
+  @Step("Удалить проект по его id")
+  public ValidatableResponse putProjectByItsId(String id,
+      ProjectWithConcurrencyStamp project) {
+    return given()
+        .spec(getBaseSpec())
+        .auth().oauth2(ADMIN_ACCESS_TOKEN)
+        .body(project)
+        .when()
+        .put(PROJECTS + id)
+        .then();
+  }
+
+  @Step("Удалить проект по его id")
+  public ValidatableResponse putProjectByItsId(String token, String id,
+      ProjectWithConcurrencyStamp newProject) {
+    return given()
+        .spec(getBaseSpec())
+        .auth().oauth2(ADMIN_ACCESS_TOKEN)
+        .body(newProject)
+        .when()
+        .put(PROJECTS + id)
         .then();
   }
 

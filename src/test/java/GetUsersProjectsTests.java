@@ -41,7 +41,7 @@ public class GetUsersProjectsTests extends StartTests {
     }
   }
 
-  @AfterAll
+  @AfterAll // todo можно ли вынести этот метод в StartTests.cleanData?
   @Step("Получить все проекты в системе и удалить все проекты всех пользователей после тестов")
   public static void deleteAllProjects() {
     getAllProjectResponse = projectsClient.getListOfProjects(Client.ADMIN_ACCESS_TOKEN);
@@ -56,7 +56,7 @@ public class GetUsersProjectsTests extends StartTests {
   @Test
   @Tag(value = "smoke")
   @DisplayName("Получить список проектов для ADMIN")
-  public void getUserByIdTest() {
+    public void getProjectsForAdminTest() {
     getAllProjectResponse = projectsClient.getListOfProjects(Client.ADMIN_ACCESS_TOKEN);
     statusCode = extractStatusCode(getAllProjectResponse);
 

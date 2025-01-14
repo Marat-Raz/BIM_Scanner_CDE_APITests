@@ -40,7 +40,7 @@ public class DeleteProjectByItsIdTests extends StartTests {
   @Test
   @Tag(value = "smoke")
   @DisplayName("Удалить все проекты пользователя ADMIN")
-  public void getUserByIdTest() {
+  public void deleteProjectByItsIdTest() {
     getAllProjectResponse = projectsClient.getListOfProjects(Client.ADMIN_ACCESS_TOKEN);
     serverResponseProjectList = List.of(getAllProjectResponse.extract().body()
         .as(ServerResponseProject[].class));
