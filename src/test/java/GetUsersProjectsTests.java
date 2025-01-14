@@ -11,8 +11,10 @@ import client.base.Client;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import java.util.ArrayList;
+import java.util.List;
 import models.project.Project;
 import models.project.ProjectFactory;
+import models.project.ServerResponseProject;
 import models.token.TokenBuilder;
 import models.user.User;
 import models.user.UserFactory;
@@ -20,10 +22,12 @@ import org.junit.jupiter.api.*;
 
 public class GetUsersProjectsTests extends StartTests {
 
-  private ValidatableResponse getAllProjectResponse;
+  private static ValidatableResponse getAllProjectResponse;
   private static ProjectFactory projectFactory = new ProjectFactory();
   private static ProjectsClient projectsClient = new ProjectsClient();
   private static ArrayList<Project> projectList = new ArrayList<Project>();
+  private static List<ServerResponseProject> serverResponseProjectList = new ArrayList<>();
+  private static ValidatableResponse deleteProjectResponse;
   private static int numberOfProjects = 5;
 
   @BeforeAll
@@ -38,12 +42,15 @@ public class GetUsersProjectsTests extends StartTests {
   }
 
   @AfterAll
+  @Step("Получить все проекты в системе и удалить все проекты всех пользователей после тестов")
   public static void deleteAllProjects() {
-// todo получить все проекты в системе и удалить все проекты всех пользователей после тестов
-
-/*    for (Project project : projectList) {
-      projectsClient.deleteProjectByItsId(Client.ADMIN_ACCESS_TOKEN, project);
-    }*/
+    getAllProjectResponse = projectsClient.getListOfProjects(Client.ADMIN_ACCESS_TOKEN);
+    serverResponseProjectList = List.of(getAllProjectResponse.extract().body()
+        .as(ServerResponseProject[].class));
+    for (ServerResponseProject project : serverResponseProjectList) {
+      deleteProjectResponse = projectsClient.deleteProjectByItsId(Client.ADMIN_ACCESS_TOKEN,
+          project.getId());
+    }
   }
 
   @Test
