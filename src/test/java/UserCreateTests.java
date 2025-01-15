@@ -33,6 +33,7 @@ public class UserCreateTests extends StartTests {
     errorRoot = secondResponse.extract().body().as(ErrorRoot.class);
 
     assertEquals(SC_FORBIDDEN, statusCode);
+    // todo ввести константы для текстов
     assertEquals("Username '" + defaultUser.getUserName() +
         "' is already taken., Email '" + defaultUser.getEmail() +
         "' is already taken.", errorRoot.error.message);

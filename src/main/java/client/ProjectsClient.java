@@ -5,6 +5,7 @@ import static io.restassured.RestAssured.given;
 import client.base.Client;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
+import java.io.File;
 import models.project.Project;
 import models.project.ProjectWithConcurrencyStamp;
 
@@ -107,4 +108,48 @@ public class ProjectsClient extends Client {
         .then();
   }
 
+  @Step("Получить изображение обложки проекта с токеном админа")
+  public ValidatableResponse getProjectCoverImage(String projectId) {
+    return given()
+        .spec(getBaseSpec())
+        .auth().oauth2(ADMIN_ACCESS_TOKEN)
+        .when()
+        .get(PROJECTS + projectId + "/cover")
+        .then();
+  }
+
+  @Step("Получить изображение обложки проекта с любым токеном")
+  public ValidatableResponse getProjectCoverImage(String token, String projectId) {
+    return given()
+        .spec(getBaseSpec())
+        .auth().oauth2(token)
+        .when()
+        .get(PROJECTS + projectId + "/cover")
+        .then();
+  }
+
+  @Step("Задать изображение обложки проекта с токеном админа")
+  public ValidatableResponse setProjectCoverImage(String projectId) {
+    return given()
+        .spec(getBaseSpec())
+        .spec(multipartBaseSpec())
+        .auth().oauth2(ADMIN_ACCESS_TOKEN)
+        .multiPart("coverImage", new File("src/main/resources/1.7mb.png"))
+        // todo заменить название файла на переменную
+        .when()
+        .put(PROJECTS + projectId + "/cover")
+        .then();
+  }
+
+  @Step("Задать изображение обложки проекта с любым токеном")
+  public ValidatableResponse setProjectCoverImage(String token, String projectId) {
+    return given()
+        .spec(multipartBaseSpec())
+        .auth().oauth2(token)
+        .multiPart("coverImage", new File("src/main/resources/1.7mb.png"))
+        // todo заменить название файла на переменную
+        .when()
+        .put(PROJECTS + projectId + "/cover")
+        .then();
+  }
 }
