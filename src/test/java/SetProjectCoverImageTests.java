@@ -50,7 +50,6 @@ public class SetProjectCoverImageTests extends StartTests {
   @Tag(value = "smoke")
   @DisplayName("Задать изображение обложки проекта")
   public void setProjectCoverImageTest() {
-    // todo сначала нужно загрузить файл на сервер
     setIconResponse = projectsClient.setProjectCoverImage(projectId);
     statusCode = extractStatusCode(setIconResponse);
 
