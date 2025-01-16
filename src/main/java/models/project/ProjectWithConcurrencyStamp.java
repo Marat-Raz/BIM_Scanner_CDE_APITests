@@ -14,10 +14,10 @@ public class ProjectWithConcurrencyStamp {
   private String concurrencyStamp;
 
   public ProjectWithConcurrencyStamp(Project project, String concurrencyStamp) {
-    this.name = project.getName();
-    this.description = project.getDescription();
-    this.responsibleId = project.getResponsibleId();
-    this.completionTime = project.getCompletionTime();
+    name = project.getName();
+    description = project.getDescription();
+    responsibleId = project.getResponsibleId();
+    completionTime = project.getCompletionTime();
     this.concurrencyStamp = concurrencyStamp;
   }
 }
