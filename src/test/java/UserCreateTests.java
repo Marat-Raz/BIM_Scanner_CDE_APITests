@@ -78,6 +78,7 @@ public class UserCreateTests extends StartTests {
     assertEquals(SC_BAD_REQUEST, statusCode);
     assertEquals("Your request is not valid!", errorRoot.error.message);
     assertEquals("The following errors were detected during validation.\n"
+        + " - The Password field is required.\n"
         + " - The UserName field is required.\n", errorRoot.error.details);
   }
 }

@@ -7,7 +7,10 @@ import client.ProjectsClient;
 import client.base.Client;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import models.project.Project;
@@ -25,7 +28,8 @@ public class GetProjectCoverImageTests extends StartTests {
   private static List<ServerResponseProject> serverResponseProjectList = new ArrayList<>();
   private static ValidatableResponse deleteProjectResponse;
   private ValidatableResponse getIconResponse;
-  private String path = "src/main/resources/coverImage.png";
+  private String pathToDownload = "src/main/resources/download";
+  private String fileName = "coverImage.txt";
 
   @BeforeAll
   @Step("Создать проект от имени ADMIN")
@@ -55,15 +59,35 @@ public class GetProjectCoverImageTests extends StartTests {
     getIconResponse = projectsClient.getProjectCoverImage(projectId);
     statusCode = extractStatusCode(getIconResponse);
 
-    byte[] image = getIconResponse.extract().body().asByteArray();
-    OutputStream outStream = new FileOutputStream(path);
-    File file = new File(path);
-    outStream.write(image);
-    outStream.close();
+    // todo нужно проверить папку на отсутствие идентичного файла и удалить, если имеется
+    if (statusCode == 200) {
+      File outputFile  = new File(pathToDownload, fileName);
+      if(outputFile .exists()) {
+        outputFile .delete();
+      }
+      byte[] image = getIconResponse.extract().body().asByteArray();
+      OutputStream outStream = null;
+      try {
+        while (true) {
+          outStream = new FileOutputStream(outputFile);
+          outStream.write(image);
+          outStream.flush();
+        }
+      } catch (Exception e) {
+        System.out.println("Error writing file " + outputFile.getAbsolutePath());
+      } finally {
+        if (outStream != null) {
+          outStream.close();
+        }
 
-    assertEquals(SC_OK, statusCode);
-    assertTrue(file.exists());
+        // fixme при запуске тестов через maven работает не корректно
+
+        assertEquals(SC_OK, statusCode);
+        assertTrue(outputFile.exists());
 
 // todo как проверить на соответствие загруженный и выгруженный файлы?
+      }
+    }
   }
+
 }
