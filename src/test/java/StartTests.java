@@ -47,6 +47,7 @@ public class StartTests {
     defaultUser = userFactory.createUser(DEFAULT_USER);
     baseResponse = userClient.createUser(defaultUser);
     userId = baseResponse.extract().path("id");
+
   }
 
   @AfterEach
