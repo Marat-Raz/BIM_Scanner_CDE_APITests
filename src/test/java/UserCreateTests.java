@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 public class UserCreateTests extends StartTests {
-  // todo создать пользователя null
+  // todo добавить тест с отсутствующим id
 
   private ValidatableResponse wrongResponse;
 
