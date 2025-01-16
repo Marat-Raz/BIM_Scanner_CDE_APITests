@@ -1,6 +1,6 @@
 import static models.project.ProjectType.DEFAULT_PROJECT;
 import static models.project.ProjectType.PROJECT_WITHOUT_NAME;
-import static models.project.ProjectType.PROJECT_WITH_NULL;
+import static models.project.ProjectType.PROJECT_WITHOUT_DATA;
 import static org.apache.http.HttpStatus.SC_BAD_REQUEST;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -58,7 +58,7 @@ public class CreateProjectTests extends StartTests {
   @Test
   @DisplayName("Создать проект, где все параметры null")
   public void createProjectWithNullTest() {
-    Project project = projectFactory.createProject(PROJECT_WITH_NULL);
+    Project project = projectFactory.createProject(PROJECT_WITHOUT_DATA);
     project.setResponsibleId(userId);
     createProjectResponse = projectsClient.createProject(project);
     statusCode = extractStatusCode(createProjectResponse);

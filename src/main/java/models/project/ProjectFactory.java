@@ -15,7 +15,7 @@ public class ProjectFactory {
     switch (projectType) {
       case PROJECT_WITHOUT_NAME:
         return new Project(null, description, imageUrl, responsibleId, completionTime);
-      case PROJECT_WITH_NULL:
+      case PROJECT_WITHOUT_DATA:
         return new Project(null, null, null, null, null);
       default:
       case DEFAULT_PROJECT:
