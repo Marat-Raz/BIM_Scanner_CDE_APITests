@@ -1,6 +1,5 @@
 package models.project;
 
-import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,10 +9,10 @@ import lombok.Setter;
 @Setter
 public class Project {
 
-  String name;
-  String description;
-  String imageUrl;
-  String responsibleId;
-  String completionTime;
+  private String name;
+  private String description;
+  private String imageUrl;
+  private String responsibleId;
+  private String completionTime;
 
 }
