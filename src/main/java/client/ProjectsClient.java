@@ -142,7 +142,6 @@ public class ProjectsClient extends Client {
   public ValidatableResponse getProjectCoverImage(String token, String projectId) {
     return given()
         .spec(multipartBaseSpec())
-        .spec(getBaseSpec())
         .auth().oauth2(token)
         .when()
         .get(PROJECTS + projectId + "/cover")
@@ -154,7 +153,7 @@ public class ProjectsClient extends Client {
     return given()
         .spec(multipartBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
-        .multiPart("file", new File("src/main/resources/1.7mb.png"))
+        .multiPart("coverImage", new File("src/main/resources/1.7mb.png"))
         // todo заменить название файла на переменную
         .when()
         .put(PROJECTS + projectId + "/cover")
