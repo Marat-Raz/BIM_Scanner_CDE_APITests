@@ -7,7 +7,7 @@ import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import models.user.User;
 
-public class AccountClient extends Client { // todo необходимо дописать остальные методы/ручки
+public class AccountClient extends Client { // todo необходимо дописать остальные методы
 
   private static final String USER = "api/account/";
 

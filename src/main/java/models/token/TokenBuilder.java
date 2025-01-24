@@ -6,32 +6,33 @@ import lombok.Setter;
 @Getter
 @Setter
 public class TokenBuilder {
-  private static String grant_type;
+
+  private static String grantType;
   private static String username;
   private static String password;
   private static final String scope = "openid profile CDE email phone";
-  private static final String client_id = "CDE_TestClient";
-  private static final String client_secret = "a7af4e9397dc457cb99672d3cdc221c0";
+  private static final String clientId = "CDE_TestClient";
+  private static final String clientSecret = "a7af4e9397dc457cb99672d3cdc221c0";
 
   public static RequestToken getTokenForAdminUser() {
     return RequestToken.builder()
-        .grant_type("password")
+        .grantType("password")
         .username("admin")
         .password("1q2w3E*")
         .scope(scope)
-        .client_id(client_id)
-        .client_secret(client_secret)
+        .clientId(clientId)
+        .clientSecret(clientSecret)
         .build();
   }
 
   public static RequestToken getTokenForUser() {
     return RequestToken.builder()
-        .grant_type(grant_type)
+        .grantType(grantType)
         .username(username)
         .password(password)
         .scope(scope)
-        .client_id(client_id)
-        .client_secret(client_secret)
+        .clientId(clientId)
+        .clientSecret(clientSecret)
         .build();
   }
 

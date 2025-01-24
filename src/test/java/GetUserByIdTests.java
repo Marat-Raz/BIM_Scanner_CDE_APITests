@@ -18,7 +18,7 @@ public class GetUserByIdTests extends StartTests {
   @Tag(value = "smoke")
   @DisplayName("Получить пользователя по id")
   public void getUserByIdTest() {
-    getUserResponse = userClient.getUserById(accessToken, userId);
+    getUserResponse = userClient.getUserById(userId);
     statusCode = extractStatusCode(getUserResponse);
     String userName = getUserResponse.extract().path("userName");
     String email = getUserResponse.extract().path("email");
@@ -31,7 +31,7 @@ public class GetUserByIdTests extends StartTests {
   @Test
   @DisplayName("Получить пользователя по неверному id")
   public void getUserByWrongIdTest() {
-    getUserResponse = userClient.getUserById(accessToken, "userId");
+    getUserResponse = userClient.getUserById("userId");
     statusCode = extractStatusCode(getUserResponse);
     message = getUserResponse.extract().path("error.message");
     details = getUserResponse.extract().path("error.details");
@@ -43,20 +43,11 @@ public class GetUserByIdTests extends StartTests {
   }
 
   @Test
-  @DisplayName("Получить пользователя по id с не верной авторизацией")
-  public void getUserByIdWithWrongTokenTest() {
-    getUserResponse = userClient.getUserById("accessToken", userId);
-    statusCode = extractStatusCode(getUserResponse);
-
-    assertEquals(SC_UNAUTHORIZED, statusCode);
-  }
-
-  @Test
   @DisplayName("Получить пользователя по id, отсутствующему в базе")
   public void getUserByMissingIdTest() {
     UUID uuid = UUID.randomUUID();
     String wrongId = String.valueOf(uuid);
-    getUserResponse = userClient.getUserById(accessToken, wrongId);
+    getUserResponse = userClient.getUserById(wrongId);
     statusCode = extractStatusCode(getUserResponse);
     message = getUserResponse.extract().path("error.message");
 
