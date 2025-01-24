@@ -7,12 +7,12 @@ import lombok.Setter;
 @Setter
 public class TokenBuilder {
 
-  static String grantType;
-  static String username;
-  static String password;
-  static String scope = "openid profile CDE email phone";
-  static String clientId = "CDE_TestClient";
-  static String clientSecret = "a7af4e9397dc457cb99672d3cdc221c0";
+  private static String grantType;
+  private static String username;
+  private static String password;
+  private static final String scope = "openid profile CDE email phone";
+  private static final String clientId = "CDE_TestClient";
+  private static final String clientSecret = "a7af4e9397dc457cb99672d3cdc221c0";
 
   public static RequestToken getTokenForAdminUser() {
     return RequestToken.builder()
