@@ -4,6 +4,7 @@ import static io.restassured.RestAssured.given;
 
 import client.base.Client;
 import io.qameta.allure.Step;
+import io.restassured.RestAssured;
 import io.restassured.response.ValidatableResponse;
 import java.io.File;
 import models.project.Project;
@@ -67,7 +68,6 @@ public class ProjectsClient extends Client {
   @Step("Получить проект по его id пользователя ADMIN")
   public ValidatableResponse getProjectByItsIdForAdmin(String id) {
     return given()
-        .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
         .get(PROJECTS + id)
@@ -130,11 +130,10 @@ public class ProjectsClient extends Client {
 
   @Step("Получить изображение обложки проекта с токеном админа")
   public ValidatableResponse getProjectCoverImage(String projectId) {
-    return given()
-        .spec(multipartBaseSpec())
+    return RestAssured.given()
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
-        .get(PROJECTS + projectId + "/cover")
+        .get(PROJECTS + projectId + "/cover") // "api/projects/projectId/cover"
         .then();
   }
 

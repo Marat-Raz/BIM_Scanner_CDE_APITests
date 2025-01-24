@@ -1,16 +1,15 @@
+import static client.base.Client.ADMIN_ACCESS_TOKEN;
+import static client.base.Client.BASE_URL;
 import static models.project.ProjectType.RANDOM_PROJECT;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import client.ProjectsClient;
-import client.base.Client;
 import io.qameta.allure.Step;
+import io.restassured.RestAssured;
 import io.restassured.response.ValidatableResponse;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import models.project.Project;
@@ -29,24 +28,24 @@ public class GetProjectCoverImageTests extends StartTests {
   private static ValidatableResponse deleteProjectResponse;
   private ValidatableResponse getIconResponse;
   private String pathToDownload = "src/main/resources/download";
-  private String fileName = "coverImage.txt";
+  private String fileName = "coverImage.png";
 
   @BeforeAll
   @Step("Создать проект от имени ADMIN")
   public static void createProject() {
     Project project = projectFactory.createProject(RANDOM_PROJECT);
-    createProjectResponse = projectsClient.createProject(Client.ADMIN_ACCESS_TOKEN, project);
+    createProjectResponse = projectsClient.createProject(ADMIN_ACCESS_TOKEN, project);
     projectId = createProjectResponse.extract().path("id");
   }
 
   @AfterAll
   @Step("Получить все проекты в системе и удалить все проекты всех пользователей после тестов")
   public static void deleteAllProjects() {
-    getAllProjectResponse = projectsClient.getListOfProjects(Client.ADMIN_ACCESS_TOKEN);
+    getAllProjectResponse = projectsClient.getListOfProjects(ADMIN_ACCESS_TOKEN);
     serverResponseProjectList = List.of(getAllProjectResponse.extract().body()
         .as(ServerResponseProject[].class));
     for (ServerResponseProject project : serverResponseProjectList) {
-      deleteProjectResponse = projectsClient.deleteProjectByItsId(Client.ADMIN_ACCESS_TOKEN,
+      deleteProjectResponse = projectsClient.deleteProjectByItsId(ADMIN_ACCESS_TOKEN,
           project.getId());
     }
   }
@@ -54,40 +53,26 @@ public class GetProjectCoverImageTests extends StartTests {
   @Test
   @Tag(value = "smoke")
   @DisplayName("Получить изображение обложки проекта")
-  public void getProjectCoverImageTest() throws IOException {
+  public void getCoverImageOfProjectTest() {
     projectsClient.setProjectCoverImage(projectId);
-    getIconResponse = projectsClient.getProjectCoverImage(projectId);
-    statusCode = extractStatusCode(getIconResponse);
+    // todo перенести код ниже в ProjectsClient
+    var response = RestAssured.given().auth().oauth2(ADMIN_ACCESS_TOKEN)
+        .when()
+        .get(BASE_URL + "api/projects/" + projectId + "/cover")
+        .then();
+    statusCode = extractStatusCode(response);
 
     // todo нужно проверить папку на отсутствие идентичного файла и удалить, если имеется
-    if (statusCode == 200) {
-      File outputFile = new File(pathToDownload, fileName);
-      if (outputFile.exists()) {
-        outputFile.delete();
-      }
-      byte[] image = getIconResponse.extract().body().asByteArray();
-      OutputStream outStream = null;
-      try {
-        while (true) {
-          outStream = new FileOutputStream(outputFile);
-          outStream.write(image);
-          outStream.flush();
-        }
-      } catch (Exception e) {
-        System.out.println("Error writing file " + outputFile.getAbsolutePath());
-      } finally {
-        if (outStream != null) {
-          outStream.close();
-        }
-
-        // fixme при запуске тестов через maven работает не корректно
-// todo как проверить на соответствие загруженный и выгруженный файлы?
-
-      }
-
-      assertEquals(SC_OK, statusCode);
-      //assertTrue(outputFile.exists());}
+    byte[] dowloadedFile = response.extract().asByteArray();
+    try {
+      FileOutputStream fileOutputStream = new FileOutputStream(new File(pathToDownload, fileName));
+      fileOutputStream.write(dowloadedFile);
+      fileOutputStream.close();
+    } catch (Exception e) {
+      e.printStackTrace();
     }
 
+    assertEquals(SC_OK, statusCode);
   }
+
 }
