@@ -25,8 +25,6 @@ public class GetProjectCoverImageTests extends StartTests {
   private static String projectId;
   private static ValidatableResponse getAllProjectResponse;
   private static List<ServerResponseProject> serverResponseProjectList = new ArrayList<>();
-  private static ValidatableResponse deleteProjectResponse;
-  private ValidatableResponse getIconResponse;
   private String pathToDownload = "src/main/resources/download";
   private String fileName = "coverImage.png";
 
@@ -45,8 +43,7 @@ public class GetProjectCoverImageTests extends StartTests {
     serverResponseProjectList = List.of(getAllProjectResponse.extract().body()
         .as(ServerResponseProject[].class));
     for (ServerResponseProject project : serverResponseProjectList) {
-      deleteProjectResponse = projectsClient.deleteProjectByItsId(ADMIN_ACCESS_TOKEN,
-          project.getId());
+      projectsClient.deleteProjectByItsId(ADMIN_ACCESS_TOKEN, project.getId());
     }
   }
 
