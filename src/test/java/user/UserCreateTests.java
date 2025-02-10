@@ -24,29 +24,29 @@ public class UserCreateTests extends StartTests {
   @Tag(value = "smoke")
   @DisplayName("Создание уникального пользователя возвращает код 200")
   public void userSuccessCreateTest() {
-    statusCode = StartTests.baseResponse.extract().statusCode();
+    statusCode = baseResponse.extract().statusCode();
     Assertions.assertEquals(SC_OK, statusCode);
   }
 
   @Test
   @DisplayName("Создать пользователя, который уже создан")
   public void createAnExistingUserTest() {
-    ValidatableResponse secondResponse = StartTests.userClient.createUser(StartTests.defaultUser);
+    ValidatableResponse secondResponse = userClient.createUser(defaultUser);
     statusCode = extractStatusCode(secondResponse);
     errorRoot = secondResponse.extract().body().as(ErrorRoot.class);
 
     Assertions.assertEquals(SC_FORBIDDEN, statusCode);
     // todo ввести константы для текстов
-    Assertions.assertEquals("Username '" + StartTests.defaultUser.getUserName() +
-        "' is already taken., Email '" + StartTests.defaultUser.getEmail() +
+    Assertions.assertEquals("Username '" + defaultUser.getUserName() +
+        "' is already taken., Email '" + defaultUser.getEmail() +
         "' is already taken.", errorRoot.error.message);
   }
 
   @Test
   @DisplayName("Создать пользователя и не заполнить одно из обязательных полей - email")
   public void createUserWithoutEmailTest() {
-    User userWithoutEmail = StartTests.userFactory.createUser(USER_WITHOUT_EMAIL);
-    wrongResponse = StartTests.userClient.createUser(userWithoutEmail);
+    User userWithoutEmail = userFactory.createUser(USER_WITHOUT_EMAIL);
+    wrongResponse = userClient.createUser(userWithoutEmail);
     errorRoot = wrongResponse.extract().body().as(ErrorRoot.class);
     statusCode = extractStatusCode(wrongResponse);
 
@@ -59,8 +59,8 @@ public class UserCreateTests extends StartTests {
   @Test
   @DisplayName("Создать пользователя и не заполнить одно из обязательных полей - password")
   public void createUserWithoutPasswordTest() {
-    User userWithoutPassword = StartTests.userFactory.createUser(USER_WITHOUT_PASSWORD);
-    wrongResponse = StartTests.userClient.createUser(userWithoutPassword);
+    User userWithoutPassword = userFactory.createUser(USER_WITHOUT_PASSWORD);
+    wrongResponse = userClient.createUser(userWithoutPassword);
     errorRoot = wrongResponse.extract().body().as(ErrorRoot.class);
     statusCode = extractStatusCode(wrongResponse);
 
@@ -73,8 +73,8 @@ public class UserCreateTests extends StartTests {
   @Test
   @DisplayName("Создать пользователя и не заполнить одно из обязательных полей - userName")
   public void createUserWithoutNameTest() {
-    User userWithoutUserName = StartTests.userFactory.createUser(USER_WITHOUT_USERNAME);
-    wrongResponse = StartTests.userClient.createUser(userWithoutUserName);
+    User userWithoutUserName = userFactory.createUser(USER_WITHOUT_USERNAME);
+    wrongResponse = userClient.createUser(userWithoutUserName);
     errorRoot = wrongResponse.extract().body().as(ErrorRoot.class);
     statusCode = extractStatusCode(wrongResponse);
 

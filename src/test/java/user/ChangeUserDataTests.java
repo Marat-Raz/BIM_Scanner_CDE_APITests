@@ -7,8 +7,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import baseTests.StartTests;
 import io.restassured.response.ValidatableResponse;
+import models.error.ErrorRoot;
 import models.user.User;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 
 public class ChangeUserDataTests extends StartTests {
 
@@ -25,7 +29,7 @@ public class ChangeUserDataTests extends StartTests {
   @DisplayName("Изменить данные пользователя - userName и password")
   public void changeUserDataTests() {
     putResponse = StartTests.userClient.changeUser(newUser, StartTests.userId);
-    int statusCode = putResponse.extract().statusCode();
+    statusCode = putResponse.extract().statusCode();
 
     assertEquals(SC_OK, statusCode);
   }
@@ -34,21 +38,20 @@ public class ChangeUserDataTests extends StartTests {
   @DisplayName("Изменить данные пользователя - userName, без передачи параметра email")
   public void changeUsernameWithoutEmailTests() {
     putResponse = StartTests.userClient.changeUser(newUser, StartTests.userId);
-    int statusCode = extractStatusCode(putResponse);
-    message = putResponse.extract().path("error.message");
-    details = putResponse.extract().path("error.details");
+    statusCode = extractStatusCode(putResponse);
+    errorRoot = putResponse.extract().body().as(ErrorRoot.class);
 
     assertEquals(SC_BAD_REQUEST, statusCode);
-    Assertions.assertEquals("Your request is not valid!", message);
-    Assertions.assertEquals("The following errors were detected during validation.\n"
-        + " - The Email field is required.\n", details);
+    assertEquals("Your request is not valid!", errorRoot.error.message);
+    assertEquals("The following errors were detected during validation.\n"
+        + " - The Email field is required.\n", errorRoot.error.details);
   }
 
   @Test
   @DisplayName("Изменить данные пользователя - userName")
   public void changeUsernameWithEmailTests() {
     putResponse = StartTests.userClient.changeUser(newUser, StartTests.userId);
-    int statusCode = extractStatusCode(putResponse);
+    statusCode = extractStatusCode(putResponse);
 
     assertEquals(SC_OK, statusCode);
   }
@@ -57,7 +60,7 @@ public class ChangeUserDataTests extends StartTests {
   @DisplayName("Изменить данные пользователя - email")
   public void changeEmailWithUsernameTests() {
     putResponse = StartTests.userClient.changeUser(StartTests.defaultUser, StartTests.userId);
-    int statusCode = extractStatusCode(putResponse);
+    statusCode = extractStatusCode(putResponse);
 
     assertEquals(SC_OK, statusCode);
   }
@@ -67,12 +70,12 @@ public class ChangeUserDataTests extends StartTests {
   public void changeEmailWithoutUsernameTests() {
     putResponse = StartTests.userClient.changeUser(StartTests.defaultUser, StartTests.userId);
     int statusCode = extractStatusCode(putResponse);
-    message = putResponse.extract().path("error.message");
-    details = putResponse.extract().path("error.details");
+    errorRoot = putResponse.extract().body().as(ErrorRoot.class);
 
     assertEquals(SC_BAD_REQUEST, statusCode);
-    Assertions.assertEquals("Your request is not valid!", message);
-    Assertions.assertEquals("The following errors were detected during validation.\n"
-        + " - The UserName field is required.\n", details);  }
+    assertEquals("Your request is not valid!", errorRoot.error.message);
+    assertEquals("The following errors were detected during validation.\n"
+        + " - The UserName field is required.\n", errorRoot.error.details);
+  }
 
 }

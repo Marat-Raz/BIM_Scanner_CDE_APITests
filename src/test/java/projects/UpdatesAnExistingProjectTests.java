@@ -62,7 +62,7 @@ public class UpdatesAnExistingProjectTests extends StartTests {
     statusCode = extractStatusCode(putProjectResponse);
     String changedProjectId = putProjectResponse.extract().path("id");
 
-    Assertions.assertEquals(SC_OK, statusCode);
+    assertEquals(SC_OK, statusCode);
     assertEquals(projectId, changedProjectId);
   }
 }

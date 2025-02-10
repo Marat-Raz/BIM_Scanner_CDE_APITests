@@ -30,8 +30,6 @@ public class StartTests {
   protected int statusCode;
   protected static UserFactory userFactory = new UserFactory();
   protected ErrorRoot errorRoot;
-  protected String message;
-  protected String details;
 
   @BeforeAll
   @Step("Запуск Allure и логирования запросов по API, \n"

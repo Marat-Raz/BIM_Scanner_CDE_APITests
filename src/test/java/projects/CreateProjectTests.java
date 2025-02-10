@@ -1,8 +1,8 @@
 package projects;
 
 import static models.project.ProjectType.DEFAULT_PROJECT;
-import static models.project.ProjectType.PROJECT_WITHOUT_NAME;
 import static models.project.ProjectType.PROJECT_WITHOUT_DATA;
+import static models.project.ProjectType.PROJECT_WITHOUT_NAME;
 import static org.apache.http.HttpStatus.SC_BAD_REQUEST;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -12,7 +12,6 @@ import client.ProjectsClient;
 import io.restassured.response.ValidatableResponse;
 import models.project.Project;
 import models.project.ProjectFactory;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -41,7 +40,7 @@ public class CreateProjectTests extends StartTests {
     String actualProjectName = createProjectResponse.extract().path("name");
     statusCode = extractStatusCode(createProjectResponse);
 
-    Assertions.assertEquals(SC_OK, statusCode);
+    assertEquals(SC_OK, statusCode);
     assertEquals(project.getName(), actualProjectName);
   }
 
@@ -53,7 +52,7 @@ public class CreateProjectTests extends StartTests {
     createProjectResponse = projectsClient.createProject(project);
     statusCode = extractStatusCode(createProjectResponse);
 
-    Assertions.assertEquals(SC_BAD_REQUEST, statusCode);
+    assertEquals(SC_BAD_REQUEST, statusCode);
   }
 
   @Test
@@ -64,7 +63,7 @@ public class CreateProjectTests extends StartTests {
     createProjectResponse = projectsClient.createProject(project);
     statusCode = extractStatusCode(createProjectResponse);
 
-    Assertions.assertEquals(SC_BAD_REQUEST, statusCode);
+    assertEquals(SC_BAD_REQUEST, statusCode);
   }
 
 }
