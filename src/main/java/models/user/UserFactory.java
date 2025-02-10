@@ -2,7 +2,6 @@ package models.user;
 
 import static org.passay.CharacterCharacteristicsRule.ERROR_CODE;
 
-import java.util.Arrays;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.passay.CharacterData;
 import org.passay.CharacterRule;
@@ -40,7 +39,8 @@ public class UserFactory {
       default:
       case DEFAULT_USER:
         return new User(userName, name, surname, emailAddress, phoneNumber, active,
-            lockoutEnabled, roleNames, password);    }
+            lockoutEnabled, roleNames, password);
+    }
   }
 
   private String generatePassword(int length, int lowerCase, int upperCase,

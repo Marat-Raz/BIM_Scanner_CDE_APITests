@@ -11,11 +11,10 @@ import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.response.ValidatableResponse;
 import models.error.ErrorRoot;
 import models.token.TokenBuilder;
+import models.user.User;
 import models.user.UserFactory;
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
-import models.user.User;
 import org.junit.jupiter.api.BeforeEach;
 
 
@@ -30,6 +29,7 @@ public class StartTests {
   protected static UserFactory userFactory = new UserFactory();
   protected ErrorRoot errorRoot;
   protected String message;
+  protected String details;
 
   @BeforeAll
   @Step("Запуск Allure и логирования запросов по API, \n"
@@ -41,7 +41,8 @@ public class StartTests {
         new AllureRestAssured());
     ValidatableResponse responseAdminToken =
         tokenClient.createToken(TokenBuilder.getTokenForAdminUser());
-    Client.ADMIN_ACCESS_TOKEN = responseAdminToken.extract().path("access_token");;
+    Client.ADMIN_ACCESS_TOKEN = responseAdminToken.extract().path("access_token");
+    ;
     defaultUser = userFactory.createUser(DEFAULT_USER);
     baseResponse = userClient.createUser(defaultUser);
     userId = baseResponse.extract().path("id");

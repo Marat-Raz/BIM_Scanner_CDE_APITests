@@ -17,7 +17,8 @@ public class ProjectFactory {
       case PROJECT_WITH_NULL:
         return new Project(null, null, null, null);
       case RANDOM_PROJECT:
-        return new Project(RandomStringUtils.randomAlphabetic(1, 256), description, responsibleId, completionTime);
+        return new Project(RandomStringUtils.randomAlphabetic(1, 256), description, responsibleId,
+            completionTime);
       default:
       case DEFAULT_PROJECT:
         return new Project(name, description, responsibleId, completionTime);
