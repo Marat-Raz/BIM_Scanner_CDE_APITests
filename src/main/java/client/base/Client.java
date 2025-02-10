@@ -1,7 +1,11 @@
 package client.base;
 
+import static io.restassured.http.ContentType.MULTIPART;
+
+import io.restassured.builder.MultiPartSpecBuilder;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
+import io.restassured.specification.MultiPartSpecification;
 import io.restassured.specification.RequestSpecification;
 
 public class Client {
@@ -24,4 +28,12 @@ public class Client {
         .setBaseUri(TOKEN_BASE_URL)
         .build();
   }
+
+  protected RequestSpecification multipartBaseSpec() {
+    return new RequestSpecBuilder()
+        .setContentType(MULTIPART)
+        .setBaseUri(BASE_URL)
+        .build();
+  }
+
 }

@@ -36,7 +36,7 @@ public class GetAllProjectsTests extends StartTests {
   @Tag(value = "smoke")
   @DisplayName("Получить список проектов")
   public void getAllProjectTest() {
-    getAllProjectResponse = projectsClient.getListOfProjects();
+    getAllProjectResponse = projectsClient.getListOfProjectsForAdmin();
     statusCode = extractStatusCode(getAllProjectResponse);
 
     assertEquals(SC_OK, statusCode);

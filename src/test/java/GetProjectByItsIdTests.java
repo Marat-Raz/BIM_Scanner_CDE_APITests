@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import client.ProjectsClient;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
-import models.error.ErrorRoot;
 import models.project.Project;
 import models.project.ProjectFactory;
 import org.junit.jupiter.api.BeforeEach;
@@ -34,7 +33,7 @@ public class GetProjectByItsIdTests extends StartTests {
   @Tag(value = "smoke")
   @DisplayName("Получить проект по id")
   public void getProjectByIdTest() {
-    getProjectResponse = projectsClient.getProjectByItsId(projectId);
+    getProjectResponse = projectsClient.getProjectByItsIdForAdmin(projectId);
     requestProjectId = getProjectResponse.extract().path("id");
 
     assertEquals(requestProjectId, requestProjectId);
