@@ -1,9 +1,12 @@
+package user;
+
 import static models.user.UserType.NEW_USER;
 import static org.apache.http.HttpStatus.SC_BAD_REQUEST;
 import static org.apache.http.HttpStatus.SC_METHOD_NOT_ALLOWED;
 import static org.apache.http.HttpStatus.SC_NO_CONTENT;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import baseTests.StartTests;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import models.user.User;
@@ -18,8 +21,8 @@ public class DeleteUserTests extends StartTests {
   @BeforeEach
   @Step("Создаем пользователя testUser")
   public void createTestUser() {
-    testUser = userFactory.createUser(NEW_USER);
-    ValidatableResponse response = userClient.createUser(testUser);
+    testUser = StartTests.userFactory.createUser(NEW_USER);
+    ValidatableResponse response = StartTests.userClient.createUser(testUser);
     testUserId = response.extract().path("id");
   }
 
@@ -27,7 +30,7 @@ public class DeleteUserTests extends StartTests {
   @Step("Удаляем пользователя testUser")
   public void deleteTestUser() {
     if (testUser != null) {
-      deleteResponse = userClient.deleteUser(testUserId);
+      deleteResponse = StartTests.userClient.deleteUser(testUserId);
     }
   }
 
@@ -35,7 +38,7 @@ public class DeleteUserTests extends StartTests {
   @Tag(value = "smoke")
   @DisplayName("Удалить пользователя testUser")
   public void deleteTestUserTest() {
-    deleteResponse = userClient.deleteUser(testUserId);
+    deleteResponse = StartTests.userClient.deleteUser(testUserId);
     statusCode = extractStatusCode(deleteResponse);
     testUser = null; // чтобы в @AfterEach повторно не удалять этого пользователя
 
@@ -46,7 +49,7 @@ public class DeleteUserTests extends StartTests {
   @DisplayName("Удалить пользователя testUser при не верном id")
   public void deleteTestUserWithWrongIdTest() {
     String wrongId = "idTestUser";
-    deleteResponse = userClient.deleteUser(wrongId);
+    deleteResponse = StartTests.userClient.deleteUser(wrongId);
     statusCode = extractStatusCode(deleteResponse);
     String message = deleteResponse.extract().path("error.message");
     String details = deleteResponse.extract().path("error.details");
@@ -60,7 +63,7 @@ public class DeleteUserTests extends StartTests {
   @Test
   @DisplayName("Удалить пользователя testUser при отсутствующем id")
   public void deleteTestUserWithoutIdTest() {
-    deleteResponse = userClient.deleteUserWithoutId();
+    deleteResponse = StartTests.userClient.deleteUserWithoutId();
     statusCode = extractStatusCode(deleteResponse);
 
     assertEquals(SC_METHOD_NOT_ALLOWED, statusCode);

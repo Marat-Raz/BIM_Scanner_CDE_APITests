@@ -1,6 +1,9 @@
+package projects;
+
 import static models.project.ProjectType.DEFAULT_PROJECT;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import baseTests.StartTests;
 import client.ProjectsClient;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
@@ -24,7 +27,7 @@ public class GetProjectByItsIdTests extends StartTests {
   @Step("Создать проект для теста")
   public void createProjectForTests() {
     Project project = projectFactory.createProject(DEFAULT_PROJECT);
-    project.setResponsibleId(userId);
+    project.setResponsibleId(StartTests.userId);
     createProjectResponse = projectsClient.createProject(project);
     projectId = createProjectResponse.extract().path("id");
   }

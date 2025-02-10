@@ -1,3 +1,5 @@
+package baseTests;
+
 import static models.user.UserType.DEFAULT_USER;
 
 import client.TokenClient;
@@ -14,7 +16,6 @@ import models.token.TokenBuilder;
 import models.user.User;
 import models.user.UserFactory;
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 
@@ -30,10 +31,7 @@ public class StartTests {
   protected static UserFactory userFactory = new UserFactory();
   protected ErrorRoot errorRoot;
   protected String message;
-<<<<<<< HEAD
-=======
   protected String details;
->>>>>>> 818c0f6b894ea0331f6a7beddf264f22757304c7
 
   @BeforeAll
   @Step("Запуск Allure и логирования запросов по API, \n"
@@ -45,7 +43,7 @@ public class StartTests {
         new AllureRestAssured());
     ValidatableResponse responseAdminToken =
         tokenClient.createToken(TokenBuilder.getTokenForAdminUser());
-    Client.ADMIN_ACCESS_TOKEN = responseAdminToken.extract().path("access_token");;
+    Client.ADMIN_ACCESS_TOKEN = responseAdminToken.extract().path("access_token");
     defaultUser = userFactory.createUser(DEFAULT_USER);
     baseResponse = userClient.createUser(defaultUser);
     userId = baseResponse.extract().path("id");

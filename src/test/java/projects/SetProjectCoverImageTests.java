@@ -1,7 +1,10 @@
+package projects;
+
 import static models.project.ProjectType.RANDOM_PROJECT;
-import static org.apache.http.HttpStatus.SC_OK;
+import static org.apache.http.HttpStatus.SC_NO_CONTENT;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import baseTests.StartTests;
 import client.ProjectsClient;
 import client.base.Client;
 import io.qameta.allure.Step;
@@ -10,22 +13,20 @@ import java.util.ArrayList;
 import java.util.List;
 import models.project.Project;
 import models.project.ProjectFactory;
-import models.project.ProjectWithConcurrencyStamp;
 import models.project.ServerResponseProject;
 import org.junit.jupiter.api.*;
 
-public class UpdatesAnExistingProjectTests extends StartTests {
+public class SetProjectCoverImageTests extends StartTests {
+// todo https://software-testing.ru/library/testing/testing-for-beginners/3318-six-tips-and-four-tools-for-file-upload
 
   private static ProjectFactory projectFactory = new ProjectFactory();
   private static ProjectsClient projectsClient = new ProjectsClient();
   private static ValidatableResponse createProjectResponse;
   private static String projectId;
-  private static String concurrencyStamp;
   private static ValidatableResponse getAllProjectResponse;
   private static List<ServerResponseProject> serverResponseProjectList = new ArrayList<>();
   private static ValidatableResponse deleteProjectResponse;
-  private ValidatableResponse putProjectResponse;
-  ProjectWithConcurrencyStamp projectWithConcurrencyStamp;
+  private ValidatableResponse setIconResponse;
 
   @BeforeAll
   @Step("Создать проект от имени ADMIN")
@@ -33,7 +34,6 @@ public class UpdatesAnExistingProjectTests extends StartTests {
     Project project = projectFactory.createProject(RANDOM_PROJECT);
     createProjectResponse = projectsClient.createProject(Client.ADMIN_ACCESS_TOKEN, project);
     projectId = createProjectResponse.extract().path("id");
-    concurrencyStamp = createProjectResponse.extract().path("concurrencyStamp");
   }
 
   @AfterAll
@@ -50,17 +50,12 @@ public class UpdatesAnExistingProjectTests extends StartTests {
 
   @Test
   @Tag(value = "smoke")
-  @DisplayName("Изменить проект пользователя ADMIN")
-  public void updatesAnExistingProjectTest() {
-    Project newProject = projectFactory.createProject(RANDOM_PROJECT);
-    projectWithConcurrencyStamp = new ProjectWithConcurrencyStamp(newProject, concurrencyStamp);
-    putProjectResponse = projectsClient.putProjectByItsId(Client.ADMIN_ACCESS_TOKEN, projectId,
-        projectWithConcurrencyStamp);
-    statusCode = extractStatusCode(putProjectResponse);
-    String changedProjectId = putProjectResponse.extract().path("id");
+  @DisplayName("Задать изображение обложки проекта")
+  public void setProjectCoverImageTest() {
+    setIconResponse = projectsClient.setProjectCoverImage(projectId);
+    statusCode = extractStatusCode(setIconResponse);
 
-    assertEquals(SC_OK, statusCode);
-    assertEquals(projectId, changedProjectId);
+    assertEquals(SC_NO_CONTENT, statusCode);
   }
-}
 
+}

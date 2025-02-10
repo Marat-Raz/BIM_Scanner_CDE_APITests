@@ -1,7 +1,10 @@
+package projects;
+
 import static models.project.ProjectType.RANDOM_PROJECT;
 import static org.apache.http.HttpStatus.SC_NO_CONTENT;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import baseTests.StartTests;
 import client.ProjectsClient;
 import client.base.Client;
 import io.qameta.allure.Step;
@@ -13,8 +16,7 @@ import models.project.ProjectFactory;
 import models.project.ServerResponseProject;
 import org.junit.jupiter.api.*;
 
-public class SetProjectCoverImageTests extends StartTests {
-// todo https://software-testing.ru/library/testing/testing-for-beginners/3318-six-tips-and-four-tools-for-file-upload
+public class DeleteProjectCoverImageTests extends StartTests {
 
   private static ProjectFactory projectFactory = new ProjectFactory();
   private static ProjectsClient projectsClient = new ProjectsClient();
@@ -23,7 +25,8 @@ public class SetProjectCoverImageTests extends StartTests {
   private static ValidatableResponse getAllProjectResponse;
   private static List<ServerResponseProject> serverResponseProjectList = new ArrayList<>();
   private static ValidatableResponse deleteProjectResponse;
-  private ValidatableResponse setIconResponse;
+  private ValidatableResponse deleteIconResponse;
+  private String path = "src/main/resources/coverImage.png";
 
   @BeforeAll
   @Step("Создать проект от имени ADMIN")
@@ -47,12 +50,13 @@ public class SetProjectCoverImageTests extends StartTests {
 
   @Test
   @Tag(value = "smoke")
-  @DisplayName("Задать изображение обложки проекта")
-  public void setProjectCoverImageTest() {
-    setIconResponse = projectsClient.setProjectCoverImage(projectId);
-    statusCode = extractStatusCode(setIconResponse);
+  @DisplayName("Удалить изображение обложки проекта")
+  public void getProjectCoverImageTest() {
+    projectsClient.setProjectCoverImage(projectId);
+    deleteIconResponse = projectsClient.deleteProjectCoverImage(projectId);
+    statusCode = extractStatusCode(deleteIconResponse);
 
     assertEquals(SC_NO_CONTENT, statusCode);
   }
-
 }
+
