@@ -1,8 +1,10 @@
 package projects;
 
+import static models.project.ProjectType.RANDOM_PROJECT;
 import static org.apache.http.HttpStatus.SC_NO_CONTENT;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import baseTests.StartTests;
 import client.ProjectsClient;
 import client.base.Client;
 import io.qameta.allure.Step;
@@ -13,7 +15,6 @@ import models.project.Project;
 import models.project.ProjectFactory;
 import models.project.ServerResponseProject;
 import org.junit.jupiter.api.*;
-import baseTests.StartTests;
 
 public class DeleteProjectByItsIdTests extends StartTests {
 
@@ -48,7 +49,7 @@ public class DeleteProjectByItsIdTests extends StartTests {
           project.getId());
       statusCode = extractStatusCode(deleteProjectResponse);
 
-      Assertions.assertEquals(SC_NO_CONTENT, statusCode);
+      assertEquals(SC_NO_CONTENT, statusCode);
     }
   }
 
