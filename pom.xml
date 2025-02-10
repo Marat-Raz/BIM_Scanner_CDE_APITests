@@ -130,6 +130,7 @@
           <testFailureIgnore>false</testFailureIgnore>
           <argLine>
             -Dfile.encoding=${project.build.sourceEncoding}
+            -Djdk.net.URLClassPath.disableClassPathURLCheck=true
             -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
           </argLine>
         </configuration>
