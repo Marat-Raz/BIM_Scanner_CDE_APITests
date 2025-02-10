@@ -27,7 +27,7 @@ public class GetProjectByItsIdTests extends StartTests {
   @Step("Создать проект для теста")
   public void createProjectForTests() {
     Project project = projectFactory.createProject(DEFAULT_PROJECT);
-    project.setResponsibleId(StartTests.userId);
+    project.setResponsibleId(userId);
     createProjectResponse = projectsClient.createProject(project);
     projectId = createProjectResponse.extract().path("id");
   }

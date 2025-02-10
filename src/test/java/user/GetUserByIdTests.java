@@ -21,20 +21,20 @@ public class GetUserByIdTests extends StartTests {
   @Tag(value = "smoke")
   @DisplayName("Получить пользователя по id")
   public void getUserByIdTest() {
-    getUserResponse = StartTests.userClient.getUserById(StartTests.userId);
+    getUserResponse = userClient.getUserById(userId);
     statusCode = extractStatusCode(getUserResponse);
     String userName = getUserResponse.extract().path("userName");
     String email = getUserResponse.extract().path("email");
 
     assertEquals(SC_OK, statusCode);
-    assertEquals(StartTests.defaultUser.getUserName(), userName);
-    assertEquals(StartTests.defaultUser.getEmail(), email);
+    assertEquals(defaultUser.getUserName(), userName);
+    assertEquals(defaultUser.getEmail(), email);
   }
 
   @Test
   @DisplayName("Получить пользователя по неверному id")
   public void getUserByWrongIdTest() {
-    getUserResponse = StartTests.userClient.getUserById("userId");
+    getUserResponse = userClient.getUserById("userId");
     statusCode = extractStatusCode(getUserResponse);
     errorRoot = getUserResponse.extract().body().as(ErrorRoot.class);
 
@@ -49,7 +49,7 @@ public class GetUserByIdTests extends StartTests {
   public void getUserByMissingIdTest() {
     UUID uuid = UUID.randomUUID();
     String wrongId = String.valueOf(uuid);
-    getUserResponse = StartTests.userClient.getUserById(wrongId);
+    getUserResponse = userClient.getUserById(wrongId);
     statusCode = extractStatusCode(getUserResponse);
     errorRoot = getUserResponse.extract().body().as(ErrorRoot.class);
 

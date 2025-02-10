@@ -21,14 +21,14 @@ public class ChangeUserDataTests extends StartTests {
 
   @BeforeEach
   public void createNewUser() {
-    newUser = StartTests.userFactory.createUser(NEW_USER);
+    newUser = userFactory.createUser(NEW_USER);
   }
 
   @Test
   @Tag(value = "smoke")
   @DisplayName("Изменить данные пользователя - userName и password")
   public void changeUserDataTests() {
-    putResponse = StartTests.userClient.changeUser(newUser, StartTests.userId);
+    putResponse = userClient.changeUser(newUser, userId);
     statusCode = putResponse.extract().statusCode();
 
     assertEquals(SC_OK, statusCode);
@@ -37,7 +37,7 @@ public class ChangeUserDataTests extends StartTests {
   @Test
   @DisplayName("Изменить данные пользователя - userName, без передачи параметра email")
   public void changeUsernameWithoutEmailTests() {
-    putResponse = StartTests.userClient.changeUser(newUser, StartTests.userId);
+    putResponse = userClient.changeUser(newUser, userId);
     statusCode = extractStatusCode(putResponse);
     errorRoot = putResponse.extract().body().as(ErrorRoot.class);
 
@@ -50,7 +50,7 @@ public class ChangeUserDataTests extends StartTests {
   @Test
   @DisplayName("Изменить данные пользователя - userName")
   public void changeUsernameWithEmailTests() {
-    putResponse = StartTests.userClient.changeUser(newUser, StartTests.userId);
+    putResponse = userClient.changeUser(newUser, userId);
     statusCode = extractStatusCode(putResponse);
 
     assertEquals(SC_OK, statusCode);
@@ -59,7 +59,7 @@ public class ChangeUserDataTests extends StartTests {
   @Test
   @DisplayName("Изменить данные пользователя - email")
   public void changeEmailWithUsernameTests() {
-    putResponse = StartTests.userClient.changeUser(StartTests.defaultUser, StartTests.userId);
+    putResponse = userClient.changeUser(defaultUser, userId);
     statusCode = extractStatusCode(putResponse);
 
     assertEquals(SC_OK, statusCode);
@@ -68,7 +68,7 @@ public class ChangeUserDataTests extends StartTests {
   @Test
   @DisplayName("Изменить данные пользователя - email, без передачи параметра userName")
   public void changeEmailWithoutUsernameTests() {
-    putResponse = StartTests.userClient.changeUser(StartTests.defaultUser, StartTests.userId);
+    putResponse = userClient.changeUser(defaultUser, userId);
     int statusCode = extractStatusCode(putResponse);
     errorRoot = putResponse.extract().body().as(ErrorRoot.class);
 

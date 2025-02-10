@@ -37,7 +37,7 @@ public class GetUsersProjectsTests extends StartTests {
     }
   }
 
-  @AfterAll // todo можно ли вынести этот метод в startTests.StartTests.cleanData?
+  @AfterAll // todo можно ли вынести этот метод в StartTests.cleanData?
   @Step("Получить все проекты в системе и удалить все проекты всех пользователей после тестов")
   public static void deleteAllProjects() {
     getAllProjectResponse = projectsClient.getListOfProjects(Client.ADMIN_ACCESS_TOKEN);
