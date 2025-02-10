@@ -2,6 +2,7 @@ package models.token;
 
 import lombok.Getter;
 import lombok.Setter;
+import models.user.User;
 
 @Getter
 @Setter
@@ -25,11 +26,11 @@ public class TokenBuilder {
         .build();
   }
 
-  public static RequestToken getTokenForUser() {
+  public static RequestToken getTokenForUser(User user) {
     return RequestToken.builder()
         .grantType(grantType)
-        .username(username)
-        .password(password)
+        .username(user.getUserName())
+        .password(user.getPassword())
         .scope(scope)
         .clientId(clientId)
         .clientSecret(clientSecret)

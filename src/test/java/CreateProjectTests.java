@@ -15,10 +15,9 @@ import org.junit.jupiter.api.Test;
 
 public class CreateProjectTests extends StartTests {
 
-  ValidatableResponse createProjectResponse;
-  ProjectsClient projectsClient = new ProjectsClient();
-  ProjectFactory projectFactory = new ProjectFactory();
-
+  private ValidatableResponse createProjectResponse;
+  private ProjectsClient projectsClient = new ProjectsClient();
+  private ProjectFactory projectFactory = new ProjectFactory();
 
 /*
 // todo создать проект со всеми параметрами

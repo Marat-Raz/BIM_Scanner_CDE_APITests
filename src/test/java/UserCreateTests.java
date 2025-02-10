@@ -1,5 +1,5 @@
 import static models.user.UserType.USER_WITHOUT_EMAIL;
-import static models.user.UserType.USER_WITHOUT_NAME;
+import static models.user.UserType.USER_WITHOUT_USERNAME;
 import static models.user.UserType.USER_WITHOUT_PASSWORD;
 import static org.apache.http.HttpStatus.SC_BAD_REQUEST;
 import static org.apache.http.HttpStatus.SC_FORBIDDEN;
@@ -14,7 +14,6 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 public class UserCreateTests extends StartTests {
-  // todo добавить тест с отсутствующим id
 
   private ValidatableResponse wrongResponse;
 
@@ -70,7 +69,7 @@ public class UserCreateTests extends StartTests {
   @Test
   @DisplayName("Создать пользователя и не заполнить одно из обязательных полей - userName")
   public void createUserWithoutNameTest() {
-    User userWithoutUserName = userFactory.createUser(USER_WITHOUT_NAME);
+    User userWithoutUserName = userFactory.createUser(USER_WITHOUT_USERNAME);
     wrongResponse = userClient.createUser(userWithoutUserName);
     errorRoot = wrongResponse.extract().body().as(ErrorRoot.class);
     statusCode = extractStatusCode(wrongResponse);

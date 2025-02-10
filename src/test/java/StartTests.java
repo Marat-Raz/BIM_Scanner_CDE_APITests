@@ -13,6 +13,7 @@ import models.error.ErrorRoot;
 import models.token.TokenBuilder;
 import models.user.User;
 import models.user.UserFactory;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,39 +22,48 @@ import org.junit.jupiter.api.BeforeEach;
 public class StartTests {
 
   private static TokenClient tokenClient = new TokenClient();
-  protected User defaultUser;
-  protected String userId;
-  protected ValidatableResponse baseResponse;
-  protected UserClient userClient = new UserClient();
+  protected static User defaultUser;
+  protected static String userId;
+  protected static ValidatableResponse baseResponse;
+  protected static UserClient userClient = new UserClient();
   protected int statusCode;
-  protected UserFactory userFactory = new UserFactory();
+  protected static UserFactory userFactory = new UserFactory();
   protected ErrorRoot errorRoot;
   protected String message;
+<<<<<<< HEAD
+=======
   protected String details;
+>>>>>>> 818c0f6b894ea0331f6a7beddf264f22757304c7
 
   @BeforeAll
-  @Step("Запуск Allure и логирования запросов по API, "
-      + "получение токена пользователя admin для запросов, требующих авторизации")
+  @Step("Запуск Allure и логирования запросов по API, \n"
+      + "получение токена пользователя admin для запросов, требующих прав админа, \n"
+      + "создание пользователя по умолчанию.\n")
   public static void globalSetUp() {
     RestAssured.filters(
         new RequestLoggingFilter(), new ResponseLoggingFilter(),
         new AllureRestAssured());
-    ValidatableResponse responseAdminToken = tokenClient.createToken(TokenBuilder.getTokenForAdminUser());
-    Client.ACCESS_TOKEN = responseAdminToken.extract().path("access_token");;
-  }
-
-  @BeforeEach
-  @Step("Создание пользователя")
-  public void setUp() {
+    ValidatableResponse responseAdminToken =
+        tokenClient.createToken(TokenBuilder.getTokenForAdminUser());
+    Client.ADMIN_ACCESS_TOKEN = responseAdminToken.extract().path("access_token");;
     defaultUser = userFactory.createUser(DEFAULT_USER);
     baseResponse = userClient.createUser(defaultUser);
     userId = baseResponse.extract().path("id");
-
+    ValidatableResponse responseToken =
+        tokenClient.createToken(TokenBuilder.getTokenForUser(defaultUser));
+    Client.DEFAULT_USER_ACCESS_TOKEN = responseToken.extract().path("access_token");
+    // todo выдать для user права на создание проектов раздел permission
   }
 
-  @AfterEach
+  @BeforeEach
+  //@Step("Создание пользователя")
+  public void setUp() {
+// todo добавить необходимую реализацию
+  }
+
+  @AfterAll
   @Step("Удаление профиля пользователя")
-  public void cleanData() {
+  public static void cleanData() {
     userClient.deleteUser(userId);
   }
 

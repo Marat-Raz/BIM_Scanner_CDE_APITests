@@ -2,6 +2,7 @@ package models.user;
 
 import static org.passay.CharacterCharacteristicsRule.ERROR_CODE;
 
+import java.util.Arrays;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.passay.CharacterData;
 import org.passay.CharacterRule;
@@ -10,28 +11,36 @@ import org.passay.PasswordGenerator;
 
 public class UserFactory {
 
-  private String userName = RandomStringUtils.randomAlphabetic(6, 256);
+  private final String NULL = null; // На данном этапе тестирования принимаем так
+  private String userName = RandomStringUtils.randomAlphabetic(6, 248);
+  private String name = NULL;
+  private String surname = NULL;
   private String emailAddress = RandomStringUtils.randomAlphabetic(3, 247) + "@mail.com";
+  private String phoneNumber = NULL;
+  private boolean active = true; // пока делаем так, далее при необходимости будем менять
+  private boolean lockoutEnabled = true;  // пока делаем так, далее при необходимости будем менять
+  private String[] roleNames = null;   // пока для простоты делаем так, далее при необходимости будем менять
   private String password = generatePassword(10, 2, 2, 2, 2);
-  private String appName = RandomStringUtils.randomAlphabetic(8);
 
   public User createUser(UserType userType) {
     switch (userType) {
       case USER_WITHOUT_EMAIL:
-        return new User(userName, null, password, appName);
+        return new User(userName, name, surname, null, phoneNumber, active,
+            lockoutEnabled, null, password);
       case USER_WITHOUT_PASSWORD:
-        return new User(userName, emailAddress, null, appName);
-      case USER_WITHOUT_NAME:
-        return new User(null, emailAddress, password, appName);
+        return new User(userName, name, surname, emailAddress, phoneNumber, active,
+            lockoutEnabled, null, null);
+      case USER_WITHOUT_USERNAME:
+        return new User(null, name, surname, emailAddress, phoneNumber, active,
+            lockoutEnabled, null, null);
       case NEW_USER:
-        return new User("newUser" + RandomStringUtils.randomAlphabetic(6, 249),
-            "newEmail" + RandomStringUtils.randomAlphabetic(3, 247) + "@mail.com",
-            "newPassword" + password,
-            appName);
+        return new User("newUser_" + userName, name, surname,
+            "newEmail" + emailAddress, phoneNumber, active, lockoutEnabled,
+            roleNames, "newPassword" + password);
       default:
       case DEFAULT_USER:
-        return new User(userName, emailAddress, password, appName);
-    }
+        return new User(userName, name, surname, emailAddress, phoneNumber, active,
+            lockoutEnabled, roleNames, password);    }
   }
 
   private String generatePassword(int length, int lowerCase, int upperCase,
@@ -49,7 +58,7 @@ public class UserFactory {
     CharacterRule digitalRule = new CharacterRule(digitalChars);
     digitalRule.setNumberOfCharacters(digitalRuleNumber);
 
-    CharacterData specialChars = new MyCharacterData();
+    CharacterData specialChars = new SpecialCharacterData();
     CharacterRule specialCharRule = new CharacterRule(specialChars);
     specialCharRule.setNumberOfCharacters(specialCharsNumber);
 
@@ -58,7 +67,7 @@ public class UserFactory {
     return password;
   }
 
-  private class MyCharacterData implements CharacterData {
+  private class SpecialCharacterData implements CharacterData {
 
     @Override
     public String getErrorCode() {
