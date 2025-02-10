@@ -14,10 +14,8 @@ public class ProjectFactory {
     switch (projectType) {
       case PROJECT_WITHOUT_NAME:
         return new Project(null, description, responsibleId, completionTime);
-      case PROJECT_WITH_NULL:
-        return new Project(null, null, null, null);
-      case RANDOM_PROJECT:
-        return new Project(RandomStringUtils.randomAlphabetic(1, 256), description, responsibleId, completionTime);
+      case PROJECT_WITHOUT_DATA:
+        return new Project( null, null, null, null);
       default:
       case DEFAULT_PROJECT:
         return new Project(name, description, responsibleId, completionTime);
