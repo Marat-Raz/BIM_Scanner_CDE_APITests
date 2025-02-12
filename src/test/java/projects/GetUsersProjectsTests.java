@@ -1,7 +1,10 @@
+package projects;
+
 import static models.project.ProjectType.RANDOM_PROJECT;
-import static org.apache.http.HttpStatus.SC_NO_CONTENT;
+import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import baseTests.StartTests;
 import client.ProjectsClient;
 import client.base.Client;
 import io.qameta.allure.Step;
@@ -13,27 +16,28 @@ import models.project.ProjectFactory;
 import models.project.ServerResponseProject;
 import org.junit.jupiter.api.*;
 
-public class SetProjectCoverImageTests extends StartTests {
-// todo https://software-testing.ru/library/testing/testing-for-beginners/3318-six-tips-and-four-tools-for-file-upload
+public class GetUsersProjectsTests extends StartTests {
 
+  private static ValidatableResponse getAllProjectResponse;
   private static ProjectFactory projectFactory = new ProjectFactory();
   private static ProjectsClient projectsClient = new ProjectsClient();
-  private static ValidatableResponse createProjectResponse;
-  private static String projectId;
-  private static ValidatableResponse getAllProjectResponse;
+  private static ArrayList<Project> projectList = new ArrayList<Project>();
   private static List<ServerResponseProject> serverResponseProjectList = new ArrayList<>();
   private static ValidatableResponse deleteProjectResponse;
-  private ValidatableResponse setIconResponse;
+  private static int numberOfProjects = 5;
 
   @BeforeAll
-  @Step("Создать проект от имени ADMIN")
-  public static void createProject() {
-    Project project = projectFactory.createProject(RANDOM_PROJECT);
-    createProjectResponse = projectsClient.createProject(Client.ADMIN_ACCESS_TOKEN, project);
-    projectId = createProjectResponse.extract().path("id");
+  @Step("Создать несколько проектов от имени ADMIN")
+  public static void createProjects() { // todo рассмотреть вынос этого метода в Steps
+    for (int i = 0; i < numberOfProjects; i++) {
+      projectList.add(projectFactory.createProject(RANDOM_PROJECT));
+    }
+    for (Project project : projectList) {
+      projectsClient.createProject(Client.ADMIN_ACCESS_TOKEN, project);
+    }
   }
 
-  @AfterAll
+  @AfterAll // todo можно ли вынести этот метод в StartTests.cleanData?
   @Step("Получить все проекты в системе и удалить все проекты всех пользователей после тестов")
   public static void deleteAllProjects() {
     getAllProjectResponse = projectsClient.getListOfProjects(Client.ADMIN_ACCESS_TOKEN);
@@ -47,12 +51,15 @@ public class SetProjectCoverImageTests extends StartTests {
 
   @Test
   @Tag(value = "smoke")
-  @DisplayName("Задать изображение обложки проекта")
-  public void setProjectCoverImageTest() {
-    setIconResponse = projectsClient.setProjectCoverImage(projectId);
-    statusCode = extractStatusCode(setIconResponse);
+  @DisplayName("Получить список проектов для ADMIN")
+    public void getProjectsForAdminTest() {
+    getAllProjectResponse = projectsClient.getListOfProjects(Client.ADMIN_ACCESS_TOKEN);
+    statusCode = extractStatusCode(getAllProjectResponse);
 
-    assertEquals(SC_NO_CONTENT, statusCode);
+    assertEquals(SC_OK, statusCode);
   }
 
+  // todo проверить список проектов со списком проектов в ответе
+  // + реализовать остальные проверки для query options
 }
+

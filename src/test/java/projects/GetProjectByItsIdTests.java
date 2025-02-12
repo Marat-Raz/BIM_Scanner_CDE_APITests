@@ -1,6 +1,9 @@
+package projects;
+
 import static models.project.ProjectType.DEFAULT_PROJECT;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import baseTests.StartTests;
 import client.ProjectsClient;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;

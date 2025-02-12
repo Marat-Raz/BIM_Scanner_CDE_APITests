@@ -16,6 +16,9 @@ public class ProjectFactory {
         return new Project(null, description, responsibleId, completionTime);
       case PROJECT_WITHOUT_DATA:
         return new Project( null, null, null, null);
+      case RANDOM_PROJECT:
+        return new Project(RandomStringUtils.randomAlphabetic(1, 256), description, responsibleId,
+            completionTime);
       default:
       case DEFAULT_PROJECT:
         return new Project(name, description, responsibleId, completionTime);

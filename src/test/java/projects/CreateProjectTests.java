@@ -1,10 +1,13 @@
+package projects;
+
 import static models.project.ProjectType.DEFAULT_PROJECT;
-import static models.project.ProjectType.PROJECT_WITHOUT_NAME;
 import static models.project.ProjectType.PROJECT_WITHOUT_DATA;
+import static models.project.ProjectType.PROJECT_WITHOUT_NAME;
 import static org.apache.http.HttpStatus.SC_BAD_REQUEST;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import baseTests.StartTests;
 import client.ProjectsClient;
 import io.restassured.response.ValidatableResponse;
 import models.project.Project;
