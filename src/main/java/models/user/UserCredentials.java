@@ -1,26 +1,39 @@
 package models.user;
+import static constants.CommonConstants.APP_NAME;
 
 public class UserCredentials {
 
 
   private String userName;
-  private String email;
+  private String emailAddress;
+  private String password;
+  private String appName;
 
-  public UserCredentials(String userName, String email) {
+  private UserCredentials(String userName, String emailAddress, String password, String appName) {
     this.userName = userName;
-    this.email = email;
+    this.emailAddress = emailAddress;
+    this.password = password;
+    this.appName = appName;
   }
 
-  public String getUserName() {
+  private String getUserName() {
     return userName;
   }
 
-  public String getEmail() {
-    return email;
+  private String getEmailAddress() {
+    return emailAddress;
+  }
+
+  private String getPassword() {
+    return password;
+  }
+
+  private String getAppName() {
+    return appName;
   }
 
   public static UserCredentials from(User user) {
-    return new UserCredentials(user.getUserName(), user.getEmail());
+    return new UserCredentials(user.getUserName(), user.getEmail(), user.getPassword(), APP_NAME);
   }
 
 }

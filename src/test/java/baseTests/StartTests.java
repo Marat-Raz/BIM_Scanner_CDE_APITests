@@ -45,9 +45,9 @@ public class StartTests {
     defaultUser = userFactory.createUser(DEFAULT_USER);
     baseResponse = userClient.createUser(defaultUser);
     userId = baseResponse.extract().path("id");
-    ValidatableResponse responseToken =
+/*    ValidatableResponse responseToken =
         tokenClient.createToken(TokenBuilder.getTokenForUser(defaultUser));
-    Client.DEFAULT_USER_ACCESS_TOKEN = responseToken.extract().path("access_token");
+    Client.DEFAULT_USER_ACCESS_TOKEN = responseToken.extract().path("access_token");*/
     // todo выдать для user права на создание проектов раздел permission
   }
 

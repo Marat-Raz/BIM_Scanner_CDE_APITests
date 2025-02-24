@@ -1,8 +1,8 @@
 package models.user;
 
+import static constants.CommonConstants.REAL_EMAIL;
 import static org.passay.CharacterCharacteristicsRule.ERROR_CODE;
 
-import java.util.Arrays;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.passay.CharacterData;
 import org.passay.CharacterRule;
@@ -34,17 +34,24 @@ public class UserFactory {
         return new User(null, name, surname, emailAddress, phoneNumber, active,
             lockoutEnabled, null, null);
       case NEW_USER:
-        return new User("newUser_" + userName, name, surname,
-            "newEmail" + emailAddress, phoneNumber, active, lockoutEnabled,
-            roleNames, "newPassword" + password);
+        return new User("newUser_" + RandomStringUtils.randomAlphabetic(0, 247),
+            RandomStringUtils.randomAlphabetic(0, 64), RandomStringUtils.randomAlphabetic(0, 64),
+            "newEmail" + RandomStringUtils.randomAlphabetic(3, 239) + "@mail.com",
+            phoneNumber, active, lockoutEnabled, roleNames,
+            "newPassword" + generatePassword(10, 2, 2, 2, 2));
+      case USER_WITH_REAL_E_MAIL:
+        return new User(userName, name, surname, REAL_EMAIL, phoneNumber, active,
+            lockoutEnabled, roleNames, password);
       default:
       case DEFAULT_USER:
         return new User(userName, name, surname, emailAddress, phoneNumber, active,
-            lockoutEnabled, roleNames, password);    }
+            lockoutEnabled, roleNames, password);
+    }
   }
 
   private String generatePassword(int length, int lowerCase, int upperCase,
       int digitalRuleNumber, int specialCharsNumber) {
+    // todo заменить на свою реализацию включающую буквы кириллицы, латиницы (+ узбекские)
     PasswordGenerator generator = new PasswordGenerator();
     CharacterData lowerCaseChars = EnglishCharacterData.LowerCase;
     CharacterRule lowerCaseRule = new CharacterRule(lowerCaseChars);
