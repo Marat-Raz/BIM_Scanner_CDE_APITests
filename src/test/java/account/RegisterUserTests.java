@@ -10,7 +10,6 @@ import io.restassured.response.ValidatableResponse;
 import models.user.User;
 import models.user.UserCredentials;
 import org.junit.jupiter.api.*;
-import user.UserCreateTests;
 
 public class RegisterUserTests extends StartTests {
 

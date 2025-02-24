@@ -5,7 +5,6 @@ import lombok.Setter;
 import models.user.User;
 import static CommonConstants.ADMIN;
 import static CommonConstants.GRANT_TYPE;
-import static CommonConstants.ADMIN_PASSWORD;
 
 @Getter
 @Setter
@@ -22,7 +21,7 @@ public class TokenBuilder {
     return RequestToken.builder()
         .grantType(GRANT_TYPE)
         .username(ADMIN)
-        .password(ADMIN_PASSWORD)
+        .password(CommonConstants.ADMIN)
         .scope(scope)
         .clientId(clientId)
         .clientSecret(clientSecret)
