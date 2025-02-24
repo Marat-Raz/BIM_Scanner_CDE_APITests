@@ -1,8 +1,8 @@
 package models.user;
 
 import static org.passay.CharacterCharacteristicsRule.ERROR_CODE;
+import static CommonConstants.APP_NAME;
 
-import java.util.Arrays;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.passay.CharacterData;
 import org.passay.CharacterRule;
@@ -37,14 +37,19 @@ public class UserFactory {
         return new User("newUser_" + userName, name, surname,
             "newEmail" + emailAddress, phoneNumber, active, lockoutEnabled,
             roleNames, "newPassword" + password);
+      case USER_WITH_REAL_E_MAIL:
+        return new User(userName, name, surname, REAL_EMAIL, phoneNumber, active,
+            lockoutEnabled, roleNames, password);
       default:
       case DEFAULT_USER:
         return new User(userName, name, surname, emailAddress, phoneNumber, active,
-            lockoutEnabled, roleNames, password);    }
+            lockoutEnabled, roleNames, password);
+    }
   }
 
   private String generatePassword(int length, int lowerCase, int upperCase,
       int digitalRuleNumber, int specialCharsNumber) {
+    // todo заменить на свою реализацию включающую буквы кириллицы, латиницы (+ узбекские)
     PasswordGenerator generator = new PasswordGenerator();
     CharacterData lowerCaseChars = EnglishCharacterData.LowerCase;
     CharacterRule lowerCaseRule = new CharacterRule(lowerCaseChars);
