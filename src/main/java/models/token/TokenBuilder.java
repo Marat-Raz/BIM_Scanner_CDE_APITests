@@ -3,8 +3,9 @@ package models.token;
 import lombok.Getter;
 import lombok.Setter;
 import models.user.User;
-import static CommonConstants.ADMIN;
-import static CommonConstants.GRANT_TYPE;
+import static constants.CommonConstants.ADMIN;
+import static constants.CommonConstants.ADMIN_P;
+import static constants.CommonConstants.GRANT_TYPE;
 
 @Getter
 @Setter
@@ -21,7 +22,7 @@ public class TokenBuilder {
     return RequestToken.builder()
         .grantType(GRANT_TYPE)
         .username(ADMIN)
-        .password(CommonConstants.ADMIN)
+        .password(ADMIN_P)
         .scope(scope)
         .clientId(clientId)
         .clientSecret(clientSecret)
