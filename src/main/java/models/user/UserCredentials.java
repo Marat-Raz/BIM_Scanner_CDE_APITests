@@ -1,5 +1,5 @@
 package models.user;
-import static CommonConstants.APP_NAME;
+import static constants.CommonConstants.APP_NAME;
 
 public class UserCredentials {
 

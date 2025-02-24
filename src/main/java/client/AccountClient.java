@@ -12,43 +12,13 @@ public class AccountClient extends Client { // todo необходимо доп�
   private static final String USER = "api/account/";
 
   @Step("Регистрация пользователя")
-  public ValidatableResponse registerUser(UserCredentials user) {
-    return given()
-        .spec(getBaseSpec())
-        .body(user)
-        .when()
-        .post(USER + "register/")
-        .then();
-  }
-/* // Fixme
-  @Step("Логин пользователя")
-  public ValidatableResponse loginUser(UserCredentials userCredentials) {
+  public ValidatableResponse registerUser(UserCredentials userCredentials) {
     return given()
         .spec(getBaseSpec())
         .body(userCredentials)
         .when()
-        .post(USER + "login/")
+        .post(USER + "register/")
         .then();
-  }*/
+  }
 
- /* @Step("Обновление данных пользователя")
-  public ValidatableResponse updateUser(User user, String accessToken) {
-    return given()
-        .spec(getBaseSpec())
-        .header("authorization", accessToken)
-        .body(user)
-        .when()
-        .patch(USER + "models/")
-        .then();
-  }
-*/
-  @Step("Удаление пользователя")
-  public ValidatableResponse deleteUser(String accessToken, String userId) {
-    return given()
-        .spec(getBaseSpec())
-        .header("authorization", accessToken)
-        .when()
-        .delete(USER + "models/")
-        .then();
-  }
 }
