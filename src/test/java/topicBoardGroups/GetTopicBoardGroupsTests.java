@@ -2,6 +2,8 @@ package topicBoardGroups;
 
 import static models.project.ProjectType.DEFAULT_PROJECT;
 import static models.topicboardsgroup.TopicBoardsGroupType.DEFAULT_TOPIC_BOARDS_GROUP;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import baseTests.StartTests;
 import client.ProjectsClient;
@@ -58,10 +60,16 @@ public class TopicBoardGroupsTests extends StartTests {
   @Tag(value = "smoke")
   @DisplayName("Получить список групп досок и досок задач в корне проекта")
   public void getTopicBoardGroupsTest() {
-    getTopicBoardGroupsResponse = topicBoardGroupsClients.getRootTopicBoardGroupsAndBoards(projectId);
-    responseTopicBoardGroupList = List.of
-    // todo реализовать далее
-  }
+    getTopicBoardGroupsResponse = topicBoardGroupsClients
+        .getRootTopicBoardGroupsAndBoards(projectId);
+    // todo создать доски и получить список этих досок тоже
+    responseTopicBoardGroupList = List.of(getTopicBoardGroupsResponse.extract().body()
+        .as(ResponseTopicBoardGroup[].class));
+    statusCode = extractStatusCode(getTopicBoardGroupsResponse);
 
+    assertEquals(countOfTopicBoardsGroup, responseTopicBoardGroupList.size()); // fixme а если в проекте будут группы досок до нашего теста?
+    assertNotNull(responseTopicBoardGroupList);
+
+  }
 
 }
