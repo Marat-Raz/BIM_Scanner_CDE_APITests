@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import baseTests.StartTests;
 import client.ProjectsClient;
-import client.TopicBoardGroupsClients;
+import client.TopicBoardGroupsClient;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import models.project.Project;
@@ -23,7 +23,7 @@ public class CreateTopicBoardsGroupTests extends StartTests {
   private static ProjectsClient projectsClient = new ProjectsClient();
   private static ProjectFactory projectFactory = new ProjectFactory();
   private static String projectId;
-  private TopicBoardGroupsClients topicBoardGroupsClients = new TopicBoardGroupsClients();
+  private TopicBoardGroupsClient topicBoardGroupsClient = new TopicBoardGroupsClient();
   private TopicBoardsGroupFactory topicBoardsGroupFactory = new TopicBoardsGroupFactory();
   private TopicBoardsGroup topicBoardsGroup;
   private ValidatableResponse createTopicBoardsGroupResponse;
@@ -47,7 +47,7 @@ public class CreateTopicBoardsGroupTests extends StartTests {
   @DisplayName("Создать группу досок задач в корне проекта")
   public void createTopicBoardsGroupTest() {
     topicBoardsGroup = topicBoardsGroupFactory.createTopicBoardsGroup(DEFAULT_TOPIC_BOARDS_GROUP);
-    createTopicBoardsGroupResponse = topicBoardGroupsClients.createNewTopicBoardsGroup(projectId,
+    createTopicBoardsGroupResponse = topicBoardGroupsClient.createNewTopicBoardsGroup(projectId,
         topicBoardsGroup);
     statusCode = extractStatusCode(createTopicBoardsGroupResponse);
     ResponseTopicBoardGroup responseTopicBoardGroup =

@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import baseTests.StartTests;
 import client.ProjectsClient;
-import client.TopicBoardGroupsClients;
+import client.TopicBoardGroupsClient;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import models.project.Project;
@@ -24,7 +24,7 @@ public class UpdateTopicBoardGroupByIdTests extends StartTests {
   private static TopicBoardsGroupFactory topicBoardsGroupFactory = new TopicBoardsGroupFactory();
   private static TopicBoardsGroup topicBoardsGroup;
   private static String projectId;
-  private static TopicBoardGroupsClients topicBoardGroupsClients = new TopicBoardGroupsClients();
+  private static TopicBoardGroupsClient topicBoardGroupsClient = new TopicBoardGroupsClient();
   private static ValidatableResponse createTopicBoardsGroupResponse;
   private ValidatableResponse updateTopicBoardGroupResponse;
   static String topicBoardsGroupId;
@@ -37,7 +37,7 @@ public class UpdateTopicBoardGroupByIdTests extends StartTests {
     ValidatableResponse createProjectResponse = projectsClient.createProject(project);
     projectId = createProjectResponse.extract().path("id");
     topicBoardsGroup = topicBoardsGroupFactory.createTopicBoardsGroup(DEFAULT_TOPIC_BOARDS_GROUP);
-    createTopicBoardsGroupResponse = topicBoardGroupsClients.createNewTopicBoardsGroup(projectId,
+    createTopicBoardsGroupResponse = topicBoardGroupsClient.createNewTopicBoardsGroup(projectId,
         topicBoardsGroup);
     topicBoardsGroupId = createTopicBoardsGroupResponse.extract().path("id");
   }
@@ -54,7 +54,7 @@ public class UpdateTopicBoardGroupByIdTests extends StartTests {
   public void updateTopicBoardGroupByIdTest() {
     TopicBoardsGroup newTopicBoardsGroup = topicBoardsGroup;
     newTopicBoardsGroup.setName("newName");
-    updateTopicBoardGroupResponse = topicBoardGroupsClients
+    updateTopicBoardGroupResponse = topicBoardGroupsClient
         .updateTopicBoardGroup(projectId, topicBoardsGroupId, newTopicBoardsGroup);
     statusCode = extractStatusCode(updateTopicBoardGroupResponse);
     ResponseTopicBoardGroup responseTopicBoardGroup = updateTopicBoardGroupResponse

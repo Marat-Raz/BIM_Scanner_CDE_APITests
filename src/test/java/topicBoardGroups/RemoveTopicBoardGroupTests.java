@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import baseTests.StartTests;
 import client.ProjectsClient;
-import client.TopicBoardGroupsClients;
+import client.TopicBoardGroupsClient;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import models.project.Project;
@@ -23,7 +23,7 @@ public class RemoveTopicBoardGroupTests extends StartTests {
   private static TopicBoardsGroupFactory topicBoardsGroupFactory = new TopicBoardsGroupFactory();
   private static TopicBoardsGroup topicBoardsGroup;
   private static String projectId;
-  private static TopicBoardGroupsClients topicBoardGroupsClients = new TopicBoardGroupsClients();
+  private static TopicBoardGroupsClient topicBoardGroupsClient = new TopicBoardGroupsClient();
   private static ValidatableResponse createTopicBoardsGroupResponse;
   private static String topicBoardsGroupId;
   private ValidatableResponse deleteTopicBoardGroupResponse;
@@ -36,7 +36,7 @@ public class RemoveTopicBoardGroupTests extends StartTests {
     ValidatableResponse createProjectResponse = projectsClient.createProject(project);
     projectId = createProjectResponse.extract().path("id");
     topicBoardsGroup = topicBoardsGroupFactory.createTopicBoardsGroup(DEFAULT_TOPIC_BOARDS_GROUP);
-    createTopicBoardsGroupResponse = topicBoardGroupsClients.createNewTopicBoardsGroup(projectId,
+    createTopicBoardsGroupResponse = topicBoardGroupsClient.createNewTopicBoardsGroup(projectId,
         topicBoardsGroup);
     topicBoardsGroupId = createTopicBoardsGroupResponse.extract().path("id");
   }
@@ -51,7 +51,7 @@ public class RemoveTopicBoardGroupTests extends StartTests {
   @Tag(value = "smoke")
   @DisplayName("Удалить группу досок задач по его id")
   public void updateTopicBoardGroupByIdTest() {
-    deleteTopicBoardGroupResponse = topicBoardGroupsClients
+    deleteTopicBoardGroupResponse = topicBoardGroupsClient
         .deleteTopicBoardGroup(projectId, topicBoardsGroupId);
     statusCode = extractStatusCode(deleteTopicBoardGroupResponse);
 

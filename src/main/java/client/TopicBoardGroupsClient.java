@@ -7,7 +7,8 @@ import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import models.topicboardsgroup.TopicBoardsGroup;
 
-public class TopicBoardGroupsClients extends Client {
+public class TopicBoardGroupsClient extends Client {
+
   private static final String TOPIC_BOARD_GROUPS = "api/projects/";
 
   @Step("Получить список групп досок и досок задач в корне проекта")
@@ -20,7 +21,7 @@ public class TopicBoardGroupsClients extends Client {
         .then();
   }
 
-  @Step("Создать группу досок задач в корне проекта")
+  @Step("Создать группу досок задач в проекте")
   public ValidatableResponse createNewTopicBoardsGroup(String projectId,
       TopicBoardsGroup topicBoardsGroup) {
     return given()

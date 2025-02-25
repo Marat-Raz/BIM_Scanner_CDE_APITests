@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import baseTests.StartTests;
 import client.ProjectsClient;
-import client.TopicBoardGroupsClients;
+import client.TopicBoardGroupsClient;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import java.util.ArrayList;
@@ -28,7 +28,7 @@ public class GetTopicBoardGroupsOnProjectRootTests extends StartTests {
   private static List<ResponseTopicBoardGroup> responseTopicBoardGroupList;
   private static TopicBoardsGroupFactory topicBoardsGroupFactory = new TopicBoardsGroupFactory();
   private static final int countOfTopicBoardsGroup = 5;
-  private static TopicBoardGroupsClients topicBoardGroupsClients = new TopicBoardGroupsClients();
+  private static TopicBoardGroupsClient topicBoardGroupsClient = new TopicBoardGroupsClient();
   private ValidatableResponse getTopicBoardGroupsResponse;
 
   @BeforeAll
@@ -43,7 +43,7 @@ public class GetTopicBoardGroupsOnProjectRootTests extends StartTests {
           .createTopicBoardsGroup(DEFAULT_TOPIC_BOARDS_GROUP));
     }
     for (TopicBoardsGroup topicBoardsGroup : topicBoardGroupsList) {
-      topicBoardGroupsClients.createNewTopicBoardsGroup(projectId,
+      topicBoardGroupsClient.createNewTopicBoardsGroup(projectId,
           topicBoardsGroup);
     }
   }
@@ -59,7 +59,7 @@ public class GetTopicBoardGroupsOnProjectRootTests extends StartTests {
   @Tag(value = "smoke")
   @DisplayName("Получить список групп досок и досок задач в корне проекта")
   public void getTopicBoardGroupsTest() {
-    getTopicBoardGroupsResponse = topicBoardGroupsClients
+    getTopicBoardGroupsResponse = topicBoardGroupsClient
         .getRootTopicBoardGroupsAndBoards(projectId);
     // todo создать доски и получить список этих досок тоже
     responseTopicBoardGroupList = List.of(getTopicBoardGroupsResponse.extract().body()
