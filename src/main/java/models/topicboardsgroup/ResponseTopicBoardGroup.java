@@ -8,7 +8,6 @@ import lombok.ToString;
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString(includeFieldNames=true)
 public class ResponseTopicBoardGroup {
 
   public String type;

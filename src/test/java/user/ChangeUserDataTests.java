@@ -37,8 +37,9 @@ public class ChangeUserDataTests extends StartTests {
   @Test
   @DisplayName("Изменить данные пользователя - userName, без передачи параметра email")
   public void changeUsernameWithoutEmailTests() {
-    // fixme исправить - по факту передается newUser с email
-    putResponse = userClient.changeUser(newUser, userId);
+    User userWithoutEmail = newUser;
+    userWithoutEmail.setEmail(null);
+    putResponse = userClient.changeUser(userWithoutEmail, userId);
     statusCode = extractStatusCode(putResponse);
     errorRoot = putResponse.extract().body().as(ErrorRoot.class);
 
@@ -70,7 +71,9 @@ public class ChangeUserDataTests extends StartTests {
   @DisplayName("Изменить данные пользователя - email, без передачи параметра userName")
   public void changeEmailWithoutUsernameTests() {
     // fixme исправить - по факту передается defaultUser с email
-    putResponse = userClient.changeUser(defaultUser, userId);
+    User userWithoutUserName = newUser;
+    userWithoutUserName.setUserName(null);
+    putResponse = userClient.changeUser(userWithoutUserName, userId);
     int statusCode = extractStatusCode(putResponse);
     errorRoot = putResponse.extract().body().as(ErrorRoot.class);
 
