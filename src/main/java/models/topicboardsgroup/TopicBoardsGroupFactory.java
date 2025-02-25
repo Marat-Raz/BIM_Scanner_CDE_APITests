@@ -12,6 +12,8 @@ public class TopicBoardsGroupFactory {
     switch (topicBoardsGroupType) {
       case TOPIC_BOARDS_GROUP_WITHOUT_NAME:
         return new TopicBoardsGroup(null, wrongParentGroupId);
+        case NEW_TOPIC_BOARDS_GROUP:
+        return new TopicBoardsGroup(RandomStringUtils.randomAlphabetic(1, 256), null);
       default:
       case DEFAULT_TOPIC_BOARDS_GROUP:
         return new TopicBoardsGroup(name, null);

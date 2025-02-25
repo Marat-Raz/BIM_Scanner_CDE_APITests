@@ -15,17 +15,14 @@ import models.project.ProjectFactory;
 import models.topicboardsgroup.ResponseTopicBoardGroup;
 import models.topicboardsgroup.TopicBoardsGroup;
 import models.topicboardsgroup.TopicBoardsGroupFactory;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 public class CreateTopicBoardsGroupTests extends StartTests {
 
-  private TopicBoardGroupsClients topicBoardGroupsClients = new TopicBoardGroupsClients();
   private static ProjectsClient projectsClient = new ProjectsClient();
   private static ProjectFactory projectFactory = new ProjectFactory();
   private static String projectId;
+  private TopicBoardGroupsClients topicBoardGroupsClients = new TopicBoardGroupsClients();
   private TopicBoardsGroupFactory topicBoardsGroupFactory = new TopicBoardsGroupFactory();
   private TopicBoardsGroup topicBoardsGroup;
   private ValidatableResponse createTopicBoardsGroupResponse;
@@ -36,6 +33,11 @@ public class CreateTopicBoardsGroupTests extends StartTests {
     project.setResponsibleId(userId);
     ValidatableResponse createProjectResponse = projectsClient.createProject(project);
     projectId = createProjectResponse.extract().path("id");
+  }
+
+  @AfterAll
+  public static void deleteProject() {
+    projectsClient.deleteProjectByItsId(projectId);
   }
 
   @Test
