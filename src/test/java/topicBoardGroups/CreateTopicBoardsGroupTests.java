@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import baseTests.StartTests;
 import client.ProjectsClient;
 import client.TopicBoardGroupsClients;
+import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import models.project.Project;
 import models.project.ProjectFactory;
@@ -28,6 +29,7 @@ public class CreateTopicBoardsGroupTests extends StartTests {
   private ValidatableResponse createTopicBoardsGroupResponse;
 
   @BeforeAll
+  @Step("Создать проект")
   public static void createProject() {
     Project project = projectFactory.createProject(DEFAULT_PROJECT);
     project.setResponsibleId(userId);

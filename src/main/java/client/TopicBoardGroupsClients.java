@@ -33,7 +33,7 @@ public class TopicBoardGroupsClients extends Client {
   }
 
   @Step("Получить группу досок задач по его id, включая или нет содержимое")
-  public ValidatableResponse getTopicBoardGroup(String projectId,
+  public ValidatableResponse getTopicBoardGroupById(String projectId,
       String topicBoardGroupId, boolean includeChildren) {
     return given()
         .spec(getBaseSpec())
