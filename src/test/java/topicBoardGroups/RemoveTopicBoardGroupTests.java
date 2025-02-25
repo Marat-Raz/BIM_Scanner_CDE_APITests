@@ -2,7 +2,7 @@ package topicBoardGroups;
 
 import static models.project.ProjectType.DEFAULT_PROJECT;
 import static models.topicboardsgroup.TopicBoardsGroupType.DEFAULT_TOPIC_BOARDS_GROUP;
-import static org.apache.http.HttpStatus.SC_OK;
+import static org.apache.http.HttpStatus.SC_NO_CONTENT;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import baseTests.StartTests;
@@ -12,12 +12,11 @@ import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import models.project.Project;
 import models.project.ProjectFactory;
-import models.topicboardsgroup.ResponseTopicBoardGroup;
 import models.topicboardsgroup.TopicBoardsGroup;
 import models.topicboardsgroup.TopicBoardsGroupFactory;
 import org.junit.jupiter.api.*;
 
-public class UpdateTopicBoardGroupByIdTests extends StartTests {
+public class RemoveTopicBoardGroupTests extends StartTests {
 
   private static ProjectsClient projectsClient = new ProjectsClient();
   private static ProjectFactory projectFactory = new ProjectFactory();
@@ -26,8 +25,8 @@ public class UpdateTopicBoardGroupByIdTests extends StartTests {
   private static String projectId;
   private static TopicBoardGroupsClients topicBoardGroupsClients = new TopicBoardGroupsClients();
   private static ValidatableResponse createTopicBoardsGroupResponse;
-  private ValidatableResponse updateTopicBoardGroupResponse;
-  static String topicBoardsGroupId;
+  private static String topicBoardsGroupId;
+  private ValidatableResponse deleteTopicBoardGroupResponse;
 
   @BeforeAll
   @Step("Создать проект, в ней создать группу досок задач")
@@ -50,19 +49,13 @@ public class UpdateTopicBoardGroupByIdTests extends StartTests {
 
   @Test
   @Tag(value = "smoke")
-  @DisplayName("Изменить группу досок задач по его id")
+  @DisplayName("Удалить группу досок задач по его id")
   public void updateTopicBoardGroupByIdTest() {
-    TopicBoardsGroup newTopicBoardsGroup = topicBoardsGroup;
-    newTopicBoardsGroup.setName("newName");
-    updateTopicBoardGroupResponse = topicBoardGroupsClients
-        .updateTopicBoardGroup(projectId, topicBoardsGroupId, newTopicBoardsGroup);
-    statusCode = extractStatusCode(updateTopicBoardGroupResponse);
-    ResponseTopicBoardGroup responseTopicBoardGroup = updateTopicBoardGroupResponse
-        .extract().as(ResponseTopicBoardGroup.class);
+    deleteTopicBoardGroupResponse = topicBoardGroupsClients
+        .deleteTopicBoardGroup(projectId, topicBoardsGroupId);
+    statusCode = extractStatusCode(deleteTopicBoardGroupResponse);
 
-    assertEquals(SC_OK, statusCode);
-    assertEquals(topicBoardsGroupId, responseTopicBoardGroup.getId());
-    assertEquals(newTopicBoardsGroup.getName(), responseTopicBoardGroup.getName());
+    assertEquals(SC_NO_CONTENT, statusCode);
   }
 
 }
