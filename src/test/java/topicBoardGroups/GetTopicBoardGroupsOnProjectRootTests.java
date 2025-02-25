@@ -19,7 +19,7 @@ import models.topicboardsgroup.TopicBoardsGroup;
 import models.topicboardsgroup.TopicBoardsGroupFactory;
 import org.junit.jupiter.api.*;
 
-public class GetTopicBoardGroupsTests extends StartTests {
+public class GetTopicBoardGroupsOnProjectRootTests extends StartTests {
 
   private static ProjectsClient projectsClient = new ProjectsClient();
   private static ProjectFactory projectFactory = new ProjectFactory();
