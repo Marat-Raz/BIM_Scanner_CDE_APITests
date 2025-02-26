@@ -47,7 +47,7 @@ public class CreateTopicBoardTests extends StartTests {
   @DisplayName("Создать доску задач в корне проекта")
   public void createTopicBoardsGroupTest() {
     topicBoard = topicBoardsFactory.createTopicBoards(DEFAULT_TOPIC_BOARDS);
-    createTopicBoardsResponse = topicBoardsClient.createNewTopicGroup(projectId, topicBoard);
+    createTopicBoardsResponse = topicBoardsClient.createNewTopicBoard(projectId, topicBoard);
     statusCode = extractStatusCode(createTopicBoardsResponse);
     ResponseTopicBoards responseTopicBoards =
         createTopicBoardsResponse.extract().as(ResponseTopicBoards.class);

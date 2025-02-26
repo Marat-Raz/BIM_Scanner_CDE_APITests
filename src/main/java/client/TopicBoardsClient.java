@@ -23,7 +23,7 @@ public class TopicBoardsClient extends Client {
   }
 
   @Step("Создать доску задач в проекте")
-  public ValidatableResponse createNewTopicGroup(String projectId,
+  public ValidatableResponse createNewTopicBoard(String projectId,
       TopicBoards topicBoard) {
     return given()
         .spec(getBaseSpec())

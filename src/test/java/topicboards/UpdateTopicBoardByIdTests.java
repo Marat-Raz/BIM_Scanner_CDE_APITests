@@ -18,28 +18,28 @@ import models.topicboards.TopicBoards;
 import models.topicboards.TopicBoardsFactory;
 import org.junit.jupiter.api.*;
 
-public class GetTopicBoardByIdTests extends StartTests {
+public class UpdateTopicBoardByIdTests extends StartTests {
 
   private static ProjectsClient projectsClient = new ProjectsClient();
   private static ProjectFactory projectFactory = new ProjectFactory();
-  private static ResponseTopicBoards responseTopicBoard;
   private static TopicBoardsFactory topicBoardsFactory = new TopicBoardsFactory();
   private static TopicBoards topicBoard;
   private static String projectId;
   private static TopicBoardsClient topicBoardsClient = new TopicBoardsClient();
   private static ValidatableResponse createTopicBoardsResponse;
-  private ValidatableResponse getTopicBoardResponse;
+  private ValidatableResponse updateTopicBoardResponse;
   static String topicBoardId;
 
   @BeforeAll
-  @Step("Создать проект, в ней создать доску задач")
+  @Step("Создать проект, в ней создать группу досок задач")
   public static void createProject() {
     Project project = projectFactory.createProject(DEFAULT_PROJECT);
     project.setResponsibleId(userId);
     ValidatableResponse createProjectResponse = projectsClient.createProject(project);
     projectId = createProjectResponse.extract().path("id");
     topicBoard = topicBoardsFactory.createTopicBoards(DEFAULT_TOPIC_BOARDS);
-    createTopicBoardsResponse = topicBoardsClient.createNewTopicBoard(projectId, topicBoard);
+    createTopicBoardsResponse = topicBoardsClient.createNewTopicBoard(projectId,
+        topicBoard);
     topicBoardId = createTopicBoardsResponse.extract().path("id");
   }
 
@@ -51,18 +51,21 @@ public class GetTopicBoardByIdTests extends StartTests {
 
   @Test
   @Tag(value = "smoke")
-  @DisplayName("Получить доску задач по его id")
-  public void getTopicBoardByIdTest() {
-    getTopicBoardResponse = topicBoardsClient.getTopicBoard(projectId, topicBoardId);
-    statusCode = extractStatusCode(getTopicBoardResponse);
-    responseTopicBoard = getTopicBoardResponse.extract()
+  @DisplayName("Изменить группу досок задач по его id")
+  public void updateTopicBoardByIdTest() {
+    TopicBoards newTopicBoard = topicBoard;
+    newTopicBoard.setName("newName");
+    updateTopicBoardResponse = topicBoardsClient
+        .updateTopicBoard(projectId, topicBoardId, newTopicBoard);
+    statusCode = extractStatusCode(updateTopicBoardResponse);
+    ResponseTopicBoards responseTopicBoards = updateTopicBoardResponse.extract()
         .as(ResponseTopicBoards.class);
 
     assertEquals(SC_OK, statusCode);
     assertAll(
-        () -> assertEquals("TopicBoard", responseTopicBoard.type),
-        () -> assertEquals(topicBoard.getName(), responseTopicBoard.name),
-        () -> assertEquals(projectId, responseTopicBoard.projectId)
+        () -> assertEquals(newTopicBoard.getName(), responseTopicBoards.getName()),
+        () -> assertEquals(topicBoardId, responseTopicBoards.getId()),
+        () -> assertEquals(projectId, responseTopicBoards.projectId)
     );
   }
 
