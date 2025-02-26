@@ -3,6 +3,7 @@ package topicBoardGroups;
 import static models.project.ProjectType.DEFAULT_PROJECT;
 import static models.topicboardsgroup.TopicBoardsGroupType.DEFAULT_TOPIC_BOARDS_GROUP;
 import static org.apache.http.HttpStatus.SC_OK;
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -62,7 +63,11 @@ public class GetTopicBoardGroupByIdTests extends StartTests {
         .as(ResponseTopicBoardGroup[].class));
 
     assertEquals(SC_OK, statusCode);
-    assertNotNull(responseTopicBoardGroupList);
+    assertAll(
+        () -> assertEquals("TopicBoardGroup", responseTopicBoardGroupList.get(0).type),
+        () -> assertEquals(topicBoardsGroup.getName(), responseTopicBoardGroupList.get(0).name),
+        () -> assertEquals(projectId, responseTopicBoardGroupList.get(0).projectId)
+    );
   }
 
 }

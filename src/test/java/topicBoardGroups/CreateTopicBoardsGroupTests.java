@@ -55,9 +55,9 @@ public class CreateTopicBoardsGroupTests extends StartTests {
 
     assertEquals(SC_OK, statusCode);
     assertAll(
-        () -> assertEquals(responseTopicBoardGroup.type, "TopicBoardGroup"),
-        () -> assertEquals(responseTopicBoardGroup.projectId, projectId),
-        () -> assertEquals(responseTopicBoardGroup.projectId, projectId)
+        () -> assertEquals("TopicBoardGroup", responseTopicBoardGroup.type),
+        () -> assertEquals(topicBoardsGroup.getName(), responseTopicBoardGroup.name),
+        () -> assertEquals(projectId, responseTopicBoardGroup.projectId)
     );
   }
 

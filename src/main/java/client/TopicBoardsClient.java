@@ -13,12 +13,12 @@ public class TopicBoardsClient extends Client {
   private static final String TOPIC_BOARDS = "api/projects/";
 
   @Step("Получить доску задач по id")
-  public ValidatableResponse getRootTopicBoard(String projectId, String boardId) {
+  public ValidatableResponse getTopicBoard(String projectId, String topicBoardId) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
-        .get(TOPIC_BOARDS + projectId + "/issues/boards/" + boardId)
+        .get(TOPIC_BOARDS + projectId + "/issues/boards/" + topicBoardId)
         .then();
   }
 
