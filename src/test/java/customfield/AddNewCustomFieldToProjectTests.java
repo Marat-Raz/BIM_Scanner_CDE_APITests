@@ -5,7 +5,6 @@ import static models.project.ProjectType.DEFAULT_PROJECT;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import baseTests.StartTests;
 import client.CustomFieldsClient;
@@ -53,7 +52,8 @@ public class AddNewCustomFieldToProjectTests extends StartTests {
 
     assertEquals(SC_OK, statusCode);
     assertAll(
-        () -> assertEquals(responseCustomField.getType(), customField.getType().toString().toLowerCase()),
+        () -> assertEquals(responseCustomField.getType(),
+            customField.getType().toString().toLowerCase()),
         () -> assertEquals(responseCustomField.getName(), customField.getName())
     );
 
