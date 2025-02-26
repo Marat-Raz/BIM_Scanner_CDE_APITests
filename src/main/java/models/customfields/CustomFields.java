@@ -1,5 +1,6 @@
 package models.customfields;
 
+import java.util.ArrayList;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,8 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CustomFields {
-  public String id;
-  public boolean isEnabled;
-  public boolean isRequired;
-  public String defaultValue;
+
+  public ArrayList<CustomField> customFields;
+
 }

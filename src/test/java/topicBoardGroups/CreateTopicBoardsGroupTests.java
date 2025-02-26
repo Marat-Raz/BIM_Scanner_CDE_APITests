@@ -30,7 +30,7 @@ public class CreateTopicBoardsGroupTests extends StartTests {
 
   @BeforeAll
   @Step("Создать проект")
-  public static void createProject() {
+  public static void createProject() { // todo перенести в StarTests
     Project project = projectFactory.createProject(DEFAULT_PROJECT);
     project.setResponsibleId(userId);
     ValidatableResponse createProjectResponse = projectsClient.createProject(project);
@@ -38,7 +38,7 @@ public class CreateTopicBoardsGroupTests extends StartTests {
   }
 
   @AfterAll
-  public static void deleteProject() {
+  public static void deleteProject() { // todo перенести в StarTests
     projectsClient.deleteProjectByItsId(projectId);
   }
 

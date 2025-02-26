@@ -26,7 +26,6 @@ public class GetTopicBoardGroupsOnProjectRootTests extends StartTests {
   private static ProjectFactory projectFactory = new ProjectFactory();
   private static ArrayList<TopicBoardsGroup> topicBoardGroupsList = new ArrayList<>();
   private static List<ResponseTopicBoardGroup> responseTopicBoardGroupList;
-  private static TopicBoardsGroupFactory topicBoardsGroupFactory = new TopicBoardsGroupFactory();
   private static final int countOfTopicBoardsGroup = 5;
   private static TopicBoardGroupsClient topicBoardGroupsClient = new TopicBoardGroupsClient();
   private ValidatableResponse getTopicBoardGroupsResponse;
@@ -39,7 +38,7 @@ public class GetTopicBoardGroupsOnProjectRootTests extends StartTests {
     ValidatableResponse createProjectResponse = projectsClient.createProject(project);
     projectId = createProjectResponse.extract().path("id");
     for (int i = 0; i < countOfTopicBoardsGroup; i++) {
-      topicBoardGroupsList.add(topicBoardsGroupFactory
+      topicBoardGroupsList.add(new TopicBoardsGroupFactory()
           .createTopicBoardsGroup(DEFAULT_TOPIC_BOARDS_GROUP));
     }
     for (TopicBoardsGroup topicBoardsGroup : topicBoardGroupsList) {

@@ -19,7 +19,6 @@ import org.junit.jupiter.api.*;
 public class GetUsersProjectsTests extends StartTests {
 
   private static ValidatableResponse getAllProjectResponse;
-  private static ProjectFactory projectFactory = new ProjectFactory();
   private static ProjectsClient projectsClient = new ProjectsClient();
   private static ArrayList<Project> projectList = new ArrayList<Project>();
   private static List<ServerResponseProject> serverResponseProjectList = new ArrayList<>();
@@ -30,7 +29,7 @@ public class GetUsersProjectsTests extends StartTests {
   @Step("Создать несколько проектов от имени ADMIN")
   public static void createProjects() { // todo рассмотреть вынос этого метода в Steps
     for (int i = 0; i < numberOfProjects; i++) {
-      projectList.add(projectFactory.createProject(RANDOM_PROJECT));
+      projectList.add(new ProjectFactory().createProject(RANDOM_PROJECT));
     }
     for (Project project : projectList) {
       projectsClient.createProject(Client.ADMIN_ACCESS_TOKEN, project);
@@ -52,7 +51,7 @@ public class GetUsersProjectsTests extends StartTests {
   @Test
   @Tag(value = "smoke")
   @DisplayName("Получить список проектов для ADMIN")
-    public void getProjectsForAdminTest() {
+  public void getProjectsForAdminTest() {
     getAllProjectResponse = projectsClient.getListOfProjects(Client.ADMIN_ACCESS_TOKEN);
     statusCode = extractStatusCode(getAllProjectResponse);
 
