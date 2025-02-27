@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import models.customfields.enumerationitem.ResponseEnumerationItem;
 
 @AllArgsConstructor
 @Getter
 @Setter
+@ToString
 public class ResponseCustomField {
 
   public String type;

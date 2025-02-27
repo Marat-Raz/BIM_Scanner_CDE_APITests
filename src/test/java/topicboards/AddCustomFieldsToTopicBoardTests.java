@@ -4,6 +4,8 @@ import static models.customfields.CustomFieldType.TEXT;
 import static models.customfields.customfieldstoedit.CustomFieldToEditType.IS_ENABLED;
 import static models.project.ProjectType.DEFAULT_PROJECT;
 import static models.topicboards.TopicBoardsType.DEFAULT_TOPIC_BOARDS;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import baseTests.StartTests;
 import client.CustomFieldsClient;
@@ -11,11 +13,9 @@ import client.ProjectsClient;
 import client.TopicBoardsClient;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
-import java.awt.image.AreaAveragingScaleFilter;
 import java.util.ArrayList;
 import models.customfields.CustomField;
 import models.customfields.CustomFieldFactory;
-import models.customfields.CustomFields;
 import models.customfields.ResponseCustomField;
 import models.customfields.customfieldstoedit.CustomFieldToEdit;
 import models.customfields.customfieldstoedit.CustomFieldToEditFactory;
@@ -30,7 +30,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class EditCustomFieldsOfTopicBoardTests extends StartTests {
+public class AddCustomFieldsToTopicBoardTests extends StartTests {
 
   private static ProjectsClient projectsClient = new ProjectsClient();
   private static ProjectFactory projectFactory = new ProjectFactory();
@@ -45,8 +45,6 @@ public class EditCustomFieldsOfTopicBoardTests extends StartTests {
   private static TopicBoards topicBoard;
   private static ValidatableResponse createTopicBoardsResponse;
   private static String topicBoardId;
-  private static ValidatableResponse getTopicBoardResponse;
-  private static ResponseTopicBoards responseTopicBoard;
 
   @BeforeAll
   @Step("Создать проект, добавить кастомные поля в проект")
@@ -61,11 +59,6 @@ public class EditCustomFieldsOfTopicBoardTests extends StartTests {
     topicBoard = topicBoardsFactory.createTopicBoards(DEFAULT_TOPIC_BOARDS);
     createTopicBoardsResponse = topicBoardsClient.createNewTopicBoard(projectId, topicBoard);
     topicBoardId = createTopicBoardsResponse.extract().path("id");
-    getTopicBoardResponse = topicBoardsClient.getTopicBoard(projectId, topicBoardId);
-    responseTopicBoard = getTopicBoardResponse.extract()
-        .as(ResponseTopicBoards.class);
-    ArrayList<ResponseCustomField> existsCustomField = responseTopicBoard.getCustomFields();
-    System.out.println("размер массива" + existsCustomField.size());
   }
 
   @AfterAll
@@ -74,10 +67,8 @@ public class EditCustomFieldsOfTopicBoardTests extends StartTests {
   }
 
   @Test
-  @DisplayName("Редактирование кастомных полей в доске задач")
+  @DisplayName("Добавление кастомных полей в доску задач")
   public void editCustomFieldsOfTopicBoardTest() {
-    System.out.println(customFieldId);
-
     CustomFieldToEditFactory customFieldToEditFactory = new CustomFieldToEditFactory();
     CustomFieldToEdit customFieldToEdit = customFieldToEditFactory
         .getCustomFieldToEditById(customFieldId, IS_ENABLED);
@@ -87,15 +78,19 @@ public class EditCustomFieldsOfTopicBoardTests extends StartTests {
     CustomFieldsToEdit customFieldsToEdit = new CustomFieldsToEdit(customFieldToEditArray);
     editCustomFieldResponse = topicBoardsClient
         .editTopicBoardCustomFields(projectId, topicBoardId, customFieldsToEdit);
+    ResponseTopicBoards responseTopicBoards = editCustomFieldResponse.extract().as(
+        ResponseTopicBoards.class);
 
+    ArrayList<ResponseCustomField> existsCustomField = responseTopicBoards.getCustomFields();
+    String actualCustomFieldId = existsCustomField.get(0).getId();
 
-
+    assertAll(
+        () -> assertEquals(customFieldId, actualCustomFieldId)
+    );
   }
 
-// todo создать проект, создать кастомные поля в проекте, создать доску задач,
+// комментарии будут удалены позже. создать проект, создать кастомные поля в проекте, создать доску задач,
 //  получить список кастомных полей в этом проекте, переедать в запросе все кастомные поля,
 //  включая те, которые хотим изменить
-
-  // todo сначала необходимо проработать создание CustomFields
 
 }

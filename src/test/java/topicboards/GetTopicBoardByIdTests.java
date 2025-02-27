@@ -29,7 +29,7 @@ public class GetTopicBoardByIdTests extends StartTests {
   private static TopicBoardsClient topicBoardsClient = new TopicBoardsClient();
   private static ValidatableResponse createTopicBoardsResponse;
   private ValidatableResponse getTopicBoardResponse;
-  static String topicBoardId;
+  private static String topicBoardId;
 
   @BeforeAll
   @Step("Создать проект, в ней создать доску задач")

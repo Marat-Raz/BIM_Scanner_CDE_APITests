@@ -13,7 +13,6 @@ import client.ProjectsClient;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import models.customfields.CustomField;
@@ -81,5 +80,6 @@ public class AddNewCustomFieldToProjectTests extends StartTests {
 
     );
   }
+  // todo реализовать получение id кастомных полей
 
 }
