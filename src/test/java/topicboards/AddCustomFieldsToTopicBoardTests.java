@@ -16,7 +16,6 @@ import io.restassured.response.ValidatableResponse;
 import java.util.ArrayList;
 import models.customfields.CustomField;
 import models.customfields.CustomFieldFactory;
-import models.customfields.ResponseCustomField;
 import models.customfields.customfieldstoedit.CustomFieldToEdit;
 import models.customfields.customfieldstoedit.CustomFieldToEditFactory;
 import models.customfields.customfieldstoedit.CustomFieldsToEdit;
