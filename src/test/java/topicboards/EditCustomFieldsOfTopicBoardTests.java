@@ -4,6 +4,8 @@ import static models.customfields.CustomFieldType.TEXT;
 import static models.customfields.customfieldstoedit.CustomFieldToEditType.IS_ENABLED;
 import static models.project.ProjectType.DEFAULT_PROJECT;
 import static models.topicboards.TopicBoardsType.DEFAULT_TOPIC_BOARDS;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import baseTests.StartTests;
 import client.CustomFieldsClient;
@@ -11,11 +13,9 @@ import client.ProjectsClient;
 import client.TopicBoardsClient;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
-import java.awt.image.AreaAveragingScaleFilter;
 import java.util.ArrayList;
 import models.customfields.CustomField;
 import models.customfields.CustomFieldFactory;
-import models.customfields.CustomFields;
 import models.customfields.ResponseCustomField;
 import models.customfields.customfieldstoedit.CustomFieldToEdit;
 import models.customfields.customfieldstoedit.CustomFieldToEditFactory;
@@ -47,6 +47,7 @@ public class EditCustomFieldsOfTopicBoardTests extends StartTests {
   private static String topicBoardId;
   private static ValidatableResponse getTopicBoardResponse;
   private static ResponseTopicBoards responseTopicBoard;
+  private static ArrayList<CustomFieldToEdit> existsCustomFields;
 
   @BeforeAll
   @Step("Создать проект, добавить кастомные поля в проект")
@@ -55,17 +56,29 @@ public class EditCustomFieldsOfTopicBoardTests extends StartTests {
     project.setResponsibleId(userId);
     ValidatableResponse createProjectResponse = projectsClient.createProject(project);
     projectId = createProjectResponse.extract().path("id");
+
     customField = new CustomFieldFactory().createCustomField(TEXT);
     addCustomFieldResponse = customFieldsClient.addNewCustomFieldToProject(projectId, customField);
     customFieldId = addCustomFieldResponse.extract().path("id");
+
     topicBoard = topicBoardsFactory.createTopicBoards(DEFAULT_TOPIC_BOARDS);
     createTopicBoardsResponse = topicBoardsClient.createNewTopicBoard(projectId, topicBoard);
     topicBoardId = createTopicBoardsResponse.extract().path("id");
+
+    CustomFieldToEditFactory customFieldToEditFactory = new CustomFieldToEditFactory();
+    CustomFieldToEdit customFieldToEdit = customFieldToEditFactory
+        .getCustomFieldToEditById(customFieldId, IS_ENABLED);
+
+    CustomFieldsToEdit customFieldsToEdit = new CustomFieldsToEdit(customFieldToEdit);
+    editCustomFieldResponse = topicBoardsClient
+        .editTopicBoardCustomFields(projectId, topicBoardId, customFieldsToEdit);
+
     getTopicBoardResponse = topicBoardsClient.getTopicBoard(projectId, topicBoardId);
     responseTopicBoard = getTopicBoardResponse.extract()
         .as(ResponseTopicBoards.class);
-    ArrayList<ResponseCustomField> existsCustomField = responseTopicBoard.getCustomFields();
-    System.out.println("размер массива" + existsCustomField.size());
+
+    existsCustomFields = responseTopicBoard.getCustomFields();
+
   }
 
   @AfterAll
@@ -76,26 +89,28 @@ public class EditCustomFieldsOfTopicBoardTests extends StartTests {
   @Test
   @DisplayName("Редактирование кастомных полей в доске задач")
   public void editCustomFieldsOfTopicBoardTest() {
-    System.out.println(customFieldId);
+    CustomFieldToEdit editableCustomField = existsCustomFields.get(0);
+    String expectedTxt = "new Test Value";
+    editableCustomField.setDefaultValue(expectedTxt);
 
-    CustomFieldToEditFactory customFieldToEditFactory = new CustomFieldToEditFactory();
-    CustomFieldToEdit customFieldToEdit = customFieldToEditFactory
-        .getCustomFieldToEditById(customFieldId, IS_ENABLED);
-
-    ArrayList<CustomFieldToEdit> customFieldToEditArray = new ArrayList<>();
-    customFieldToEditArray.add(customFieldToEdit);
-    CustomFieldsToEdit customFieldsToEdit = new CustomFieldsToEdit(customFieldToEditArray);
+    existsCustomFields.set(0, editableCustomField);
+    CustomFieldsToEdit customFieldsToEdit = new CustomFieldsToEdit(existsCustomFields);
     editCustomFieldResponse = topicBoardsClient
         .editTopicBoardCustomFields(projectId, topicBoardId, customFieldsToEdit);
+    ResponseTopicBoards responseTopicBoards = editCustomFieldResponse.extract()
+        .as(ResponseTopicBoards.class);
 
+    ArrayList<CustomFieldToEdit> actualCustomField = responseTopicBoards.getCustomFields();
 
+    assertAll(
+        () -> assertEquals(expectedTxt, actualCustomField.get(0).getDefaultValue())
+    );
 
   }
 
+// комментарии будут удалены позже.
 // todo создать проект, создать кастомные поля в проекте, создать доску задач,
 //  получить список кастомных полей в этом проекте, переедать в запросе все кастомные поля,
 //  включая те, которые хотим изменить
-
-  // todo сначала необходимо проработать создание CustomFields
 
 }

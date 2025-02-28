@@ -48,11 +48,11 @@ public class TopicBoardsClient extends Client {
 
   @Step("Редактировать кастомные поля доски задач")
   public ValidatableResponse editTopicBoardCustomFields(String projectId,
-      String topicBoardId, CustomFieldsToEdit CustomFieldsToEdit) {
+      String topicBoardId, CustomFieldsToEdit customFieldsToEdit) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
-        .body(CustomFieldsToEdit)
+        .body(customFieldsToEdit)
         .when()
         .patch(TOPIC_BOARDS + projectId + "/issues/boards/" + topicBoardId)
         .then();

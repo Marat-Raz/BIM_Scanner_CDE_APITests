@@ -12,4 +12,13 @@ public class CustomFieldsToEdit {
 
   public ArrayList<CustomFieldToEdit> customFields;
 
+  public CustomFieldsToEdit(CustomFieldToEdit customField) {
+    this.customFields = new ArrayList<>();
+    this.customFields.add(customField);
+  }
+
+  public void addCustomFieldToEdit(CustomFieldToEdit customField) {
+    this.customFields.add(customField);
+  }
+
 }

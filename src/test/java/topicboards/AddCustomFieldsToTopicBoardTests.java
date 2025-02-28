@@ -73,15 +73,13 @@ public class AddCustomFieldsToTopicBoardTests extends StartTests {
     CustomFieldToEdit customFieldToEdit = customFieldToEditFactory
         .getCustomFieldToEditById(customFieldId, IS_ENABLED);
 
-    ArrayList<CustomFieldToEdit> customFieldToEditArray = new ArrayList<>();
-    customFieldToEditArray.add(customFieldToEdit);
-    CustomFieldsToEdit customFieldsToEdit = new CustomFieldsToEdit(customFieldToEditArray);
+    CustomFieldsToEdit customFieldsToEdit = new CustomFieldsToEdit(customFieldToEdit);
     editCustomFieldResponse = topicBoardsClient
         .editTopicBoardCustomFields(projectId, topicBoardId, customFieldsToEdit);
     ResponseTopicBoards responseTopicBoards = editCustomFieldResponse.extract().as(
         ResponseTopicBoards.class);
 
-    ArrayList<ResponseCustomField> existsCustomField = responseTopicBoards.getCustomFields();
+    ArrayList<CustomFieldToEdit> existsCustomField = responseTopicBoards.getCustomFields();
     String actualCustomFieldId = existsCustomField.get(0).getId();
 
     assertAll(
@@ -89,8 +87,9 @@ public class AddCustomFieldsToTopicBoardTests extends StartTests {
     );
   }
 
-// комментарии будут удалены позже. создать проект, создать кастомные поля в проекте, создать доску задач,
-//  получить список кастомных полей в этом проекте, переедать в запросе все кастомные поля,
-//  включая те, которые хотим изменить
+// комментарии будут удалены позже.
+//  todo создать проект, создать кастомные поля в проекте, создать доску задач,
+//   получить список кастомных полей в этом проекте, переедать в запросе все кастомные поля,
+//   включая те, которые хотим изменить
 
 }
