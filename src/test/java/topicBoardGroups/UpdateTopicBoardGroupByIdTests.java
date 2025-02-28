@@ -20,33 +20,20 @@ import org.junit.jupiter.api.*;
 
 public class UpdateTopicBoardGroupByIdTests extends StartTests {
 
-  private static ProjectsClient projectsClient = new ProjectsClient();
-  private static ProjectFactory projectFactory = new ProjectFactory();
   private static TopicBoardsGroupFactory topicBoardsGroupFactory = new TopicBoardsGroupFactory();
   private static TopicBoardsGroup topicBoardsGroup;
-  private static String projectId;
   private static TopicBoardGroupsClient topicBoardGroupsClient = new TopicBoardGroupsClient();
   private static ValidatableResponse createTopicBoardsGroupResponse;
   private ValidatableResponse updateTopicBoardGroupResponse;
   static String topicBoardsGroupId;
 
-  @BeforeAll
-  @Step("Создать проект, в ней создать группу досок задач")
-  public static void createProject() {
-    Project project = projectFactory.createProject(DEFAULT_PROJECT);
-    project.setResponsibleId(userId);
-    ValidatableResponse createProjectResponse = projectsClient.createProject(project);
-    projectId = createProjectResponse.extract().path("id");
+  @BeforeEach
+  @Step("Создать  в проекте группу досок задач")
+  public void createTopicBoardGroupsOnProject() {
     topicBoardsGroup = topicBoardsGroupFactory.createTopicBoardsGroup(DEFAULT_TOPIC_BOARDS_GROUP);
     createTopicBoardsGroupResponse = topicBoardGroupsClient.createNewTopicBoardsGroup(projectId,
         topicBoardsGroup);
     topicBoardsGroupId = createTopicBoardsGroupResponse.extract().path("id");
-  }
-
-  @AfterAll
-  @Step("Удалить проект")
-  public static void deleteProject() {
-    projectsClient.deleteProjectByItsId(projectId);
   }
 
   @Test

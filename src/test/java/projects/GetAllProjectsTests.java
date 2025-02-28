@@ -5,7 +5,6 @@ import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import baseTests.StartTests;
-import client.ProjectsClient;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import java.util.ArrayList;
@@ -19,7 +18,6 @@ import org.junit.jupiter.api.Test;
 public class GetAllProjectsTests extends StartTests {
 
   private ValidatableResponse getAllProjectResponse;
-  private static ProjectsClient projectsClient = new ProjectsClient();
   private static ArrayList<Project> projectList = new ArrayList<Project>();
   private static int numberOfProjects = 5;
 

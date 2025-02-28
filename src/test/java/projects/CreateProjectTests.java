@@ -1,9 +1,7 @@
 package projects;
 
-import static models.project.ProjectType.DEFAULT_PROJECT;
 import static models.project.ProjectType.PROJECT_WITHOUT_DATA;
 import static models.project.ProjectType.PROJECT_WITHOUT_NAME;
-import static org.apache.http.HttpStatus.SC_BAD_REQUEST;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.apache.http.HttpStatus.SC_UNPROCESSABLE_ENTITY;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -35,14 +33,11 @@ public class CreateProjectTests extends StartTests {
   @Tag(value = "smoke")
   @DisplayName("Создать проект")
   public void createProjectTest() {
-    Project project = projectFactory.createProject(DEFAULT_PROJECT);
-    project.setResponsibleId(userId);
-    createProjectResponse = projectsClient.createProject(project);
     String actualProjectName = createProjectResponse.extract().path("name");
     statusCode = extractStatusCode(createProjectResponse);
 
     assertEquals(SC_OK, statusCode);
-    assertEquals(project.getName(), actualProjectName);
+    assertEquals(defaultProject.getName(), actualProjectName);
   }
 
   @Test

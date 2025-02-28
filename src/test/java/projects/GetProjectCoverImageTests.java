@@ -22,16 +22,16 @@ import org.junit.jupiter.api.*;
 
 public class GetProjectCoverImageTests extends StartTests {
 
-  private static ProjectFactory projectFactory = new ProjectFactory();
+/*  private static ProjectFactory projectFactory = new ProjectFactory();
   private static ProjectsClient projectsClient = new ProjectsClient();
   private static ValidatableResponse createProjectResponse;
   private static String projectId;
-  private static ValidatableResponse getAllProjectResponse;
+  private static ValidatableResponse getAllProjectResponse;*/
   private static List<ServerResponseProject> serverResponseProjectList = new ArrayList<>();
   private String pathToDownload = "src/main/resources/download";
   private String fileName = "coverImage.png";
 
-  @BeforeAll
+/*  @BeforeAll
   @Step("Создать проект от имени ADMIN")
   public static void createProject() {
     Project project = projectFactory.createProject(RANDOM_PROJECT);
@@ -48,13 +48,17 @@ public class GetProjectCoverImageTests extends StartTests {
     for (ServerResponseProject project : serverResponseProjectList) {
       projectsClient.deleteProjectByItsId(ADMIN_ACCESS_TOKEN, project.getId());
     }
+  }*/
+  @BeforeEach
+  @Step("Установить обложку проекта")
+  public void setProjectCoverImage() {
+    projectsClient.setProjectCoverImage(projectId);
   }
 
   @Test
   @Tag(value = "smoke")
   @DisplayName("Получить изображение обложки проекта")
   public void getCoverImageOfProjectTest() {
-    projectsClient.setProjectCoverImage(projectId);
     // todo перенести код ниже в ProjectsClient
     var response = RestAssured.given().auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()

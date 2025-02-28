@@ -1,46 +1,26 @@
 package topicBoardGroups;
 
-import static models.project.ProjectType.DEFAULT_PROJECT;
 import static models.topicboardsgroup.TopicBoardsGroupType.DEFAULT_TOPIC_BOARDS_GROUP;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import baseTests.StartTests;
-import client.ProjectsClient;
 import client.TopicBoardGroupsClient;
-import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
-import models.project.Project;
-import models.project.ProjectFactory;
 import models.topicboardsgroup.ResponseTopicBoardGroup;
 import models.topicboardsgroup.TopicBoardsGroup;
 import models.topicboardsgroup.TopicBoardsGroupFactory;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 
 public class CreateTopicBoardsGroupTests extends StartTests {
 
-  private static ProjectsClient projectsClient = new ProjectsClient();
-  private static ProjectFactory projectFactory = new ProjectFactory();
-  private static String projectId;
   private TopicBoardGroupsClient topicBoardGroupsClient = new TopicBoardGroupsClient();
   private TopicBoardsGroupFactory topicBoardsGroupFactory = new TopicBoardsGroupFactory();
   private TopicBoardsGroup topicBoardsGroup;
   private ValidatableResponse createTopicBoardsGroupResponse;
-
-  @BeforeAll
-  @Step("Создать проект")
-  public static void createProject() { // todo перенести в StarTests
-    Project project = projectFactory.createProject(DEFAULT_PROJECT);
-    project.setResponsibleId(userId);
-    ValidatableResponse createProjectResponse = projectsClient.createProject(project);
-    projectId = createProjectResponse.extract().path("id");
-  }
-
-  @AfterAll
-  public static void deleteProject() { // todo перенести в StarTests
-    projectsClient.deleteProjectByItsId(projectId);
-  }
 
   @Test
   @Tag(value = "smoke")

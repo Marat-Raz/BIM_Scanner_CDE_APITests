@@ -1,42 +1,34 @@
 package topicBoardGroups;
 
-import static models.project.ProjectType.DEFAULT_PROJECT;
 import static models.topicboardsgroup.TopicBoardsGroupType.DEFAULT_TOPIC_BOARDS_GROUP;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import baseTests.StartTests;
-import client.ProjectsClient;
 import client.TopicBoardGroupsClient;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import java.util.ArrayList;
 import java.util.List;
-import models.project.Project;
-import models.project.ProjectFactory;
 import models.topicboardsgroup.ResponseTopicBoardGroup;
 import models.topicboardsgroup.TopicBoardsGroup;
 import models.topicboardsgroup.TopicBoardsGroupFactory;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 
 public class GetTopicBoardGroupsOnProjectRootTests extends StartTests {
 
-  private static String projectId;
-  private static ProjectsClient projectsClient = new ProjectsClient();
-  private static ProjectFactory projectFactory = new ProjectFactory();
   private static ArrayList<TopicBoardsGroup> topicBoardGroupsList = new ArrayList<>();
   private static List<ResponseTopicBoardGroup> responseTopicBoardGroupList;
   private static final int countOfTopicBoardsGroup = 5;
   private static TopicBoardGroupsClient topicBoardGroupsClient = new TopicBoardGroupsClient();
   private ValidatableResponse getTopicBoardGroupsResponse;
 
-  @BeforeAll
-  @Step("Создать  проект, в ней создать несколько групп досок задач")
-  public static void createProject() {
-    Project project = projectFactory.createProject(DEFAULT_PROJECT);
-    project.setResponsibleId(userId);
-    ValidatableResponse createProjectResponse = projectsClient.createProject(project);
-    projectId = createProjectResponse.extract().path("id");
+  @BeforeEach
+  @Step("Создать  в проекте несколько групп досок задач")
+  public void createTopicBoardGroupsOnProject() {
     for (int i = 0; i < countOfTopicBoardsGroup; i++) {
       topicBoardGroupsList.add(new TopicBoardsGroupFactory()
           .createTopicBoardsGroup(DEFAULT_TOPIC_BOARDS_GROUP));
@@ -46,13 +38,6 @@ public class GetTopicBoardGroupsOnProjectRootTests extends StartTests {
           topicBoardsGroup);
     }
   }
-
-  @AfterAll
-  @Step("Удалить проект")
-  public static void deleteProject() {
-    projectsClient.deleteProjectByItsId(projectId);
-  }
-
 
   @Test
   @Tag(value = "smoke")
@@ -65,7 +50,8 @@ public class GetTopicBoardGroupsOnProjectRootTests extends StartTests {
         .as(ResponseTopicBoardGroup[].class));
     statusCode = extractStatusCode(getTopicBoardGroupsResponse);
 
-    assertEquals(countOfTopicBoardsGroup, responseTopicBoardGroupList.size()); // fixme а если в проекте будут группы досок до нашего теста?
+    assertEquals(countOfTopicBoardsGroup,
+        responseTopicBoardGroupList.size()); // fixme а если в проекте будут группы досок до нашего теста?
     assertNotNull(responseTopicBoardGroupList);
   }
 

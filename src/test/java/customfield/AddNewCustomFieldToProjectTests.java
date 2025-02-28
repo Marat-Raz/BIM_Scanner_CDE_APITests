@@ -1,7 +1,6 @@
 package customfield;
 
 import static models.customfields.CustomFieldType.ENUMERATION;
-import static models.project.ProjectType.DEFAULT_PROJECT;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -9,8 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import baseTests.StartTests;
 import client.CustomFieldsClient;
-import client.ProjectsClient;
-import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,38 +17,26 @@ import models.customfields.CustomFieldFactory;
 import models.customfields.ResponseCustomField;
 import models.customfields.enumerationitem.EnumerationItem;
 import models.customfields.enumerationitem.ResponseEnumerationItem;
-import models.project.Project;
-import models.project.ProjectFactory;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 
 public class AddNewCustomFieldToProjectTests extends StartTests {
 
-  private static ProjectsClient projectsClient = new ProjectsClient();
-  private static ProjectFactory projectFactory = new ProjectFactory();
   private static CustomFieldsClient customFieldsClient = new CustomFieldsClient();
-  private static String projectId;
   private ValidatableResponse addResponse;
   private CustomField customField;
 
-  @BeforeAll
-  @Step("Создать проект")
-  public static void createProject() {
-    Project project = projectFactory.createProject(DEFAULT_PROJECT);
-    project.setResponsibleId(userId);
-    ValidatableResponse createProjectResponse = projectsClient.createProject(project);
-    projectId = createProjectResponse.extract().path("id");
-  }
-
-  @AfterAll
-  public static void deleteProject() {
-    projectsClient.deleteProjectByItsId(projectId);
+  @BeforeEach
+  public void createCustomField() {
+    customField = new CustomFieldFactory().createCustomField(ENUMERATION);
   }
 
   @Test
   @Tag(value = "smoke")
   @DisplayName("Добавить новое кастомное поле в проект")
   public void createTopicBoardsGroupTest() {
-    customField = new CustomFieldFactory().createCustomField(ENUMERATION);
     addResponse = customFieldsClient.addNewCustomFieldToProject(projectId, customField);
     statusCode = extractStatusCode(addResponse);
     ResponseCustomField responseCustomField = addResponse.extract().as(ResponseCustomField.class);
