@@ -2,6 +2,7 @@ image: maven:3.8.6-openjdk-21
 
 stages:
   - test
+  - deploy
 
 variables:
   MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
@@ -15,17 +16,29 @@ run-tests:
   stage: test
   script:
     - mvn clean test
-    - allure serve target/allure-results
+    - mvn allure:report # Генерация Allure-отчета
   artifacts:
     paths:
       - target/surefire-reports/
       - target/allure-results/
+      - target/site/allure-maven-plugin/ # Папка с Allure-отчетом
     expire_in: 1 week
+
+pages:
+  stage: deploy
+  script:
+    - mkdir public
+    - cp -r target/site/allure-maven-plugin/* public/ # Копируем Allure-отчет в папку public
+  artifacts:
+    paths:
+      - public
+  only:
+    - main # Запускать только для ветки main
 
 notifications:
   email:
     recipients:
       - mrazetdinov@briogroup.ru
-      - on_success: always
-      - on_failure: always
-      - on_pipeline_failure: always
+    on_success: always
+    on_failure: always
+    on_pipeline_failure: always
