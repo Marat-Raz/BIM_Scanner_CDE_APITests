@@ -1,0 +1,23 @@
+image: maven:3.8.6-openjdk-21
+
+stages:
+  - test
+
+variables:
+  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
+  API_BASE_URL: "https://cde-api.test.briodev.ru/"
+
+cache:
+  paths:
+    - .m2/repository/
+
+run-tests:
+  stage: test
+  script:
+    - mvn clean test
+    - allure serve target/allure-results
+  artifacts:
+    paths:
+      - target/surefire-reports/
+      - target/allure-results/
+    expire_in: 1 week
