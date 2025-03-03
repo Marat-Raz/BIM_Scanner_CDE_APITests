@@ -44,7 +44,7 @@ public class AddStatusToTopicBoardTests extends StartTests {
 
   @Test
   @Tag(value = "smoke")
-  @DisplayName("Создать доску задач в корне проекта")
+  @DisplayName("Создать статус в доске задач")
   public void createTopicBoardsGroupTest() {
     status = statusesFactory.createStatuses(DEFAULT);
     addStatusResponse = topicBoardStatusClient.addStatusToTopicBoard(topicBoardId, status);
