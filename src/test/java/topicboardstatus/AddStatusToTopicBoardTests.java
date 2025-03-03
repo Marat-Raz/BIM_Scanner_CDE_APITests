@@ -45,7 +45,7 @@ public class AddStatusToTopicBoardTests extends StartTests {
   @Test
   @Tag(value = "smoke")
   @DisplayName("Создать статус в доске задач")
-  public void createTopicBoardsGroupTest() {
+  public void addStatusToTopicBoardTest() {
     status = statusesFactory.createStatuses(DEFAULT);
     addStatusResponse = topicBoardStatusClient.addStatusToTopicBoard(topicBoardId, status);
     statusCode = extractStatusCode(addStatusResponse);

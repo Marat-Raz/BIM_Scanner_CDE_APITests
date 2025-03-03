@@ -36,7 +36,7 @@ public class AddNewCustomFieldToProjectTests extends StartTests {
   @Test
   @Tag(value = "smoke")
   @DisplayName("Добавить новое кастомное поле в проект")
-  public void createTopicBoardsGroupTest() {
+  public void addNewCustomFieldToProjectTest() {
     addResponse = customFieldsClient.addNewCustomFieldToProject(projectId, customField);
     statusCode = extractStatusCode(addResponse);
     ResponseCustomField responseCustomField = addResponse.extract().as(ResponseCustomField.class);

@@ -37,7 +37,7 @@ public class GetTopicBoardStatusesTests extends StartTests {
   private static List<Statuses> expectedStatuses = new ArrayList<>();
 
   @BeforeAll
-  public static void createTopicBoard() {
+  public static void createTopicBoardAndAddStatus() {
     topicBoard = topicBoardsFactory.createTopicBoards(DEFAULT_TOPIC_BOARDS);
     createTopicBoardsResponse = topicBoardsClient.createNewTopicBoard(projectId, topicBoard);
     ResponseTopicBoards responseTopicBoards =
@@ -55,7 +55,7 @@ public class GetTopicBoardStatusesTests extends StartTests {
   @Test
   @Tag(value = "smoke")
   @DisplayName("Получить все статусы доски задач")
-  public void createTopicBoardsGroupTest() {
+  public void getTopicBoardStatusesTest() {
     getAllStatuses = topicBoardStatusClient.getTopicBoardStatuses(topicBoardId);
     List<Statuses> actualStatuses = Arrays.asList(getAllStatuses.extract().as(Statuses[].class));
 

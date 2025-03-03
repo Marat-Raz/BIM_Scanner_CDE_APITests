@@ -31,7 +31,7 @@ public class CreateTopicBoardTests extends StartTests {
   @Test
   @Tag(value = "smoke")
   @DisplayName("Создать доску задач в корне проекта")
-  public void createTopicBoardsGroupTest() {
+  public void createNewTopicBoardTest() {
     createTopicBoardsResponse = topicBoardsClient.createNewTopicBoard(projectId, topicBoard);
     statusCode = extractStatusCode(createTopicBoardsResponse);
     ResponseTopicBoards responseTopicBoards =

@@ -37,7 +37,7 @@ public class GetTopicBoardTypesTests extends StartTests {
   private static List<Types> expectedTypes = new ArrayList<>();
 
   @BeforeAll
-  public static void createTopicBoard() {
+  public static void createTopicBoardAndAddType() {
     topicBoard = topicBoardsFactory.createTopicBoards(DEFAULT_TOPIC_BOARDS);
     createTopicBoardsResponse = topicBoardsClient.createNewTopicBoard(projectId, topicBoard);
     ResponseTopicBoards responseTopicBoards =
@@ -55,7 +55,7 @@ public class GetTopicBoardTypesTests extends StartTests {
   @Test
   @Tag(value = "smoke")
   @DisplayName("Получить все приоритеты доски задач")
-  public void createTopicBoardsGroupTest() {
+  public void getTopicBoardTypesTest() {
     getAllTypes = topicBoardTypesClient.getTopicBoardTypes(topicBoardId);
     List<Types> actualTypes = Arrays.asList(getAllTypes.extract().as(Types[].class));
 

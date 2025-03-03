@@ -34,7 +34,7 @@ public class DeleteTypesFromTopicBoardTests extends StartTests {
   private static String typeId;
 
   @BeforeAll
-  public static void createTopicBoard() {
+  public static void createTopicBoardAndAddType() {
     topicBoard = topicBoardsFactory.createTopicBoards(DEFAULT_TOPIC_BOARDS);
     createTopicBoardsResponse = topicBoardsClient.createNewTopicBoard(projectId, topicBoard);
     ResponseTopicBoards responseTopicBoards =
@@ -48,7 +48,7 @@ public class DeleteTypesFromTopicBoardTests extends StartTests {
   @Test
   @Tag(value = "smoke")
   @DisplayName("Удалить тип задачи из доски задач")
-  public void createTopicBoardsGroupTest() {
+  public void deleteTypesInTopicBoardTest() {
     deleteTypesResponse = topicBoardTypesClient.deleteTypesInTopicBoard(topicBoardId, typeId);
     statusCode = extractStatusCode(deleteTypesResponse);
 

@@ -34,7 +34,7 @@ public class DeleteStatusFromTopicBoardTests extends StartTests {
   private static String statusId;
 
   @BeforeAll
-  public static void createTopicBoard() {
+  public static void createTopicBoardAndAddStatus() {
     topicBoard = topicBoardsFactory.createTopicBoards(DEFAULT_TOPIC_BOARDS);
     createTopicBoardsResponse = topicBoardsClient.createNewTopicBoard(projectId, topicBoard);
     ResponseTopicBoards responseTopicBoards =
@@ -48,7 +48,7 @@ public class DeleteStatusFromTopicBoardTests extends StartTests {
   @Test
   @Tag(value = "smoke")
   @DisplayName("Удалить статус из доски задач")
-  public void createTopicBoardsGroupTest() {
+  public void deleteStatusInTopicBoardTest() {
     deleteStatusResponse = topicBoardStatusClient.deleteStatusInTopicBoard(topicBoardId, statusId);
     statusCode = extractStatusCode(deleteStatusResponse);
 

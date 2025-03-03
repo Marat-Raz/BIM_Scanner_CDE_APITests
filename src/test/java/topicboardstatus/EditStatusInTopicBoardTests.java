@@ -35,7 +35,7 @@ public class EditStatusInTopicBoardTests extends StartTests {
   private static String statusId;
 
   @BeforeAll
-  public static void createTopicBoard() {
+  public static void createTopicBoardAndAddStatus() {
     topicBoard = topicBoardsFactory.createTopicBoards(DEFAULT_TOPIC_BOARDS);
     createTopicBoardsResponse = topicBoardsClient.createNewTopicBoard(projectId, topicBoard);
     ResponseTopicBoards responseTopicBoards =
@@ -49,7 +49,7 @@ public class EditStatusInTopicBoardTests extends StartTests {
   @Test
   @Tag(value = "smoke")
   @DisplayName("Редактировать параметр «name» статуса в доске задач")
-  public void createTopicBoardsGroupTest() {
+  public void editStatusInTopicBoardTest() {
     Statuses editableStatus = status;
     editableStatus.setName("newName");
     editStatusResponse = topicBoardStatusClient
