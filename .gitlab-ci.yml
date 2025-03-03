@@ -15,8 +15,8 @@ cache:
 run-tests:
   stage: test
   script:
-    - mvn clean test
-    - mvn allure:report # Генерация Allure-отчета
+    - ./mvnw clean test
+    - ./mvnw allure:report # Генерация Allure-отчета
   artifacts:
     paths:
       - target/surefire-reports/
