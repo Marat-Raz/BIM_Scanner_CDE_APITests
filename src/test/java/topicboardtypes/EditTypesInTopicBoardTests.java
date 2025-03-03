@@ -31,8 +31,8 @@ public class EditTypesInTopicBoardTests extends StartTests {
   private static ValidatableResponse editTypeResponse;
   private static TopicBoardTypesClient topicBoardTypeClient = new TopicBoardTypesClient();
   private static TypesFactory typesFactory = new TypesFactory();
-  private static Types types;
-  private static String typesId;
+  private static Types type;
+  private static String typeId;
 
   @BeforeAll
   public static void createTopicBoardAndAddType() {
@@ -41,19 +41,19 @@ public class EditTypesInTopicBoardTests extends StartTests {
     ResponseTopicBoards responseTopicBoards =
         createTopicBoardsResponse.extract().as(ResponseTopicBoards.class);
     topicBoardId = responseTopicBoards.getId();
-    types = typesFactory.createTypes(DEFAULT);
-    addTypeResponse = topicBoardTypeClient.addTypesToTopicBoard(topicBoardId, types);
-    typesId = addTypeResponse.extract().path("id");
+    type = typesFactory.createTypes(DEFAULT);
+    addTypeResponse = topicBoardTypeClient.addTypesToTopicBoard(topicBoardId, type);
+    typeId = addTypeResponse.extract().path("id");
   }
 
   @Test
   @Tag(value = "smoke")
   @DisplayName("Редактировать параметр «name» статуса в доске задач")
   public void editTypesInTopicBoardTest() {
-    Types editableType = types;
+    Types editableType = type;
     editableType.setName("newName");
     editTypeResponse = topicBoardTypeClient
-        .editTypesInTopicBoard(topicBoardId, typesId, editableType);
+        .editTypesInTopicBoard(topicBoardId, typeId, editableType);
     statusCode = extractStatusCode(editTypeResponse);
     ResponseTypes editedTypeFromResponse =
         editTypeResponse.extract().as(ResponseTypes.class);
