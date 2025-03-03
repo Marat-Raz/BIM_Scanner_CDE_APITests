@@ -40,7 +40,8 @@ public class AddNewCustomFieldToProjectTests extends StartTests {
     addResponse = customFieldsClient.addNewCustomFieldToProject(projectId, customField);
     statusCode = extractStatusCode(addResponse);
     ResponseCustomField responseCustomField = addResponse.extract().as(ResponseCustomField.class);
-    ArrayList<ResponseEnumerationItem> responseEnumerationItems = responseCustomField.getEnumerationItems();
+    ArrayList<ResponseEnumerationItem> responseEnumerationItems =
+        responseCustomField.getEnumerationItems();
 
     List<EnumerationItem> enumerationItems = customField.getEnumerationItems();
     List<String> expectedEnumerationItemName = new ArrayList<>();
@@ -66,5 +67,7 @@ public class AddNewCustomFieldToProjectTests extends StartTests {
     );
   }
   // todo реализовать получение id кастомных полей
+  // todo реализовать () -> assertEquals(new HashSet<>(expectedStatuses), new HashSet<>(actualStatuses))
+  //  как в GetTopicBoardStatusesTests
 
 }
