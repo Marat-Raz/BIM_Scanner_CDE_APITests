@@ -21,3 +21,11 @@ run-tests:
       - target/surefire-reports/
       - target/allure-results/
     expire_in: 1 week
+
+notifications:
+  email:
+    recipients:
+      - mrazetdinov@briogroup.ru
+      - on_success: always
+      - on_failure: always
+      - on_pipeline_failure: always
