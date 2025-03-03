@@ -34,11 +34,3 @@ pages:
       - public
   only:
     - main # Запускать только для ветки main
-
-notifications:
-  email:
-    recipients:
-      - mrazetdinov@briogroup.ru
-    on_success: always
-    on_failure: always
-    on_pipeline_failure: always
