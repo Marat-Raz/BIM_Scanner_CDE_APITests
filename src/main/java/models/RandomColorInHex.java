@@ -2,9 +2,9 @@ package models;
 
 import java.util.Random;
 
-public class RandomColor {
+public class RandomColorInHex {
 
-  public String getRandomColorInHex() {
+  public static String getRandomColorInHex() {
     Random random = new Random();
     int alpha = random.nextInt(256);
     int red = random.nextInt(256);

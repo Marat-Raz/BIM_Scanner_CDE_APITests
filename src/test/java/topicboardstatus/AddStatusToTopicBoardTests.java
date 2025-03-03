@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import baseTests.StartTests;
 import client.TopicBoardsClient;
-import client.base.TopicBoardStatusClient;
+import client.TopicBoardStatusClient;
 import io.restassured.response.ValidatableResponse;
 import models.statuses.ResponseStatuses;
 import models.statuses.Statuses;

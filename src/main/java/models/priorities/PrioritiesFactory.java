@@ -1,22 +1,22 @@
-package models.statuses;
+package models.priorities;
 
 import models.RandomColorInHex;
 import org.apache.commons.lang3.RandomStringUtils;
 
-public class StatusesFactory {
+public class PrioritiesFactory {
 
   public String name = RandomStringUtils.randomAlphabetic(1, 256);
   public String color = RandomColorInHex.getRandomColorInHex();
 
-  public Statuses createStatuses(StatusesType statusesType) {
-    switch (statusesType) {
+  public Priorities createPriorities(PrioritiesType prioritiesType) {
+    switch (prioritiesType) {
       case WITHOUT_NAME:
-        return new Statuses(null, color);
+        return new Priorities(null, color);
       case WITHOUT_COLOR:
-        return new Statuses(name, null);
+        return new Priorities(name, null);
       default:
       case DEFAULT:
-        return new Statuses(name, color);
+        return new Priorities(name, color);
     }
   }
 
