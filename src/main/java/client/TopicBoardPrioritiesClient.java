@@ -11,7 +11,7 @@ public class TopicBoardPrioritiesClient extends Client {
 
   private static final String TOPIC_BOARD_PRIORITIES = "api/issues/boards/";
 
-  @Step("Получить статусы, доступные на доске задач")
+  @Step("Получить приоритеты, доступные на доске задач")
   public ValidatableResponse getTopicBoardPriorities(String topicBoardId) {
     return given()
         .spec(getBaseSpec())
@@ -21,7 +21,7 @@ public class TopicBoardPrioritiesClient extends Client {
         .then();
   }
 
-  @Step("Добавить статус на доску задач")
+  @Step("Добавить приоритет на доску задач")
   public ValidatableResponse addPrioritiesToTopicBoard(String topicBoardId, Priorities priorities) {
     return given()
         .spec(getBaseSpec())
@@ -32,7 +32,7 @@ public class TopicBoardPrioritiesClient extends Client {
         .then();
   }
 
-  @Step("Редактировать статус на доске задач")
+  @Step("Редактировать приоритет на доске задач")
   public ValidatableResponse editPrioritiesInTopicBoard(String topicBoardId, String prioritiesId,
       Priorities editedPriorities) {
     return given()
@@ -44,7 +44,7 @@ public class TopicBoardPrioritiesClient extends Client {
         .then();
   }
 
-  @Step("Удалить статус на доске задач")
+  @Step("Удалить приоритет с доски задач")
   public ValidatableResponse deletePrioritiesInTopicBoard(String topicBoardId, String prioritiesId) {
     return given()
         .spec(getBaseSpec())

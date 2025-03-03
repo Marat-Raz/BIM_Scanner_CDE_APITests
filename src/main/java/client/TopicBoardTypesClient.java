@@ -21,7 +21,7 @@ public class TopicBoardTypesClient extends Client {
         .then();
   }
 
-  @Step("Добавить статус на доску задач")
+  @Step("Добавить тип задачи на доску задач")
   public ValidatableResponse addTypesToTopicBoard(String topicBoardId, Types type) {
     return given()
         .spec(getBaseSpec())
@@ -32,7 +32,7 @@ public class TopicBoardTypesClient extends Client {
         .then();
   }
 
-  @Step("Редактировать статус на доске задач")
+  @Step("Редактировать тип задачи на доске задач")
   public ValidatableResponse editTypesInTopicBoard(String topicBoardId, String typeId,
       Types editedTypes) {
     return given()
@@ -44,7 +44,7 @@ public class TopicBoardTypesClient extends Client {
         .then();
   }
 
-  @Step("Удалить статус на доске задач")
+  @Step("Удалить тип задачи с доски задач")
   public ValidatableResponse deleteTypesInTopicBoard(String topicBoardId, String typeId) {
     return given()
         .spec(getBaseSpec())

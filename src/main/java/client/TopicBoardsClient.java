@@ -34,7 +34,7 @@ public class TopicBoardsClient extends Client {
         .then();
   }
 
-  @Step("Изменить группу досок задач")
+  @Step("Изменить доску задач")
   public ValidatableResponse updateTopicBoard(String projectId,
       String topicBoardId, TopicBoards topicBoard) {
     return given()

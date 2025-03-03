@@ -44,7 +44,7 @@ public class TopicBoardStatusClient extends Client {
         .then();
   }
 
-  @Step("Удалить статус на доске задач")
+  @Step("Удалить статус с доски задач")
   public ValidatableResponse deleteStatusInTopicBoard(String topicBoardId, String statusId) {
     return given()
         .spec(getBaseSpec())
