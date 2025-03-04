@@ -1,50 +1,18 @@
 package topicboardtypes;
 
-import static models.topicboards.TopicBoardsType.DEFAULT_TOPIC_BOARDS;
-import static models.types.TypesType.DEFAULT;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import basetests.StartTests;
-import client.TopicBoardTypesClient;
-import client.TopicBoardsClient;
 import io.restassured.response.ValidatableResponse;
-import models.topicboards.ResponseTopicBoards;
-import models.topicboards.TopicBoards;
-import models.topicboards.TopicBoardsFactory;
 import models.types.ResponseTypes;
 import models.types.Types;
-import models.types.TypesFactory;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-public class EditTypesInTopicBoardTests extends StartTests {
+public class EditTypesInTopicBoardTests extends TopicBoardTypeBaseTests {
 
-  private static TopicBoardsClient topicBoardsClient = new TopicBoardsClient();
-  private static TopicBoardsFactory topicBoardsFactory = new TopicBoardsFactory();
-  private static TopicBoards topicBoard;
-  private static ValidatableResponse createTopicBoardsResponse;
-  private static String topicBoardId;
-  private static ValidatableResponse addTypeResponse;
   private static ValidatableResponse editTypeResponse;
-  private static TopicBoardTypesClient topicBoardTypeClient = new TopicBoardTypesClient();
-  private static TypesFactory typesFactory = new TypesFactory();
-  private static Types type;
-  private static String typeId;
-
-  @BeforeAll
-  public static void createTopicBoardAndAddType() {
-    topicBoard = topicBoardsFactory.createTopicBoards(DEFAULT_TOPIC_BOARDS);
-    createTopicBoardsResponse = topicBoardsClient.createNewTopicBoard(projectId, topicBoard);
-    ResponseTopicBoards responseTopicBoards =
-        createTopicBoardsResponse.extract().as(ResponseTopicBoards.class);
-    topicBoardId = responseTopicBoards.getId();
-    type = typesFactory.createTypes(DEFAULT);
-    addTypeResponse = topicBoardTypeClient.addTypesToTopicBoard(topicBoardId, type);
-    typeId = addTypeResponse.extract().path("id");
-  }
 
   @Test
   @Tag(value = "smoke")
@@ -52,7 +20,7 @@ public class EditTypesInTopicBoardTests extends StartTests {
   public void editTypesInTopicBoardTest() {
     Types editableType = type;
     editableType.setName("newName");
-    editTypeResponse = topicBoardTypeClient
+    editTypeResponse = topicBoardTypesClient
         .editTypesInTopicBoard(topicBoardId, typeId, editableType);
     statusCode = extractStatusCode(editTypeResponse);
     ResponseTypes editedTypeFromResponse =
