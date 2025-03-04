@@ -5,7 +5,7 @@ import static org.apache.http.HttpStatus.SC_BAD_REQUEST;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import baseTests.StartTests;
+import basetests.StartTests;
 import io.restassured.response.ValidatableResponse;
 import models.error.ErrorRoot;
 import models.user.User;

@@ -1,18 +1,14 @@
-package topicBoardGroups;
+package topicgoardgroups;
 
-import static models.project.ProjectType.DEFAULT_PROJECT;
 import static models.topicboardsgroup.TopicBoardsGroupType.DEFAULT_TOPIC_BOARDS_GROUP;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import baseTests.StartTests;
-import client.ProjectsClient;
+import basetests.StartTests;
 import client.TopicBoardGroupsClient;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
-import models.project.Project;
-import models.project.ProjectFactory;
 import models.topicboardsgroup.ResponseTopicBoardGroup;
 import models.topicboardsgroup.TopicBoardsGroup;
 import models.topicboardsgroup.TopicBoardsGroupFactory;

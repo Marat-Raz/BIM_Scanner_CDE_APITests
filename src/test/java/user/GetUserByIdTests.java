@@ -5,7 +5,7 @@ import static org.apache.http.HttpStatus.SC_NOT_FOUND;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import baseTests.StartTests;
+import basetests.StartTests;
 import io.restassured.response.ValidatableResponse;
 import java.util.UUID;
 import models.error.ErrorRoot;

@@ -5,7 +5,7 @@ import static models.priorities.PrioritiesType.DEFAULT;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import baseTests.StartTests;
+import basetests.StartTests;
 import client.TopicBoardPrioritiesClient;
 import client.TopicBoardsClient;
 import io.restassured.response.ValidatableResponse;

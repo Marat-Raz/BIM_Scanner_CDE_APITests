@@ -5,7 +5,7 @@ import static models.priorities.PrioritiesType.DEFAULT;
 import static org.apache.http.HttpStatus.SC_NO_CONTENT;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import baseTests.StartTests;
+import basetests.StartTests;
 import client.TopicBoardPrioritiesClient;
 import client.TopicBoardsClient;
 import io.restassured.response.ValidatableResponse;
@@ -48,7 +48,7 @@ public class DeletePrioritiesFromTopicBoardTests extends StartTests {
 
   @Test
   @Tag(value = "smoke")
-  @DisplayName("Удалить тип задачи из доски задач")
+  @DisplayName("Удалить приоритет задачи из доски задач")
   public void deletePrioritiesInTopicBoardTest() {
     deletePrioritiesResponse = topicBoardPrioritiesClient.deletePrioritiesInTopicBoard(topicBoardId, priorityId);
     statusCode = extractStatusCode(deletePrioritiesResponse);

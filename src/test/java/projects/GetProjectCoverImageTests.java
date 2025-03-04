@@ -2,21 +2,16 @@ package projects;
 
 import static client.base.Client.ADMIN_ACCESS_TOKEN;
 import static client.base.Client.BASE_URL;
-import static models.project.ProjectType.RANDOM_PROJECT;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import baseTests.StartTests;
-import client.ProjectsClient;
+import basetests.StartTests;
 import io.qameta.allure.Step;
 import io.restassured.RestAssured;
-import io.restassured.response.ValidatableResponse;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
-import models.project.Project;
-import models.project.ProjectFactory;
 import models.project.ServerResponseProject;
 import org.junit.jupiter.api.*;
 

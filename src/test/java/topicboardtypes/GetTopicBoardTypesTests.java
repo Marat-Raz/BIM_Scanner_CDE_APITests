@@ -5,7 +5,7 @@ import static models.topicboards.TopicBoardsType.DEFAULT_TOPIC_BOARDS;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import baseTests.StartTests;
+import basetests.StartTests;
 import client.TopicBoardTypesClient;
 import client.TopicBoardsClient;
 import io.restassured.response.ValidatableResponse;

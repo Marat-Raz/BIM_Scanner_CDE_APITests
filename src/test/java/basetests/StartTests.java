@@ -1,8 +1,9 @@
-package baseTests;
+package basetests;
 
 import static models.project.ProjectType.DEFAULT_PROJECT;
 import static models.user.UserType.DEFAULT_USER;
 
+import client.ProjectMembersClient;
 import client.ProjectsClient;
 import client.TokenClient;
 import client.UserClient;
@@ -18,6 +19,7 @@ import models.error.ErrorRoot;
 import models.project.Project;
 import models.project.ProjectFactory;
 import models.project.ServerResponseProject;
+import models.projectmember.ProjectMember;
 import models.token.TokenBuilder;
 import models.user.User;
 import models.user.UserFactory;
@@ -33,6 +35,7 @@ public class StartTests {
   protected static String userId;
   protected static ValidatableResponse baseResponse;
   protected static UserClient userClient = new UserClient();
+  protected static ProjectMembersClient projectMembersClient = new ProjectMembersClient();
   protected int statusCode;
   protected static UserFactory userFactory = new UserFactory();
   protected ErrorRoot errorRoot;
@@ -53,19 +56,24 @@ public class StartTests {
     ValidatableResponse responseAdminToken =
         tokenClient.createToken(TokenBuilder.getTokenForAdminUser());
     Client.ADMIN_ACCESS_TOKEN = responseAdminToken.extract().path("access_token");
+    //String adminId = userClient.getUserByUserName("admin").extract().path("id");
 
     defaultUser = userFactory.createUser(DEFAULT_USER);
     baseResponse = userClient.createUser(defaultUser);
     userId = baseResponse.extract().path("id");
 
     defaultProject = projectFactory.createProject(DEFAULT_PROJECT);
-    defaultProject.setResponsibleId(userId);
+    //defaultProject.setResponsibleId(userId);
     createProjectResponse = projectsClient.createProject(defaultProject);
+
     projectId = createProjectResponse.extract().path("id");
+    //projectMembersClient.addProjectMember(projectId, new ProjectMember(adminId));
+
 /*    ValidatableResponse responseToken =
         tokenClient.createToken(TokenBuilder.getTokenForUser(defaultUser));
     Client.DEFAULT_USER_ACCESS_TOKEN = responseToken.extract().path("access_token");*/
     // todo выдать для user права на создание проектов раздел permission
+    // todo сделать админа участником проекта
   }
 
   @BeforeEach

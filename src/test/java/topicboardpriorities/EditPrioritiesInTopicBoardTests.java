@@ -5,7 +5,7 @@ import static models.priorities.PrioritiesType.DEFAULT;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import baseTests.StartTests;
+import basetests.StartTests;
 import client.TopicBoardPrioritiesClient;
 import client.TopicBoardsClient;
 import io.restassured.response.ValidatableResponse;
@@ -48,7 +48,7 @@ public class EditPrioritiesInTopicBoardTests extends StartTests {
 
   @Test
   @Tag(value = "smoke")
-  @DisplayName("Редактировать параметр «name» статуса в доске задач")
+  @DisplayName("Редактировать параметр «name» приоритета в доске задач")
   public void editPrioritiesInTopicBoardTest() {
     Priorities editablePriority = priority;
     editablePriority.setName("newName");

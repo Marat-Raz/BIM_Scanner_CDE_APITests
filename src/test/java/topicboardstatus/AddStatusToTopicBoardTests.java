@@ -6,7 +6,7 @@ import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import baseTests.StartTests;
+import basetests.StartTests;
 import client.TopicBoardsClient;
 import client.TopicBoardStatusClient;
 import io.restassured.response.ValidatableResponse;

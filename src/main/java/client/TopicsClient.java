@@ -5,6 +5,8 @@ import static io.restassured.RestAssured.given;
 import client.base.Client;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
+import java.util.Map;
+import models.topics.ResponseTopics;
 import models.topics.Topics;
 
 public class TopicsClient extends Client {
@@ -12,14 +14,25 @@ public class TopicsClient extends Client {
   private final String TOPICS = "api/issues/boards/";
 
   @Step("Получить список задач определенной доски задач")
-  public ValidatableResponse getListOfTopicsFromTopicBoard(String topicBoardId, String filter,
-      String search, String orderBy, String top, String skip) {
-    // todo необходимо сформировать список опций/фильтров для этого запроса
+  public ValidatableResponse getListOfTopicsFromTopicBoard(String topicBoardId,
+      Map<String, Object> queryParams) {
+    // todo реализовать тесты для этого метода
+    return given()
+        .spec(getBaseSpec())
+        .auth().oauth2(ADMIN_ACCESS_TOKEN)
+        .queryParams(queryParams)
+        .when()
+        .get(TOPICS + topicBoardId + "/topics")
+        .then();
+  }
+
+  @Step("Получить список задач определенной доски задач")
+  public ValidatableResponse getListOfTopicsFromTopicBoardWithoutQueryOptions(String topicBoardId) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
-        .get(TOPICS + topicBoardId + "/topics" + filter + search + orderBy + top + skip)
+        .get(TOPICS + topicBoardId + "/topics")
         .then();
   }
 
@@ -32,18 +45,30 @@ public class TopicsClient extends Client {
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .body(topic)
         .when()
-        .get(TOPICS + topicBoardId + "/topics")
+        .post(TOPICS + topicBoardId + "/topics")
         .then();
   }
 
   @Step("Получить список задач в проекте")
-  public ValidatableResponse getTopicsInProject(String projectId, String filter,
-      String search, String orderBy, String top, String skip) {
+  public ValidatableResponse getTopicsInProject(String projectId,
+      Map<String, Object> queryParams) {
+    return given()
+        .spec(getBaseSpec())
+        .auth().oauth2(ADMIN_ACCESS_TOKEN)
+        .queryParams(queryParams)
+        .when()
+        .get("api/projects/" + projectId + "/topics")
+        // todo вывести  "api/projects/" в константы
+        .then();
+  }
+
+  @Step("Получить список задач в проекте")
+  public ValidatableResponse getTopicsInProjectWithoutQueryOptions(String projectId) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
-        .get(TOPICS + projectId + "/topics" + filter + search + orderBy + top + skip)
+        .get("api/projects/" + projectId + "/topics")
         .then();
   }
 
@@ -59,7 +84,7 @@ public class TopicsClient extends Client {
 
   @Step("Обновить задачу в доске задач по ID")
   public ValidatableResponse updateTopicInTopicBoard(String topicBoardId,
-      String topicId, Topics updatedTopic) {
+      String topicId, ResponseTopics updatedTopic) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)

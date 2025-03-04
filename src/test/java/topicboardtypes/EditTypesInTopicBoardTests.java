@@ -5,7 +5,7 @@ import static models.types.TypesType.DEFAULT;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import baseTests.StartTests;
+import basetests.StartTests;
 import client.TopicBoardTypesClient;
 import client.TopicBoardsClient;
 import io.restassured.response.ValidatableResponse;
@@ -48,7 +48,7 @@ public class EditTypesInTopicBoardTests extends StartTests {
 
   @Test
   @Tag(value = "smoke")
-  @DisplayName("Редактировать параметр «name» статуса в доске задач")
+  @DisplayName("Редактировать параметр «name» типа задач в доске задач")
   public void editTypesInTopicBoardTest() {
     Types editableType = type;
     editableType.setName("newName");

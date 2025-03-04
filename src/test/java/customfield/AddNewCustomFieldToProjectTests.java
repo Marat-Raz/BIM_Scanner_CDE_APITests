@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import baseTests.StartTests;
+import basetests.StartTests;
 import client.CustomFieldsClient;
 import io.restassured.response.ValidatableResponse;
 import java.util.ArrayList;
