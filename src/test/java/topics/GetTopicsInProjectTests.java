@@ -23,27 +23,21 @@ import org.junit.jupiter.api.Test;
 
 public class GetTopicsInProjectTests extends TopicsBaseTests {
 
-
   private static ValidatableResponse addTopicsResponse;
   private static TopicsClient topicsClient = new TopicsClient();
-  private static TopicsFactory topicsFactory = new TopicsFactory();
   private static TopicBoardsClient topicBoardsClient = new TopicBoardsClient();
-  private static Topics topic, newTopic;
+  private static Topics newTopic;
   private ValidatableResponse getListOfTopicsFromProjectResponse;
   private static ValidatableResponse createTopicBoardsResponse;
 
   @BeforeAll
-  public static void createTopic() {
+  public static void createNewTopicBoardAndNewTopic() {
     TopicBoards newTopicBoard = new TopicBoardsFactory().createTopicBoards(DEFAULT_TOPIC_BOARDS);
     createTopicBoardsResponse = topicBoardsClient.createNewTopicBoard(projectId, newTopicBoard);
     ResponseTopicBoards responseTopicBoards =
         createTopicBoardsResponse.extract().as(ResponseTopicBoards.class);
-    String newTopicBoardId = responseTopicBoards.getId();
-    topic = topicsFactory.createTopic(DEFAULT_TOPIC);
-    addTopicsResponse = topicsClient.createTopicInTopicBoard(topicBoardId, topic);
     newTopic = new TopicsFactory().createTopic(DEFAULT_TOPIC);
-    addTopicsResponse = topicsClient.createTopicInTopicBoard(newTopicBoardId, newTopic);
-
+    addTopicsResponse = topicsClient.createTopicInTopicBoard(responseTopicBoards.getId(), newTopic);
   }
 
   @Test
