@@ -10,7 +10,7 @@ public class TopicsFactory {
   public String title = RandomStringUtils.randomAlphanumeric(1, 256);
   public String description = RandomStringUtils.randomAlphanumeric(1, 100); // todo 10000
   public String dueDate = LocalDateTime.now().plusDays(14).toString();
-  public String assignedToId; // userId
+  public String assignedToId;
   public String typeId;
   public String statusId;
   public String priorityId;
