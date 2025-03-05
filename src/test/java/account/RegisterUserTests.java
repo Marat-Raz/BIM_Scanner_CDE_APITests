@@ -56,7 +56,6 @@ public class RegisterUserTests extends StartTests {
     User user = userFactory.createUser(NEW_USER);
     accountClient.registerUser(UserCredentials.from(user));
     registerUserResponse = accountClient.registerUser(UserCredentials.from(user));
-    statusCode = extractStatusCode(registerUserResponse);
 
     int newStatusCode = extractStatusCode(registerUserResponse);
     errorRoot = registerUserResponse.extract().body().as(ErrorRoot.class);
@@ -65,7 +64,6 @@ public class RegisterUserTests extends StartTests {
     String id = response.extract().path("id");
     userClient.deleteUser(id);
 
-    assertEquals(SC_OK, statusCode);
     assertEquals(SC_FORBIDDEN, newStatusCode);
     assertEquals("Username '" + user.getUserName() +
         "' is already taken., Email '" + user.getEmail() +

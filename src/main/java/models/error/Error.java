@@ -9,14 +9,12 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Error {
+
     public String code;
     public String message;
     public String details;
     public Data data;
     public ArrayList<ValidationError> validationErrors;
 
-  public Error() {
-
-  }
 }
 
