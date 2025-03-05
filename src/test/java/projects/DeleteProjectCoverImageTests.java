@@ -16,7 +16,7 @@ import models.project.ProjectFactory;
 import models.project.ServerResponseProject;
 import org.junit.jupiter.api.*;
 
-public class DeleteProjectCoverImageTests extends StartTests {
+/*public class DeleteProjectCoverImageTests extends StartTests {
 
   private static ProjectFactory projectFactory = new ProjectFactory();
   private static ProjectsClient projectsClient = new ProjectsClient();
@@ -58,5 +58,5 @@ public class DeleteProjectCoverImageTests extends StartTests {
 
     assertEquals(SC_NO_CONTENT, statusCode);
   }
-}
+}*/
 

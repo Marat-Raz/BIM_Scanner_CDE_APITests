@@ -3,6 +3,7 @@ package client.base;
 import static io.restassured.http.ContentType.MULTIPART;
 
 import io.restassured.builder.RequestSpecBuilder;
+import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 
@@ -30,6 +31,7 @@ public class Client {
   protected RequestSpecification multipartBaseSpec() {
     return new RequestSpecBuilder()
         .setContentType(MULTIPART)
+        .log(LogDetail.METHOD)
         .setBaseUri(BASE_URL)
         .build();
   }
