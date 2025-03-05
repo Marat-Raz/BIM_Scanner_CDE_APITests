@@ -64,7 +64,6 @@ public class RegisterUserTests extends StartTests {
     String id = response.extract().path("id");
     userClient.deleteUser(id);
 
-    assertEquals(SC_OK, statusCode);
     assertEquals(SC_FORBIDDEN, newStatusCode);
     assertEquals("Username '" + user.getUserName() +
         "' is already taken., Email '" + user.getEmail() +

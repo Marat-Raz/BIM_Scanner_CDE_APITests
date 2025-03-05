@@ -17,7 +17,7 @@ public class UserClient extends Client {
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
-        .post(USERS + id)
+        .get(USERS + id)
         .then();
   }
 

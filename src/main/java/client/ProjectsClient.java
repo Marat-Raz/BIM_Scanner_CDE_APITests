@@ -68,6 +68,7 @@ public class ProjectsClient extends Client {
   @Step("Получить проект по его id пользователя ADMIN")
   public ValidatableResponse getProjectByItsIdForAdmin(String id) {
     return given()
+        .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
         .get(PROJECTS + id)

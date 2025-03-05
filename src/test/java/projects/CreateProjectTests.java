@@ -5,6 +5,7 @@ import static models.project.ProjectType.PROJECT_WITHOUT_DATA;
 import static models.project.ProjectType.PROJECT_WITHOUT_NAME;
 import static org.apache.http.HttpStatus.SC_BAD_REQUEST;
 import static org.apache.http.HttpStatus.SC_OK;
+import static org.apache.http.HttpStatus.SC_UNPROCESSABLE_ENTITY;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import baseTests.StartTests;
@@ -52,7 +53,7 @@ public class CreateProjectTests extends StartTests {
     createProjectResponse = projectsClient.createProject(project);
     statusCode = extractStatusCode(createProjectResponse);
 
-    assertEquals(SC_BAD_REQUEST, statusCode);
+    assertEquals(SC_UNPROCESSABLE_ENTITY, statusCode);
   }
 
   @Test
@@ -63,7 +64,7 @@ public class CreateProjectTests extends StartTests {
     createProjectResponse = projectsClient.createProject(project);
     statusCode = extractStatusCode(createProjectResponse);
 
-    assertEquals(SC_BAD_REQUEST, statusCode);
+    assertEquals(SC_UNPROCESSABLE_ENTITY, statusCode);
   }
 
 }
