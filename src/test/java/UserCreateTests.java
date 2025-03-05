@@ -7,15 +7,16 @@ import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import io.restassured.response.ValidatableResponse;
+import models.error.ErrorRoot;
 import models.user.User;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 public class UserCreateTests extends StartTests {
+  // todo создать пользователя null
 
-
-  ValidatableResponse wrongResponse;
+  private ValidatableResponse wrongResponse;
 
   @Test
   @Tag(value = "smoke")
@@ -30,12 +31,12 @@ public class UserCreateTests extends StartTests {
   public void createAnExistingUserTest() {
     ValidatableResponse secondResponse = userClient.createUser(defaultUser);
     statusCode = extractStatusCode(secondResponse);
-    message = secondResponse.extract().path("error.message");
+    errorRoot = secondResponse.extract().body().as(ErrorRoot.class);
 
     assertEquals(SC_FORBIDDEN, statusCode);
     assertEquals("Username '" + defaultUser.getUserName() +
         "' is already taken., Email '" + defaultUser.getEmail() +
-        "' is already taken.", message);
+        "' is already taken.", errorRoot.error.message);
   }
 
   @Test
@@ -43,43 +44,40 @@ public class UserCreateTests extends StartTests {
   public void createUserWithoutEmailTest() {
     User userWithoutEmail = userFactory.createUser(USER_WITHOUT_EMAIL);
     wrongResponse = userClient.createUser(userWithoutEmail);
-    message = wrongResponse.extract().path("error.message");
-    details = wrongResponse.extract().path("error.details");
+    errorRoot = wrongResponse.extract().body().as(ErrorRoot.class);
     statusCode = extractStatusCode(wrongResponse);
 
     assertEquals(SC_BAD_REQUEST, statusCode);
-    assertEquals("Your request is not valid!", message);
+    assertEquals("Your request is not valid!", errorRoot.error.message);
     assertEquals("The following errors were detected during validation.\n"
-        + " - The Email field is required.\n", details);
+        + " - The Email field is required.\n", errorRoot.error.details);
   }
 
   @Test
   @DisplayName("Создать пользователя и не заполнить одно из обязательных полей - password")
   public void createUserWithoutPasswordTest() {
-    User getUserWithoutPassword = userFactory.createUser(USER_WITHOUT_PASSWORD);
-    wrongResponse = userClient.createUser(getUserWithoutPassword);
-    message = wrongResponse.extract().path("error.message");
-    details = wrongResponse.extract().path("error.details");
+    User userWithoutPassword = userFactory.createUser(USER_WITHOUT_PASSWORD);
+    wrongResponse = userClient.createUser(userWithoutPassword);
+    errorRoot = wrongResponse.extract().body().as(ErrorRoot.class);
     statusCode = extractStatusCode(wrongResponse);
 
     assertEquals(SC_BAD_REQUEST, statusCode);
-    assertEquals("Your request is not valid!", message);
+    assertEquals("Your request is not valid!", errorRoot.error.message);
     assertEquals("The following errors were detected during validation.\n"
-        + " - The Password field is required.\n", details);
+        + " - The Password field is required.\n", errorRoot.error.details);
   }
 
   @Test
   @DisplayName("Создать пользователя и не заполнить одно из обязательных полей - userName")
   public void createUserWithoutNameTest() {
-    User getUserWithoutUserName = userFactory.createUser(USER_WITHOUT_NAME);
-    wrongResponse = userClient.createUser(getUserWithoutUserName);
-    message = wrongResponse.extract().path("error.message");
-    details = wrongResponse.extract().path("error.details");
+    User userWithoutUserName = userFactory.createUser(USER_WITHOUT_NAME);
+    wrongResponse = userClient.createUser(userWithoutUserName);
+    errorRoot = wrongResponse.extract().body().as(ErrorRoot.class);
     statusCode = extractStatusCode(wrongResponse);
 
     assertEquals(SC_BAD_REQUEST, statusCode);
-    assertEquals("Your request is not valid!", message);
+    assertEquals("Your request is not valid!", errorRoot.error.message);
     assertEquals("The following errors were detected during validation.\n"
-        + " - The UserName field is required.\n", details);
+        + " - The UserName field is required.\n", errorRoot.error.details);
   }
 }

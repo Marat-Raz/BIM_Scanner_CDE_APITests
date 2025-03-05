@@ -42,6 +42,16 @@ public class UserClient extends Client {
         .then();
   }
 
+  @Step("Удалить пользователя по id")
+  public ValidatableResponse deleteUserWithoutId() {
+    return given()
+        .spec(getBaseSpec())
+        .auth().oauth2(ACCESS_TOKEN)
+        .when()
+        .delete(USERS)
+        .then();
+  }
+
   @Step("Получить список пользователей по фильтрам")
   public ValidatableResponse getListOfUsers(String filter, String sorting,
       String skipCount, int maxResultCount) {

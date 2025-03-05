@@ -7,8 +7,8 @@ import lombok.Setter;
 @Setter
 public class ProjectData {
 
-  String description;
-  String name;
+  private String description;
+  private String name;
 
   public ProjectData(String description, String name) {
     this.description = description;

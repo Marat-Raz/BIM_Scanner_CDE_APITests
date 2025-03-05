@@ -24,7 +24,9 @@ public class UserFactory {
       case USER_WITHOUT_NAME:
         return new User(null, emailAddress, password, appName);
       case NEW_USER:
-        return new User("newUser" + userName, "newEmail" + emailAddress, "newPassword" + password,
+        return new User("newUser" + RandomStringUtils.randomAlphabetic(6, 249),
+            "newEmail" + RandomStringUtils.randomAlphabetic(3, 247) + "@mail.com",
+            "newPassword" + password,
             appName);
       default:
       case DEFAULT_USER:
