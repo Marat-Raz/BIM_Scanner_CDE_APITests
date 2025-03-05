@@ -56,6 +56,7 @@ public class RegisterUserTests extends StartTests {
     User user = userFactory.createUser(NEW_USER);
     accountClient.registerUser(UserCredentials.from(user));
     registerUserResponse = accountClient.registerUser(UserCredentials.from(user));
+    statusCode = extractStatusCode(registerUserResponse);
 
     int newStatusCode = extractStatusCode(registerUserResponse);
     errorRoot = registerUserResponse.extract().body().as(ErrorRoot.class);

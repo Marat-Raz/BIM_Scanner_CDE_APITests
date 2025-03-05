@@ -9,6 +9,7 @@ import baseTests.StartTests;
 import io.restassured.response.ValidatableResponse;
 import java.util.UUID;
 import models.error.ErrorRoot;
+import models.user.ResponseUser;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -23,12 +24,12 @@ public class GetUserByIdTests extends StartTests {
   public void getUserByIdTest() {
     getUserResponse = userClient.getUserById(userId);
     statusCode = extractStatusCode(getUserResponse);
-    String userName = getUserResponse.extract().path("userName");
-    String email = getUserResponse.extract().path("email");
+    ResponseUser responseUser = getUserResponse.extract().as(ResponseUser.class);
 
     assertEquals(SC_OK, statusCode);
-    assertEquals(defaultUser.getUserName(), userName);
-    assertEquals(defaultUser.getEmail(), email);
+    assertEquals(defaultUser.getUserName(), responseUser.getUserName());
+    assertEquals(defaultUser.getEmail(), responseUser.getEmail());
+
   }
 
   @Test
@@ -57,4 +58,5 @@ public class GetUserByIdTests extends StartTests {
     assertEquals("There is no entity IdentityUser with id = "
         + wrongId + "!", errorRoot.error.message);
   }
+
 }
