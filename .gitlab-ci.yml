@@ -1,4 +1,16 @@
-image: maven:3.8.6-openjdk-21
+# workflow describes basic conditions for pipeline to be created
+# see https://habr.com/ru/companies/selectel/articles/819509/
+workflow:
+  rules:
+    # create pipeline when started manually from web interface
+    - if: '$CI_PIPELINE_SOURCE == "web"'
+    # create pipeline for merge requests
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    # do NOT create pipeline for commits already handled by merge requests
+    - if: '$CI_COMMIT_BRANCH && $CI_OPEN_MERGE_REQUESTS'
+      when: never
+    # create pipeline for single commits or branches
+    - if: '$CI_COMMIT_BRANCH || $CI_COMMIT_TAG'
 
 stages:
   - test
@@ -13,15 +25,21 @@ cache:
     - .m2/repository/
 
 run-tests:
+  image: maven:3.8.6-openjdk-21
   stage: test
+  tags:
+    - docker-on-host
   script:
     - mvn clean test
-    - mvn allure:report # Генерация Allure-отчета
+    #- mvn allure:report # Генерация Allure-отчета
   artifacts:
     paths:
       - target/surefire-reports/
       - target/allure-results/
-      - target/site/allure-maven-plugin/ # Папка с Allure-отчетом
+      #- target/site/allure-maven-plugin/ # Папка с Allure-отчетом
+    reports:
+      junit:
+        - target/surefire-reports/TEST-*.xml
     expire_in: 1 week
 
 pages:
