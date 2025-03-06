@@ -23,12 +23,9 @@ import org.junit.jupiter.api.Test;
 
 public class GetTopicsInProjectTests extends TopicsBaseTests {
 
-  private static ValidatableResponse addTopicsResponse;
-  private static TopicsClient topicsClient = new TopicsClient();
-  private static TopicBoardsClient topicBoardsClient = new TopicBoardsClient();
   private static Topics newTopic;
-  private ValidatableResponse getListOfTopicsFromProjectResponse;
   private static ValidatableResponse createTopicBoardsResponse;
+  private ValidatableResponse getListOfTopicsFromProjectResponse;
 
   @BeforeAll
   public static void createNewTopicBoardAndNewTopic() {

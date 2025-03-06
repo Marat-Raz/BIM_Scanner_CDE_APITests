@@ -14,7 +14,6 @@ import org.junit.jupiter.api.Test;
 
 public class GetAllTopicsFromTopicBoardTests extends TopicsBaseTests {
 
-  private static TopicsClient topicsClient = new TopicsClient();
   private ValidatableResponse getListOfTopicsResponse;
 
   @Test

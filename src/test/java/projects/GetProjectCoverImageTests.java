@@ -17,33 +17,10 @@ import org.junit.jupiter.api.*;
 
 public class GetProjectCoverImageTests extends StartTests {
 
-/*  private static ProjectFactory projectFactory = new ProjectFactory();
-  private static ProjectsClient projectsClient = new ProjectsClient();
-  private static ValidatableResponse createProjectResponse;
-  private static String projectId;
-  private static ValidatableResponse getAllProjectResponse;*/
   private static List<ServerResponseProject> serverResponseProjectList = new ArrayList<>();
   private String pathToDownload = "src/main/resources/download";
   private String fileName = "coverImage.png";
 
-/*  @BeforeAll
-  @Step("Создать проект от имени ADMIN")
-  public static void createProject() {
-    Project project = projectFactory.createProject(RANDOM_PROJECT);
-    createProjectResponse = projectsClient.createProject(ADMIN_ACCESS_TOKEN, project);
-    projectId = createProjectResponse.extract().path("id");
-  }
-
-  @AfterAll
-  @Step("Получить все проекты в системе и удалить все проекты всех пользователей после тестов")
-  public static void deleteAllProjects() {
-    getAllProjectResponse = projectsClient.getListOfProjects(ADMIN_ACCESS_TOKEN);
-    serverResponseProjectList = List.of(getAllProjectResponse.extract().body()
-        .as(ServerResponseProject[].class));
-    for (ServerResponseProject project : serverResponseProjectList) {
-      projectsClient.deleteProjectByItsId(ADMIN_ACCESS_TOKEN, project.getId());
-    }
-  }*/
   @BeforeEach
   @Step("Установить обложку проекта")
   public void setProjectCoverImage() {

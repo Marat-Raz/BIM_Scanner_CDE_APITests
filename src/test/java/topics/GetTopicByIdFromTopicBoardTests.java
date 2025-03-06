@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Test;
 
 public class GetTopicByIdFromTopicBoardTests extends TopicsBaseTests {
 
-  private static TopicsClient topicsClient = new TopicsClient();
   private ValidatableResponse getTopicByIdResponse;
 
 

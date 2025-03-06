@@ -13,8 +13,6 @@ import org.junit.jupiter.api.Test;
 
 public class AddTopicsToTopicBoardTests extends TopicsBaseTests {
 
-  private ValidatableResponse addTopicsResponse;
-  private Topics topic;
 
   @Test
   @Tag(value = "smoke")

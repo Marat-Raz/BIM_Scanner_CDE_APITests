@@ -17,11 +17,11 @@ import org.junit.jupiter.api.BeforeAll;
 
 public class TopicsBaseTests extends StartTests {
 
-  private static TopicBoardsClient topicBoardsClient = new TopicBoardsClient();
-  private static TopicBoardsFactory topicBoardsFactory = new TopicBoardsFactory();
-  private static TopicBoards topicBoard;
-  private static ValidatableResponse createTopicBoardsResponse;
-  private static ValidatableResponse addTopicsResponse;
+  protected static TopicBoardsClient topicBoardsClient = new TopicBoardsClient();
+  protected static TopicBoardsFactory topicBoardsFactory = new TopicBoardsFactory();
+  protected static TopicBoards topicBoard;
+  protected static ValidatableResponse createTopicBoardsResponse;
+  protected static ValidatableResponse addTopicsResponse;
   protected static TopicsClient topicsClient = new TopicsClient();
   protected static TopicsFactory topicsFactory = new TopicsFactory();
   protected static Topics topic;

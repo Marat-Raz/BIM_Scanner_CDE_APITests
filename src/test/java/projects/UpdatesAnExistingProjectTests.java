@@ -10,13 +10,16 @@ import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import models.project.Project;
 import models.project.ProjectWithConcurrencyStamp;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 
 public class UpdatesAnExistingProjectTests extends StartTests {
 
   private static String concurrencyStamp;
   private ValidatableResponse putProjectResponse;
-  ProjectWithConcurrencyStamp projectWithConcurrencyStamp;
+  private ProjectWithConcurrencyStamp projectWithConcurrencyStamp;
 
   @BeforeEach
   @Step("Создать проект от имени ADMIN")
