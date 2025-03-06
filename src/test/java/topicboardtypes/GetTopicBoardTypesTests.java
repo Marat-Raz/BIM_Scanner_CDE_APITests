@@ -20,13 +20,13 @@ import org.junit.jupiter.api.Test;
 public class GetTopicBoardTypesTests extends TopicBoardTypeBaseTests {
 
   private static TopicBoardTypesClient topicBoardTypesClient = new TopicBoardTypesClient();
-  private static final int typesCount = 5;
   private ValidatableResponse getAllTypes;
   private static List<Types> expectedTypes = new ArrayList<>();
 
   @BeforeAll
   public static void addTypesToTopicBoards() {
-    for (int i = 0; i < typesCount; i++) {
+    expectedTypes.add(type);
+    for (int i = 0; i < 5; i++) {
       expectedTypes.add(new TypesFactory().createTypes(DEFAULT));
     }
     for (Types type : expectedTypes) {
@@ -42,7 +42,6 @@ public class GetTopicBoardTypesTests extends TopicBoardTypeBaseTests {
     List<Types> actualTypes = Arrays.asList(getAllTypes.extract().as(Types[].class));
 
     assertAll(
-        () -> assertEquals(typesCount, actualTypes.size()),
         () -> assertEquals(new HashSet<>(expectedTypes), new HashSet<>(actualTypes))
     );
   }

@@ -31,17 +31,17 @@ import org.junit.jupiter.api.BeforeEach;
 public class StartTests {
 
   private static TokenClient tokenClient = new TokenClient();
-  protected static User defaultUser;
-  protected static String userId;
-  protected static ValidatableResponse baseResponse;
-  protected static UserClient userClient = new UserClient();
-  protected static ProjectMembersClient projectMembersClient = new ProjectMembersClient();
-  protected int statusCode;
-  protected static UserFactory userFactory = new UserFactory();
-  protected ErrorRoot errorRoot;
-  protected static ValidatableResponse createProjectResponse;
   protected static ProjectsClient projectsClient = new ProjectsClient();
   protected static ProjectFactory projectFactory = new ProjectFactory();
+  protected static UserFactory userFactory = new UserFactory();
+  protected static UserClient userClient = new UserClient();
+  protected static User defaultUser;
+  protected static ValidatableResponse baseResponse;
+  protected static ValidatableResponse createProjectResponse;
+  protected static String userId;
+  protected ErrorRoot errorRoot;
+  protected int statusCode;
+
   protected static String projectId;
   protected static Project defaultProject;
 
@@ -63,15 +63,8 @@ public class StartTests {
     userId = baseResponse.extract().path("id");
 
     defaultProject = projectFactory.createProject(DEFAULT_PROJECT);
-    //defaultProject.setResponsibleId(userId);
     createProjectResponse = projectsClient.createProject(defaultProject);
-
     projectId = createProjectResponse.extract().path("id");
-    //projectMembersClient.addProjectMember(projectId, new ProjectMember(adminId));
-
-/*    ValidatableResponse responseToken =
-        tokenClient.createToken(TokenBuilder.getTokenForUser(defaultUser));
-    Client.DEFAULT_USER_ACCESS_TOKEN = responseToken.extract().path("access_token");*/
     // todo выдать для user права на создание проектов раздел permission
     // todo сделать админа участником проекта
   }

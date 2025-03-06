@@ -21,7 +21,6 @@ import org.junit.jupiter.api.Test;
 
 public class DeleteProjectByItsIdTests extends StartTests {
 
-  private static ProjectsClient projectsClient = new ProjectsClient();
   private ValidatableResponse getAllProjectResponse;
   private ValidatableResponse deleteProjectResponse;
   private static ArrayList<Project> projectList = new ArrayList<Project>();

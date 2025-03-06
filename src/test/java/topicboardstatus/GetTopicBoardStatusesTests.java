@@ -22,6 +22,7 @@ public class GetTopicBoardStatusesTests extends TopicBoardStatusBaseTests {
 
   @BeforeAll
   public static void addStatusesToTopicBoard() {
+    expectedStatuses.add(status);
     for (int i = 0; i < 5; i++) {
       expectedStatuses.add(new StatusesFactory().createStatuses(DEFAULT));
     }
