@@ -3,7 +3,6 @@ package basetests;
 import static models.project.ProjectType.DEFAULT_PROJECT;
 import static models.user.UserType.DEFAULT_USER;
 
-import client.ProjectMembersClient;
 import client.ProjectsClient;
 import client.TokenClient;
 import client.UserClient;
@@ -19,14 +18,12 @@ import models.error.ErrorRoot;
 import models.project.Project;
 import models.project.ProjectFactory;
 import models.project.ServerResponseProject;
-import models.projectmember.ProjectMember;
 import models.token.TokenBuilder;
 import models.user.User;
 import models.user.UserFactory;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-
 
 public class StartTests {
 
@@ -38,12 +35,11 @@ public class StartTests {
   protected static User defaultUser;
   protected static ValidatableResponse baseResponse;
   protected static ValidatableResponse createProjectResponse;
+  protected static Project defaultProject;
+  protected static String projectId;
   protected static String userId;
   protected ErrorRoot errorRoot;
   protected int statusCode;
-
-  protected static String projectId;
-  protected static Project defaultProject;
 
   @BeforeAll
   @Step("Запуск Allure и логирования запросов по API, \n"
@@ -65,8 +61,8 @@ public class StartTests {
     defaultProject = projectFactory.createProject(DEFAULT_PROJECT);
     createProjectResponse = projectsClient.createProject(defaultProject);
     projectId = createProjectResponse.extract().path("id");
+
     // todo выдать для user права на создание проектов раздел permission
-    // todo сделать админа участником проекта
   }
 
   @BeforeEach

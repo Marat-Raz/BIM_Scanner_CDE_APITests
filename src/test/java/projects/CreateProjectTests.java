@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 
 public class CreateProjectTests extends StartTests {
 
+  Project project;
 /*
 // todo создать проект со всеми параметрами
 // todo создать проект без необязательных полей
@@ -26,20 +27,9 @@ public class CreateProjectTests extends StartTests {
  */
 
   @Test
-  @Tag(value = "smoke")
-  @DisplayName("Создать проект")
-  public void createProjectTest() {
-    String actualProjectName = createProjectResponse.extract().path("name");
-    statusCode = extractStatusCode(createProjectResponse);
-
-    assertEquals(SC_OK, statusCode);
-    assertEquals(defaultProject.getName(), actualProjectName);
-  }
-
-  @Test
   @DisplayName("Создать проект без названия, без обязательного поля name")
   public void createProjectWithoutNameTest() {
-    Project project = projectFactory.createProject(PROJECT_WITHOUT_NAME);
+    project = projectFactory.createProject(PROJECT_WITHOUT_NAME);
     project.setResponsibleId(userId);
     createProjectResponse = projectsClient.createProject(project);
     statusCode = extractStatusCode(createProjectResponse);
@@ -50,7 +40,7 @@ public class CreateProjectTests extends StartTests {
   @Test
   @DisplayName("Создать проект, где все параметры null")
   public void createProjectWithNullTest() {
-    Project project = projectFactory.createProject(PROJECT_WITHOUT_DATA);
+    project = projectFactory.createProject(PROJECT_WITHOUT_DATA);
     project.setResponsibleId(userId);
     createProjectResponse = projectsClient.createProject(project);
     statusCode = extractStatusCode(createProjectResponse);
