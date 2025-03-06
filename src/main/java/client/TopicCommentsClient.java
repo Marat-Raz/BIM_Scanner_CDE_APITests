@@ -24,12 +24,10 @@ public class TopicCommentsClient extends Client {
   }
 
   @Step("Получить список комментариев к задаче")
-  public ValidatableResponse getTopicComments(String topicBoardId, String topicId,
-      Map<String, Object> queryParams) {
+  public ValidatableResponse getTopicComments(String topicBoardId, String topicId) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
-        .queryParams(queryParams)
         .when()
         .get(TOPIC_COMMENTS + topicBoardId + "/topics/" + topicId + "/comments")
         .then();
