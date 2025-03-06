@@ -47,7 +47,7 @@ public class UserClient extends Client {
   public ValidatableResponse deleteUserWithoutId() {
     return given()
         .spec(getBaseSpec())
-        .auth().oauth2(ACCESS_TOKEN)
+        .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
         .delete(USERS)
         .then();

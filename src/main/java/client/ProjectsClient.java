@@ -146,13 +146,13 @@ public class ProjectsClient extends Client {
         .get(PROJECTS + projectId + "/cover")
         .then();
   }
-
+File file = new File("src/main/resources/1.7mb.png");
   @Step("Задать изображение обложки проекта с токеном админа")
   public ValidatableResponse setProjectCoverImage(String projectId) {
     return given()
         .spec(multipartBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
-        .multiPart("coverImage", new File("src/main/resources/1.7mb.png"))
+        .multiPart("coverImage", file, "image/png")
         // todo заменить название файла на переменную
         .when()
         .put(PROJECTS + projectId + "/cover")

@@ -2,10 +2,8 @@ package client.base;
 
 import static io.restassured.http.ContentType.MULTIPART;
 
-import io.restassured.builder.MultiPartSpecBuilder;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
-import io.restassured.specification.MultiPartSpecification;
 import io.restassured.specification.RequestSpecification;
 
 public class Client {
