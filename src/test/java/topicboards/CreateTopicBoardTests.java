@@ -13,7 +13,7 @@ public class CreateTopicBoardTests extends TopicBoardsBaseTests {
 
   @Test
   @Tag(value = "smoke")
-  @DisplayName("Создать доску задач в корне проекта")
+  @DisplayName("Создать доску задач в корне проекта дает код ответа 200")
   public void createNewTopicBoardTest() {
     statusCode = extractStatusCode(createTopicBoardsResponse);
     ResponseTopicBoards responseTopicBoards =

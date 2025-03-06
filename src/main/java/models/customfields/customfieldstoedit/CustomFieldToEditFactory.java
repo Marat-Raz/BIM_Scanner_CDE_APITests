@@ -7,7 +7,7 @@ public class CustomFieldToEditFactory {
   public boolean isRequired;
   public String defaultValue = "string"; //
 
-  public CustomFieldToEdit getCustomFieldToEditById(String idFromResponse,
+  public CustomFieldToEdit createCustomFieldToEditById(String idFromResponse,
       CustomFieldToEditType customFieldToEditType) {
     switch (customFieldToEditType) {
       case IS_NOT_ENABLED:

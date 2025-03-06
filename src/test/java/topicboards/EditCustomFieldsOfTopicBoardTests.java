@@ -1,59 +1,32 @@
 package topicboards;
 
-import static models.customfields.CustomFieldType.TEXT;
 import static models.customfields.customfieldstoedit.CustomFieldToEditType.IS_ENABLED;
-import static models.topicboards.TopicBoardsType.DEFAULT_TOPIC_BOARDS;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import basetests.StartTests;
-import client.CustomFieldsClient;
-import client.TopicBoardsClient;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import java.util.ArrayList;
-import models.customfields.CustomField;
-import models.customfields.CustomFieldFactory;
 import models.customfields.customfieldstoedit.CustomFieldToEdit;
 import models.customfields.customfieldstoedit.CustomFieldToEditFactory;
 import models.customfields.customfieldstoedit.CustomFieldsToEdit;
 import models.topicboards.ResponseTopicBoards;
-import models.topicboards.TopicBoards;
-import models.topicboards.TopicBoardsFactory;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class EditCustomFieldsOfTopicBoardTests extends StartTests {
+public class EditCustomFieldsOfTopicBoardTests extends TopicBoardsBaseTests {
 
-  private static CustomFieldsClient customFieldsClient = new CustomFieldsClient();
-  private static TopicBoardsClient topicBoardsClient = new TopicBoardsClient();
-  private static TopicBoardsFactory topicBoardsFactory = new TopicBoardsFactory();
-  private static ValidatableResponse addCustomFieldResponse;
   private static ValidatableResponse editCustomFieldResponse;
-  private static CustomField customField;
-  private static String customFieldId;
-  private static TopicBoards topicBoard;
-  private static ValidatableResponse createTopicBoardsResponse;
-  private static String topicBoardId;
   private static ValidatableResponse getTopicBoardResponse;
-  private static ResponseTopicBoards responseTopicBoard;
   private static ArrayList<CustomFieldToEdit> existsCustomFields;
 
   @BeforeAll
-  @Step("Добавить кастомные поля в проект")
+  @Step("Добавить кастомные поля в доску задач")
   public static void createProject() {
-    customField = new CustomFieldFactory().createCustomField(TEXT);
-    addCustomFieldResponse = customFieldsClient.addNewCustomFieldToProject(projectId, customField);
-    customFieldId = addCustomFieldResponse.extract().path("id");
-
-    topicBoard = topicBoardsFactory.createTopicBoards(DEFAULT_TOPIC_BOARDS);
-    createTopicBoardsResponse = topicBoardsClient.createNewTopicBoard(projectId, topicBoard);
-    topicBoardId = createTopicBoardsResponse.extract().path("id");
-
     CustomFieldToEditFactory customFieldToEditFactory = new CustomFieldToEditFactory();
     CustomFieldToEdit customFieldToEdit = customFieldToEditFactory
-        .getCustomFieldToEditById(customFieldId, IS_ENABLED);
+        .createCustomFieldToEditById(customFieldId, IS_ENABLED);
 
     CustomFieldsToEdit customFieldsToEdit = new CustomFieldsToEdit(customFieldToEdit);
     editCustomFieldResponse = topicBoardsClient

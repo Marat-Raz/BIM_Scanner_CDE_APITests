@@ -22,15 +22,15 @@ public class TopicBoardsBaseTests extends StartTests {
   protected static TopicBoardsFactory topicBoardsFactory = new TopicBoardsFactory();
   protected static ValidatableResponse addCustomFieldResponse;
   protected static ValidatableResponse editCustomFieldResponse;
-  protected static CustomField customField;
-  protected static String customFieldId;
-  protected static TopicBoards topicBoard;
   protected static ValidatableResponse createTopicBoardsResponse;
+  protected static ResponseTopicBoards responseTopicBoard;
+  protected static CustomField customField;
+  protected static TopicBoards topicBoard;
+  protected static String customFieldId;
   protected static String topicBoardId;
-  protected static ResponseTopicBoards responseTopicBoards;
 
   @BeforeAll
-  @Step("Добавить кастомные поля в проект")
+  @Step("Добавить кастомные поля в проект, создать доску задач в проекте")
   public static void addCustomFieldToProjectAndCreateTopicBoard() {
     customField = new CustomFieldFactory().createCustomField(TEXT);
     addCustomFieldResponse = customFieldsClient.addNewCustomFieldToProject(projectId, customField);
@@ -38,7 +38,7 @@ public class TopicBoardsBaseTests extends StartTests {
 
     topicBoard = topicBoardsFactory.createTopicBoards(DEFAULT_TOPIC_BOARDS);
     createTopicBoardsResponse = topicBoardsClient.createNewTopicBoard(projectId, topicBoard);
-    responseTopicBoards = createTopicBoardsResponse.extract().as(ResponseTopicBoards.class);
-    topicBoardId = responseTopicBoards.getId();
+    responseTopicBoard = createTopicBoardsResponse.extract().as(ResponseTopicBoards.class);
+    topicBoardId = responseTopicBoard.getId();
   }
 }
