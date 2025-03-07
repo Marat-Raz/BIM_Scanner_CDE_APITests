@@ -22,13 +22,13 @@ public class TopicsBaseTests extends StartTests {
   protected static TopicBoardsFactory topicBoardsFactory = new TopicBoardsFactory();
   protected static TopicBoards topicBoard;
   protected static ValidatableResponse createTopicBoardsResponse;
-  protected static ValidatableResponse addTopicsResponse;
   protected static TopicsClient topicsClient = new TopicsClient();
   protected static TopicsFactory topicsFactory = new TopicsFactory();
-  protected static Topics topic;
-  protected static String defaultTopicId;
-  protected static ResponseTopics responseTopic;
   protected static String topicBoardId;
+  protected ValidatableResponse addTopicsResponse;
+  protected Topics topic;
+  protected String defaultTopicId;
+  protected ResponseTopics responseTopic;
 
   @BeforeAll
   public static void createTopicBoardAndTopic() {

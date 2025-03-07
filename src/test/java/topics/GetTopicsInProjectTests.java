@@ -16,10 +16,7 @@ import models.topics.ResponseFromGetAllTopics;
 import models.topics.ResponseTopics;
 import models.topics.Topics;
 import models.topics.TopicsFactory;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 public class GetTopicsInProjectTests extends TopicsBaseTests {
 
@@ -27,8 +24,8 @@ public class GetTopicsInProjectTests extends TopicsBaseTests {
   private static ValidatableResponse createTopicBoardsResponse;
   private ValidatableResponse getListOfTopicsFromProjectResponse;
 
-  @BeforeAll
-  public static void createNewTopicBoardAndNewTopic() {
+  @BeforeEach
+  public void createNewTopicBoardAndNewTopic() {
     TopicBoards newTopicBoard = new TopicBoardsFactory().createTopicBoards(DEFAULT_TOPIC_BOARDS);
     createTopicBoardsResponse = topicBoardsClient.createNewTopicBoard(projectId, newTopicBoard);
     ResponseTopicBoards responseTopicBoards =
