@@ -13,6 +13,7 @@ import models.topicboards.ResponseTopicBoards;
 import models.topicboards.TopicBoards;
 import models.topicboards.TopicBoardsFactory;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 
 public class TopicBoardPrioritiesBaseTests extends StartTests {
 
@@ -34,9 +35,14 @@ public class TopicBoardPrioritiesBaseTests extends StartTests {
     ResponseTopicBoards responseTopicBoards =
         createTopicBoardsResponse.extract().as(ResponseTopicBoards.class);
     topicBoardId = responseTopicBoards.getId();
+  }
+
+  @BeforeEach
+  public void addPrioritiesToTopicBoard() {
     priority = prioritiesFactory.createPriorities(DEFAULT);
     addPrioritiesResponse = topicBoardPrioritiesClient.addPrioritiesToTopicBoard(topicBoardId,
         priority);
     priorityId = addPrioritiesResponse.extract().path("id");
   }
+
 }

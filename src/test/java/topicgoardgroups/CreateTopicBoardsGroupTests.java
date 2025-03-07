@@ -15,6 +15,7 @@ public class CreateTopicBoardsGroupTests extends TopicBoardGroupBaseTests {
   @DisplayName("При создании в проекте группы досок задач код ответа 200")
   public void createTopicBoardsGroupTest() {
     statusCode = extractStatusCode(createTopicBoardsGroupResponse);
+    // fixme statusCode при появлении новых тестов будет неверным
 
     assertEquals(SC_OK, statusCode);
     assertAll(

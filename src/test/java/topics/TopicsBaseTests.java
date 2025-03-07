@@ -14,6 +14,7 @@ import models.topics.ResponseTopics;
 import models.topics.Topics;
 import models.topics.TopicsFactory;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 
 public class TopicsBaseTests extends StartTests {
 
@@ -36,6 +37,10 @@ public class TopicsBaseTests extends StartTests {
     ResponseTopicBoards responseTopicBoards =
         createTopicBoardsResponse.extract().as(ResponseTopicBoards.class);
     topicBoardId = responseTopicBoards.getId();
+  }
+
+  @BeforeEach
+  public void addTopic() {
     topic = topicsFactory.createTopic(DEFAULT_TOPIC);
     addTopicsResponse = topicsClient.createTopicInTopicBoard(topicBoardId, topic);
     responseTopic = addTopicsResponse.extract().as(ResponseTopics.class);

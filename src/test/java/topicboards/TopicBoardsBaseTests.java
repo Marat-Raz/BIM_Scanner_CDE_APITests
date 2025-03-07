@@ -14,6 +14,7 @@ import models.topicboards.ResponseTopicBoards;
 import models.topicboards.TopicBoards;
 import models.topicboards.TopicBoardsFactory;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 
 public class TopicBoardsBaseTests extends StartTests {
 
@@ -31,14 +32,18 @@ public class TopicBoardsBaseTests extends StartTests {
 
   @BeforeAll
   @Step("Добавить кастомные поля в проект, создать доску задач в проекте")
-  public static void addCustomFieldToProjectAndCreateTopicBoard() {
+  public static void addCustomFieldToProject() {
     customField = new CustomFieldFactory().createCustomField(TEXT);
     addCustomFieldResponse = customFieldsClient.addNewCustomFieldToProject(projectId, customField);
     customFieldId = addCustomFieldResponse.extract().path("id");
+  }
 
+  @BeforeEach
+  public void createTopicBoard() {
     topicBoard = topicBoardsFactory.createTopicBoards(DEFAULT_TOPIC_BOARDS);
     createTopicBoardsResponse = topicBoardsClient.createNewTopicBoard(projectId, topicBoard);
     responseTopicBoard = createTopicBoardsResponse.extract().as(ResponseTopicBoards.class);
     topicBoardId = responseTopicBoard.getId();
   }
+
 }

@@ -14,6 +14,7 @@ import models.topicboards.ResponseTopicBoards;
 import models.topicboards.TopicBoards;
 import models.topicboards.TopicBoardsFactory;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 
 public class TopicBoardStatusBaseTests extends StartTests {
 
@@ -30,15 +31,20 @@ public class TopicBoardStatusBaseTests extends StartTests {
   protected static ResponseStatuses responseStatuses;
 
   @BeforeAll
-  public static void createTopicBoardAndAddStatus() {
+  public static void createTopicBoard() {
     topicBoard = topicBoardsFactory.createTopicBoards(DEFAULT_TOPIC_BOARDS);
     createTopicBoardsResponse = topicBoardsClient.createNewTopicBoard(projectId, topicBoard);
     ResponseTopicBoards responseTopicBoards =
         createTopicBoardsResponse.extract().as(ResponseTopicBoards.class);
     topicBoardId = responseTopicBoards.getId();
+  }
+
+  @BeforeEach
+  public void addStatus() {
     status = statusesFactory.createStatuses(DEFAULT);
     addStatusResponse = topicBoardStatusClient.addStatusToTopicBoard(topicBoardId, status);
     responseStatuses = addStatusResponse.extract().as(ResponseStatuses.class);
     statusId = responseStatuses.getId();
   }
+
 }

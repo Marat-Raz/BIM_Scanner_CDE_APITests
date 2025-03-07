@@ -14,6 +14,7 @@ import models.types.ResponseTypes;
 import models.types.Types;
 import models.types.TypesFactory;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 
 public class TopicBoardTypeBaseTests extends StartTests {
 
@@ -36,9 +37,14 @@ public class TopicBoardTypeBaseTests extends StartTests {
     ResponseTopicBoards responseTopicBoards =
         createTopicBoardsResponse.extract().as(ResponseTopicBoards.class);
     topicBoardId = responseTopicBoards.getId();
+  }
+
+  @BeforeEach
+  public void addType() {
     type = typesFactory.createTypes(DEFAULT);
     addTypesResponse = topicBoardTypesClient.addTypesToTopicBoard(topicBoardId, type);
     responseTypes = addTypesResponse.extract().as(ResponseTypes.class);
     typeId = responseTypes.getId();
   }
+
 }
