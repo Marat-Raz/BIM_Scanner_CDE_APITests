@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 
 public class GetUserByIdTests extends StartTests {
 
-  ValidatableResponse getUserResponse;
+  private ValidatableResponse getUserResponse;
 
   @Test
   @Tag(value = "smoke")

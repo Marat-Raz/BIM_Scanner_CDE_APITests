@@ -16,12 +16,12 @@ import org.junit.jupiter.api.*;
 
 public class UpdateTopicBoardGroupByIdTests extends StartTests {
 
-  private static TopicBoardsGroupFactory topicBoardsGroupFactory = new TopicBoardsGroupFactory();
-  private static TopicBoardsGroup topicBoardsGroup;
-  private static TopicBoardGroupsClient topicBoardGroupsClient = new TopicBoardGroupsClient();
-  private static ValidatableResponse createTopicBoardsGroupResponse;
+  private TopicBoardsGroupFactory topicBoardsGroupFactory = new TopicBoardsGroupFactory();
+  private TopicBoardsGroup topicBoardsGroup;
+  private TopicBoardGroupsClient topicBoardGroupsClient = new TopicBoardGroupsClient();
+  private ValidatableResponse createTopicBoardsGroupResponse;
   private ValidatableResponse updateTopicBoardGroupResponse;
-  static String topicBoardsGroupId;
+  private String topicBoardsGroupId;
 
   @BeforeEach
   @Step("Создать  в проекте группу досок задач")
