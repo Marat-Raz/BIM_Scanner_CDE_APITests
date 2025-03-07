@@ -12,7 +12,17 @@ public class TopicEventsClient extends Client {
 
   private static final String TOPIC_EVENTS = "api/issues/boards/";
 
-  @Step("Получить события изменений задач в доске задач")
+  @Step("Получить уведомления обо всех изменениях задач в доске задач")
+  public ValidatableResponse getTopicEventsWithoutQueryParams(String topicBoardId) {
+    return given()
+        .spec(getBaseSpec())
+        .auth().oauth2(ADMIN_ACCESS_TOKEN)
+        .when()
+        .get(TOPIC_EVENTS + topicBoardId + "/topics/events/")
+        .then();
+  }
+
+  @Step("Получить уведомления обо всех изменениях задач в доске задач")
   public ValidatableResponse getTopicEvents(String topicBoardId, Map<String, Object> queryParams) {
     return given()
         .spec(getBaseSpec())
@@ -23,7 +33,20 @@ public class TopicEventsClient extends Client {
         .then();
   }
 
-  @Step("Получить события изменений для конкретной задачи в доске задач")
+  @Step("Получить список уведомлений об изменениях определенной задачи, "
+      + "сгруппированных по дате")
+  public ValidatableResponse getTopicEventsForSpecificTopicWithoutQueryParams(String topicBoardId,
+      String topicId) {
+    return given()
+        .spec(getBaseSpec())
+        .auth().oauth2(ADMIN_ACCESS_TOKEN)
+        .when()
+        .get(TOPIC_EVENTS + topicBoardId + "/topics/" + topicId + "/events/")
+        .then();
+  }
+
+  @Step("Получить список уведомлений об изменениях определенной задачи, "
+      + "сгруппированных по дате")
   public ValidatableResponse getTopicEventsForSpecificTopic(String topicBoardId, String topicId,
       Map<String, Object> queryParams) {
     return given()

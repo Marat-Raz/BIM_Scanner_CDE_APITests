@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import models.customfields.CustomFields;
+import models.customfields.ListOfCustomField;
 
 @AllArgsConstructor
 @Getter
@@ -18,7 +18,7 @@ public class Topics {
   public String typeId;
   public String statusId;
   public String priorityId;
-  public CustomFields customFields;
+  public ListOfCustomField customFields;
   public ArrayList<String> labels;
 
 }

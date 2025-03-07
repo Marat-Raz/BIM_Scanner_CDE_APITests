@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import models.customfields.CustomFields;
+import models.customfields.ListOfCustomField;
 import org.apache.commons.lang3.RandomStringUtils;
 
 public class TopicsFactory {
@@ -19,7 +19,7 @@ public class TopicsFactory {
   public String typeId;
   public String statusId;
   public String priorityId;
-  public CustomFields customFields;
+  public ListOfCustomField customFields;
   public ArrayList<String> labels;
 
   public Topics createTopic(TopicType topicType) {

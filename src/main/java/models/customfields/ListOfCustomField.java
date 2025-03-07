@@ -8,11 +8,11 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class CustomFields {
+public class ListOfCustomField {
 
   public ArrayList<CustomField> customFields;
 
-  public CustomFields(CustomField customField) {
+  public ListOfCustomField(CustomField customField) {
     this.customFields = new ArrayList<>();
     this.customFields.add(customField);
   }
