@@ -58,4 +58,5 @@ public class GetUserByIdTests extends StartTests {
     assertEquals("There is no entity IdentityUser with id = "
         + wrongId + "!", errorRoot.error.message);
   }
+
 }

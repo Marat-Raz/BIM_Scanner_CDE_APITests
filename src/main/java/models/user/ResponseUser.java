@@ -1,6 +1,5 @@
 package models.user;
 
-import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -36,3 +35,4 @@ public class ResponseUser {
   public Object extraProperties;
 
 }
+

@@ -70,7 +70,6 @@ public class ChangeUserDataTests extends StartTests {
   @Test
   @DisplayName("Изменить данные пользователя - email, без передачи параметра userName")
   public void changeEmailWithoutUsernameTests() {
-    // fixme исправить - по факту передается defaultUser с email
     User userWithoutUserName = newUser;
     userWithoutUserName.setUserName(null);
     putResponse = userClient.changeUser(userWithoutUserName, userId);
