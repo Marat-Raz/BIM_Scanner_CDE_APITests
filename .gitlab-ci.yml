@@ -19,6 +19,7 @@ stages:
 variables:
   MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
   API_BASE_URL: "https://cde-api.test.briodev.ru/"
+  CI_DEBUG_TRACE: "true"
 
 cache:
   paths:
