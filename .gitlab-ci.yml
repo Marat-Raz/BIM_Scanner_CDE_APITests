@@ -52,4 +52,4 @@ pages:
     paths:
       - public
   only:
-    - main # Запускать только для ветки main
+    - master # Запускать только для ветки master
