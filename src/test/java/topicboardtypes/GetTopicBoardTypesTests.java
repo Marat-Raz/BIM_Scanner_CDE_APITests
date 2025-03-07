@@ -12,10 +12,7 @@ import java.util.HashSet;
 import java.util.List;
 import models.types.Types;
 import models.types.TypesFactory;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 public class GetTopicBoardTypesTests extends TopicBoardTypeBaseTests {
 
@@ -23,8 +20,8 @@ public class GetTopicBoardTypesTests extends TopicBoardTypeBaseTests {
   private ValidatableResponse getAllTypes;
   private static List<Types> expectedTypes = new ArrayList<>();
 
-  @BeforeAll
-  public static void addTypesToTopicBoards() {
+  @BeforeEach
+  public void addTypesToTopicBoards() {
     expectedTypes.add(type);
     for (int i = 0; i < 5; i++) {
       expectedTypes.add(new TypesFactory().createTypes(DEFAULT));

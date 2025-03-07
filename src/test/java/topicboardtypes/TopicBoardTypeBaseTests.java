@@ -25,10 +25,10 @@ public class TopicBoardTypeBaseTests extends StartTests {
   protected static TopicBoards topicBoard;
   protected static ValidatableResponse createTopicBoardsResponse;
   protected static String topicBoardId;
-  protected static ValidatableResponse addTypesResponse;
-  protected static Types type;
-  protected static String typeId;
-  protected static ResponseTypes responseTypes;
+  protected ValidatableResponse addTypesResponse;
+  protected Types type;
+  protected String typeId;
+  protected ResponseTypes responseTypes;
 
   @BeforeAll
   public static void createTopicBoardAndAddType() {

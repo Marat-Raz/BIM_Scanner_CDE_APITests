@@ -25,10 +25,10 @@ public class TopicBoardStatusBaseTests extends StartTests {
   protected static TopicBoards topicBoard;
   protected static ValidatableResponse createTopicBoardsResponse;
   protected static String topicBoardId;
-  protected static ValidatableResponse addStatusResponse;
-  protected static Statuses status;
-  protected static String statusId;
-  protected static ResponseStatuses responseStatuses;
+  protected ValidatableResponse addStatusResponse;
+  protected Statuses status;
+  protected String statusId;
+  protected ResponseStatuses responseStatuses;
 
   @BeforeAll
   public static void createTopicBoard() {

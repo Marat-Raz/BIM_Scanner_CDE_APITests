@@ -133,6 +133,7 @@
             -Djdk.net.URLClassPath.disableClassPathURLCheck=true
             -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
           </argLine>
+          <redirectTestOutputToFile>true</redirectTestOutputToFile>
         </configuration>
         <dependencies>
           <dependency>

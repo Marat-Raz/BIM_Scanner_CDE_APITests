@@ -22,11 +22,11 @@ public class TopicBoardPrioritiesClient extends Client {
   }
 
   @Step("Добавить приоритет на доску задач")
-  public ValidatableResponse addPrioritiesToTopicBoard(String topicBoardId, Priorities priorities) {
+  public ValidatableResponse addPrioritiesToTopicBoard(String topicBoardId, Priorities priority) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
-        .body(priorities)
+        .body(priority)
         .when()
         .post(TOPIC_BOARD_PRIORITIES + topicBoardId + "/priorities")
         .then();

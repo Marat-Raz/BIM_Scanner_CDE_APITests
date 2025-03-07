@@ -19,14 +19,15 @@ public class TopicBoardPrioritiesBaseTests extends StartTests {
 
   protected static TopicBoardsClient topicBoardsClient = new TopicBoardsClient();
   protected static TopicBoardsFactory topicBoardsFactory = new TopicBoardsFactory();
-  protected static TopicBoardPrioritiesClient topicBoardPrioritiesClient = new TopicBoardPrioritiesClient();
+  protected static TopicBoardPrioritiesClient topicBoardPrioritiesClient
+      = new TopicBoardPrioritiesClient();
   protected static PrioritiesFactory prioritiesFactory = new PrioritiesFactory();
   protected static TopicBoards topicBoard;
   protected static ValidatableResponse createTopicBoardsResponse;
-  protected static ValidatableResponse addPrioritiesResponse;
-  protected static Priorities priority;
   protected static String topicBoardId;
-  protected static String priorityId;
+  protected ValidatableResponse addPrioritiesResponse;
+  protected Priorities priority;
+  protected String priorityId;
 
   @BeforeAll
   public static void createTopicBoard() {

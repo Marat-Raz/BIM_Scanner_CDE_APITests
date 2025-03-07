@@ -10,18 +10,15 @@ import java.util.HashSet;
 import java.util.List;
 import models.statuses.Statuses;
 import models.statuses.StatusesFactory;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 public class GetTopicBoardStatusesTests extends TopicBoardStatusBaseTests {
 
   private ValidatableResponse getAllStatuses;
   private static List<Statuses> expectedStatuses = new ArrayList<>();
 
-  @BeforeAll
-  public static void addStatusesToTopicBoard() {
+  @BeforeEach
+  public void addStatusesToTopicBoard() {
     expectedStatuses.add(status);
     for (int i = 0; i < 5; i++) {
       expectedStatuses.add(new StatusesFactory().createStatuses(DEFAULT));

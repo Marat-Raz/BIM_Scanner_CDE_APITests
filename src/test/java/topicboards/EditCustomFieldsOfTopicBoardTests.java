@@ -12,6 +12,7 @@ import models.customfields.customfieldstoedit.CustomFieldToEditFactory;
 import models.customfields.customfieldstoedit.CustomFieldsToEdit;
 import models.topicboards.ResponseTopicBoards;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -19,11 +20,11 @@ public class EditCustomFieldsOfTopicBoardTests extends TopicBoardsBaseTests {
 
   private static ValidatableResponse editCustomFieldResponse;
   private static ValidatableResponse getTopicBoardResponse;
-  private static ArrayList<CustomFieldToEdit> existsCustomFields;
+  private static ArrayList<CustomFieldToEdit> existsCustomFields = new ArrayList<>();
 
-  @BeforeAll
+  @BeforeEach
   @Step("Добавить кастомные поля в доску задач")
-  public static void createProject() {
+  public void createProject() {
     CustomFieldToEditFactory customFieldToEditFactory = new CustomFieldToEditFactory();
     CustomFieldToEdit customFieldToEdit = customFieldToEditFactory
         .createCustomFieldToEditById(customFieldId, IS_ENABLED);

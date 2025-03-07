@@ -23,12 +23,12 @@ public class TopicBoardsBaseTests extends StartTests {
   protected static TopicBoardsFactory topicBoardsFactory = new TopicBoardsFactory();
   protected static ValidatableResponse addCustomFieldResponse;
   protected static ValidatableResponse editCustomFieldResponse;
-  protected static ValidatableResponse createTopicBoardsResponse;
-  protected static ResponseTopicBoards responseTopicBoard;
   protected static CustomField customField;
-  protected static TopicBoards topicBoard;
   protected static String customFieldId;
-  protected static String topicBoardId;
+  protected ValidatableResponse createTopicBoardsResponse;
+  protected ResponseTopicBoards responseTopicBoard;
+  protected TopicBoards topicBoard;
+  protected String topicBoardId;
 
   @BeforeAll
   @Step("Добавить кастомные поля в проект, создать доску задач в проекте")
