@@ -13,11 +13,11 @@ import org.junit.jupiter.api.Test;
 
 public class AddTopicsToTopicBoardTests extends TopicsBaseTests {
 
-
   @Test
   @Tag(value = "smoke")
   @DisplayName("Добавить задачу в доску задач возвращает код 200")
   public void addTopicsToTopicBoardTest() {
+    addTopicsResponse = topicsClient.createTopicInTopicBoard(topicBoardId, topic);
     statusCode = extractStatusCode(addTopicsResponse);
     ResponseTopics responseTopics = addTopicsResponse.extract().as(ResponseTopics.class);
 
