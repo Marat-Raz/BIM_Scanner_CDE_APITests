@@ -1,4 +1,4 @@
-package topicgoardgroups;
+package topicboardgroups;
 
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertAll;

@@ -1,4 +1,4 @@
-package topicgoardgroups;
+package topicboardgroups;
 
 import static models.topicboardsgroup.TopicBoardsGroupType.DEFAULT_TOPIC_BOARDS_GROUP;
 import static org.apache.http.HttpStatus.SC_OK;

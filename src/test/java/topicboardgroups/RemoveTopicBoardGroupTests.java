@@ -1,4 +1,4 @@
-package topicgoardgroups;
+package topicboardgroups;
 
 import static org.apache.http.HttpStatus.SC_NO_CONTENT;
 import static org.junit.jupiter.api.Assertions.assertEquals;

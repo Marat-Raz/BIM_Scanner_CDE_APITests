@@ -4,6 +4,7 @@ import static models.project.ProjectType.RANDOM_PROJECT;
 import static org.apache.http.HttpStatus.SC_NO_CONTENT;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import basetests.StartTests;
 import client.ProjectsClient;
 import client.base.Client;
 import io.qameta.allure.Step;
