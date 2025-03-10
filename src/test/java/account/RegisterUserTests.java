@@ -5,7 +5,7 @@ import static org.apache.http.HttpStatus.SC_FORBIDDEN;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import baseTests.StartTests;
+import basetests.StartTests;
 import client.AccountClient;
 import io.restassured.response.ValidatableResponse;
 import models.error.ErrorRoot;

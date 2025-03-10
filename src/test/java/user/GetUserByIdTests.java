@@ -5,7 +5,7 @@ import static org.apache.http.HttpStatus.SC_NOT_FOUND;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import baseTests.StartTests;
+import basetests.StartTests;
 import io.restassured.response.ValidatableResponse;
 import java.util.UUID;
 import models.error.ErrorRoot;
@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 
 public class GetUserByIdTests extends StartTests {
 
-  ValidatableResponse getUserResponse;
+  private ValidatableResponse getUserResponse;
 
   @Test
   @Tag(value = "smoke")
@@ -29,8 +29,8 @@ public class GetUserByIdTests extends StartTests {
     assertEquals(SC_OK, statusCode);
     assertEquals(defaultUser.getUserName(), responseUser.getUserName());
     assertEquals(defaultUser.getEmail(), responseUser.getEmail());
-
   }
+
 
   @Test
   @DisplayName("Получить пользователя по неверному id")

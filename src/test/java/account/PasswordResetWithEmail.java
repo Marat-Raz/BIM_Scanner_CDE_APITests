@@ -1,6 +1,6 @@
 package account;
 
-import baseTests.StartTests;
+import basetests.StartTests;
 
 public class PasswordResetWithEmail extends StartTests {
   // todo вернуться к реализации после установления ясности метода работы с

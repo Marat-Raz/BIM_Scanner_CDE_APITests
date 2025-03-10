@@ -19,6 +19,7 @@ stages:
 variables:
   MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
   API_BASE_URL: "https://cde-api.test.briodev.ru/"
+  CI_DEBUG_TRACE: "true"
 
 cache:
   paths:
@@ -31,12 +32,12 @@ run-tests:
     - docker-on-host
   script:
     - mvn clean test
-    #- mvn allure:report # Генерация Allure-отчета
+    - mvn allure:report # Генерация Allure-отчета
   artifacts:
     paths:
       - target/surefire-reports/
       - target/allure-results/
-      #- target/site/allure-maven-plugin/ # Папка с Allure-отчетом
+      - target/site/allure-maven-plugin/ # Папка с Allure-отчетом
     reports:
       junit:
         - target/surefire-reports/TEST-*.xml
@@ -51,4 +52,4 @@ pages:
     paths:
       - public
   only:
-    - main # Запускать только для ветки main
+    - master # Запускать только для ветки master

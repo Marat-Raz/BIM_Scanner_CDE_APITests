@@ -5,7 +5,7 @@ import static org.apache.http.HttpStatus.SC_BAD_REQUEST;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import baseTests.StartTests;
+import basetests.StartTests;
 import io.restassured.response.ValidatableResponse;
 import models.error.ErrorRoot;
 import models.user.User;
@@ -42,7 +42,6 @@ public class ChangeUserDataTests extends StartTests {
     putResponse = userClient.changeUser(userWithoutEmail, userId);
     statusCode = extractStatusCode(putResponse);
     errorRoot = putResponse.extract().body().as(ErrorRoot.class);
-
 
     assertEquals(SC_BAD_REQUEST, statusCode);
     assertEquals("Your request is not valid!", errorRoot.error.message);
@@ -81,7 +80,6 @@ public class ChangeUserDataTests extends StartTests {
     assertEquals("Your request is not valid!", errorRoot.error.message);
     assertEquals("The following errors were detected during validation.\n"
         + " - The UserName field is required.\n", errorRoot.error.details);
-
   }
 
 }

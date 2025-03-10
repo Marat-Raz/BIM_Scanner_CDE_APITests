@@ -17,7 +17,7 @@ public class Client {
     return new RequestSpecBuilder()
         .setContentType(ContentType.JSON)
         .setBaseUri(BASE_URL)
-        .build(); // todo рассмотреть возможность вставки токена тут
+        .build();
   }
 
   protected RequestSpecification getTokenBaseSpec() {

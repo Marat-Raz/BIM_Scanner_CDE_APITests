@@ -89,7 +89,7 @@ public class ProjectsClient extends Client {
   public ValidatableResponse deleteProjectByItsId(String id) {
     return given()
         .spec(getBaseSpec())
-        .auth().oauth2(DEFAULT_USER_ACCESS_TOKEN)
+        .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
         .delete(PROJECTS + id)
         .then();
