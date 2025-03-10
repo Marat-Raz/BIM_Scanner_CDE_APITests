@@ -1,3 +1,5 @@
+package projects;
+
 import static client.base.Client.ADMIN_ACCESS_TOKEN;
 import static client.base.Client.BASE_URL;
 import static models.project.ProjectType.RANDOM_PROJECT;
