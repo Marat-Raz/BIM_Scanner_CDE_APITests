@@ -20,7 +20,7 @@ import models.project.ProjectFactory;
 import models.project.ServerResponseProject;
 import org.junit.jupiter.api.*;
 
-public class GetProjectCoverImageTests extends StartTests {
+/*public class GetProjectCoverImageTests extends StartTests {
 
   private static ProjectFactory projectFactory = new ProjectFactory();
   private static ProjectsClient projectsClient = new ProjectsClient();

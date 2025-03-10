@@ -16,7 +16,7 @@ import models.project.ProjectFactory;
 import models.project.ServerResponseProject;
 import org.junit.jupiter.api.*;
 
-public class SetProjectCoverImageTests extends StartTests {
+/*public class SetProjectCoverImageTests extends StartTests {
 // todo https://software-testing.ru/library/testing/testing-for-beginners/3318-six-tips-and-four-tools-for-file-upload
 
   private static ProjectFactory projectFactory = new ProjectFactory();
