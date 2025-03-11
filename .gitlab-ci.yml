@@ -19,21 +19,11 @@ stages:
 variables:
   MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
   API_BASE_URL: "https://cde-api.test.briodev.ru/"
+  CI_DEBUG_TRACE: "true"
 
 cache:
   paths:
     - .m2/repository/
-
-install_allure:
-  stage: test
-  script:
-    - apt-get update && apt-get install -y default-jre
-    - wget https://github.com/allure-framework/allure2/releases/download/2.22.0/allure-2.22.0.tgz
-    - tar -xvzf allure-2.22.0.tgz
-    - export PATH=$PATH:$(pwd)/allure-2.22.0/bin
-  artifacts:
-    paths:
-      - allure-2.22.0/
 
 run-tests:
   image: maven:3.9.9-amazoncorretto-21
@@ -42,13 +32,12 @@ run-tests:
     - docker-on-host
   script:
     - mvn clean test
-    - cd .\target
-    - allure generate --clean # Генерация Allure-отчета
+    - mvn allure:report # Генерация Allure-отчета
   artifacts:
     paths:
       - target/surefire-reports/
       - target/allure-results/
-      - target/allure-report/ # Папка с Allure-отчетом
+      - target/site/allure-maven-plugin/ # Папка с Allure-отчетом
     reports:
       junit:
         - target/surefire-reports/TEST-*.xml
