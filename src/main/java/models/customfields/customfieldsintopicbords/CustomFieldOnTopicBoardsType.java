@@ -1,6 +1,6 @@
-package models.customfields.customfieldstoedit;
+package models.customfields.customfieldsintopicbords;
 
-public enum CustomFieldToEditType {
+public enum CustomFieldOnTopicBoardsType {
   IS_ENABLED,
   IS_NOT_ENABLED,
   IS_REQUIRED,

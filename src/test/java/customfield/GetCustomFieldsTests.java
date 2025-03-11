@@ -1,5 +1,7 @@
 package customfield;
 
+import static org.apache.http.HttpStatus.SC_OK;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import basetests.StartTests;
@@ -7,44 +9,28 @@ import client.CustomFieldsClient;
 import io.restassured.response.ValidatableResponse;
 import java.util.HashMap;
 import java.util.Map;
+import models.customfields.ResponseCustomField;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-public class GetCustomFieldsTests extends StartTests {
+public class GetCustomFieldsTests extends CustomFieldsBaseTests {
 
-  private static CustomFieldsClient customFieldsClient = new CustomFieldsClient();
   private ValidatableResponse getResponse;
-  private Map<String, Object> queryParams = new HashMap<>();
-
-  @BeforeEach
-  public void setUp() {
-    // Здесь можно добавить подготовку данных, если необходимо
-  }
+  private Map<String, String> queryParams = new HashMap<>();
+  private String[] archiveType = new String[]{"all", "archived", "not-archived"};
 
   @Test
   @Tag(value = "smoke")
   @DisplayName("Получить список кастомных полей проекта")
   public void getCustomFieldsTest() {
-    // Параметры запроса (например, фильтр по архивированным полям)
-    queryParams.put("archive", "not-archived"); // Получаем только неархивированные поля
-
-    // Выполняем запрос
+    queryParams.put("archive", archiveType[0]);
     getResponse = customFieldsClient.getCustomFields(projectId, queryParams);
-
-    // Проверяем статус код
     statusCode = extractStatusCode(getResponse);
-    assertEquals(200, statusCode);
+    ResponseCustomField[] arrayOfCustomField = getResponse.extract().as(ResponseCustomField[].class);
 
-    // Проверяем, что ответ содержит список кастомных полей
-    List<ResponseCustomField> customFields = getResponse.extract().jsonPath().getList("", ResponseCustomField.class);
-
-    // Пример проверок:
-    assertThat(customFields, is(not(empty()))); // Проверяем, что список не пустой
-    for (ResponseCustomField field : customFields) {
-      assertThat(field.getId(), is(notNullValue())); // Проверяем, что у каждого поля есть ID
-      assertThat(field.getName(), is(notNullValue())); // Проверяем, что у каждого поля есть имя
-    }
+    assertEquals(SC_OK, statusCode);
+    assertEquals(responseCustomFieldArrayList.size(), arrayOfCustomField.length);
   }
 }

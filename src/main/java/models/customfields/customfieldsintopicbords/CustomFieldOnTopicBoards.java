@@ -1,4 +1,4 @@
-package models.customfields.customfieldstoedit;
+package models.customfields.customfieldsintopicbords;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class CustomFieldToEdit {
+public class CustomFieldOnTopicBoards {
 
   public String id;
   public boolean isEnabled;
