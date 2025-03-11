@@ -44,7 +44,7 @@ public class TopicEventsBaseTests extends StartTests {
     }
     ArrayList<ResponseTopics> responseTopicsArray = new ArrayList<>();
     for (Topics topic : topicList) {
-      addTopicsResponse = topicsClient.createTopicInTopicBoard(topicBoardId, topic);
+      addTopicsResponse = topicsClient.createTopicOnTopicBoard(topicBoardId, topic);
       responseTopic = addTopicsResponse.extract().as(ResponseTopics.class);
       responseTopicsArray.add(responseTopic);
     }

@@ -14,8 +14,8 @@ public class PrioritiesFactory {
         return new Priorities(null, color);
       case WITHOUT_COLOR:
         return new Priorities(name, null);
-      default:
       case DEFAULT:
+      default:
         return new Priorities(name, color);
     }
   }

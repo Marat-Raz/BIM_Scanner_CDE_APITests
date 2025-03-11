@@ -23,7 +23,7 @@ public class TopicBoardPrioritiesClient extends Client {
   }
 
   @Step("Добавить приоритет на доску задач")
-  public ValidatableResponse addPrioritiesToTopicBoard(String topicBoardId, Priorities priority) {
+  public ValidatableResponse addTopicBoardPriorities(String topicBoardId, Priorities priority) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
@@ -34,7 +34,7 @@ public class TopicBoardPrioritiesClient extends Client {
   }
 
   @Step("Редактировать приоритет на доске задач")
-  public ValidatableResponse editPrioritiesInTopicBoard(String topicBoardId, String prioritiesId,
+  public ValidatableResponse editTopicBoardPriorities(String topicBoardId, String prioritiesId,
       Priorities editedPriorities) {
     return given()
         .spec(getBaseSpec())
@@ -46,7 +46,7 @@ public class TopicBoardPrioritiesClient extends Client {
   }
 
   @Step("Удалить приоритет с доски задач")
-  public ValidatableResponse deletePrioritiesInTopicBoard(String topicBoardId, String prioritiesId) {
+  public ValidatableResponse deleteTopicBoardPriorities(String topicBoardId, String prioritiesId) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)

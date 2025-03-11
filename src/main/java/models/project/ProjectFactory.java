@@ -19,8 +19,8 @@ public class ProjectFactory {
       case RANDOM_PROJECT:
         return new Project(RandomStringUtils.randomAlphabetic(1, 256), description, responsibleId,
             completionTime);
-      default:
       case DEFAULT_PROJECT:
+      default:
         return new Project(name, description, responsibleId, completionTime);
     }
   }

@@ -21,7 +21,7 @@ public class UpdatesExistingTopicTests extends TopicsBaseTests {
   public void updateTopicInBoardTest() {
     responseTopic.setTitle("new Title");
     updateTopicByIdResponse = topicsClient
-        .updateTopicInTopicBoard(topicBoardId, responseTopic.getId(), responseTopic);
+        .updateTopicOnTopicBoard(topicBoardId, responseTopic.getId(), responseTopic);
     ResponseTopics updatedTopics = updateTopicByIdResponse.extract().as(ResponseTopics.class);
     statusCode = extractStatusCode(updateTopicByIdResponse);
 

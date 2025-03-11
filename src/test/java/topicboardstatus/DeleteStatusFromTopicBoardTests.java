@@ -16,7 +16,7 @@ public class DeleteStatusFromTopicBoardTests extends TopicBoardStatusBaseTests {
   @Tag(value = "smoke")
   @DisplayName("Удалить статус из доски задач")
   public void deleteStatusInTopicBoardTest() {
-    deleteStatusResponse = topicBoardStatusClient.deleteStatusInTopicBoard(topicBoardId, statusId);
+    deleteStatusResponse = topicBoardStatusClient.deleteTopicBoardStatuses(topicBoardId, statusId);
     statusCode = extractStatusCode(deleteStatusResponse);
 
     assertEquals(SC_NO_CONTENT, statusCode);

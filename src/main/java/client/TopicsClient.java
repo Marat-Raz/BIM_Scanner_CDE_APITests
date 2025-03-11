@@ -37,9 +37,8 @@ public class TopicsClient extends Client {
         .then();
   }
 
-
   @Step("Создать задачу в доске задач")
-  public ValidatableResponse createTopicInTopicBoard(String topicBoardId, Topics topic) {
+  public ValidatableResponse createTopicOnTopicBoard(String topicBoardId, Topics topic) {
     // todo необходимо сформировать список опций/фильтров для этого запроса
     return given()
         .spec(getBaseSpec())
@@ -73,7 +72,7 @@ public class TopicsClient extends Client {
   }
 
   @Step("Получить задачу в доске задач по ID")
-  public ValidatableResponse getTopicInTopicBoard(String topicBoardId, String topicId) {
+  public ValidatableResponse getTopicOnTopicBoard(String topicBoardId, String topicId) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
@@ -83,7 +82,7 @@ public class TopicsClient extends Client {
   }
 
   @Step("Обновить задачу в доске задач по ID")
-  public ValidatableResponse updateTopicInTopicBoard(String topicBoardId,
+  public ValidatableResponse updateTopicOnTopicBoard(String topicBoardId,
       String topicId, ResponseTopics updatedTopic) {
     return given()
         .spec(getBaseSpec())
@@ -95,7 +94,7 @@ public class TopicsClient extends Client {
   }
 
   @Step("Удалить задачу в доске задач по ID")
-  public ValidatableResponse deleteTopicInTopicBoard(String topicBoardId, String topicId) {
+  public ValidatableResponse deleteTopicOnTopicBoard(String topicBoardId, String topicId) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)

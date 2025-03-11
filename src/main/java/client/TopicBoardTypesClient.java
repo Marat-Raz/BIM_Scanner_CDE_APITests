@@ -22,7 +22,7 @@ public class TopicBoardTypesClient extends Client {
   }
 
   @Step("Добавить тип задачи на доску задач")
-  public ValidatableResponse addTypesToTopicBoard(String topicBoardId, Types type) {
+  public ValidatableResponse addTopicBoardTypes(String topicBoardId, Types type) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
@@ -33,7 +33,7 @@ public class TopicBoardTypesClient extends Client {
   }
 
   @Step("Редактировать тип задачи на доске задач")
-  public ValidatableResponse editTypesInTopicBoard(String topicBoardId, String typeId,
+  public ValidatableResponse editTopicBoardTypes(String topicBoardId, String typeId,
       Types editedTypes) {
     return given()
         .spec(getBaseSpec())
@@ -45,7 +45,7 @@ public class TopicBoardTypesClient extends Client {
   }
 
   @Step("Удалить тип задачи с доски задач")
-  public ValidatableResponse deleteTypesInTopicBoard(String topicBoardId, String typeId) {
+  public ValidatableResponse deleteTopicBoardTypes(String topicBoardId, String typeId) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)

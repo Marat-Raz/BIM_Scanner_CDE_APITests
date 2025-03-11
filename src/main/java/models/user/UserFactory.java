@@ -42,8 +42,8 @@ public class UserFactory {
       case USER_WITH_REAL_E_MAIL:
         return new User(userName, name, surname, REAL_EMAIL, phoneNumber, active,
             lockoutEnabled, roleNames, password);
-      default:
       case DEFAULT_USER:
+      default:
         return new User(userName, name, surname, emailAddress, phoneNumber, active,
             lockoutEnabled, roleNames, password);
     }

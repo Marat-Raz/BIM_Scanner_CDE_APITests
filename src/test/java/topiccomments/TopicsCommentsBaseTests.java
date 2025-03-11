@@ -50,7 +50,7 @@ public class TopicsCommentsBaseTests extends StartTests {
     topicBoardId = responseTopicBoards.getId();
 
     topic = topicsFactory.createTopic(DEFAULT_TOPIC);
-    addTopicsResponse = topicsClient.createTopicInTopicBoard(topicBoardId, topic);
+    addTopicsResponse = topicsClient.createTopicOnTopicBoard(topicBoardId, topic);
     responseTopic = addTopicsResponse.extract().as(ResponseTopics.class);
     defaultTopicId = responseTopic.getId();
   }

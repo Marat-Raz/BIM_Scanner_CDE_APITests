@@ -33,8 +33,8 @@ public class TopicsFactory {
       case RANDOM_TOPIC:
         return new Topics(RandomStringUtils.randomAlphabetic(1, 256), description, dueDate,
             assignedToId, typeId, statusId, priorityId, customFields, labels);
-      default:
       case DEFAULT_TOPIC:
+      default:
         return new Topics(title, description, dueDate, assignedToId, typeId, statusId, priorityId,
             customFields, labels);
     }

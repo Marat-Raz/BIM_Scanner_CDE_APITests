@@ -41,7 +41,7 @@ public class TopicBoardPrioritiesBaseTests extends StartTests {
   @BeforeEach
   public void addPrioritiesToTopicBoard() {
     priority = prioritiesFactory.createPriorities(DEFAULT);
-    addPrioritiesResponse = topicBoardPrioritiesClient.addPrioritiesToTopicBoard(topicBoardId,
+    addPrioritiesResponse = topicBoardPrioritiesClient.addTopicBoardPriorities(topicBoardId,
         priority);
     priorityId = addPrioritiesResponse.extract().path("id");
   }

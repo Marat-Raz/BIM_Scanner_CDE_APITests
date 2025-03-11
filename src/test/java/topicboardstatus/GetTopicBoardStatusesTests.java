@@ -24,7 +24,7 @@ public class GetTopicBoardStatusesTests extends TopicBoardStatusBaseTests {
       expectedStatuses.add(new StatusesFactory().createStatuses(DEFAULT));
     }
     for (Statuses status : expectedStatuses) {
-      addStatusResponse = topicBoardStatusClient.addStatusToTopicBoard(topicBoardId, status);
+      addStatusResponse = topicBoardStatusClient.addTopicBoardStatuses(topicBoardId, status);
     }
   }
 

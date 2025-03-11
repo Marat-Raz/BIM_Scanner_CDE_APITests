@@ -21,7 +21,7 @@ public class EditStatusInTopicBoardTests extends TopicBoardStatusBaseTests {
     Statuses editableStatus = status;
     editableStatus.setName("newName");
     editStatusResponse = topicBoardStatusClient
-        .editStatusInTopicBoard(topicBoardId, statusId, editableStatus);
+        .editTopicBoardStatuses(topicBoardId, statusId, editableStatus);
     statusCode = extractStatusCode(editStatusResponse);
     ResponseStatuses editedStatusFromResponse =
         editStatusResponse.extract().as(ResponseStatuses.class);

@@ -13,9 +13,9 @@ public class CustomFieldToEditFactory {
       case IS_NOT_ENABLED:
         return new CustomFieldToEdit(idFromResponse, false, true, null);
 
-      default:
       case DEFAULT_CUSTOM_FIELDS_TO_EDIT:
       case IS_ENABLED:
+      default:
         return new CustomFieldToEdit(idFromResponse, true, true, defaultValue);}
 
   }

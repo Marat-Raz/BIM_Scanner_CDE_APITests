@@ -12,7 +12,7 @@ public class ProjectMembersClient extends Client {
 
 private static final String MEMBERS = "/members/";
 
-  @Step("")
+  @Step("Добавить участника в проект")
   public ValidatableResponse addUserToProjectMembers(String projectId, String userId) {
     return given()
         .spec(getBaseSpec())

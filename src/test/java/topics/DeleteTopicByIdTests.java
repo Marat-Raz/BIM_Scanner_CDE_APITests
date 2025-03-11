@@ -16,7 +16,7 @@ public class DeleteTopicByIdTests extends TopicsBaseTests {
   @Tag(value = "smoke")
   @DisplayName("Удалить задачу по его id")
   public void deleteTopicByIdTest() {
-    deleteTopicByIdResponse = topicsClient.deleteTopicInTopicBoard(topicBoardId, defaultTopicId);
+    deleteTopicByIdResponse = topicsClient.deleteTopicOnTopicBoard(topicBoardId, defaultTopicId);
     statusCode = extractStatusCode(deleteTopicByIdResponse);
 
     assertEquals(SC_NO_CONTENT, statusCode);

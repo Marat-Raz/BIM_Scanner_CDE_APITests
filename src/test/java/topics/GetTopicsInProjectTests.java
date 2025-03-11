@@ -5,8 +5,6 @@ import static models.topics.TopicType.DEFAULT_TOPIC;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import client.TopicBoardsClient;
-import client.TopicsClient;
 import io.restassured.response.ValidatableResponse;
 import java.util.ArrayList;
 import models.topicboards.ResponseTopicBoards;
@@ -31,7 +29,7 @@ public class GetTopicsInProjectTests extends TopicsBaseTests {
     ResponseTopicBoards responseTopicBoards =
         createTopicBoardsResponse.extract().as(ResponseTopicBoards.class);
     newTopic = new TopicsFactory().createTopic(DEFAULT_TOPIC);
-    addTopicsResponse = topicsClient.createTopicInTopicBoard(responseTopicBoards.getId(), newTopic);
+    addTopicsResponse = topicsClient.createTopicOnTopicBoard(responseTopicBoards.getId(), newTopic);
   }
 
   @Test

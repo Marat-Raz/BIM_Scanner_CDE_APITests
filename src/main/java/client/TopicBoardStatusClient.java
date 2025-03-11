@@ -22,7 +22,7 @@ public class TopicBoardStatusClient extends Client {
   }
 
   @Step("Добавить статус на доску задач")
-  public ValidatableResponse addStatusToTopicBoard(String topicBoardId, Statuses status) {
+  public ValidatableResponse addTopicBoardStatuses(String topicBoardId, Statuses status) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
@@ -33,7 +33,7 @@ public class TopicBoardStatusClient extends Client {
   }
 
   @Step("Редактировать статус на доске задач")
-  public ValidatableResponse editStatusInTopicBoard(String topicBoardId, String statusId,
+  public ValidatableResponse editTopicBoardStatuses(String topicBoardId, String statusId,
       Statuses editedStatus) {
     return given()
         .spec(getBaseSpec())
@@ -45,7 +45,7 @@ public class TopicBoardStatusClient extends Client {
   }
 
   @Step("Удалить статус с доски задач")
-  public ValidatableResponse deleteStatusInTopicBoard(String topicBoardId, String statusId) {
+  public ValidatableResponse deleteTopicBoardStatuses(String topicBoardId, String statusId) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)

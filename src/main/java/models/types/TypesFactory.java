@@ -14,8 +14,8 @@ public class TypesFactory {
         return new Types(null, color);
       case WITHOUT_COLOR:
         return new Types(name, null);
-      default:
       case DEFAULT:
+      default:
         return new Types(name, color);
     }
   }
