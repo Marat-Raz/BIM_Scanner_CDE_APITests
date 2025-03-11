@@ -31,12 +31,12 @@ run-tests:
     - docker-on-host
   script:
     - mvn clean test
-    #- mvn allure:report # Генерация Allure-отчета
+    - allure generate --clean # Генерация Allure-отчета
   artifacts:
     paths:
       - target/surefire-reports/
       - target/allure-results/
-      #- target/site/allure-maven-plugin/ # Папка с Allure-отчетом
+      - target/allure-report/ # Папка с Allure-отчетом
     reports:
       junit:
         - target/surefire-reports/TEST-*.xml
