@@ -24,6 +24,17 @@ cache:
   paths:
     - .m2/repository/
 
+install_allure:
+  stage: test
+  script:
+    - apt-get update && apt-get install -y default-jre
+    - wget https://github.com/allure-framework/allure2/releases/download/2.22.0/allure-2.22.0.tgz
+    - tar -xvzf allure-2.22.0.tgz
+    - export PATH=$PATH:$(pwd)/allure-2.22.0/bin
+  artifacts:
+    paths:
+      - allure-2.22.0/
+
 run-tests:
   image: maven:3.9.9-amazoncorretto-21
   stage: test
@@ -31,6 +42,7 @@ run-tests:
     - docker-on-host
   script:
     - mvn clean test
+    - cd .\target
     - allure generate --clean # Генерация Allure-отчета
   artifacts:
     paths:
