@@ -10,7 +10,8 @@ import models.topiccomments.TopicComment;
 
 public class TopicCommentsClient extends Client {
 
-  private final String TOPIC_COMMENTS = "api/projects/";
+  private final String TOPICS = "/topics/";
+  private final String COMMENTS = "/comments/";
 
   @Step("Создать комментарий к задаче")
   public ValidatableResponse createTopicComment(String topicBoardId, String topicId, TopicComment comment) {
@@ -19,7 +20,7 @@ public class TopicCommentsClient extends Client {
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .body(comment)
         .when()
-        .post(TOPIC_COMMENTS + topicBoardId + "/topics/" + topicId + "/comments")
+        .post(API_PROJECTS + topicBoardId + TOPICS + topicId + COMMENTS)
         .then();
   }
 
@@ -29,7 +30,7 @@ public class TopicCommentsClient extends Client {
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
-        .get(TOPIC_COMMENTS + topicBoardId + "/topics/" + topicId + "/comments")
+        .get(API_PROJECTS + topicBoardId + TOPICS + topicId + COMMENTS)
         .then();
   }
 
@@ -39,7 +40,7 @@ public class TopicCommentsClient extends Client {
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
-        .get(TOPIC_COMMENTS + topicBoardId + "/topics/" + topicId + "/comments/" + topicCommentId)
+        .get(API_PROJECTS + topicBoardId + TOPICS + topicId + COMMENTS + topicCommentId)
         .then();
   }
 
@@ -50,7 +51,7 @@ public class TopicCommentsClient extends Client {
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .body(updatedComment)
         .when()
-        .put(TOPIC_COMMENTS + topicBoardId + "/topics/" + topicId + "/comments/" + topicCommentId)
+        .put(API_PROJECTS + topicBoardId + TOPICS + topicId + COMMENTS + topicCommentId)
         .then();
   }
 
@@ -60,7 +61,7 @@ public class TopicCommentsClient extends Client {
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
-        .delete(TOPIC_COMMENTS + topicBoardId + "/topics/" + topicId + "/comments/" + topicCommentId)
+        .delete(API_PROJECTS + topicBoardId + TOPICS + topicId + COMMENTS + topicCommentId)
         .then();
   }
 

@@ -10,7 +10,7 @@ import models.projectmember.ProjectMember;
 
 public class ProjectMembersClient extends Client {
 
-private final String PROJECT_MEMBERS = "api/projects/";
+private static final String MEMBERS = "/members/";
 
   @Step("")
   public ValidatableResponse addUserToProjectMembers(String projectId, String userId) {
@@ -19,7 +19,7 @@ private final String PROJECT_MEMBERS = "api/projects/";
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .body("{\"userId\": \"" + userId + "\"}") // fixme сделать объектно или удалить
         .when()
-        .post(PROJECT_MEMBERS + projectId + "/members")
+        .post(API_PROJECTS + projectId + MEMBERS)
         .then();
   }
 
@@ -29,7 +29,7 @@ private final String PROJECT_MEMBERS = "api/projects/";
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
-        .get(PROJECT_MEMBERS + projectId + "/members")
+        .get(API_PROJECTS + projectId + MEMBERS)
         .then();
   }
 
@@ -40,7 +40,7 @@ private final String PROJECT_MEMBERS = "api/projects/";
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .queryParams(queryParams)
         .when()
-        .get(PROJECT_MEMBERS + projectId + "/members")
+        .get(API_PROJECTS + projectId + MEMBERS)
         .then();
   }
 
@@ -51,7 +51,7 @@ private final String PROJECT_MEMBERS = "api/projects/";
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .body(member)
         .when()
-        .post(PROJECT_MEMBERS + projectId + "/members")
+        .post(API_PROJECTS + projectId + MEMBERS)
         .then();
   }
 
@@ -61,7 +61,7 @@ private final String PROJECT_MEMBERS = "api/projects/";
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
-        .get(PROJECT_MEMBERS + projectId + "/members/" + userId)
+        .get(API_PROJECTS + projectId + MEMBERS + userId)
         .then();
   }
 
@@ -71,7 +71,7 @@ private final String PROJECT_MEMBERS = "api/projects/";
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
-        .delete(PROJECT_MEMBERS + projectId + "/members/" + userId)
+        .delete(API_PROJECTS + projectId + MEMBERS + userId)
         .then();
   }
 
@@ -83,7 +83,7 @@ private final String PROJECT_MEMBERS = "api/projects/";
         .pathParam("projectId", projectId)
         .queryParams(queryParams) // Передаем параметры запроса
         .when()
-        .get(PROJECT_MEMBERS + projectId + "/member-candidates")
+        .get(API_PROJECTS + projectId + "/member-candidates")
         .then();
   }
 }

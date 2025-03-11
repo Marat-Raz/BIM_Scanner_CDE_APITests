@@ -10,6 +10,7 @@ public class Client {
 
   public static final String BASE_URL = "https://cde-api.test.briodev.ru/";
   public static final String TOKEN_BASE_URL = "https://cde-auth.test.briodev.ru/";
+  public static final String API_PROJECTS = "api/projects/";
   public static String DEFAULT_USER_ACCESS_TOKEN;
   public static String ADMIN_ACCESS_TOKEN;
 

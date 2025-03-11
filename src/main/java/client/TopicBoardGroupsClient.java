@@ -9,7 +9,7 @@ import models.topicboardsgroup.TopicBoardsGroup;
 
 public class TopicBoardGroupsClient extends Client {
 
-  private static final String TOPIC_BOARD_GROUPS = "api/projects/";
+  public static final String BOARD_GROUPS = "/issues/board-groups/";
 
   @Step("Получить список групп досок и досок задач в корне проекта")
   public ValidatableResponse getRootTopicBoardGroupsAndBoards(String projectId) {
@@ -17,7 +17,7 @@ public class TopicBoardGroupsClient extends Client {
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
-        .get(TOPIC_BOARD_GROUPS + projectId + "/issues/board-groups/")
+        .get(API_PROJECTS + projectId + BOARD_GROUPS)
         .then();
   }
 
@@ -29,7 +29,7 @@ public class TopicBoardGroupsClient extends Client {
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .body(topicBoardsGroup)
         .when()
-        .post(TOPIC_BOARD_GROUPS + projectId + "/issues/board-groups/")
+        .post(API_PROJECTS + projectId + BOARD_GROUPS)
         .then();
   }
 
@@ -41,7 +41,7 @@ public class TopicBoardGroupsClient extends Client {
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .body(includeChildren)
         .when()
-        .get(TOPIC_BOARD_GROUPS + projectId + "/issues/board-groups/")
+        .get(API_PROJECTS + projectId + BOARD_GROUPS)
         .then();
   }
 
@@ -53,7 +53,7 @@ public class TopicBoardGroupsClient extends Client {
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .body(topicBoardsGroup)
         .when()
-        .put(TOPIC_BOARD_GROUPS + projectId + "/issues/board-groups/" + groupId)
+        .put(API_PROJECTS + projectId + BOARD_GROUPS + groupId)
         .then();
   }
 
@@ -64,7 +64,7 @@ public class TopicBoardGroupsClient extends Client {
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
-        .delete(TOPIC_BOARD_GROUPS + projectId + "/issues/board-groups/" + groupId)
+        .delete(API_PROJECTS + projectId + BOARD_GROUPS + groupId)
         .then();
   }
 

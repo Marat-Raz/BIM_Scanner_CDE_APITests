@@ -10,6 +10,7 @@ import models.priorities.Priorities;
 public class TopicBoardPrioritiesClient extends Client {
 
   private static final String TOPIC_BOARD_PRIORITIES = "api/issues/boards/";
+  private static final String PRIORITIES = "/priorities/";
 
   @Step("Получить приоритеты, доступные на доске задач")
   public ValidatableResponse getTopicBoardPriorities(String topicBoardId) {
@@ -17,7 +18,7 @@ public class TopicBoardPrioritiesClient extends Client {
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
-        .get(TOPIC_BOARD_PRIORITIES + topicBoardId + "/priorities")
+        .get(TOPIC_BOARD_PRIORITIES + topicBoardId + PRIORITIES)
         .then();
   }
 
@@ -28,7 +29,7 @@ public class TopicBoardPrioritiesClient extends Client {
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .body(priority)
         .when()
-        .post(TOPIC_BOARD_PRIORITIES + topicBoardId + "/priorities")
+        .post(TOPIC_BOARD_PRIORITIES + topicBoardId + PRIORITIES)
         .then();
   }
 
@@ -40,7 +41,7 @@ public class TopicBoardPrioritiesClient extends Client {
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .body(editedPriorities)
         .when()
-        .put(TOPIC_BOARD_PRIORITIES + topicBoardId + "/priorities/" + prioritiesId)
+        .put(TOPIC_BOARD_PRIORITIES + topicBoardId + PRIORITIES + prioritiesId)
         .then();
   }
 
@@ -50,7 +51,7 @@ public class TopicBoardPrioritiesClient extends Client {
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
-        .delete(TOPIC_BOARD_PRIORITIES + topicBoardId + "/priorities/" + prioritiesId)
+        .delete(TOPIC_BOARD_PRIORITIES + topicBoardId + PRIORITIES + prioritiesId)
         .then();
   }
 }

@@ -9,7 +9,7 @@ import models.statuses.Statuses;
 
 public class TopicBoardStatusClient extends Client {
 
-  private static final String TOPIC_BOARD_STATUS = "api/issues/boards/";
+  private static final String STATUSES = "/statuses/";
 
   @Step("Получить статусы, доступные на доске задач")
   public ValidatableResponse getTopicBoardStatuses(String topicBoardId) {
@@ -17,7 +17,7 @@ public class TopicBoardStatusClient extends Client {
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
-        .get(TOPIC_BOARD_STATUS + topicBoardId + "/statuses")
+        .get(API_PROJECTS + topicBoardId + STATUSES)
         .then();
   }
 
@@ -28,7 +28,7 @@ public class TopicBoardStatusClient extends Client {
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .body(status)
         .when()
-        .post(TOPIC_BOARD_STATUS + topicBoardId + "/statuses")
+        .post(API_PROJECTS + topicBoardId + STATUSES)
         .then();
   }
 
@@ -40,7 +40,7 @@ public class TopicBoardStatusClient extends Client {
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .body(editedStatus)
         .when()
-        .put(TOPIC_BOARD_STATUS + topicBoardId + "/statuses/" + statusId)
+        .put(API_PROJECTS + topicBoardId + STATUSES + statusId)
         .then();
   }
 
@@ -50,7 +50,7 @@ public class TopicBoardStatusClient extends Client {
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
-        .delete(TOPIC_BOARD_STATUS + topicBoardId + "/statuses/" + statusId)
+        .delete(API_PROJECTS + topicBoardId + STATUSES + statusId)
         .then();
   }
 }

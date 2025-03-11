@@ -11,7 +11,8 @@ import models.topics.Topics;
 
 public class TopicsClient extends Client {
 
-  private final String TOPICS = "api/issues/boards/";
+  private final String TOPICS_API = "api/issues/boards/";
+  private final String TOPICS = "/topics/";
 
   @Step("Получить список задач определенной доски задач")
   public ValidatableResponse getListOfTopicsFromTopicBoard(String topicBoardId,
@@ -22,7 +23,7 @@ public class TopicsClient extends Client {
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .queryParams(queryParams)
         .when()
-        .get(TOPICS + topicBoardId + "/topics")
+        .get(TOPICS_API + topicBoardId + TOPICS)
         .then();
   }
 
@@ -32,7 +33,7 @@ public class TopicsClient extends Client {
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
-        .get(TOPICS + topicBoardId + "/topics")
+        .get(TOPICS_API + topicBoardId + TOPICS)
         .then();
   }
 
@@ -45,7 +46,7 @@ public class TopicsClient extends Client {
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .body(topic)
         .when()
-        .post(TOPICS + topicBoardId + "/topics")
+        .post(TOPICS_API + topicBoardId + TOPICS)
         .then();
   }
 
@@ -57,8 +58,7 @@ public class TopicsClient extends Client {
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .queryParams(queryParams)
         .when()
-        .get("api/projects/" + projectId + "/topics")
-        // todo вывести  "api/projects/" в константы
+        .get(API_PROJECTS + projectId + TOPICS)
         .then();
   }
 
@@ -68,7 +68,7 @@ public class TopicsClient extends Client {
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
-        .get("api/projects/" + projectId + "/topics")
+        .get(API_PROJECTS + projectId + TOPICS)
         .then();
   }
 
@@ -78,7 +78,7 @@ public class TopicsClient extends Client {
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
-        .get(TOPICS + topicBoardId + "/topics/" + topicId)
+        .get(TOPICS_API + topicBoardId + TOPICS + topicId)
         .then();
   }
 
@@ -90,7 +90,7 @@ public class TopicsClient extends Client {
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .body(updatedTopic)
         .when()
-        .put(TOPICS + topicBoardId + "/topics/" + topicId)
+        .put(TOPICS_API + topicBoardId + TOPICS + topicId)
         .then();
   }
 
@@ -100,7 +100,7 @@ public class TopicsClient extends Client {
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
-        .delete(TOPICS + topicBoardId + "/topics/" + topicId)
+        .delete(TOPICS_API + topicBoardId + TOPICS + topicId)
         .then();
   }
 

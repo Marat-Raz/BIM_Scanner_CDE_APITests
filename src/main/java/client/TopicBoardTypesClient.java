@@ -9,7 +9,7 @@ import models.types.Types;
 
 public class TopicBoardTypesClient extends Client {
 
-  private static final String TOPIC_BOARD_TYPES = "api/issues/boards/";
+  private static final String TYPES = "/types/";
 
   @Step("Получить статусы, доступные на доске задач")
   public ValidatableResponse getTopicBoardTypes(String topicBoardId) {
@@ -17,7 +17,7 @@ public class TopicBoardTypesClient extends Client {
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
-        .get(TOPIC_BOARD_TYPES + topicBoardId + "/types")
+        .get(API_PROJECTS + topicBoardId + TYPES)
         .then();
   }
 
@@ -28,7 +28,7 @@ public class TopicBoardTypesClient extends Client {
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .body(type)
         .when()
-        .post(TOPIC_BOARD_TYPES + topicBoardId + "/types")
+        .post(API_PROJECTS + topicBoardId + TYPES)
         .then();
   }
 
@@ -40,7 +40,7 @@ public class TopicBoardTypesClient extends Client {
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .body(editedTypes)
         .when()
-        .put(TOPIC_BOARD_TYPES + topicBoardId + "/types/" + typeId)
+        .put(API_PROJECTS + topicBoardId + TYPES + typeId)
         .then();
   }
 
@@ -50,7 +50,7 @@ public class TopicBoardTypesClient extends Client {
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
-        .delete(TOPIC_BOARD_TYPES + topicBoardId + "/types/" + typeId)
+        .delete(API_PROJECTS + topicBoardId + TYPES + typeId)
         .then();
   }
 }
