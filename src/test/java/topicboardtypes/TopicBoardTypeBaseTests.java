@@ -42,7 +42,7 @@ public class TopicBoardTypeBaseTests extends StartTests {
   @BeforeEach
   public void addType() {
     type = typesFactory.createTypes(DEFAULT);
-    addTypesResponse = topicBoardTypesClient.addTypesToTopicBoard(topicBoardId, type);
+    addTypesResponse = topicBoardTypesClient.addTopicBoardTypes(topicBoardId, type);
     responseTypes = addTypesResponse.extract().as(ResponseTypes.class);
     typeId = responseTypes.getId();
   }
