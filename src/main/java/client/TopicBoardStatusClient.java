@@ -17,7 +17,7 @@ public class TopicBoardStatusClient extends Client {
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
-        .get(API_PROJECTS + topicBoardId + STATUSES)
+        .get(API_ISSUES_BOARDS + topicBoardId + STATUSES)
         .then();
   }
 
@@ -28,7 +28,7 @@ public class TopicBoardStatusClient extends Client {
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .body(status)
         .when()
-        .post(API_PROJECTS + topicBoardId + STATUSES)
+        .post(API_ISSUES_BOARDS + topicBoardId + STATUSES)
         .then();
   }
 
@@ -40,7 +40,7 @@ public class TopicBoardStatusClient extends Client {
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .body(editedStatus)
         .when()
-        .put(API_PROJECTS + topicBoardId + STATUSES + statusId)
+        .put(API_ISSUES_BOARDS + topicBoardId + STATUSES + statusId)
         .then();
   }
 
@@ -50,7 +50,7 @@ public class TopicBoardStatusClient extends Client {
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
-        .delete(API_PROJECTS + topicBoardId + STATUSES + statusId)
+        .delete(API_ISSUES_BOARDS + topicBoardId + STATUSES + statusId)
         .then();
   }
 }

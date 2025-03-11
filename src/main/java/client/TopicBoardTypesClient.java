@@ -17,7 +17,7 @@ public class TopicBoardTypesClient extends Client {
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
-        .get(API_PROJECTS + topicBoardId + TYPES)
+        .get(API_ISSUES_BOARDS + topicBoardId + TYPES)
         .then();
   }
 
@@ -28,7 +28,7 @@ public class TopicBoardTypesClient extends Client {
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .body(type)
         .when()
-        .post(API_PROJECTS + topicBoardId + TYPES)
+        .post(API_ISSUES_BOARDS + topicBoardId + TYPES)
         .then();
   }
 
@@ -40,7 +40,7 @@ public class TopicBoardTypesClient extends Client {
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .body(editedTypes)
         .when()
-        .put(API_PROJECTS + topicBoardId + TYPES + typeId)
+        .put(API_ISSUES_BOARDS + topicBoardId + TYPES + typeId)
         .then();
   }
 
@@ -50,7 +50,7 @@ public class TopicBoardTypesClient extends Client {
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
-        .delete(API_PROJECTS + topicBoardId + TYPES + typeId)
+        .delete(API_ISSUES_BOARDS + topicBoardId + TYPES + typeId)
         .then();
   }
 }

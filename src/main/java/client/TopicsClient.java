@@ -11,7 +11,6 @@ import models.topics.Topics;
 
 public class TopicsClient extends Client {
 
-  private final String TOPICS_API = "api/issues/boards/";
   private final String TOPICS = "/topics/";
 
   @Step("Получить список задач определенной доски задач")
@@ -23,7 +22,7 @@ public class TopicsClient extends Client {
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .queryParams(queryParams)
         .when()
-        .get(TOPICS_API + topicBoardId + TOPICS)
+        .get(API_ISSUES_BOARDS + topicBoardId + TOPICS)
         .then();
   }
 
@@ -33,7 +32,7 @@ public class TopicsClient extends Client {
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
-        .get(TOPICS_API + topicBoardId + TOPICS)
+        .get(API_ISSUES_BOARDS + topicBoardId + TOPICS)
         .then();
   }
 
@@ -45,7 +44,7 @@ public class TopicsClient extends Client {
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .body(topic)
         .when()
-        .post(TOPICS_API + topicBoardId + TOPICS)
+        .post(API_ISSUES_BOARDS + topicBoardId + TOPICS)
         .then();
   }
 
@@ -77,7 +76,7 @@ public class TopicsClient extends Client {
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
-        .get(TOPICS_API + topicBoardId + TOPICS + topicId)
+        .get(API_ISSUES_BOARDS + topicBoardId + TOPICS + topicId)
         .then();
   }
 
@@ -89,7 +88,7 @@ public class TopicsClient extends Client {
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .body(updatedTopic)
         .when()
-        .put(TOPICS_API + topicBoardId + TOPICS + topicId)
+        .put(API_ISSUES_BOARDS + topicBoardId + TOPICS + topicId)
         .then();
   }
 
@@ -99,7 +98,7 @@ public class TopicsClient extends Client {
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
-        .delete(TOPICS_API + topicBoardId + TOPICS + topicId)
+        .delete(API_ISSUES_BOARDS + topicBoardId + TOPICS + topicId)
         .then();
   }
 

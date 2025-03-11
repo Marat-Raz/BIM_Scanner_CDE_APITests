@@ -18,7 +18,7 @@ public class TopicEventsClient extends Client {
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
-        .get(API_PROJECTS + topicBoardId + TOPIC_EVENTS)
+        .get(API_ISSUES_BOARDS + topicBoardId + TOPIC_EVENTS)
         .then();
   }
 
@@ -29,7 +29,7 @@ public class TopicEventsClient extends Client {
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .queryParams(queryParams)
         .when()
-        .get(API_PROJECTS + topicBoardId + TOPIC_EVENTS)
+        .get(API_ISSUES_BOARDS + topicBoardId + TOPIC_EVENTS)
         .then();
   }
 
@@ -41,7 +41,7 @@ public class TopicEventsClient extends Client {
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
-        .get(API_PROJECTS + topicBoardId + "/topics/" + topicId + "/events/")
+        .get(API_ISSUES_BOARDS + topicBoardId + "/topics/" + topicId + "/events/")
         .then();
   }
 
@@ -54,7 +54,7 @@ public class TopicEventsClient extends Client {
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .queryParams(queryParams)
         .when()
-        .get(API_PROJECTS + topicBoardId + "/topics/" + topicId + "/events/")
+        .get(API_ISSUES_BOARDS + topicBoardId + "/topics/" + topicId + "/events/")
         .then();
   }
 
