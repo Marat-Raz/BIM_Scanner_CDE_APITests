@@ -25,7 +25,6 @@ public class GetCustomFieldByIdTests extends CustomFieldsBaseTests {
 
     assertEquals(SC_OK, statusCode);
     assertEquals(customFieldId, responseCustomField.getId());
-
   }
 
 }

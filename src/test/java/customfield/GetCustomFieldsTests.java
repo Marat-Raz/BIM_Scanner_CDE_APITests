@@ -3,6 +3,7 @@ package customfield;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import basetests.StartTests;
 import client.CustomFieldsClient;
@@ -33,5 +34,6 @@ public class GetCustomFieldsTests extends CustomFieldsBaseTests {
     ResponseCustomField[] arrayOfCustomField = getResponse.extract().as(ResponseCustomField[].class);
 
     assertEquals(SC_OK, statusCode);
+    assertNotNull(arrayOfCustomField);
   }
 }
