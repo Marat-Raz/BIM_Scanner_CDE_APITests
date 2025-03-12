@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 public class CreateTopicBoardsGroupTests extends TopicBoardGroupBaseTests {
+// todo   private ValidatableResponse createResponse;
 
   @Test
   @Tag(value = "smoke")
