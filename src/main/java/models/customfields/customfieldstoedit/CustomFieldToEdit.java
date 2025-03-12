@@ -1,10 +1,11 @@
-package models.customfields;
+package models.customfields.customfieldstoedit;
 
 import java.util.ArrayList;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import models.customfields.ResponseCustomField;
 import models.customfields.enumerationitem.ResponseEnumerationItem;
 
 @AllArgsConstructor

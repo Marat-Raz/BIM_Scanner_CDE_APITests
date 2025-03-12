@@ -4,7 +4,7 @@ import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import io.restassured.response.ValidatableResponse;
-import models.customfields.CustomFieldToEdit;
+import models.customfields.customfieldstoedit.CustomFieldToEdit;
 import models.customfields.ResponseCustomField;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 public class EditCustomFieldTests extends CustomFieldsBaseTests {
 
   private ValidatableResponse editResponse;
-  CustomFieldToEdit customFieldToEdit;
+  private CustomFieldToEdit customFieldToEdit;
 
   @Test
   @Tag(value = "smoke")

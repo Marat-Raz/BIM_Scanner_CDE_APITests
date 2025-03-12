@@ -7,7 +7,7 @@ import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import java.util.Map;
 import models.customfields.CustomField;
-import models.customfields.CustomFieldToEdit;
+import models.customfields.customfieldstoedit.CustomFieldToEdit;
 
 public class CustomFieldsClient extends Client {
   public static final String CUSTOM_FIELDS = "/custom-fields/";

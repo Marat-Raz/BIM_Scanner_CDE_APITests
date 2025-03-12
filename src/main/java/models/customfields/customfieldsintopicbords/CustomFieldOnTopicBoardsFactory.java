@@ -5,7 +5,7 @@ public class CustomFieldOnTopicBoardsFactory {
   public String id;
   public boolean isEnabled;
   public boolean isRequired;
-  public String defaultValue = "string"; //
+  public String defaultValue = "string";
 
   public CustomFieldOnTopicBoards createCustomFieldOnTopicBoardsById(String idFromResponse,
       CustomFieldOnTopicBoardsType customFieldOnTopicBoardsType) {
@@ -13,10 +13,11 @@ public class CustomFieldOnTopicBoardsFactory {
       case IS_NOT_ENABLED:
         return new CustomFieldOnTopicBoards(idFromResponse, false, true, null);
 
-      default:
-      case DEFAULT_CUSTOM_FIELDS_TO_EDIT:
+      case DEFAULT_CUSTOM_ON_TOPIC_BOARDS:
       case IS_ENABLED:
-        return new CustomFieldOnTopicBoards(idFromResponse, true, true, defaultValue);}
+      default:
+        return new CustomFieldOnTopicBoards(idFromResponse, true, true, defaultValue);
+    }
 
   }
 }
