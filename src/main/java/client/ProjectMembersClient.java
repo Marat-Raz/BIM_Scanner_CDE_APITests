@@ -23,7 +23,7 @@ private static final String MEMBERS = "/members/";
         .then();
   }
 
-  @Step("Получить список участников проекта")
+  @Step("Получить список участников проекта без QueryOptions")
   public ValidatableResponse getProjectMembersWithoutQueryOptions(String projectId) {
     return given()
         .spec(getBaseSpec())
