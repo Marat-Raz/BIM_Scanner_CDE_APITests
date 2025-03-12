@@ -45,8 +45,8 @@ public class LabelsClient extends Client {
         .then();
   }
 
-  @Step("Получить метку id и по id проекта")
-  public ValidatableResponse getLabelInProject(String projectId, String labelId) {
+  @Step("Получить метку по id")
+  public ValidatableResponse getLabelById(String projectId, String labelId) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
