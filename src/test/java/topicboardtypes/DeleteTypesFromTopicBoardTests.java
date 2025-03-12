@@ -17,7 +17,7 @@ public class DeleteTypesFromTopicBoardTests extends TopicBoardTypeBaseTests {
   @Tag(value = "smoke")
   @DisplayName("Удалить тип задачи из доски задач")
   public void deleteTypesInTopicBoardTest() {
-    deleteTypesResponse = topicBoardTypesClient.deleteTypesInTopicBoard(topicBoardId, typeId);
+    deleteTypesResponse = topicBoardTypesClient.deleteTopicBoardTypes(topicBoardId, typeId);
     statusCode = extractStatusCode(deleteTypesResponse);
 
     assertEquals(SC_NO_CONTENT, statusCode);

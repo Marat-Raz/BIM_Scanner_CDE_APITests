@@ -27,7 +27,7 @@ public class GetTopicBoardTypesTests extends TopicBoardTypeBaseTests {
       expectedTypes.add(new TypesFactory().createTypes(DEFAULT));
     }
     for (Types type : expectedTypes) {
-      addTypesResponse = topicBoardTypesClient.addTypesToTopicBoard(topicBoardId, type);
+      addTypesResponse = topicBoardTypesClient.addTopicBoardTypes(topicBoardId, type);
     }
   }
 

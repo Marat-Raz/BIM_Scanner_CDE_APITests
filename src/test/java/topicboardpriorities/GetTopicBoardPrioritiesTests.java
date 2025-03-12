@@ -24,7 +24,7 @@ public class GetTopicBoardPrioritiesTests extends TopicBoardPrioritiesBaseTests 
       expectedPriorities.add(new PrioritiesFactory().createPriorities(DEFAULT));
     }
     for (Priorities priority : expectedPriorities) {
-      addPrioritiesResponse = topicBoardPrioritiesClient.addPrioritiesToTopicBoard(topicBoardId,
+      addPrioritiesResponse = topicBoardPrioritiesClient.addTopicBoardPriorities(topicBoardId,
           priority);
     }
   }

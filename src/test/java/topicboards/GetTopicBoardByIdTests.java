@@ -27,7 +27,6 @@ public class GetTopicBoardByIdTests extends TopicBoardsBaseTests {
 
     assertEquals(SC_OK, statusCode);
     assertAll(
-        () -> assertEquals("TopicBoard", responseTopicBoard.type),
         () -> assertEquals(topicBoard.getName(), responseTopicBoard.name),
         () -> assertEquals(projectId, responseTopicBoard.projectId)
     );

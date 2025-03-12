@@ -4,7 +4,6 @@ import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import client.TopicsClient;
 import io.restassured.response.ValidatableResponse;
 import models.topics.ResponseTopics;
 import org.junit.jupiter.api.DisplayName;
@@ -20,7 +19,7 @@ public class GetTopicByIdFromTopicBoardTests extends TopicsBaseTests {
   @Tag(value = "smoke")
   @DisplayName("Получить задачу по его id и id доски задач")
   public void getTopicByIdAndBoardIdTest() {
-    getTopicByIdResponse = topicsClient.getTopicInTopicBoard(topicBoardId, defaultTopicId);
+    getTopicByIdResponse = topicsClient.getTopicOnTopicBoard(topicBoardId, defaultTopicId);
     statusCode = extractStatusCode(getTopicByIdResponse);
     ResponseTopics responseTopics = getTopicByIdResponse.extract().as(ResponseTopics.class);
 

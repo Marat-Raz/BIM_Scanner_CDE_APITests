@@ -21,7 +21,7 @@ public class EditTypesInTopicBoardTests extends TopicBoardTypeBaseTests {
     Types editableType = type;
     editableType.setName("newName");
     editTypeResponse = topicBoardTypesClient
-        .editTypesInTopicBoard(topicBoardId, typeId, editableType);
+        .editTopicBoardTypes(topicBoardId, typeId, editableType);
     statusCode = extractStatusCode(editTypeResponse);
     ResponseTypes editedTypeFromResponse =
         editTypeResponse.extract().as(ResponseTypes.class);

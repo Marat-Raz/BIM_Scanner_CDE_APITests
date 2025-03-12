@@ -10,8 +10,7 @@ import models.customfields.CustomField;
 import models.customfields.CustomFieldToEdit;
 
 public class CustomFieldsClient extends Client {
-
-  private static final String CUSTOM_FIELDS = "api/projects/";
+  public static final String CUSTOM_FIELDS = "/custom-fields/";
 
   @Step("Получить список кастомных полей проекта")
   public ValidatableResponse getCustomFields(String projectId, Map<String, String> queryParams) {
@@ -20,7 +19,7 @@ public class CustomFieldsClient extends Client {
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .queryParams(queryParams)
         .when()
-        .get(CUSTOM_FIELDS + projectId + "/custom-fields/")
+        .get(API_PROJECTS + projectId + CUSTOM_FIELDS)
         .then();
   }
 
@@ -31,7 +30,7 @@ public class CustomFieldsClient extends Client {
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .body(customField)
         .when()
-        .post(CUSTOM_FIELDS + projectId + "/custom-fields/")
+        .post(API_PROJECTS + projectId + CUSTOM_FIELDS)
         .then();
   }
 
@@ -41,7 +40,7 @@ public class CustomFieldsClient extends Client {
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
-        .get(CUSTOM_FIELDS + projectId + "/custom-fields/" + customFieldId)
+        .get(API_PROJECTS + projectId + CUSTOM_FIELDS + customFieldId)
         .then();
   }
 
@@ -53,7 +52,7 @@ public class CustomFieldsClient extends Client {
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .body(customFieldToEdit)
         .when()
-        .patch(CUSTOM_FIELDS + projectId + "/custom-fields/" + customFieldId)
+        .patch(API_PROJECTS + projectId + CUSTOM_FIELDS + customFieldId)
         .then();
   }
 
@@ -64,7 +63,7 @@ public class CustomFieldsClient extends Client {
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
-        .get(CUSTOM_FIELDS + projectId + "/custom-fields/" + customFieldId + "/enumeration-items")
+        .get(API_PROJECTS + projectId + CUSTOM_FIELDS + customFieldId + "/enumeration-items")
         .then();
   }
 }

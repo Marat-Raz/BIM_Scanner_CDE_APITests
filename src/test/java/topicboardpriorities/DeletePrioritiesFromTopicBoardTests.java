@@ -16,7 +16,7 @@ public class DeletePrioritiesFromTopicBoardTests extends TopicBoardPrioritiesBas
   @Tag(value = "smoke")
   @DisplayName("Удалить приоритет задачи из доски задач")
   public void deletePrioritiesInTopicBoardTest() {
-    deletePrioritiesResponse = topicBoardPrioritiesClient.deletePrioritiesInTopicBoard(topicBoardId,
+    deletePrioritiesResponse = topicBoardPrioritiesClient.deleteTopicBoardPriorities(topicBoardId,
         priorityId);
     statusCode = extractStatusCode(deletePrioritiesResponse);
 

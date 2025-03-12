@@ -10,7 +10,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-public class EditStatusInTopicBoardTests extends TopicBoardStatusBaseTests {
+public class EditStatusOnTopicBoardTests extends TopicBoardStatusBaseTests {
 
   private static ValidatableResponse editStatusResponse;
 
@@ -21,7 +21,7 @@ public class EditStatusInTopicBoardTests extends TopicBoardStatusBaseTests {
     Statuses editableStatus = status;
     editableStatus.setName("newName");
     editStatusResponse = topicBoardStatusClient
-        .editStatusInTopicBoard(topicBoardId, statusId, editableStatus);
+        .editTopicBoardStatuses(topicBoardId, statusId, editableStatus);
     statusCode = extractStatusCode(editStatusResponse);
     ResponseStatuses editedStatusFromResponse =
         editStatusResponse.extract().as(ResponseStatuses.class);

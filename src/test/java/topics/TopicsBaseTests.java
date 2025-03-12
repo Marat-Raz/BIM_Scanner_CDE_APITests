@@ -42,7 +42,7 @@ public class TopicsBaseTests extends StartTests {
   @BeforeEach
   public void addTopic() {
     topic = topicsFactory.createTopic(DEFAULT_TOPIC);
-    addTopicsResponse = topicsClient.createTopicInTopicBoard(topicBoardId, topic);
+    addTopicsResponse = topicsClient.createTopicOnTopicBoard(topicBoardId, topic);
     responseTopic = addTopicsResponse.extract().as(ResponseTopics.class);
     defaultTopicId = responseTopic.getId();
   }

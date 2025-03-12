@@ -54,6 +54,7 @@ public class UserClient extends Client {
 
   @Step("Получить список пользователей по фильтрам")
   public ValidatableResponse getListOfUsers(String filter, String sorting,
+      // todo внедрить HashMap тут
       String skipCount, int maxResultCount) {
     return given()
         .spec(getBaseSpec())

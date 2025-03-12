@@ -14,8 +14,8 @@ public class StatusesFactory {
         return new Statuses(null, color);
       case WITHOUT_COLOR:
         return new Statuses(name, null);
-      default:
       case DEFAULT:
+      default:
         return new Statuses(name, color);
     }
   }

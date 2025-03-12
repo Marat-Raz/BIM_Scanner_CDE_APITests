@@ -42,7 +42,7 @@ public class TopicBoardStatusBaseTests extends StartTests {
   @BeforeEach
   public void addStatus() {
     status = statusesFactory.createStatuses(DEFAULT);
-    addStatusResponse = topicBoardStatusClient.addStatusToTopicBoard(topicBoardId, status);
+    addStatusResponse = topicBoardStatusClient.addTopicBoardStatuses(topicBoardId, status);
     responseStatuses = addStatusResponse.extract().as(ResponseStatuses.class);
     statusId = responseStatuses.getId();
   }

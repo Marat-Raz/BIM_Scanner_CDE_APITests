@@ -10,7 +10,7 @@ import static io.restassured.RestAssured.given;
 
 public class TopicEventsClient extends Client {
 
-  private static final String TOPIC_EVENTS = "api/issues/boards/";
+  private static final String TOPIC_EVENTS = "/topics/events/";
 
   @Step("Получить уведомления обо всех изменениях задач в доске задач")
   public ValidatableResponse getTopicEventsWithoutQueryParams(String topicBoardId) {
@@ -18,7 +18,7 @@ public class TopicEventsClient extends Client {
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
-        .get(TOPIC_EVENTS + topicBoardId + "/topics/events/")
+        .get(API_ISSUES_BOARDS + topicBoardId + TOPIC_EVENTS)
         .then();
   }
 
@@ -29,7 +29,7 @@ public class TopicEventsClient extends Client {
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .queryParams(queryParams)
         .when()
-        .get(TOPIC_EVENTS + topicBoardId + "/topics/events/")
+        .get(API_ISSUES_BOARDS + topicBoardId + TOPIC_EVENTS)
         .then();
   }
 
@@ -41,7 +41,7 @@ public class TopicEventsClient extends Client {
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
-        .get(TOPIC_EVENTS + topicBoardId + "/topics/" + topicId + "/events/")
+        .get(API_ISSUES_BOARDS + topicBoardId + "/topics/" + topicId + "/events/")
         .then();
   }
 
@@ -54,7 +54,7 @@ public class TopicEventsClient extends Client {
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .queryParams(queryParams)
         .when()
-        .get(TOPIC_EVENTS + topicBoardId + "/topics/" + topicId + "/events/")
+        .get(API_ISSUES_BOARDS + topicBoardId + "/topics/" + topicId + "/events/")
         .then();
   }
 

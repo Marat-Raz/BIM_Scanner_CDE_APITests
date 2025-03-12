@@ -14,8 +14,8 @@ public class TopicBoardsGroupFactory {
         return new TopicBoardsGroup(null, wrongParentGroupId);
         case NEW_TOPIC_BOARDS_GROUP:
         return new TopicBoardsGroup(RandomStringUtils.randomAlphabetic(1, 256), null);
-      default:
       case DEFAULT_TOPIC_BOARDS_GROUP:
+      default:
         return new TopicBoardsGroup(name, null);
     }
   }

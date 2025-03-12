@@ -11,7 +11,7 @@ import models.topics.Topics;
 
 public class TopicsClient extends Client {
 
-  private final String TOPICS = "api/issues/boards/";
+  private final String TOPICS = "/topics/";
 
   @Step("Получить список задач определенной доски задач")
   public ValidatableResponse getListOfTopicsFromTopicBoard(String topicBoardId,
@@ -22,7 +22,7 @@ public class TopicsClient extends Client {
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .queryParams(queryParams)
         .when()
-        .get(TOPICS + topicBoardId + "/topics")
+        .get(API_ISSUES_BOARDS + topicBoardId + TOPICS)
         .then();
   }
 
@@ -32,20 +32,19 @@ public class TopicsClient extends Client {
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
-        .get(TOPICS + topicBoardId + "/topics")
+        .get(API_ISSUES_BOARDS + topicBoardId + TOPICS)
         .then();
   }
 
-
   @Step("Создать задачу в доске задач")
-  public ValidatableResponse createTopicInTopicBoard(String topicBoardId, Topics topic) {
+  public ValidatableResponse createTopicOnTopicBoard(String topicBoardId, Topics topic) {
     // todo необходимо сформировать список опций/фильтров для этого запроса
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .body(topic)
         .when()
-        .post(TOPICS + topicBoardId + "/topics")
+        .post(API_ISSUES_BOARDS + topicBoardId + TOPICS)
         .then();
   }
 
@@ -57,8 +56,7 @@ public class TopicsClient extends Client {
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .queryParams(queryParams)
         .when()
-        .get("api/projects/" + projectId + "/topics")
-        // todo вывести  "api/projects/" в константы
+        .get(API_PROJECTS + projectId + TOPICS)
         .then();
   }
 
@@ -68,39 +66,39 @@ public class TopicsClient extends Client {
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
-        .get("api/projects/" + projectId + "/topics")
+        .get(API_PROJECTS + projectId + TOPICS)
         .then();
   }
 
   @Step("Получить задачу в доске задач по ID")
-  public ValidatableResponse getTopicInTopicBoard(String topicBoardId, String topicId) {
+  public ValidatableResponse getTopicOnTopicBoard(String topicBoardId, String topicId) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
-        .get(TOPICS + topicBoardId + "/topics/" + topicId)
+        .get(API_ISSUES_BOARDS + topicBoardId + TOPICS + topicId)
         .then();
   }
 
   @Step("Обновить задачу в доске задач по ID")
-  public ValidatableResponse updateTopicInTopicBoard(String topicBoardId,
+  public ValidatableResponse updateTopicOnTopicBoard(String topicBoardId,
       String topicId, ResponseTopics updatedTopic) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .body(updatedTopic)
         .when()
-        .put(TOPICS + topicBoardId + "/topics/" + topicId)
+        .put(API_ISSUES_BOARDS + topicBoardId + TOPICS + topicId)
         .then();
   }
 
   @Step("Удалить задачу в доске задач по ID")
-  public ValidatableResponse deleteTopicInTopicBoard(String topicBoardId, String topicId) {
+  public ValidatableResponse deleteTopicOnTopicBoard(String topicBoardId, String topicId) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
-        .delete(TOPICS + topicBoardId + "/topics/" + topicId)
+        .delete(API_ISSUES_BOARDS + topicBoardId + TOPICS + topicId)
         .then();
   }
 

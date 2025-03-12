@@ -10,7 +10,7 @@ import models.topicboards.TopicBoards;
 
 public class TopicBoardsClient extends Client {
 
-  private static final String TOPIC_BOARDS = "api/projects/";
+  private static final String ISSUES_BOARDS = "/issues/boards/";
 
   @Step("Получить доску задач по id")
   public ValidatableResponse getTopicBoard(String projectId, String topicBoardId) {
@@ -18,7 +18,7 @@ public class TopicBoardsClient extends Client {
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
-        .get(TOPIC_BOARDS + projectId + "/issues/boards/" + topicBoardId)
+        .get(API_PROJECTS + projectId + ISSUES_BOARDS + topicBoardId)
         .then();
   }
 
@@ -30,7 +30,7 @@ public class TopicBoardsClient extends Client {
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .body(topicBoard)
         .when()
-        .post(TOPIC_BOARDS + projectId + "/issues/boards/")
+        .post(API_PROJECTS + projectId + ISSUES_BOARDS)
         .then();
   }
 
@@ -42,7 +42,7 @@ public class TopicBoardsClient extends Client {
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .body(topicBoard)
         .when()
-        .put(TOPIC_BOARDS + projectId + "/issues/boards/" + topicBoardId)
+        .put(API_PROJECTS + projectId + ISSUES_BOARDS + topicBoardId)
         .then();
   }
 
@@ -54,7 +54,7 @@ public class TopicBoardsClient extends Client {
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .body(customFieldsOnTopicBoards)
         .when()
-        .patch(TOPIC_BOARDS + projectId + "/issues/boards/" + topicBoardId)
+        .patch(API_PROJECTS + projectId + ISSUES_BOARDS + topicBoardId)
         .then();
   }
 
@@ -65,7 +65,7 @@ public class TopicBoardsClient extends Client {
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
-        .delete(TOPIC_BOARDS + projectId + "/issues/boards/" + topicBoardId)
+        .delete(API_PROJECTS + projectId + ISSUES_BOARDS + topicBoardId)
         .then();
   }
 

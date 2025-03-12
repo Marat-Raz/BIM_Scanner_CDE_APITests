@@ -30,8 +30,8 @@ public class CustomFieldFactory {
         return new CustomField(name, description, BOOL, null);
       case ENUMERATION:
         return new CustomField(name, description, ENUMERATION, enumerationItems);
-      default:
       case TEXT:
+      default:
         return new CustomField(name, description, TEXT, null);
     }
   }

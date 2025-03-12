@@ -3,7 +3,6 @@ package topicboardpriorities;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import basetests.StartTests;
 import io.restassured.response.ValidatableResponse;
 import models.priorities.Priorities;
 import models.priorities.ResponsePriorities;
@@ -22,7 +21,7 @@ public class EditPrioritiesInTopicBoardTests extends TopicBoardPrioritiesBaseTes
     Priorities editablePriority = priority;
     editablePriority.setName("newName");
     editPrioritiesResponse = topicBoardPrioritiesClient
-        .editPrioritiesInTopicBoard(topicBoardId, priorityId, editablePriority);
+        .editTopicBoardPriorities(topicBoardId, priorityId, editablePriority);
     statusCode = extractStatusCode(editPrioritiesResponse);
     ResponsePriorities editedPriorityFromResponse =
         editPrioritiesResponse.extract().as(ResponsePriorities.class);

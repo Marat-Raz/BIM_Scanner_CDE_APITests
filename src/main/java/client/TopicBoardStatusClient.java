@@ -9,7 +9,7 @@ import models.statuses.Statuses;
 
 public class TopicBoardStatusClient extends Client {
 
-  private static final String TOPIC_BOARD_STATUS = "api/issues/boards/";
+  private static final String STATUSES = "/statuses/";
 
   @Step("Получить статусы, доступные на доске задач")
   public ValidatableResponse getTopicBoardStatuses(String topicBoardId) {
@@ -17,40 +17,40 @@ public class TopicBoardStatusClient extends Client {
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
-        .get(TOPIC_BOARD_STATUS + topicBoardId + "/statuses")
+        .get(API_ISSUES_BOARDS + topicBoardId + STATUSES)
         .then();
   }
 
   @Step("Добавить статус на доску задач")
-  public ValidatableResponse addStatusToTopicBoard(String topicBoardId, Statuses status) {
+  public ValidatableResponse addTopicBoardStatuses(String topicBoardId, Statuses status) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .body(status)
         .when()
-        .post(TOPIC_BOARD_STATUS + topicBoardId + "/statuses")
+        .post(API_ISSUES_BOARDS + topicBoardId + STATUSES)
         .then();
   }
 
   @Step("Редактировать статус на доске задач")
-  public ValidatableResponse editStatusInTopicBoard(String topicBoardId, String statusId,
+  public ValidatableResponse editTopicBoardStatuses(String topicBoardId, String statusId,
       Statuses editedStatus) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .body(editedStatus)
         .when()
-        .put(TOPIC_BOARD_STATUS + topicBoardId + "/statuses/" + statusId)
+        .put(API_ISSUES_BOARDS + topicBoardId + STATUSES + statusId)
         .then();
   }
 
   @Step("Удалить статус с доски задач")
-  public ValidatableResponse deleteStatusInTopicBoard(String topicBoardId, String statusId) {
+  public ValidatableResponse deleteTopicBoardStatuses(String topicBoardId, String statusId) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
-        .delete(TOPIC_BOARD_STATUS + topicBoardId + "/statuses/" + statusId)
+        .delete(API_ISSUES_BOARDS + topicBoardId + STATUSES + statusId)
         .then();
   }
 }

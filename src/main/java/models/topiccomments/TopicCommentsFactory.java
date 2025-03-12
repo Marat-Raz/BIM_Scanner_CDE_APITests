@@ -10,8 +10,8 @@ public class TopicCommentsFactory {
     switch (topicCommentType) {
       case NULL_TOPIC_COMMENT:
         return new TopicComment(null);
-      default:
       case DEFAULT_TOPIC_COMMENT:
+      default:
         return new TopicComment(comment);
     }
   }

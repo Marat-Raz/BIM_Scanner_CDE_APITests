@@ -52,7 +52,6 @@ public class StartTests {
     ValidatableResponse responseAdminToken =
         tokenClient.createToken(TokenBuilder.getTokenForAdminUser());
     Client.ADMIN_ACCESS_TOKEN = responseAdminToken.extract().path("access_token");
-    //String adminId = userClient.getUserByUserName("admin").extract().path("id");
 
     defaultUser = userFactory.createUser(DEFAULT_USER);
     baseResponse = userClient.createUser(defaultUser);

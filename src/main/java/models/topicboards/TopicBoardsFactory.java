@@ -15,8 +15,8 @@ public class TopicBoardsFactory {
         return new TopicBoards(name, "new TopicBoards" + description, null);
       case TOPIC_BOARDS_WITHOUT_NAME:
         return new TopicBoards(null, description, wrongParentGroupId);
-      default:
       case DEFAULT_TOPIC_BOARDS:
+      default:
         return new TopicBoards(name, null, null);
     }
   }
