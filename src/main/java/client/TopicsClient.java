@@ -62,7 +62,7 @@ public class TopicsClient extends Client {
         .then();
   }
 
-  @Step("Получить список задач в проекте")
+  @Step("Получить список задач в проекте без QueryOptions")
   public ValidatableResponse getTopicsInProjectWithoutQueryOptions(String projectId) {
     return given()
         .spec(getBaseSpec())

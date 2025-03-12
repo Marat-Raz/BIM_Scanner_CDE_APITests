@@ -23,7 +23,7 @@ private final String PROJECT_MEMBERS = "api/projects/";
         .then();
   }
 
-  @Step("Получить список участников проекта")
+  @Step("Получить список участников проекта без QueryOptions")
   public ValidatableResponse getProjectMembersWithoutQueryOptions(String projectId) {
     return given()
         .spec(getBaseSpec())
@@ -81,7 +81,7 @@ private final String PROJECT_MEMBERS = "api/projects/";
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .pathParam("projectId", projectId)
-        .queryParams(queryParams) // Передаем параметры запроса
+        .queryParams(queryParams) 
         .when()
         .get(PROJECT_MEMBERS + projectId + "/member-candidates")
         .then();
