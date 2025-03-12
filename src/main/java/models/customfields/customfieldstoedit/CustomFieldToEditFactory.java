@@ -3,8 +3,6 @@ package models.customfields.customfieldstoedit;
 public class CustomFieldToEditFactory {
 
   public String id;
-  public boolean isEnabled;
-  public boolean isRequired;
   public String defaultValue = "string";
 
   public CustomFieldToEdit createCustomFieldToEditById(String idFromResponse,
