@@ -1,5 +1,6 @@
 package dtomodels.topics;
 
+import io.qameta.allure.internal.shadowed.jackson.annotation.JsonFormat;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
@@ -22,7 +23,7 @@ public class ResponseTopics {
   public String serverAssignedId;
   public String title;
   public String description;
-  //public String dueDate;
+  public String dueDate;
   public String assignedToId;
   public String topicBoardId;
   public String concurrencyStamp;
@@ -37,14 +38,14 @@ public class ResponseTopics {
   public String creatorId;
   public String id;
 
-  public OffsetDateTime dueDate;
 
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSX")
   public String getDueDate() {
-    return dueDate.toString(); // ISO 8601 формат по умолчанию
+    return dueDate;
   }
 
   public void setDueDate(String dueDate) {
-    this.dueDate = OffsetDateTime.parse(dueDate);
+    this.dueDate = dueDate;
   }
 /*
   public String getDueDate() {
