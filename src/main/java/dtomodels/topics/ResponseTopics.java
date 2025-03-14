@@ -39,7 +39,7 @@ public class ResponseTopics {
 
   public OffsetDateTime dueDate;
 
-  public String getDueDateAsString() {
+  public String getDueDate() {
     return dueDate.toString(); // ISO 8601 формат по умолчанию
   }
 
