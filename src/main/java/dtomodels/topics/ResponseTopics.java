@@ -44,19 +44,4 @@ public class ResponseTopics {
     return dueDate;
   }
 
-  public void setDueDate(String dueDate) {
-    this.dueDate = dueDate;
-  }
-/*
-  public String getDueDate() {
-    return String (new LocalDateTime(dueDate)
-        .atOffset(ZoneOffset.UTC)
-        .format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)
-        .replace("+00:00", "Z"));
-  }
-
-
-*//*  private String getDueDate() {
-    return dueDate;
-  }*/
 }
