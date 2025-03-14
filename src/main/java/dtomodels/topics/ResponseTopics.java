@@ -38,8 +38,7 @@ public class ResponseTopics {
   public String creatorId;
   public String id;
 
-
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSX")
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SX")
   public String getDueDate() {
     return dueDate;
   }
