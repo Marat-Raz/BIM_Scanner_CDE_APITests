@@ -1,6 +1,7 @@
 package dtomodels.topics;
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ public class ResponseTopics {
   public String serverAssignedId;
   public String title;
   public String description;
-  public String dueDate;
+  //public String dueDate;
   public String assignedToId;
   public String topicBoardId;
   public String concurrencyStamp;
@@ -36,9 +37,14 @@ public class ResponseTopics {
   public String creatorId;
   public String id;
 
-  public String getDueDate() {
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
-    return dueDate.format(String.valueOf(formatter));
+  private OffsetDateTime dueDate;
+
+  public String getDueDateAsString() {
+    return dueDate.toString(); // ISO 8601 формат по умолчанию
+  }
+
+  public void setDueDate(String dueDate) {
+    this.dueDate = OffsetDateTime.parse(dueDate);
   }
 /*
   public String getDueDate() {
