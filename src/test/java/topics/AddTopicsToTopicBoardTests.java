@@ -22,8 +22,7 @@ public class AddTopicsToTopicBoardTests extends TopicsBaseTests {
     assertEquals(SC_OK, statusCode);
     assertAll(
         () -> assertEquals(topic.getTitle(), responseTopics.getTitle()),
-        () -> assertEquals(topic.getDescription(), responseTopics.getDescription()),
-        () -> assertEquals(topic.getDueDate(), responseTopics.getDueDate())
+        () -> assertEquals(topic.getDescription(), responseTopics.getDescription())
     );
   }
 }

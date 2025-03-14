@@ -1,10 +1,5 @@
 package dtomodels.topics;
 
-import io.qameta.allure.internal.shadowed.jackson.annotation.JsonFormat;
-import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -37,10 +32,5 @@ public class ResponseTopics {
   public String creationTime;
   public String creatorId;
   public String id;
-
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SX")
-  public String getDueDate() {
-    return dueDate;
-  }
 
 }
