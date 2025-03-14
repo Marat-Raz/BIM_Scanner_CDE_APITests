@@ -37,7 +37,7 @@ public class ResponseTopics {
   public String creatorId;
   public String id;
 
-  private OffsetDateTime dueDate;
+  public OffsetDateTime dueDate;
 
   public String getDueDateAsString() {
     return dueDate.toString(); // ISO 8601 формат по умолчанию
