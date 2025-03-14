@@ -1,6 +1,6 @@
 package topicboardstatus;
 
-import static models.statuses.StatusesType.DEFAULT;
+import static dtomodels.statuses.StatusesType.DEFAULT;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import io.restassured.response.ValidatableResponse;
@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-import models.statuses.Statuses;
-import models.statuses.StatusesFactory;
+import dtomodels.statuses.Statuses;
+import dtomodels.statuses.StatusesFactory;
 import org.junit.jupiter.api.*;
 
 public class GetTopicBoardStatusesTests extends TopicBoardStatusBaseTests {

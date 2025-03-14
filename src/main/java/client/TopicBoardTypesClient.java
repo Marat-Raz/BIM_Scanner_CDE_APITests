@@ -5,7 +5,7 @@ import static io.restassured.RestAssured.given;
 import client.base.Client;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
-import models.types.Types;
+import dtomodels.types.Types;
 
 public class TopicBoardTypesClient extends Client {
 

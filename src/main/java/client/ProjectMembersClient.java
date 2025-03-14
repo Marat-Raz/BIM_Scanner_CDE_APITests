@@ -6,7 +6,7 @@ import client.base.Client;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import java.util.Map;
-import models.projectmember.ProjectMember;
+import dtomodels.projectmember.ProjectMember;
 
 public class ProjectMembersClient extends Client {
 

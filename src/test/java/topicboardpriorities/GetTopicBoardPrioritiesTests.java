@@ -1,6 +1,6 @@
 package topicboardpriorities;
 
-import static models.priorities.PrioritiesType.DEFAULT;
+import static dtomodels.priorities.PrioritiesType.DEFAULT;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import io.restassured.response.ValidatableResponse;
@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-import models.priorities.Priorities;
-import models.priorities.PrioritiesFactory;
+import dtomodels.priorities.Priorities;
+import dtomodels.priorities.PrioritiesFactory;
 import org.junit.jupiter.api.*;
 
 public class GetTopicBoardPrioritiesTests extends TopicBoardPrioritiesBaseTests {

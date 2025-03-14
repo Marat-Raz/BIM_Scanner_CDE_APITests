@@ -1,6 +1,6 @@
 package topicboardtypes;
 
-import static models.types.TypesType.DEFAULT;
+import static dtomodels.types.TypesType.DEFAULT;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-import models.types.Types;
-import models.types.TypesFactory;
+import dtomodels.types.Types;
+import dtomodels.types.TypesFactory;
 import org.junit.jupiter.api.*;
 
 public class GetTopicBoardTypesTests extends TopicBoardTypeBaseTests {

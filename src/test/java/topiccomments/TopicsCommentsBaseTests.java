@@ -1,23 +1,23 @@
 package topiccomments;
 
-import static models.topicboards.TopicBoardsType.DEFAULT_TOPIC_BOARDS;
-import static models.topiccomments.TopicCommentType.DEFAULT_TOPIC_COMMENT;
-import static models.topics.TopicType.DEFAULT_TOPIC;
+import static dtomodels.topicboards.TopicBoardsType.DEFAULT_TOPIC_BOARDS;
+import static dtomodels.topiccomments.TopicCommentType.DEFAULT_TOPIC_COMMENT;
+import static dtomodels.topics.TopicType.DEFAULT_TOPIC;
 
 import basetests.StartTests;
 import client.TopicBoardsClient;
 import client.TopicCommentsClient;
 import client.TopicsClient;
 import io.restassured.response.ValidatableResponse;
-import models.topicboards.ResponseTopicBoards;
-import models.topicboards.TopicBoards;
-import models.topicboards.TopicBoardsFactory;
-import models.topiccomments.ResponseTopicComment;
-import models.topiccomments.TopicComment;
-import models.topiccomments.TopicCommentsFactory;
-import models.topics.ResponseTopics;
-import models.topics.Topics;
-import models.topics.TopicsFactory;
+import dtomodels.topicboards.ResponseTopicBoards;
+import dtomodels.topicboards.TopicBoards;
+import dtomodels.topicboards.TopicBoardsFactory;
+import dtomodels.topiccomments.ResponseTopicComment;
+import dtomodels.topiccomments.TopicComment;
+import dtomodels.topiccomments.TopicCommentsFactory;
+import dtomodels.topics.ResponseTopics;
+import dtomodels.topics.Topics;
+import dtomodels.topics.TopicsFactory;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 

@@ -1,18 +1,18 @@
 package topicboardtypes;
 
-import static models.topicboards.TopicBoardsType.DEFAULT_TOPIC_BOARDS;
-import static models.types.TypesType.DEFAULT;
+import static dtomodels.topicboards.TopicBoardsType.DEFAULT_TOPIC_BOARDS;
+import static dtomodels.types.TypesType.DEFAULT;
 
 import basetests.StartTests;
 import client.TopicBoardTypesClient;
 import client.TopicBoardsClient;
 import io.restassured.response.ValidatableResponse;
-import models.topicboards.ResponseTopicBoards;
-import models.topicboards.TopicBoards;
-import models.topicboards.TopicBoardsFactory;
-import models.types.ResponseTypes;
-import models.types.Types;
-import models.types.TypesFactory;
+import dtomodels.topicboards.ResponseTopicBoards;
+import dtomodels.topicboards.TopicBoards;
+import dtomodels.topicboards.TopicBoardsFactory;
+import dtomodels.types.ResponseTypes;
+import dtomodels.types.Types;
+import dtomodels.types.TypesFactory;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 

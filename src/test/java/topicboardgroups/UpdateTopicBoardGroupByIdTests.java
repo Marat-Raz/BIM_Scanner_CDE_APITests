@@ -1,6 +1,6 @@
 package topicboardgroups;
 
-import static models.topicboardsgroup.TopicBoardsGroupType.DEFAULT_TOPIC_BOARDS_GROUP;
+import static dtomodels.topicboardsgroup.TopicBoardsGroupType.DEFAULT_TOPIC_BOARDS_GROUP;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -9,9 +9,9 @@ import basetests.StartTests;
 import client.TopicBoardGroupsClient;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
-import models.topicboardsgroup.ResponseTopicBoardGroup;
-import models.topicboardsgroup.TopicBoardsGroup;
-import models.topicboardsgroup.TopicBoardsGroupFactory;
+import dtomodels.topicboardsgroup.ResponseTopicBoardGroup;
+import dtomodels.topicboardsgroup.TopicBoardsGroup;
+import dtomodels.topicboardsgroup.TopicBoardsGroupFactory;
 import org.junit.jupiter.api.*;
 
 public class UpdateTopicBoardGroupByIdTests extends StartTests {

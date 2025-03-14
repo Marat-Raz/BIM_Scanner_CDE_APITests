@@ -1,15 +1,15 @@
 package topicboards;
 
-import static models.customfields.customfieldstoedit.CustomFieldToEditType.IS_ENABLED;
+import static dtomodels.customfields.customfieldstoedit.CustomFieldToEditType.IS_ENABLED;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import io.restassured.response.ValidatableResponse;
 import java.util.ArrayList;
-import models.customfields.customfieldstoedit.CustomFieldToEdit;
-import models.customfields.customfieldstoedit.CustomFieldToEditFactory;
-import models.customfields.customfieldstoedit.CustomFieldsToEdit;
-import models.topicboards.ResponseTopicBoards;
+import dtomodels.customfields.customfieldstoedit.CustomFieldToEdit;
+import dtomodels.customfields.customfieldstoedit.CustomFieldToEditFactory;
+import dtomodels.customfields.customfieldstoedit.CustomFieldsToEdit;
+import dtomodels.topicboards.ResponseTopicBoards;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;

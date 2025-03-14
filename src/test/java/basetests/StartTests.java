@@ -1,7 +1,7 @@
 package basetests;
 
-import static models.project.ProjectType.DEFAULT_PROJECT;
-import static models.user.UserType.DEFAULT_USER;
+import static dtomodels.project.ProjectType.DEFAULT_PROJECT;
+import static dtomodels.user.UserType.DEFAULT_USER;
 
 import client.ProjectsClient;
 import client.TokenClient;
@@ -14,16 +14,15 @@ import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.response.ValidatableResponse;
 import java.util.List;
-import models.error.ErrorRoot;
-import models.project.Project;
-import models.project.ProjectFactory;
-import models.project.ServerResponseProject;
-import models.token.TokenBuilder;
-import models.user.User;
-import models.user.UserFactory;
+import dtomodels.error.ErrorRoot;
+import dtomodels.project.Project;
+import dtomodels.project.ProjectFactory;
+import dtomodels.project.ServerResponseProject;
+import dtomodels.token.TokenBuilder;
+import dtomodels.user.User;
+import dtomodels.user.UserFactory;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 
 public class StartTests {
 

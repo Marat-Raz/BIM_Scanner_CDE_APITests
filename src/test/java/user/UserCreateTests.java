@@ -1,8 +1,8 @@
 package user;
 
-import static models.user.UserType.USER_WITHOUT_EMAIL;
-import static models.user.UserType.USER_WITHOUT_PASSWORD;
-import static models.user.UserType.USER_WITHOUT_USERNAME;
+import static dtomodels.user.UserType.USER_WITHOUT_EMAIL;
+import static dtomodels.user.UserType.USER_WITHOUT_PASSWORD;
+import static dtomodels.user.UserType.USER_WITHOUT_USERNAME;
 import static org.apache.http.HttpStatus.SC_BAD_REQUEST;
 import static org.apache.http.HttpStatus.SC_FORBIDDEN;
 import static org.apache.http.HttpStatus.SC_OK;
@@ -10,8 +10,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import basetests.StartTests;
 import io.restassured.response.ValidatableResponse;
-import models.error.ErrorRoot;
-import models.user.User;
+import dtomodels.error.ErrorRoot;
+import dtomodels.user.User;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;

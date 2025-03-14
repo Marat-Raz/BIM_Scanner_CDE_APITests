@@ -1,17 +1,17 @@
 package topicboardpriorities;
 
-import static models.priorities.PrioritiesType.DEFAULT;
-import static models.topicboards.TopicBoardsType.DEFAULT_TOPIC_BOARDS;
+import static dtomodels.priorities.PrioritiesType.DEFAULT;
+import static dtomodels.topicboards.TopicBoardsType.DEFAULT_TOPIC_BOARDS;
 
 import basetests.StartTests;
 import client.TopicBoardPrioritiesClient;
 import client.TopicBoardsClient;
 import io.restassured.response.ValidatableResponse;
-import models.priorities.Priorities;
-import models.priorities.PrioritiesFactory;
-import models.topicboards.ResponseTopicBoards;
-import models.topicboards.TopicBoards;
-import models.topicboards.TopicBoardsFactory;
+import dtomodels.priorities.Priorities;
+import dtomodels.priorities.PrioritiesFactory;
+import dtomodels.topicboards.ResponseTopicBoards;
+import dtomodels.topicboards.TopicBoards;
+import dtomodels.topicboards.TopicBoardsFactory;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 
