@@ -8,8 +8,10 @@ import io.restassured.specification.RequestSpecification;
 
 public class Client {
 
-  public static final String BASE_URL = "https://cde-api.test.briodev.ru/";
-  public static final String TOKEN_BASE_URL = "https://cde-auth.test.briodev.ru/";
+  protected static final String BASE_URL = "https://cde-api.test.briodev.ru/";
+  protected static final String TOKEN_BASE_URL = "https://cde-auth.test.briodev.ru/";
+  public static final String API_PROJECTS = "api/projects/";
+  public static final String API_ISSUES_BOARDS = "/api/issues/boards/";
   public static String DEFAULT_USER_ACCESS_TOKEN;
   public static String ADMIN_ACCESS_TOKEN;
 
@@ -17,7 +19,7 @@ public class Client {
     return new RequestSpecBuilder()
         .setContentType(ContentType.JSON)
         .setBaseUri(BASE_URL)
-        .build(); // todo рассмотреть возможность вставки токена тут
+        .build();
   }
 
   protected RequestSpecification getTokenBaseSpec() {

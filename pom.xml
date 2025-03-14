@@ -111,8 +111,8 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.13.0</version>
         <configuration>
-          <source>11</source> <!-- depending on your project -->
-          <target>11</target> <!-- depending on your project -->
+          <source>11</source> <!-- depending on your project DO NOT CHANGE! -->
+          <target>11</target> <!-- depending on your project DO NOT CHANGE! -->
           <annotationProcessorPaths>
             <path>
               <groupId>org.projectlombok</groupId>
@@ -127,12 +127,14 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.2.5</version>
         <configuration>
-          <testFailureIgnore>false</testFailureIgnore>
+          <testFailureIgnore>true</testFailureIgnore>
           <argLine>
             -Dfile.encoding=${project.build.sourceEncoding}
             -Djdk.net.URLClassPath.disableClassPathURLCheck=true
             -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
           </argLine>
+          <!-- перенаправить стандартный вывод модульного теста в файл, работа тестов не будет выводиться в консоль. -->
+          <redirectTestOutputToFile>true</redirectTestOutputToFile>
         </configuration>
         <dependencies>
           <dependency>

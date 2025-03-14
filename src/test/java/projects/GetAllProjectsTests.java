@@ -4,20 +4,20 @@ import static models.project.ProjectType.RANDOM_PROJECT;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import baseTests.StartTests;
-import client.ProjectsClient;
+import basetests.StartTests;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import java.util.ArrayList;
 import models.project.Project;
 import models.project.ProjectFactory;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 
 public class GetAllProjectsTests extends StartTests {
 
   private ValidatableResponse getAllProjectResponse;
-  private static ProjectFactory projectFactory = new ProjectFactory();
-  private static ProjectsClient projectsClient = new ProjectsClient();
   private static ArrayList<Project> projectList = new ArrayList<Project>();
   private static int numberOfProjects = 5;
 
@@ -25,7 +25,7 @@ public class GetAllProjectsTests extends StartTests {
   @Step("Создать несколько проектов для теста")
   public static void createProjects() {
     for (int i = 0; i < numberOfProjects; i++) {
-      projectList.add(projectFactory.createProject(RANDOM_PROJECT));
+      projectList.add(new ProjectFactory().createProject(RANDOM_PROJECT));
     }
     for (Project project : projectList) {
       projectsClient.createProject(project);

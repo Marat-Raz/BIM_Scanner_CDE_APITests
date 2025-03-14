@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import models.user.Owner;
-import models.user.Responsible;
+import models.user.ResponseUser;
 
 @AllArgsConstructor
 @Getter
@@ -16,7 +16,7 @@ public class ServerResponseProject {
   public String completionTime;
   public String concurrencyStamp;
   public Owner owner;
-  public Responsible responsible;
+  public ResponseUser responsible;
   public String lastModificationTime;
   public String lastModifierId;
   public String creationTime;

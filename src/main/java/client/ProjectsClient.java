@@ -11,7 +11,6 @@ import models.project.Project;
 import models.project.ProjectWithConcurrencyStamp;
 
 public class ProjectsClient extends Client {
-  private static final String PROJECTS = "api/projects/";
 
   @Step("Получить список всех проектов DEFAULT_USER")
   public ValidatableResponse getListOfProjects() {
@@ -19,7 +18,7 @@ public class ProjectsClient extends Client {
         .spec(getBaseSpec())
         .auth().oauth2(DEFAULT_USER_ACCESS_TOKEN)
         .when()
-        .get(PROJECTS)
+        .get(API_PROJECTS)
         .then();
   }
 
@@ -29,7 +28,7 @@ public class ProjectsClient extends Client {
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
-        .get(PROJECTS)
+        .get(API_PROJECTS)
         .then();
   }
 
@@ -39,7 +38,7 @@ public class ProjectsClient extends Client {
         .spec(getBaseSpec())
         .auth().oauth2(token)
         .when()
-        .get(PROJECTS)
+        .get(API_PROJECTS)
         .then();
   }
 
@@ -50,7 +49,7 @@ public class ProjectsClient extends Client {
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .body(project)
         .when()
-        .post(PROJECTS)
+        .post(API_PROJECTS)
         .then();
   }
 
@@ -61,7 +60,7 @@ public class ProjectsClient extends Client {
         .auth().oauth2(token)
         .body(project)
         .when()
-        .post(PROJECTS)
+        .post(API_PROJECTS)
         .then();
   }
 
@@ -71,7 +70,7 @@ public class ProjectsClient extends Client {
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
-        .get(PROJECTS + id)
+        .get(API_PROJECTS + id)
         .then();
   }
 
@@ -81,7 +80,7 @@ public class ProjectsClient extends Client {
         .spec(getBaseSpec())
         .auth().oauth2(token)
         .when()
-        .get(PROJECTS + id)
+        .get(API_PROJECTS + id)
         .then();
   }
 
@@ -89,9 +88,9 @@ public class ProjectsClient extends Client {
   public ValidatableResponse deleteProjectByItsId(String id) {
     return given()
         .spec(getBaseSpec())
-        .auth().oauth2(DEFAULT_USER_ACCESS_TOKEN)
+        .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
-        .delete(PROJECTS + id)
+        .delete(API_PROJECTS + id)
         .then();
   }
 
@@ -101,7 +100,7 @@ public class ProjectsClient extends Client {
         .spec(getBaseSpec())
         .auth().oauth2(token)
         .when()
-        .delete(PROJECTS + id)
+        .delete(API_PROJECTS + id)
         .then();
   }
 
@@ -113,7 +112,7 @@ public class ProjectsClient extends Client {
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .body(project)
         .when()
-        .put(PROJECTS + id)
+        .put(API_PROJECTS + id)
         .then();
   }
 
@@ -125,7 +124,7 @@ public class ProjectsClient extends Client {
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .body(newProject)
         .when()
-        .put(PROJECTS + id)
+        .put(API_PROJECTS + id)
         .then();
   }
 
@@ -134,7 +133,7 @@ public class ProjectsClient extends Client {
     return RestAssured.given()
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
-        .get(PROJECTS + projectId + "/cover") // "api/projects/projectId/cover"
+        .get(API_PROJECTS + projectId + "/cover") // "api/projects/projectId/cover"
         .then();
   }
 
@@ -144,7 +143,7 @@ public class ProjectsClient extends Client {
         .spec(multipartBaseSpec())
         .auth().oauth2(token)
         .when()
-        .get(PROJECTS + projectId + "/cover")
+        .get(API_PROJECTS + projectId + "/cover")
         .then();
   }
 
@@ -156,7 +155,7 @@ public class ProjectsClient extends Client {
         .multiPart("coverImage", new File("src/main/resources/1.7mb.png"))
         // todo заменить название файла на переменную
         .when()
-        .put(PROJECTS + projectId + "/cover")
+        .put(API_PROJECTS + projectId + "/cover")
         .then();
   }
 
@@ -168,7 +167,7 @@ public class ProjectsClient extends Client {
         .multiPart("coverImage", new File("src/main/resources/1.7mb.png"))
         // todo заменить название файла на переменную
         .when()
-        .put(PROJECTS + projectId + "/cover")
+        .put(API_PROJECTS + projectId + "/cover")
         .then();
   }
 
@@ -178,7 +177,7 @@ public class ProjectsClient extends Client {
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
-        .delete(PROJECTS + projectId + "/cover")
+        .delete(API_PROJECTS + projectId + "/cover")
         .then();
   }
 
@@ -188,7 +187,7 @@ public class ProjectsClient extends Client {
         .spec(getBaseSpec())
         .auth().oauth2(token)
         .when()
-        .delete(PROJECTS + projectId + "/cover")
+        .delete(API_PROJECTS + projectId + "/cover")
         .then();
   }
 }

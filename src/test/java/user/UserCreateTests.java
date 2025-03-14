@@ -8,11 +8,10 @@ import static org.apache.http.HttpStatus.SC_FORBIDDEN;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import baseTests.StartTests;
+import basetests.StartTests;
 import io.restassured.response.ValidatableResponse;
 import models.error.ErrorRoot;
 import models.user.User;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
