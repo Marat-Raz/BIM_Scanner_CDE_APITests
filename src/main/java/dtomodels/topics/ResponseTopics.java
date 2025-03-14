@@ -1,5 +1,8 @@
 package dtomodels.topics;
 
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -33,4 +36,20 @@ public class ResponseTopics {
   public String creatorId;
   public String id;
 
+  public String getDueDate() {
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSX");
+    return dueDate.format(String.valueOf(formatter));
+  }
+/*
+  public String getDueDate() {
+    return String (new LocalDateTime(dueDate)
+        .atOffset(ZoneOffset.UTC)
+        .format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)
+        .replace("+00:00", "Z"));
+  }
+
+
+*//*  private String getDueDate() {
+    return dueDate;
+  }*/
 }
