@@ -6,15 +6,26 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.testcontainers.containers.PostgreSQLContainer;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
+import org.testcontainers.utility.MountableFile;
 import testcontainers.Customer;
 import testcontainers.CustomerService;
 import testcontainers.DBConnectionProvider;
 
+@Testcontainers
 class CustomerServiceTest {
 
+  @Container
   static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>(
       "postgres:16-alpine"
   );
+/*
+      .withCopyFileToContainer(
+          MountableFile.forClasspathResource("init-db.sql"),
+          "/docker-entrypoint-initdb.d/"
+      ); //.withClasspathResourceMapping("init-db.sql", "/docker-entrypoint-initdb.d/", BindMode.READ_ONLY)
+*/
 
   CustomerService customerService;
 
