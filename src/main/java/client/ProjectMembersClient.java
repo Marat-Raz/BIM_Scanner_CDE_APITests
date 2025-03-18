@@ -81,7 +81,7 @@ private static final String MEMBERS = "/members/";
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .pathParam("projectId", projectId)
-        .queryParams(queryParams) // Передаем параметры запроса
+        .queryParams(queryParams) 
         .when()
         .get(API_PROJECTS + projectId + "/member-candidates")
         .then();
