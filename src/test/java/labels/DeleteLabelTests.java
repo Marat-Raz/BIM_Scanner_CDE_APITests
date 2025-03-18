@@ -26,4 +26,5 @@ public class DeleteLabelTests extends LabelBaseTests {
 
     assertEquals(SC_NO_CONTENT, statusCode);
   }
+
 }

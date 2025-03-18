@@ -35,4 +35,5 @@ public class EditLabelTests extends LabelBaseTests {
     assertEquals(SC_OK, statusCode);
     assertEquals(newLabel.getName(), actualLabel.getName());
   }
+
 }

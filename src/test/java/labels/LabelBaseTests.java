@@ -37,4 +37,5 @@ public class LabelBaseTests extends StartTests {
     }
     labelId = responseLabels.get(0).getId();
   }
+  
 }

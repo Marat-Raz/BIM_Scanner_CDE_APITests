@@ -19,7 +19,9 @@ public class LabelFactory {
         return new Label(name, color);
     }
   }
+
   public Label from(ResponseLabel responseLabel) {
     return new Label(responseLabel.getName(), responseLabel.getColor());
   }
+
 }
