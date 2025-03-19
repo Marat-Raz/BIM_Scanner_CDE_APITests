@@ -22,15 +22,12 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-public class AddNewCustomFieldToProjectTests extends StartTests {
+public class AddNewCustomFieldToProjectTests extends CustomFieldsBaseTests {
 
-  private static CustomFieldsClient customFieldsClient = new CustomFieldsClient();
   private ValidatableResponse addResponse;
-  private CustomField customField;
 
   @BeforeEach
   public void createCustomField() {
-    customField = new CustomFieldFactory().createCustomField(ENUMERATION);
   }
 
   @Test

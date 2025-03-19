@@ -5,8 +5,8 @@ import static io.restassured.RestAssured.given;
 import client.base.Client;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
-import dtomodels.customfields.customfieldstoedit.CustomFieldsToEdit;
 import dtomodels.topicboards.TopicBoards;
+import dtomodels.customfields.customfieldsintopicbords.CustomFieldsOnTopicBoards;
 
 public class TopicBoardsClient extends Client {
 
@@ -48,11 +48,11 @@ public class TopicBoardsClient extends Client {
 
   @Step("Редактировать кастомные поля доски задач")
   public ValidatableResponse editTopicBoardCustomFields(String projectId,
-      String topicBoardId, CustomFieldsToEdit customFieldsToEdit) {
+      String topicBoardId, CustomFieldsOnTopicBoards customFieldsOnTopicBoards) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
-        .body(customFieldsToEdit)
+        .body(customFieldsOnTopicBoards)
         .when()
         .patch(API_PROJECTS + projectId + ISSUES_BOARDS + topicBoardId)
         .then();

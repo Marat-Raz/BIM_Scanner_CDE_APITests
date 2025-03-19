@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import dtomodels.customfields.customfieldstoedit.CustomFieldToEdit;
+import dtomodels.customfields.customfieldsintopicbords.CustomFieldOnTopicBoards;
 
 @AllArgsConstructor
 @Getter
@@ -17,6 +17,6 @@ public class ResponseTopicBoards {
   public String parentGroupId;
   public String name;
   public String description;
-  public ArrayList<CustomFieldToEdit> customFields;
+  public ArrayList<CustomFieldOnTopicBoards> customFields;
 
 }

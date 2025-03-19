@@ -12,8 +12,6 @@ import org.junit.jupiter.api.Test;
 
 public class CreateModelTests extends ModelsBaseTests {
 
-  private ValidatableResponse createModelResponse; // создан на перспективу для других тестов
-
   @Test
   @Tag(value = "smoke")
   @DisplayName("Запрос на создание модели дает ответ 200")

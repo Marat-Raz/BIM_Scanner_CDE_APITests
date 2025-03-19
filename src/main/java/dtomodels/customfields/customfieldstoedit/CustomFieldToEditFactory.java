@@ -1,6 +1,6 @@
 package dtomodels.customfields.customfieldstoedit;
 
-public class CustomFieldToEditFactory {
+/*public class CustomFieldToEditFactory {
 
   public String id;
   public String defaultValue = "string";
@@ -16,5 +16,5 @@ public class CustomFieldToEditFactory {
       default:
         return new CustomFieldToEdit(idFromResponse, true, true, defaultValue);}
 
-  }
-}
+  }*/
+//}
