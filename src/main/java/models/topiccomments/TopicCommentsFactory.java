@@ -1,10 +1,10 @@
 package models.topiccomments;
 
-import org.apache.commons.lang3.RandomStringUtils;
+import models.RandomWord;
 
 public class TopicCommentsFactory {
 
-  public String comment = RandomStringUtils.randomAlphanumeric(1, 256);
+  public String comment = RandomWord.randomAllCharacters(1, 256);
 
   public TopicComment createTopicComment(TopicCommentType topicCommentType) {
     switch (topicCommentType) {

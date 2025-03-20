@@ -1,11 +1,11 @@
 package models.types;
 
 import models.RandomColorInHex;
-import org.apache.commons.lang3.RandomStringUtils;
+import models.RandomWord;
 
 public class TypesFactory {
 
-  public String name = RandomStringUtils.randomAlphabetic(1, 256);
+  public String name = RandomWord.randomAllCharacters(1, 256);
   public String color = RandomColorInHex.getRandomColorInHex();
 
   public Types createTypes(TypesType typesType) {

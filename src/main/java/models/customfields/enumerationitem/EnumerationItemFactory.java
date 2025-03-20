@@ -1,10 +1,10 @@
 package models.customfields.enumerationitem;
 
-import org.apache.commons.lang3.RandomStringUtils;
+import models.RandomWord;
 
 public class EnumerationItemFactory {
 
-  private String name = RandomStringUtils.randomAlphabetic(1, 256);
+  private String name = RandomWord.randomAllCharacters(1, 256);
 
   public EnumerationItem createNameForEnumerationItem() {
     return new EnumerationItem(name);

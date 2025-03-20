@@ -1,12 +1,12 @@
 package models.topicboards;
 
 import java.util.UUID;
-import org.apache.commons.lang3.RandomStringUtils;
+import models.RandomWord;
 
 public class TopicBoardsFactory {
 
-  private String name = RandomStringUtils.randomAlphabetic(1, 256);
-  private String description = RandomStringUtils.randomAlphabetic(1, 100); // Can up to 10000 characters
+  private String name = RandomWord.randomAllCharacters(1, 256);
+  private String description = RandomWord.randomAllCharacters(1, 100); // Can up to 10000 characters
   private String wrongParentGroupId = String.valueOf(UUID.randomUUID());
 
   public TopicBoards createTopicBoards(TopicBoardsType topicBoardsType) {

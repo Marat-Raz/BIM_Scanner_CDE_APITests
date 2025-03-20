@@ -3,15 +3,14 @@ package models.customfields;
 import static models.customfields.CustomFieldType.*;
 
 import java.util.List;
+import models.RandomWord;
 import models.customfields.enumerationitem.EnumerationItem;
 import models.customfields.enumerationitem.EnumerationItemFactory;
-import org.apache.commons.lang3.RandomStringUtils;
 
 public class CustomFieldFactory {
 
-  private String name = RandomStringUtils.randomAlphabetic(1, 256);
-  private String description = RandomStringUtils.randomAlphabetic(1,
-      100); // Can up to 10000 characters
+  private String name = RandomWord.randomAllCharacters(1, 256);
+  private String description = RandomWord.randomAllCharacters(1, 100); // Can up to 10000 characters
   public CustomFieldType type;
   public List<EnumerationItem> enumerationItems =
       List.of(new EnumerationItemFactory().createNameForEnumerationItem(),
