@@ -23,7 +23,6 @@ import models.user.User;
 import models.user.UserFactory;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 
 public class StartTests {
 
@@ -35,7 +34,7 @@ public class StartTests {
   protected static User defaultUser;
   protected static ValidatableResponse baseResponse;
   protected static ValidatableResponse createProjectResponse;
-  protected static Project defaultProject;
+  private static Project defaultProject;
   protected static String projectId;
   protected static String userId;
   protected ErrorRoot errorRoot;
