@@ -10,7 +10,7 @@ import io.restassured.specification.RequestSpecification;
 
 public class Client {
 
-  protected static final String BASE_URL = "https://cde-api.test.briodev.ru/";
+  public static final String BASE_URL = "https://cde-api.test.briodev.ru/";
   protected static final String TOKEN_BASE_URL = "https://cde-auth.test.briodev.ru/";
   public static final String API_PROJECTS = "api/projects/";
   public static final String API_ISSUES_BOARDS = "/api/issues/boards/";

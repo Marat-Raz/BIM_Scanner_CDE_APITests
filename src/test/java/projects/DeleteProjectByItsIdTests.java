@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import models.project.Project;
 import models.project.ProjectFactory;
+import models.project.ResponseFromGetAllProjects;
 import models.project.ServerResponseProject;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -42,8 +43,8 @@ public class DeleteProjectByItsIdTests extends StartTests {
   @DisplayName("Удалить все проекты пользователя ADMIN")
   public void deleteProjectByItsIdTest() {
     getAllProjectResponse = projectsClient.getListOfProjects(Client.ADMIN_ACCESS_TOKEN);
-    serverResponseProjectList = List.of(getAllProjectResponse.extract().body()
-        .as(ServerResponseProject[].class));
+    serverResponseProjectList = getAllProjectResponse.extract().body()
+        .as(ResponseFromGetAllProjects.class).getItems();
     for (ServerResponseProject project : serverResponseProjectList) {
       deleteProjectResponse = projectsClient.deleteProjectByItsId(Client.ADMIN_ACCESS_TOKEN,
           project.getId());

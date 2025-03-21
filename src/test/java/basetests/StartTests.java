@@ -17,6 +17,7 @@ import java.util.List;
 import models.error.ErrorRoot;
 import models.project.Project;
 import models.project.ProjectFactory;
+import models.project.ResponseFromGetAllProjects;
 import models.project.ServerResponseProject;
 import models.token.TokenBuilder;
 import models.user.User;
@@ -70,9 +71,9 @@ public class StartTests {
     userClient.deleteUser(userId);
     ValidatableResponse getAllProjectResponse =
         projectsClient.getListOfProjects(Client.ADMIN_ACCESS_TOKEN);
-    List<ServerResponseProject> serverResponseProjectList =
-        List.of(getAllProjectResponse.extract().body().as(ServerResponseProject[].class));
-    for (ServerResponseProject project : serverResponseProjectList) {
+    ResponseFromGetAllProjects serverResponseProjectList =
+        getAllProjectResponse.extract().body().as(ResponseFromGetAllProjects.class);
+    for (ServerResponseProject project : serverResponseProjectList.getItems()) {
       projectsClient.deleteProjectByItsId(Client.ADMIN_ACCESS_TOKEN,
           project.getId());
     }
