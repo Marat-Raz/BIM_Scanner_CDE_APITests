@@ -13,7 +13,6 @@ import io.restassured.RestAssured;
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.response.ValidatableResponse;
-import java.util.List;
 import models.error.ErrorRoot;
 import models.project.Project;
 import models.project.ProjectFactory;

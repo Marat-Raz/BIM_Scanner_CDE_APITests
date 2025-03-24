@@ -37,6 +37,13 @@ public class DeleteProjectCoverImageTests extends StartTests {
     projectId = createProjectResponse.extract().path("id");
   }
 
+  @BeforeEach
+  public void setUp() {
+    FilterSwitcher.withTemporaryFilters(() -> {
+      System.out.println("Фильтры изменены перед тестом, где происходит работа с файлами.");
+    });
+  }
+
   @AfterAll
   @Step("Получить все проекты в системе и удалить все проекты всех пользователей после тестов")
   public static void deleteAllProjects() {

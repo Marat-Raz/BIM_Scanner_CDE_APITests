@@ -117,7 +117,9 @@
             -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
           </argLine>
           <!-- перенаправить стандартный вывод модульного теста в файл, работа тестов не будет выводиться в консоль. -->
+<!--
           <redirectTestOutputToFile>true</redirectTestOutputToFile>
+-->
           <properties>
             <property>
               <name>listener</name>

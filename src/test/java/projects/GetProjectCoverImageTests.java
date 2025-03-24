@@ -40,6 +40,13 @@ public class GetProjectCoverImageTests extends StartTests {
     projectId = createProjectResponse.extract().path("id");
   }
 
+  @BeforeEach
+  public void setUp() {
+    FilterSwitcher.withTemporaryFilters(() -> {
+      System.out.println("Фильтры изменены перед тестом c передачей файлов по api.");
+    });
+  }
+
   @AfterAll
   @Step("Получить все проекты в системе и удалить все проекты всех пользователей после тестов")
   public static void deleteAllProjects() {
