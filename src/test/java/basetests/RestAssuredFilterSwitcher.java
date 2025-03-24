@@ -1,4 +1,4 @@
-package projects;
+package basetests;
 
 import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
@@ -8,10 +8,9 @@ import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
 import java.util.List;
 
-public class FilterSwitcher {
+public class RestAssuredFilterSwitcher {
 
   public static void withTemporaryFilters(Runnable action) {
-
     List<Filter> originalFilters = RestAssured.filters();
     try {
       RestAssured.filters(

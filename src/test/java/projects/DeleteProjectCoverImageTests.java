@@ -4,6 +4,7 @@ import static models.project.ProjectType.RANDOM_PROJECT;
 import static org.apache.http.HttpStatus.SC_NO_CONTENT;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import basetests.RestAssuredFilterSwitcher;
 import basetests.StartTests;
 import client.ProjectsClient;
 import client.base.Client;
@@ -39,7 +40,7 @@ public class DeleteProjectCoverImageTests extends StartTests {
 
   @BeforeEach
   public void setUp() {
-    FilterSwitcher.withTemporaryFilters(() -> {
+    RestAssuredFilterSwitcher.withTemporaryFilters(() -> {
       System.out.println("Фильтры изменены перед тестом, где происходит работа с файлами.");
     });
   }

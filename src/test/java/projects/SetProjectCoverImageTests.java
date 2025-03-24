@@ -3,18 +3,12 @@ package projects;
 import static models.project.ProjectType.RANDOM_PROJECT;
 import static org.apache.http.HttpStatus.SC_NO_CONTENT;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static projects.FilterSwitcher.withTemporaryFilters;
 
+import basetests.RestAssuredFilterSwitcher;
 import basetests.StartTests;
 import client.ProjectsClient;
 import client.base.Client;
 import io.qameta.allure.Step;
-import io.qameta.allure.restassured.AllureRestAssured;
-import io.restassured.RestAssured;
-import io.restassured.filter.Filter;
-import io.restassured.filter.log.LogDetail;
-import io.restassured.filter.log.RequestLoggingFilter;
-import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.response.ValidatableResponse;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +40,7 @@ public class SetProjectCoverImageTests extends StartTests {
 
   @BeforeEach
   public void setUp() {
-    FilterSwitcher.withTemporaryFilters(() -> {
+    RestAssuredFilterSwitcher.withTemporaryFilters(() -> {
       System.out.println("Фильтры изменены перед тестом c передачей файлов по api.");
     });
   }
