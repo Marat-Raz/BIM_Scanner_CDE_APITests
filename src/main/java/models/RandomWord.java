@@ -9,10 +9,10 @@ import java.util.Random;
 public class RandomWord {
 
   private static final String LATIN_LOWERCASE = "abcdefghijklmnopqrstuvwxyz";
-  private static final String LATIN_UPPERCASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  private static final String LATIN_UPPERCASE = LATIN_LOWERCASE.toUpperCase();
   private static final String LATIN_CHARS = LATIN_LOWERCASE + LATIN_UPPERCASE;
   private static final String CYRILLIC_LOWERCASE = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя";
-  private static final String CYRILLIC_UPPERCASE = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
+  private static final String CYRILLIC_UPPERCASE = CYRILLIC_LOWERCASE.toUpperCase();
   private static final String CYRILLIC_CHARS = CYRILLIC_LOWERCASE + CYRILLIC_UPPERCASE;
   private static final String UZBEK_CHARS = "ўқғҳЎҚҒҲ";
   private static final String DIGITS = "0123456789";
@@ -24,7 +24,7 @@ public class RandomWord {
   public static String generateWord(int minLength, int maxLength, String chars) {
     if (minLength > maxLength) {
       throw new IllegalArgumentException(
-          "Минимальная длина должна быть меньше или равна максимальной");
+          "The minimum length must be less than or equal to the maximum");
     }
     Random random = new Random();
     int length = random.nextInt(maxLength - minLength + 1) + minLength;
@@ -62,11 +62,11 @@ public class RandomWord {
 
   public static String generatePassword(int minLength, int maxLength) {
     if (minLength < 6) {
-      throw new IllegalArgumentException("Минимальная длина пароля должна быть не менее 6 символов");
+      throw new IllegalArgumentException("The minimum password length must be at least 6 characters");
     }
     if (maxLength < minLength) {
-      throw new IllegalArgumentException("Максимальная длина должна быть больше или "
-          + "равна минимальной длине.");
+      throw new IllegalArgumentException("The maximum length must be greater than or "
+          + "equal to the minimum length.");
     }
 
     int length = minLength + random.nextInt(maxLength - minLength + 1);
