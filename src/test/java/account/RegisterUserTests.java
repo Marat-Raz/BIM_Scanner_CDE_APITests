@@ -1,6 +1,6 @@
 package account;
 
-import static models.user.UserType.NEW_USER;
+import static dtomodels.user.UserType.NEW_USER;
 import static org.apache.http.HttpStatus.SC_FORBIDDEN;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -8,9 +8,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import basetests.StartTests;
 import client.AccountClient;
 import io.restassured.response.ValidatableResponse;
-import models.error.ErrorRoot;
-import models.user.User;
-import models.user.UserCredentials;
+import dtomodels.error.ErrorRoot;
+import dtomodels.user.User;
+import dtomodels.user.UserCredentials;
 import org.junit.jupiter.api.*;
 
 public class RegisterUserTests extends StartTests {

@@ -1,18 +1,19 @@
 package topicboardstatus;
 
-import static models.statuses.StatusesType.DEFAULT;
-import static models.topicboards.TopicBoardsType.DEFAULT_TOPIC_BOARDS;
+import static dtomodels.statuses.StatusesType.DEFAULT;
+import static dtomodels.topicboards.TopicBoardsType.DEFAULT_TOPIC_BOARDS;
 
 import basetests.StartTests;
 import client.TopicBoardStatusClient;
 import client.TopicBoardsClient;
+import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
-import models.statuses.ResponseStatuses;
-import models.statuses.Statuses;
-import models.statuses.StatusesFactory;
-import models.topicboards.ResponseTopicBoards;
-import models.topicboards.TopicBoards;
-import models.topicboards.TopicBoardsFactory;
+import dtomodels.statuses.ResponseStatuses;
+import dtomodels.statuses.Statuses;
+import dtomodels.statuses.StatusesFactory;
+import dtomodels.topicboards.ResponseTopicBoards;
+import dtomodels.topicboards.TopicBoards;
+import dtomodels.topicboards.TopicBoardsFactory;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 
@@ -31,6 +32,7 @@ public class TopicBoardStatusBaseTests extends StartTests {
   protected ResponseStatuses responseStatuses;
 
   @BeforeAll
+  @Step("Создаем доску задач в проекте")
   public static void createTopicBoard() {
     topicBoard = topicBoardsFactory.createTopicBoards(DEFAULT_TOPIC_BOARDS);
     createTopicBoardsResponse = topicBoardsClient.createNewTopicBoard(projectId, topicBoard);
@@ -40,6 +42,7 @@ public class TopicBoardStatusBaseTests extends StartTests {
   }
 
   @BeforeEach
+  @Step("Добавляем статусы в доску задач")
   public void addStatus() {
     status = statusesFactory.createStatuses(DEFAULT);
     addStatusResponse = topicBoardStatusClient.addTopicBoardStatuses(topicBoardId, status);

@@ -1,18 +1,18 @@
 package topicboards;
 
-import static models.customfields.CustomFieldType.TEXT;
-import static models.topicboards.TopicBoardsType.DEFAULT_TOPIC_BOARDS;
+import static dtomodels.customfields.CustomFieldType.TEXT;
+import static dtomodels.topicboards.TopicBoardsType.DEFAULT_TOPIC_BOARDS;
 
 import basetests.StartTests;
 import client.CustomFieldsClient;
 import client.TopicBoardsClient;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
-import models.customfields.CustomField;
-import models.customfields.CustomFieldFactory;
-import models.topicboards.ResponseTopicBoards;
-import models.topicboards.TopicBoards;
-import models.topicboards.TopicBoardsFactory;
+import dtomodels.customfields.CustomField;
+import dtomodels.customfields.CustomFieldFactory;
+import dtomodels.topicboards.ResponseTopicBoards;
+import dtomodels.topicboards.TopicBoards;
+import dtomodels.topicboards.TopicBoardsFactory;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 
@@ -31,7 +31,7 @@ public class TopicBoardsBaseTests extends StartTests {
   protected String topicBoardId;
 
   @BeforeAll
-  @Step("Добавить кастомные поля в проект, создать доску задач в проекте")
+  @Step("Добавить кастомные поля в проект")
   public static void addCustomFieldToProject() {
     customField = new CustomFieldFactory().createCustomField(TEXT);
     addCustomFieldResponse = customFieldsClient.addNewCustomFieldToProject(projectId, customField);
@@ -39,6 +39,7 @@ public class TopicBoardsBaseTests extends StartTests {
   }
 
   @BeforeEach
+  @Step("Создать доску задач в проекте")
   public void createTopicBoard() {
     topicBoard = topicBoardsFactory.createTopicBoards(DEFAULT_TOPIC_BOARDS);
     createTopicBoardsResponse = topicBoardsClient.createNewTopicBoard(projectId, topicBoard);

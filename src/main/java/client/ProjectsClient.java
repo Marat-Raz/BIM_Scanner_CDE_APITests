@@ -7,8 +7,8 @@ import io.qameta.allure.Step;
 import io.restassured.RestAssured;
 import io.restassured.response.ValidatableResponse;
 import java.io.File;
-import models.project.Project;
-import models.project.ProjectWithConcurrencyStamp;
+import dtomodels.project.Project;
+import dtomodels.project.ProjectWithConcurrencyStamp;
 
 public class ProjectsClient extends Client {
 

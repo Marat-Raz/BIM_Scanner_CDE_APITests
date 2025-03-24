@@ -5,7 +5,7 @@ import static io.restassured.RestAssured.given;
 import client.base.Client;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
-import models.user.UserCredentials;
+import dtomodels.user.UserCredentials;
 
 public class AccountClient extends Client { // todo необходимо дописать остальные методы
 

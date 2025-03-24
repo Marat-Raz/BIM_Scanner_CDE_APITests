@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import client.TopicsClient;
 import io.restassured.response.ValidatableResponse;
-import models.topics.ResponseTopics;
+import dtomodels.topics.ResponseTopics;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;

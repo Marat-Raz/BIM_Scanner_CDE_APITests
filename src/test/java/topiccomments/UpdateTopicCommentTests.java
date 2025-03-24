@@ -4,8 +4,8 @@ import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import io.restassured.response.ValidatableResponse;
-import models.topiccomments.ResponseTopicComment;
-import models.topiccomments.TopicComment;
+import dtomodels.topiccomments.ResponseTopicComment;
+import dtomodels.topiccomments.TopicComment;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;

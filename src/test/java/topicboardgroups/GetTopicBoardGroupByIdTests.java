@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import client.TopicBoardGroupsClient;
 import io.restassured.response.ValidatableResponse;
 import java.util.List;
-import models.topicboardsgroup.ResponseTopicBoardGroup;
+import dtomodels.topicboardsgroup.ResponseTopicBoardGroup;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
