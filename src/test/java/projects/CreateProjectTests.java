@@ -1,18 +1,13 @@
 package projects;
 
-import static models.project.ProjectType.PROJECT_WITHOUT_DATA;
-import static models.project.ProjectType.PROJECT_WITHOUT_NAME;
-import static org.apache.http.HttpStatus.SC_OK;
+import static dtomodels.project.ProjectType.PROJECT_WITHOUT_DATA;
+import static dtomodels.project.ProjectType.PROJECT_WITHOUT_NAME;
 import static org.apache.http.HttpStatus.SC_UNPROCESSABLE_ENTITY;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import basetests.StartTests;
-import client.ProjectsClient;
-import io.restassured.response.ValidatableResponse;
-import models.project.Project;
-import models.project.ProjectFactory;
+import dtomodels.project.Project;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 public class CreateProjectTests extends StartTests {

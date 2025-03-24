@@ -1,14 +1,14 @@
 package user;
 
-import static models.user.UserType.NEW_USER;
+import static dtomodels.user.UserType.NEW_USER;
 import static org.apache.http.HttpStatus.SC_BAD_REQUEST;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import basetests.StartTests;
 import io.restassured.response.ValidatableResponse;
-import models.error.ErrorRoot;
-import models.user.User;
+import dtomodels.error.ErrorRoot;
+import dtomodels.user.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;

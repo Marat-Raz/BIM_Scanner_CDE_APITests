@@ -5,8 +5,8 @@ import static io.restassured.RestAssured.given;
 import client.base.Client;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
-import models.customfields.customfieldsintopicbords.CustomFieldsOnTopicBoards;
-import models.topicboards.TopicBoards;
+import dtomodels.topicboards.TopicBoards;
+import dtomodels.customfields.customfieldsintopicbords.CustomFieldsOnTopicBoards;
 
 public class TopicBoardsClient extends Client {
 

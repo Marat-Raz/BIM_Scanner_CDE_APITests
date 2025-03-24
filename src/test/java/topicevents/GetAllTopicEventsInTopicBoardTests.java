@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import io.restassured.response.ValidatableResponse;
-import models.topicevents.ResponseTopicEventList;
+import dtomodels.topicevents.ResponseTopicEventList;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;

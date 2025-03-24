@@ -1,19 +1,19 @@
 package topics;
 
-import static models.topicboards.TopicBoardsType.DEFAULT_TOPIC_BOARDS;
-import static models.topics.TopicType.DEFAULT_TOPIC;
+import static dtomodels.topicboards.TopicBoardsType.DEFAULT_TOPIC_BOARDS;
+import static dtomodels.topics.TopicType.DEFAULT_TOPIC;
 
 import basetests.StartTests;
 import client.TopicBoardsClient;
 import client.TopicsClient;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
-import models.topicboards.ResponseTopicBoards;
-import models.topicboards.TopicBoards;
-import models.topicboards.TopicBoardsFactory;
-import models.topics.ResponseTopics;
-import models.topics.Topics;
-import models.topics.TopicsFactory;
+import dtomodels.topicboards.ResponseTopicBoards;
+import dtomodels.topicboards.TopicBoards;
+import dtomodels.topicboards.TopicBoardsFactory;
+import dtomodels.topics.ResponseTopics;
+import dtomodels.topics.Topics;
+import dtomodels.topics.TopicsFactory;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 

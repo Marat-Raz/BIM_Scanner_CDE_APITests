@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import io.restassured.response.ValidatableResponse;
-import models.topicboards.ResponseTopicBoards;
-import models.topicboards.TopicBoards;
+import dtomodels.topicboards.ResponseTopicBoards;
+import dtomodels.topicboards.TopicBoards;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;

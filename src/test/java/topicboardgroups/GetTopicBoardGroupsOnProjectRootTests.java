@@ -1,6 +1,6 @@
 package topicboardgroups;
 
-import static models.topicboardsgroup.TopicBoardsGroupType.DEFAULT_TOPIC_BOARDS_GROUP;
+import static dtomodels.topicboardsgroup.TopicBoardsGroupType.DEFAULT_TOPIC_BOARDS_GROUP;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -10,9 +10,9 @@ import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import java.util.ArrayList;
 import java.util.List;
-import models.topicboardsgroup.ResponseTopicBoardGroup;
-import models.topicboardsgroup.TopicBoardsGroup;
-import models.topicboardsgroup.TopicBoardsGroupFactory;
+import dtomodels.topicboardsgroup.ResponseTopicBoardGroup;
+import dtomodels.topicboardsgroup.TopicBoardsGroup;
+import dtomodels.topicboardsgroup.TopicBoardsGroupFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;

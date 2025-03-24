@@ -4,7 +4,7 @@ import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import io.restassured.response.ValidatableResponse;
-import models.customfields.enumerationitem.ResponseEnumerationItem;
+import dtomodels.customfields.enumerationitem.ResponseEnumerationItem;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
