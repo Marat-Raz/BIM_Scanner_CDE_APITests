@@ -1,16 +1,16 @@
 package topicboards;
 
-import static models.customfields.customfieldsintopicbords.CustomFieldOnTopicBoardsType.IS_ENABLED;
+import static dtomodels.customfields.customfieldsintopicbords.CustomFieldOnTopicBoardsType.IS_ENABLED;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import dtomodels.customfields.customfieldsintopicbords.CustomFieldOnTopicBoards;
+import dtomodels.customfields.customfieldsintopicbords.CustomFieldOnTopicBoardsFactory;
+import dtomodels.customfields.customfieldsintopicbords.CustomFieldsOnTopicBoards;
+import dtomodels.topicboards.ResponseTopicBoards;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import java.util.ArrayList;
-import models.customfields.customfieldsintopicbords.CustomFieldOnTopicBoards;
-import models.customfields.customfieldsintopicbords.CustomFieldOnTopicBoardsFactory;
-import models.customfields.customfieldsintopicbords.CustomFieldsOnTopicBoards;
-import models.topicboards.ResponseTopicBoards;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -49,7 +49,8 @@ public class EditCustomFieldsOfTopicBoardTests extends TopicBoardsBaseTests {
     editableCustomField.setDefaultValue(expectedTxt);
 
     existsCustomFields.set(0, editableCustomField);
-    CustomFieldsOnTopicBoards customFieldsOnTopicBoards = new CustomFieldsOnTopicBoards(existsCustomFields);
+    CustomFieldsOnTopicBoards customFieldsOnTopicBoards = new CustomFieldsOnTopicBoards(
+        existsCustomFields);
     editCustomFieldResponse = topicBoardsClient
         .editTopicBoardCustomFields(projectId, topicBoardId, customFieldsOnTopicBoards);
     ResponseTopicBoards responseTopicBoards = editCustomFieldResponse.extract()

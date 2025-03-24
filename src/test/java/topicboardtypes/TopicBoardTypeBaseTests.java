@@ -1,18 +1,19 @@
 package topicboardtypes;
 
-import static models.topicboards.TopicBoardsType.DEFAULT_TOPIC_BOARDS;
-import static models.types.TypesType.DEFAULT;
+import static dtomodels.topicboards.TopicBoardsType.DEFAULT_TOPIC_BOARDS;
+import static dtomodels.types.TypesType.DEFAULT;
 
 import basetests.StartTests;
 import client.TopicBoardTypesClient;
 import client.TopicBoardsClient;
+import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
-import models.topicboards.ResponseTopicBoards;
-import models.topicboards.TopicBoards;
-import models.topicboards.TopicBoardsFactory;
-import models.types.ResponseTypes;
-import models.types.Types;
-import models.types.TypesFactory;
+import dtomodels.topicboards.ResponseTopicBoards;
+import dtomodels.topicboards.TopicBoards;
+import dtomodels.topicboards.TopicBoardsFactory;
+import dtomodels.types.ResponseTypes;
+import dtomodels.types.Types;
+import dtomodels.types.TypesFactory;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 
@@ -31,6 +32,7 @@ public class TopicBoardTypeBaseTests extends StartTests {
   protected ResponseTypes responseTypes;
 
   @BeforeAll
+  @Step("Создаем доску задач в проекте")
   public static void createTopicBoardAndAddType() {
     topicBoard = topicBoardsFactory.createTopicBoards(DEFAULT_TOPIC_BOARDS);
     createTopicBoardsResponse = topicBoardsClient.createNewTopicBoard(projectId, topicBoard);
@@ -40,6 +42,7 @@ public class TopicBoardTypeBaseTests extends StartTests {
   }
 
   @BeforeEach
+  @Step("Добавляем типы в доску задач")
   public void addType() {
     type = typesFactory.createTypes(DEFAULT);
     addTypesResponse = topicBoardTypesClient.addTopicBoardTypes(topicBoardId, type);

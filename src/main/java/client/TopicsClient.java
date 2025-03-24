@@ -6,8 +6,8 @@ import client.base.Client;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import java.util.Map;
-import models.topics.ResponseTopics;
-import models.topics.Topics;
+import dtomodels.topics.ResponseTopics;
+import dtomodels.topics.Topics;
 
 public class TopicsClient extends Client {
 

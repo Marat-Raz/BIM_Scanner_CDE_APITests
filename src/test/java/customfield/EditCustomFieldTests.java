@@ -4,8 +4,8 @@ import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import io.restassured.response.ValidatableResponse;
-import models.customfields.customfieldstoedit.CustomFieldToEdit;
-import models.customfields.ResponseCustomField;
+import dtomodels.customfields.customfieldstoedit.CustomFieldToEdit;
+import dtomodels.customfields.ResponseCustomField;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;

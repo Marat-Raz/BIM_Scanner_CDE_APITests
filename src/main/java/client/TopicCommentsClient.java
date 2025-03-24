@@ -5,8 +5,7 @@ import static io.restassured.RestAssured.given;
 import client.base.Client;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
-import java.util.Map;
-import models.topiccomments.TopicComment;
+import dtomodels.topiccomments.TopicComment;
 
 public class TopicCommentsClient extends Client {
 

@@ -1,6 +1,6 @@
 package projects;
 
-import static models.project.ProjectType.RANDOM_PROJECT;
+import static dtomodels.project.ProjectType.RANDOM_PROJECT;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -8,8 +8,8 @@ import basetests.StartTests;
 import client.base.Client;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
-import models.project.Project;
-import models.project.ProjectWithConcurrencyStamp;
+import dtomodels.project.Project;
+import dtomodels.project.ProjectWithConcurrencyStamp;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;

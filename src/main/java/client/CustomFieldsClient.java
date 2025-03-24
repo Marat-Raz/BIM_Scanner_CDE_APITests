@@ -3,11 +3,12 @@ package client;
 import static io.restassured.RestAssured.given;
 
 import client.base.Client;
+import dtomodels.customfields.customfieldstoedit.CustomFieldToEdit;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
+import dtomodels.customfields.CustomField;
 import java.util.Map;
-import models.customfields.CustomField;
-import models.customfields.customfieldstoedit.CustomFieldToEdit;
+
 
 public class CustomFieldsClient extends Client {
   public static final String CUSTOM_FIELDS = "/custom-fields/";

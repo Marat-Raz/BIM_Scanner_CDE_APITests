@@ -1,14 +1,14 @@
 package customfield;
 
-import static models.customfields.CustomFieldType.ENUMERATION;
+import static dtomodels.customfields.CustomFieldType.ENUMERATION;
 
 import basetests.StartTests;
 import client.CustomFieldsClient;
 import io.restassured.response.ValidatableResponse;
 import java.util.ArrayList;
-import models.customfields.CustomField;
-import models.customfields.CustomFieldFactory;
-import models.customfields.ResponseCustomField;
+import dtomodels.customfields.CustomField;
+import dtomodels.customfields.CustomFieldFactory;
+import dtomodels.customfields.ResponseCustomField;
 import org.junit.jupiter.api.BeforeAll;
 
 public class CustomFieldsBaseTests extends StartTests {
