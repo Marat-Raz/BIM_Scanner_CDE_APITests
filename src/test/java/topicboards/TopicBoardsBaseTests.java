@@ -31,7 +31,7 @@ public class TopicBoardsBaseTests extends StartTests {
   protected String topicBoardId;
 
   @BeforeAll
-  @Step("Добавить кастомные поля в проект, создать доску задач в проекте")
+  @Step("Добавить кастомные поля в проект")
   public static void addCustomFieldToProject() {
     customField = new CustomFieldFactory().createCustomField(TEXT);
     addCustomFieldResponse = customFieldsClient.addNewCustomFieldToProject(projectId, customField);
@@ -39,6 +39,7 @@ public class TopicBoardsBaseTests extends StartTests {
   }
 
   @BeforeEach
+  @Step("Создать доску задач в проекте")
   public void createTopicBoard() {
     topicBoard = topicBoardsFactory.createTopicBoards(DEFAULT_TOPIC_BOARDS);
     createTopicBoardsResponse = topicBoardsClient.createNewTopicBoard(projectId, topicBoard);

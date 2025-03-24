@@ -23,7 +23,6 @@ import models.user.User;
 import models.user.UserFactory;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 
 public class StartTests {
 
@@ -85,3 +84,9 @@ public class StartTests {
   }
 
 }
+/*
+todo внедрить
+    @Epic("Web interface")
+    @Feature("Essential features")
+    @Story("Authentication")
+ */

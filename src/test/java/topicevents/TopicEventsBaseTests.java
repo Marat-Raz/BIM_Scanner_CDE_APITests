@@ -7,6 +7,7 @@ import basetests.StartTests;
 import client.TopicBoardsClient;
 import client.TopicEventsClient;
 import client.TopicsClient;
+import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import java.util.ArrayList;
 import models.topicboards.ResponseTopicBoards;
@@ -31,6 +32,7 @@ public class TopicEventsBaseTests extends StartTests {
   protected static String topicBoardId;
 
   @BeforeAll
+  @Step("Создаем доску задач в проекте и добавляем несколько задач")
   public static void createTopicBoardAndTopic() {
     topicBoard = topicBoardsFactory.createTopicBoards(DEFAULT_TOPIC_BOARDS);
     createTopicBoardsResponse = topicBoardsClient.createNewTopicBoard(projectId, topicBoard);
@@ -49,7 +51,6 @@ public class TopicEventsBaseTests extends StartTests {
       responseTopicsArray.add(responseTopic);
     }
     defaultTopicId = responseTopicsArray.get(0).getId();
-
   }
 
 }

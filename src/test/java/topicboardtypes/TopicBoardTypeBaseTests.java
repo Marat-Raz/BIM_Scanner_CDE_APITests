@@ -6,6 +6,7 @@ import static models.types.TypesType.DEFAULT;
 import basetests.StartTests;
 import client.TopicBoardTypesClient;
 import client.TopicBoardsClient;
+import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import models.topicboards.ResponseTopicBoards;
 import models.topicboards.TopicBoards;
@@ -31,6 +32,7 @@ public class TopicBoardTypeBaseTests extends StartTests {
   protected ResponseTypes responseTypes;
 
   @BeforeAll
+  @Step("Создаем доску задач в проекте")
   public static void createTopicBoardAndAddType() {
     topicBoard = topicBoardsFactory.createTopicBoards(DEFAULT_TOPIC_BOARDS);
     createTopicBoardsResponse = topicBoardsClient.createNewTopicBoard(projectId, topicBoard);
@@ -40,6 +42,7 @@ public class TopicBoardTypeBaseTests extends StartTests {
   }
 
   @BeforeEach
+  @Step("Добавляем типы в доску задач")
   public void addType() {
     type = typesFactory.createTypes(DEFAULT);
     addTypesResponse = topicBoardTypesClient.addTopicBoardTypes(topicBoardId, type);

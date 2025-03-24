@@ -30,6 +30,4 @@ public class TopicBoardGroupBaseTests extends StartTests {
         createTopicBoardsGroupResponse.extract().as(ResponseTopicBoardGroup.class);
     topicBoardsGroupId = responseTopicBoardGroup.getId();
   }
-
-
 }
