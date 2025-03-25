@@ -1,6 +1,6 @@
 package projects;
 
-import static models.project.ProjectType.RANDOM_PROJECT;
+import static dtomodels.project.ProjectType.RANDOM_PROJECT;
 import static org.apache.http.HttpStatus.SC_NO_CONTENT;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -8,14 +8,12 @@ import basetests.RestAssuredFilterSwitcher;
 import basetests.StartTests;
 import client.ProjectsClient;
 import client.base.Client;
+import dtomodels.PaginatedResponse;
+import dtomodels.project.Project;
+import dtomodels.project.ProjectFactory;
+import dtomodels.project.ResponseProject;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
-import java.util.ArrayList;
-import java.util.List;
-import models.project.Project;
-import models.project.ProjectFactory;
-import models.project.ResponseFromGetAllProjects;
-import models.project.ServerResponseProject;
 import org.junit.jupiter.api.*;
 
 public class SetProjectCoverImageTests extends StartTests {
@@ -26,7 +24,6 @@ public class SetProjectCoverImageTests extends StartTests {
   private static ValidatableResponse createProjectResponse;
   private static String projectId;
   private static ValidatableResponse getAllProjectResponse;
-  private static List<ServerResponseProject> serverResponseProjectList = new ArrayList<>();
   private static ValidatableResponse deleteProjectResponse;
   private ValidatableResponse setIconResponse;
 
@@ -41,7 +38,8 @@ public class SetProjectCoverImageTests extends StartTests {
   @BeforeEach
   public void setUp() {
     RestAssuredFilterSwitcher.withTemporaryFilters(() -> {
-      System.out.println("Фильтры изменены перед тестом c передачей файлов по api.");
+      System.out.println("Фильтры изменены перед тестом, где происходит работа с файлами.\n"
+          + "Логи тестов не выводятся для стабильности работы тестов");
     });
   }
 
@@ -49,9 +47,9 @@ public class SetProjectCoverImageTests extends StartTests {
   @Step("Получить все проекты в системе и удалить все проекты всех пользователей после тестов")
   public static void deleteAllProjects() {
     getAllProjectResponse = projectsClient.getListOfProjects(Client.ADMIN_ACCESS_TOKEN);
-    serverResponseProjectList = getAllProjectResponse.extract().body()
-        .as(ResponseFromGetAllProjects.class).getItems();
-    for (ServerResponseProject project : serverResponseProjectList) {
+    PaginatedResponse<ResponseProject> projectPaginatedResponse =
+        getAllProjectResponse.extract().body().as(typeRef);
+    for (ResponseProject project : projectPaginatedResponse.getItems()) {
       deleteProjectResponse = projectsClient.deleteProjectByItsId(Client.ADMIN_ACCESS_TOKEN,
           project.getId());
     }

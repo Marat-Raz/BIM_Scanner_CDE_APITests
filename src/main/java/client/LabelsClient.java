@@ -6,7 +6,7 @@ import client.base.Client;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import java.util.Map;
-import models.labels.Label;
+import dtomodels.labels.Label;
 
 public class LabelsClient extends Client {
 

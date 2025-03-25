@@ -9,7 +9,7 @@ import dtomodels.user.ResponseUser;
 @AllArgsConstructor
 @Getter
 @Setter
-public class ServerResponseProject {
+public class ResponseProject {
 
   public String name;
   public String description;

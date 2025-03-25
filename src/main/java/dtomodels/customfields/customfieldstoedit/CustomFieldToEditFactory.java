@@ -1,20 +1,15 @@
 package dtomodels.customfields.customfieldstoedit;
 
-/*public class CustomFieldToEditFactory {
+import dtomodels.customfields.enumerationitem.ResponseEnumerationItem;
+import java.util.ArrayList;
 
-  public String id;
-  public String defaultValue = "string";
+public class CustomFieldToEditFactory {
 
-  public CustomFieldToEdit createCustomFieldToEditById(String idFromResponse,
-      CustomFieldToEditType customFieldToEditType) {
-    switch (customFieldToEditType) {
-      case IS_NOT_ENABLED:
-        return new CustomFieldToEdit(idFromResponse, false, true, null);
+  public String name;
+  public String description;
+  public boolean archived;
+  public ArrayList<ResponseEnumerationItem> enumerationItems;
 
-      case DEFAULT_CUSTOM_FIELD_TO_EDIT:
-      case IS_ENABLED:
-      default:
-        return new CustomFieldToEdit(idFromResponse, true, true, defaultValue);}
+// todo реализовать create метод
 
-  }*/
-//}
+}

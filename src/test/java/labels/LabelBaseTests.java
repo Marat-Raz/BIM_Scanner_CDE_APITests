@@ -1,15 +1,15 @@
 package labels;
 
-import static models.labels.LabelType.DEFAULT;
+import static dtomodels.labels.LabelType.DEFAULT;
 
 import basetests.StartTests;
 import client.LabelsClient;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import java.util.ArrayList;
-import models.labels.Label;
-import models.labels.LabelFactory;
-import models.labels.ResponseLabel;
+import dtomodels.labels.Label;
+import dtomodels.labels.LabelFactory;
+import dtomodels.labels.ResponseLabel;
 import org.junit.jupiter.api.BeforeAll;
 
 public class LabelBaseTests extends StartTests {

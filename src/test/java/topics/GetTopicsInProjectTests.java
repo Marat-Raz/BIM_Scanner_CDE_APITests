@@ -5,16 +5,19 @@ import static dtomodels.topics.TopicType.DEFAULT_TOPIC;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import io.restassured.response.ValidatableResponse;
-import java.util.ArrayList;
+import dtomodels.PaginatedResponse;
 import dtomodels.topicboards.ResponseTopicBoards;
 import dtomodels.topicboards.TopicBoards;
 import dtomodels.topicboards.TopicBoardsFactory;
-import dtomodels.topics.ResponseFromGetAllTopics;
 import dtomodels.topics.ResponseTopics;
 import dtomodels.topics.Topics;
 import dtomodels.topics.TopicsFactory;
-import org.junit.jupiter.api.*;
+import io.restassured.response.ValidatableResponse;
+import java.util.ArrayList;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 
 public class GetTopicsInProjectTests extends TopicsBaseTests {
 
@@ -39,12 +42,12 @@ public class GetTopicsInProjectTests extends TopicsBaseTests {
     getListOfTopicsFromProjectResponse = topicsClient
         .getTopicsInProjectWithoutQueryOptions(projectId);
     statusCode = extractStatusCode(getListOfTopicsFromProjectResponse);
-    ResponseFromGetAllTopics responseFromGetAllTopics = getListOfTopicsFromProjectResponse
-        .extract().as(ResponseFromGetAllTopics.class);
-    ArrayList<ResponseTopics> arrayOfTopics = responseFromGetAllTopics.getItems();
+    PaginatedResponse<ResponseTopics> paginatedResponse = getListOfTopicsFromProjectResponse
+        .extract().as(PaginatedResponse.class);
+    ArrayList<ResponseTopics> arrayOfTopics = paginatedResponse.getItems();
 
     assertEquals(SC_OK, statusCode);
-    assertEquals(responseFromGetAllTopics.getTotalCount(),
+    assertEquals(paginatedResponse.getTotalCount(),
         arrayOfTopics.size()); // fixme нужно другим образом сравнить
   }
 }

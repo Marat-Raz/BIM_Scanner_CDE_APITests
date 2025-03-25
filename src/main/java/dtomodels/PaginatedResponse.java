@@ -1,4 +1,4 @@
-package dtomodels.topics;
+package dtomodels;
 
 import java.util.ArrayList;
 import lombok.AllArgsConstructor;
@@ -8,9 +8,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class ResponseFromGetAllTopics {
+public class PaginatedResponse<T> {
 
-  public int totalCount;
-  public ArrayList<ResponseTopics> items;
+  private int totalCount;
+  private ArrayList<T> items;
 
 }
