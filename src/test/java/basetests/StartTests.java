@@ -24,6 +24,7 @@ import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.response.ValidatableResponse;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 
 public class StartTests {
 
@@ -32,7 +33,8 @@ public class StartTests {
   protected static ProjectFactory projectFactory = new ProjectFactory();
   protected static UserFactory userFactory = new UserFactory();
   protected static UserClient userClient = new UserClient();
-  protected static TypeRef<PaginatedResponse<ResponseProject>> typeRef = new TypeRef<>() {};
+  protected static TypeRef<PaginatedResponse<ResponseProject>> typeRef = new TypeRef<>() {
+  };
   protected static User defaultUser;
   protected static ValidatableResponse baseResponse;
   protected static ValidatableResponse createProjectResponse;
@@ -47,7 +49,7 @@ public class StartTests {
       + "получение токена пользователя admin для запросов, требующих прав админа, \n"
       + "создание пользователя по умолчанию.\n")
   public static void globalSetUp() {
-    RestAssured.filters(
+    RestAssured.replaceFiltersWith(
         new RequestLoggingFilter(), new ResponseLoggingFilter(),
         new AllureRestAssured());
     ValidatableResponse responseAdminToken =

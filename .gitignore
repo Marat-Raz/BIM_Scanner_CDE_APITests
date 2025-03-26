@@ -49,3 +49,10 @@ replay_pid*
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
+# Temporary files to upload to the server
+src/main/resources/upload/1.7mb.png 
+src/main/resources/upload/Gladilova_AC_(IFC2x3).ifczip 
+src/main/resources/upload/Gladilova_AC_(IFC2x3).ifc 
+
+ 

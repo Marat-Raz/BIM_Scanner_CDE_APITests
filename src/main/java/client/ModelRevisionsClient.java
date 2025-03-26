@@ -6,11 +6,13 @@ import client.base.Client;
 import groovyjarjarpicocli.CommandLine.Model;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
+import java.io.File;
 import java.util.Map;
 
 public class ModelRevisionsClient extends Client {
 
   private final String MODELS = "/models/";
+  private final String REVISIONS = "/revisions/";
 
   @Step("Получить список моделей в проекте с параметрами запроса")
   public ValidatableResponse getListOfModelsInProject(String projectId,
@@ -34,14 +36,20 @@ public class ModelRevisionsClient extends Client {
         .then();
   }
 
-  @Step("Создать модель в проекте")
-  public ValidatableResponse createModelInProject(String projectId, Model model) {
+  @Step("Загрузить новый файл модели")
+  public ValidatableResponse uploadNewModelFile(
+      String projectId,
+      String modelId,
+      File modelFile,
+      String comment
+  ) {
     return given()
-        .spec(getBaseSpec())
+        .spec(multipartBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
-        .body(model)
+        .multiPart("file", modelFile)  // Основной файл модели
+        .multiPart("comment", comment)
         .when()
-        .post(API_PROJECTS + projectId + MODELS)
+        .post(API_PROJECTS + projectId + MODELS + modelId + REVISIONS)
         .then();
   }
 

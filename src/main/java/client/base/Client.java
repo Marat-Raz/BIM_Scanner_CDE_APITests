@@ -37,8 +37,8 @@ public class Client {
         .setBaseUri(BASE_URL)
         .setConfig(RestAssuredConfig.config()
             .httpClient(HttpClientConfig.httpClientConfig()
-                .setParam("http.socket.timeout", 60000)
-                .setParam("http.connection.timeout", 60000)))
+                .setParam("http.socket.timeout", 300000)
+                .setParam("http.connection.timeout", 300000)))
         .build();
   }
 
