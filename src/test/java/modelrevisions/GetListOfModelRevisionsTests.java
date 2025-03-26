@@ -1,26 +1,49 @@
 package modelrevisions;
 
+import static org.apache.http.HttpStatus.SC_OK;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import basetests.RestAssuredLogging;
+import dtomodels.PaginatedResponse;
+import dtomodels.comment.Comment;
 import dtomodels.models.modelrevisions.ResponseModelRevisions;
-import org.junit.jupiter.api.*;
+import io.restassured.response.ValidatableResponse;
+import java.util.ArrayList;
+import java.util.List;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 
 public class GetListOfModelRevisionsTests extends ModelRevisionsBaseTests {
+
+  private ValidatableResponse getListOfModelRevisionsResponse;
+  private int modelRevisionCount = 3;
+  private List<ResponseModelRevisions> modelRevisionsArrayFromResponse = new ArrayList<>();
 
   @BeforeEach
   public void setupMinimalLoggingAndUploadModelFiles() {
     RestAssuredLogging.setupMinimalLogging();
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < modelRevisionCount; i++) {
       uploadModelFileResponse = modelRevisionsClient
-          .uploadNewModelFile(projectId, modelId, modelFile, "comment №" + i);
-      responseModelRevisions = uploadModelFileResponse.extract()
-          .as(ResponseModelRevisions.class);
+          .uploadNewModelFile(projectId, modelId, modelFile, new Comment("comment №" + i));
+      responseModelRevisions = uploadModelFileResponse.extract().as(ResponseModelRevisions.class);
+      modelRevisionsArrayFromResponse.add(responseModelRevisions);
     }
   }
 
   @Test
   @Tag(value = "positive")
-  @DisplayName("Загрузить новый файл модели - код ответа 200")
+  @DisplayName("Получить список версий модели без фильтров - код ответа 200")
   public void uploadModelFileTest() {
-    modelRevisionsClient.getListOfModelRevisions()
+    getListOfModelRevisionsResponse = modelRevisionsClient.getListOfModelRevisionsWithoutQueryOptions(
+        projectId, modelId);
+    statusCode = extractStatusCode(getListOfModelRevisionsResponse);
+    PaginatedResponse<ResponseModelRevisions> paginatedResponse = getListOfModelRevisionsResponse
+        .extract().as(PaginatedResponse.class);
+    List<ResponseModelRevisions> arrayOfModelRevisions = paginatedResponse.getItems();
+
+    assertEquals(SC_OK, statusCode);
+    assertEquals(modelRevisionCount, paginatedResponse.getTotalCount());
   }
 }

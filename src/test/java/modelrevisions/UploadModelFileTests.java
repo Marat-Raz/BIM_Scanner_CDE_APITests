@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import basetests.RestAssuredLogging;
+import dtomodels.comment.Comment;
 import dtomodels.models.modelrevisions.ResponseModelRevisions;
 import org.junit.jupiter.api.*;
 
@@ -14,7 +15,7 @@ public class UploadModelFileTests extends ModelRevisionsBaseTests {
   public void setupMinimalLoggingAndUploadModelFile() {
     RestAssuredLogging.setupMinimalLogging();
     uploadModelFileResponse = modelRevisionsClient
-        .uploadNewModelFile(projectId, modelId, modelFile, "comment");
+        .uploadNewModelFile(projectId, modelId, modelFile, new Comment("comment"));
     responseModelRevisions = uploadModelFileResponse.extract()
         .as(ResponseModelRevisions.class);
   }

@@ -6,7 +6,9 @@ import client.base.Client;
 import dtomodels.comment.Comment;
 import dtomodels.models.ModelFileFormat;
 import io.qameta.allure.Step;
+import io.restassured.builder.MultiPartSpecBuilder;
 import io.restassured.response.ValidatableResponse;
+import io.restassured.specification.MultiPartSpecification;
 import java.io.File;
 import java.util.Map;
 
@@ -17,23 +19,24 @@ public class ModelRevisionsClient extends Client {
 
   @Step("Получить список моделей в проекте с параметрами запроса")
   public ValidatableResponse getListOfModelRevisions(String projectId,
-      Map<String, Object> queryParams) {
+      String modelId, Map<String, Object> queryParams) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .queryParams(queryParams)
         .when()
-        .get(API_PROJECTS + projectId + MODELS)
+        .get(API_PROJECTS + projectId + MODELS + modelId + REVISIONS)
         .then();
   }
 
   @Step("Получить список моделей в проекте без параметров запроса")
-  public ValidatableResponse getListOfModelRevisionsWithoutQueryOptions(String projectId) {
+  public ValidatableResponse getListOfModelRevisionsWithoutQueryOptions(String projectId,
+      String modelId) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
-        .get(API_PROJECTS + projectId + MODELS)
+        .get(API_PROJECTS + projectId + MODELS + modelId + REVISIONS)
         .then();
   }
 
@@ -42,13 +45,18 @@ public class ModelRevisionsClient extends Client {
       String projectId,
       String modelId,
       File modelFile,
-      String comment
+      Comment comment
   ) {
+    MultiPartSpecification commentPart = new MultiPartSpecBuilder(comment.getComment())
+        .controlName("comment")
+        .mimeType("text/plain")
+        .charset("UTF-8")
+        .build();
     return given()
-        .spec(multipartBaseSpec())
+        .spec(getMultipartSpecWithUtf8())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
-        .multiPart("file", modelFile)  // Основной файл модели
-        .multiPart("comment", comment)
+        .multiPart("file", modelFile)
+        .multiPart(commentPart)
         .when()
         .post(API_PROJECTS + projectId + MODELS + modelId + REVISIONS)
         .then();

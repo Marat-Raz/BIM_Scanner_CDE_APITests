@@ -2,7 +2,9 @@ package client.base;
 
 import static io.restassured.http.ContentType.MULTIPART;
 
+import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
+import io.restassured.config.EncoderConfig;
 import io.restassured.config.HttpClientConfig;
 import io.restassured.config.RestAssuredConfig;
 import io.restassured.http.ContentType;
@@ -41,5 +43,15 @@ public class Client {
                 .setParam("http.connection.timeout", 300000)))
         .build();
   }
-
+  protected RequestSpecification getMultipartSpecWithUtf8() {
+    return new RequestSpecBuilder()
+        .setContentType("multipart/form-data; boundary=----WebKitFormBoundary123456")
+        .addHeader("Accept-Charset", "UTF-8")
+        .setConfig(RestAssured.config()
+            .encoderConfig(EncoderConfig.encoderConfig()
+                .encodeContentTypeAs("multipart/form-data", ContentType.TEXT)
+                .defaultContentCharset("UTF-8")))
+        .setBaseUri(BASE_URL)
+        .build();
+  }
 }
