@@ -1,4 +1,4 @@
-package dtomodels.topiccomments;
+package dtomodels.comment;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode
-public class TopicComment {
+public class Comment {
 
   public String comment;
 

@@ -1,7 +1,7 @@
 package topiccomments;
 
 import static dtomodels.topicboards.TopicBoardsType.DEFAULT_TOPIC_BOARDS;
-import static dtomodels.topiccomments.TopicCommentType.DEFAULT_TOPIC_COMMENT;
+import static dtomodels.comment.CommentType.DEFAULT_TOPIC_COMMENT;
 import static dtomodels.topics.TopicType.DEFAULT_TOPIC;
 
 import basetests.StartTests;
@@ -13,9 +13,9 @@ import io.restassured.response.ValidatableResponse;
 import dtomodels.topicboards.ResponseTopicBoards;
 import dtomodels.topicboards.TopicBoards;
 import dtomodels.topicboards.TopicBoardsFactory;
-import dtomodels.topiccomments.ResponseTopicComment;
-import dtomodels.topiccomments.TopicComment;
-import dtomodels.topiccomments.TopicCommentsFactory;
+import dtomodels.comment.ResponseTopicComment;
+import dtomodels.comment.Comment;
+import dtomodels.comment.CommentsFactory;
 import dtomodels.topics.ResponseTopics;
 import dtomodels.topics.Topics;
 import dtomodels.topics.TopicsFactory;
@@ -29,13 +29,13 @@ public class TopicsCommentsBaseTests extends StartTests {
   protected static TopicsClient topicsClient = new TopicsClient();
   protected static TopicsFactory topicsFactory = new TopicsFactory();
   protected static TopicCommentsClient topicCommentsClient = new TopicCommentsClient();
-  protected static TopicCommentsFactory topicCommentsFactory = new TopicCommentsFactory();
+  protected static CommentsFactory commentsFactory = new CommentsFactory();
   protected static TopicBoards topicBoard;
   protected static ValidatableResponse createTopicBoardsResponse;
   protected static ValidatableResponse addTopicsResponse;
   protected static ValidatableResponse addTopicsCommentsResponse;
   protected static Topics topic;
-  protected static TopicComment topicComment;
+  protected static Comment comment;
   protected static ResponseTopics responseTopic;
   protected static ResponseTopicComment responseTopicComment;
   protected static String topicBoardId;
@@ -60,9 +60,9 @@ public class TopicsCommentsBaseTests extends StartTests {
   @BeforeEach
   @Step("Добавляем комментарии к задаче")
   public void addTopicComment() {
-    topicComment = topicCommentsFactory.createTopicComment(DEFAULT_TOPIC_COMMENT);
+    comment = commentsFactory.createTopicComment(DEFAULT_TOPIC_COMMENT);
     addTopicsCommentsResponse = topicCommentsClient
-        .createTopicComment(topicBoardId, defaultTopicId, topicComment);
+        .createTopicComment(topicBoardId, defaultTopicId, comment);
     responseTopicComment = addTopicsCommentsResponse.extract().as(ResponseTopicComment.class);
     topicCommentId = responseTopicComment.getId();
   }

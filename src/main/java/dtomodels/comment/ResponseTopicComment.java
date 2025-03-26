@@ -1,4 +1,4 @@
-package dtomodels.topiccomments;
+package dtomodels.comment;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;

@@ -1,4 +1,4 @@
-package dtomodels.modelrevisions;
+package dtomodels.models.modelrevisions;
 
 import dtomodels.user.Author;
 import lombok.AllArgsConstructor;

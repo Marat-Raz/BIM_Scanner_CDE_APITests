@@ -3,7 +3,8 @@ package client;
 import static io.restassured.RestAssured.given;
 
 import client.base.Client;
-import groovyjarjarpicocli.CommandLine.Model;
+import dtomodels.comment.Comment;
+import dtomodels.models.ModelFileFormat;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import java.io.File;
@@ -15,7 +16,7 @@ public class ModelRevisionsClient extends Client {
   private final String REVISIONS = "/revisions/";
 
   @Step("Получить список моделей в проекте с параметрами запроса")
-  public ValidatableResponse getListOfModelsInProject(String projectId,
+  public ValidatableResponse getListOfModelRevisions(String projectId,
       Map<String, Object> queryParams) {
     return given()
         .spec(getBaseSpec())
@@ -27,7 +28,7 @@ public class ModelRevisionsClient extends Client {
   }
 
   @Step("Получить список моделей в проекте без параметров запроса")
-  public ValidatableResponse getListOfModelsInProjectWithoutQueryOptions(String projectId) {
+  public ValidatableResponse getListOfModelRevisionsWithoutQueryOptions(String projectId) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
@@ -53,35 +54,56 @@ public class ModelRevisionsClient extends Client {
         .then();
   }
 
-  @Step("Получить модель в проекте по ID")
-  public ValidatableResponse getModelInProjectById(String projectId, String modelId) {
+  @Step("Получить версию модели в проекте по ID")
+  public ValidatableResponse getModelRevisionByVersion(String projectId, String modelId,
+      String modelVersion) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
-        .get(API_PROJECTS + projectId + MODELS + modelId)
+        .get(API_PROJECTS + projectId + MODELS + modelId + REVISIONS + modelVersion)
         .then();
   }
 
-  @Step("Обновить модель в проекте по ID")
-  public ValidatableResponse updateModelInProjectById(String projectId, String modelId,
-      Model updatedModel) {
+  @Step("Изменить комментарий к версии модели")
+  public ValidatableResponse changeModelRevisionComment(
+      String projectId,
+      String modelId,
+      String modelVersion,
+      Comment comment) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
-        .body(updatedModel)
+        .body(comment)
         .when()
-        .put(API_PROJECTS + projectId + MODELS + modelId)
+        .put(API_PROJECTS + projectId + MODELS + modelId + REVISIONS + modelVersion)
         .then();
   }
 
-  @Step("Удалить модель в проекте по ID")
-  public ValidatableResponse deleteModelInProjectById(String projectId, String modelId) {
+  @Step("Загрузить файл ревизии модели в указанном формате")
+  public ValidatableResponse downloadModelRevisionFile(
+      String projectId,
+      String modelId,
+      int version,
+      ModelFileFormat format) {
+
+    return given()
+        .spec(getBaseSpec())
+        .auth().oauth2(ADMIN_ACCESS_TOKEN)
+        .header("Accept", format.getMediaType())
+        .when()
+        .get(API_PROJECTS + projectId + MODELS + modelId + REVISIONS + version + "/download")
+        .then();
+  }
+
+  @Step("Получить статус конвертации модели")
+  public ValidatableResponse getModelConversionStatus(String projectId, String modelId,
+      int version) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
-        .delete(API_PROJECTS + projectId + MODELS + modelId)
+        .get(API_PROJECTS + projectId + MODELS + modelId + REVISIONS + version + "/status")
         .then();
   }
 }

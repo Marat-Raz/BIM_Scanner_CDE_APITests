@@ -5,7 +5,7 @@ import static io.restassured.RestAssured.given;
 import client.base.Client;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
-import dtomodels.topiccomments.TopicComment;
+import dtomodels.comment.Comment;
 
 public class TopicCommentsClient extends Client {
 
@@ -13,7 +13,7 @@ public class TopicCommentsClient extends Client {
   private final String COMMENTS = "/comments/";
 
   @Step("Создать комментарий к задаче")
-  public ValidatableResponse createTopicComment(String topicBoardId, String topicId, TopicComment comment) {
+  public ValidatableResponse createTopicComment(String topicBoardId, String topicId, Comment comment) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
@@ -44,7 +44,7 @@ public class TopicCommentsClient extends Client {
   }
 
   @Step("Обновить комментарий к задаче по ID")
-  public ValidatableResponse updateTopicComment(String topicBoardId, String topicId, String topicCommentId, TopicComment updatedComment) {
+  public ValidatableResponse updateTopicComment(String topicBoardId, String topicId, String topicCommentId, Comment updatedComment) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)

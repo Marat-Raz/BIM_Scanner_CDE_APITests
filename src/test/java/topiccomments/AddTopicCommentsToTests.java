@@ -7,7 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-public class AddTopicCommentsToTopicTests extends TopicsCommentsBaseTests {
+public class AddTopicCommentsToTests extends TopicsCommentsBaseTests {
 
   @Test
   @Tag(value = "smoke")
@@ -16,6 +16,6 @@ public class AddTopicCommentsToTopicTests extends TopicsCommentsBaseTests {
     statusCode = extractStatusCode(addTopicsCommentsResponse);
 
     assertEquals(SC_OK, statusCode);
-    assertEquals(topicComment.getComment(), responseTopicComment.getComment());
+    assertEquals(comment.getComment(), responseTopicComment.getComment());
   }
 }
