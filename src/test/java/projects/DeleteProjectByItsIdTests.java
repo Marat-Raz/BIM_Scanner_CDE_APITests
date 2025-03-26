@@ -10,9 +10,16 @@ import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import java.util.ArrayList;
 import java.util.List;
+<<<<<<< HEAD
 import dtomodels.project.Project;
 import dtomodels.project.ProjectFactory;
 import dtomodels.project.ServerResponseProject;
+=======
+import models.project.Project;
+import models.project.ProjectFactory;
+import models.project.ResponseFromGetAllProjects;
+import models.project.ServerResponseProject;
+>>>>>>> 524f41cb87e19de1e5fae22e3311a10d5fcd343d
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -42,8 +49,8 @@ public class DeleteProjectByItsIdTests extends StartTests {
   @DisplayName("Удалить все проекты пользователя ADMIN")
   public void deleteProjectByItsIdTest() {
     getAllProjectResponse = projectsClient.getListOfProjects(Client.ADMIN_ACCESS_TOKEN);
-    serverResponseProjectList = List.of(getAllProjectResponse.extract().body()
-        .as(ServerResponseProject[].class));
+    serverResponseProjectList = getAllProjectResponse.extract().body()
+        .as(ResponseFromGetAllProjects.class).getItems();
     for (ServerResponseProject project : serverResponseProjectList) {
       deleteProjectResponse = projectsClient.deleteProjectByItsId(Client.ADMIN_ACCESS_TOKEN,
           project.getId());

@@ -3,12 +3,14 @@ package client.base;
 import static io.restassured.http.ContentType.MULTIPART;
 
 import io.restassured.builder.RequestSpecBuilder;
+import io.restassured.config.HttpClientConfig;
+import io.restassured.config.RestAssuredConfig;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 
 public class Client {
 
-  protected static final String BASE_URL = "https://cde-api.test.briodev.ru/";
+  public static final String BASE_URL = "https://cde-api.test.briodev.ru/";
   protected static final String TOKEN_BASE_URL = "https://cde-auth.test.briodev.ru/";
   protected static final String API_PROJECTS = "api/projects/";
   protected static final String API_ISSUES_BOARDS = "/api/issues/boards/";
@@ -33,6 +35,10 @@ public class Client {
     return new RequestSpecBuilder()
         .setContentType(MULTIPART)
         .setBaseUri(BASE_URL)
+        .setConfig(RestAssuredConfig.config()
+            .httpClient(HttpClientConfig.httpClientConfig()
+                .setParam("http.socket.timeout", 60000)
+                .setParam("http.connection.timeout", 60000)))
         .build();
   }
 

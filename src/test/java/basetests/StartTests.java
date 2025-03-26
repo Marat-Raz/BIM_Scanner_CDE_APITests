@@ -7,20 +7,20 @@ import client.ProjectsClient;
 import client.TokenClient;
 import client.UserClient;
 import client.base.Client;
+import dtomodels.error.ErrorRoot;
+import dtomodels.project.Project;
+import dtomodels.project.ProjectFactory;
+import dtomodels.project.ResponseFromGetAllProjects;
+import dtomodels.project.ServerResponseProject;
+import dtomodels.token.TokenBuilder;
+import dtomodels.user.User;
+import dtomodels.user.UserFactory;
 import io.qameta.allure.Step;
 import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.response.ValidatableResponse;
-import java.util.List;
-import dtomodels.error.ErrorRoot;
-import dtomodels.project.Project;
-import dtomodels.project.ProjectFactory;
-import dtomodels.project.ServerResponseProject;
-import dtomodels.token.TokenBuilder;
-import dtomodels.user.User;
-import dtomodels.user.UserFactory;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 
@@ -70,9 +70,9 @@ public class StartTests {
     userClient.deleteUser(userId);
     ValidatableResponse getAllProjectResponse =
         projectsClient.getListOfProjects(Client.ADMIN_ACCESS_TOKEN);
-    List<ServerResponseProject> serverResponseProjectList =
-        List.of(getAllProjectResponse.extract().body().as(ServerResponseProject[].class));
-    for (ServerResponseProject project : serverResponseProjectList) {
+    ResponseFromGetAllProjects serverResponseProjectList =
+        getAllProjectResponse.extract().body().as(ResponseFromGetAllProjects.class);
+    for (ServerResponseProject project : serverResponseProjectList.getItems()) {
       projectsClient.deleteProjectByItsId(Client.ADMIN_ACCESS_TOKEN,
           project.getId());
     }

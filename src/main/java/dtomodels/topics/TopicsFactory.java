@@ -4,13 +4,13 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import dtomodels.RandomWord;
 import dtomodels.customfields.ListOfCustomField;
-import org.apache.commons.lang3.RandomStringUtils;
 
 public class TopicsFactory {
 
-  public String title = RandomStringUtils.randomAlphanumeric(1, 256);
-  public String description = RandomStringUtils.randomAlphanumeric(1, 100); // todo 10000
+  public String title = RandomWord.randomAllCharacters(1, 256);
+  public String description = RandomWord.randomAllCharacters(1, 100); // todo 10000
   public String dueDate = LocalDateTime.now().plusDays(14)
       .atOffset(ZoneOffset.UTC)
       .format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)
@@ -31,7 +31,7 @@ public class TopicsFactory {
         return new Topics(null, null, null, null, null,
             null, null, null, null);
       case RANDOM_TOPIC:
-        return new Topics(RandomStringUtils.randomAlphabetic(1, 256), description, dueDate,
+        return new Topics(RandomWord.randomAllCharacters(1, 256), description, dueDate,
             assignedToId, typeId, statusId, priorityId, customFields, labels);
       case DEFAULT_TOPIC:
       default:

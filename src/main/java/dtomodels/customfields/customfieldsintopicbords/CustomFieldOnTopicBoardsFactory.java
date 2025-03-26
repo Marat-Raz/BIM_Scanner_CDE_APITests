@@ -3,8 +3,6 @@ package dtomodels.customfields.customfieldsintopicbords;
 public class CustomFieldOnTopicBoardsFactory {
 
   public String id;
-  public boolean isEnabled;
-  public boolean isRequired;
   public String defaultValue = "string";
 
   public CustomFieldOnTopicBoards createCustomFieldOnTopicBoardsById(String idFromResponse,
