@@ -3,16 +3,15 @@ package dtomodels.customfields;
 import static dtomodels.customfields.CustomFieldType.*;
 import static dtomodels.customfields.enumerationitem.EnumerationItemType.DEFAULT;
 
-import java.util.List;
-import dtomodels.customfields.enumerationitem.EnumerationItem;
 import dtomodels.customfields.enumerationitem.EnumerationItemFactory;
-import org.apache.commons.lang3.RandomStringUtils;
+import java.util.List;
+import dtomodels.RandomWord;
+import dtomodels.customfields.enumerationitem.EnumerationItem;
 
 public class CustomFieldFactory {
 
-  private String name = RandomStringUtils.randomAlphabetic(1, 256);
-  private String description = RandomStringUtils.randomAlphabetic(1,
-      100); // Can up to 10000 characters
+  private String name = RandomWord.randomAllCharacters(1, 256);
+  private String description = RandomWord.randomAllCharacters(1, 100); // Can up to 10000 characters
   public CustomFieldType type;
   public List<EnumerationItem> enumerationItems =
       List.of(new EnumerationItemFactory().createNameForEnumerationItem(DEFAULT),

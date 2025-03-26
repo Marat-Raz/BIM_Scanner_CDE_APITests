@@ -1,11 +1,11 @@
 package dtomodels.statuses;
 
+import dtomodels.RandomWord;
 import dtomodels.RandomColorInHex;
-import org.apache.commons.lang3.RandomStringUtils;
 
 public class StatusesFactory {
 
-  public String name = RandomStringUtils.randomAlphabetic(1, 256);
+  public String name = RandomWord.randomAllCharacters(1, 256);
   public String color = RandomColorInHex.getRandomColorInHex();
 
   public Statuses createStatuses(StatusesType statusesType) {
