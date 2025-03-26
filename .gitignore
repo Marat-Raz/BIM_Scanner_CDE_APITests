@@ -52,6 +52,3 @@ replay_pid*
 
 # Temporary files to download/send to/from the server
 src/main/resources/download/
-src/main/resources/upload/
-
- 
