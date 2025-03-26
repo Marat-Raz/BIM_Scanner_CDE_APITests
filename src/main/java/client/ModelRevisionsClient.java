@@ -64,7 +64,7 @@ public class ModelRevisionsClient extends Client {
 
   @Step("Получить версию модели в проекте по ID")
   public ValidatableResponse getModelRevisionByVersion(String projectId, String modelId,
-      String modelVersion) {
+      int modelVersion) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
@@ -77,7 +77,7 @@ public class ModelRevisionsClient extends Client {
   public ValidatableResponse changeModelRevisionComment(
       String projectId,
       String modelId,
-      String modelVersion,
+      int modelVersion,
       Comment comment) {
     return given()
         .spec(getBaseSpec())

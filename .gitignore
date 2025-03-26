@@ -50,9 +50,8 @@ replay_pid*
 hs_err_pid*
 replay_pid*
 
-# Temporary files to upload to the server
-src/main/resources/upload/1.7mb.png 
-src/main/resources/upload/Gladilova_AC_(IFC2x3).ifczip 
-src/main/resources/upload/Gladilova_AC_(IFC2x3).ifc 
+# Temporary files to download/send to/from the server
+src/main/resources/download/
+src/main/resources/upload/
 
  

@@ -3,7 +3,8 @@ package dtomodels.models;
 public enum ModelFileFormat {
 
   IFC("application/ifc"),
-  GIFT_BINARY("application/gift-binary"),
+  IFC_ZIP("application/ifczip"),
+  GLTF_BINARY("application/gift-binary"),
   IFC_XML("bimscanner/ifc-xml"),
   XKT("application/xkt");
 

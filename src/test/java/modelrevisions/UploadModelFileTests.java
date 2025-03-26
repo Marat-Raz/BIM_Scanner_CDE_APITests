@@ -4,21 +4,11 @@ import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import basetests.RestAssuredLogging;
-import dtomodels.comment.Comment;
-import dtomodels.models.modelrevisions.ResponseModelRevisions;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 
 public class UploadModelFileTests extends ModelRevisionsBaseTests {
-
-  @BeforeEach
-  public void setupMinimalLoggingAndUploadModelFile() {
-    RestAssuredLogging.setupMinimalLogging();
-    uploadModelFileResponse = modelRevisionsClient
-        .uploadNewModelFile(projectId, modelId, modelFile, new Comment("comment"));
-    responseModelRevisions = uploadModelFileResponse.extract()
-        .as(ResponseModelRevisions.class);
-  }
 
   @Test
   @Tag(value = "positive")
