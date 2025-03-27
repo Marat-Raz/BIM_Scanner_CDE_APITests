@@ -6,20 +6,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import basetests.StartTests;
 import client.base.Client;
+import dtomodels.project.ResponseFromGetAllProjects;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import java.util.ArrayList;
 import java.util.List;
-<<<<<<< HEAD
 import dtomodels.project.Project;
 import dtomodels.project.ProjectFactory;
 import dtomodels.project.ServerResponseProject;
-=======
-import models.project.Project;
-import models.project.ProjectFactory;
-import models.project.ResponseFromGetAllProjects;
-import models.project.ServerResponseProject;
->>>>>>> 524f41cb87e19de1e5fae22e3311a10d5fcd343d
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;

@@ -20,8 +20,11 @@ public class CustomFieldToEdit {
   public ArrayList<ResponseEnumerationItem> enumerationItems;
 
   public static CustomFieldToEdit from(ResponseCustomField responseCustomField) {
-    return new CustomFieldToEdit(responseCustomField.getName(), responseCustomField.description,
-        responseCustomField.isArchived(), responseCustomField.getEnumerationItems());
-  }
+    return new CustomFieldToEdit(
+        responseCustomField.getName(),
+        responseCustomField.description,
+        responseCustomField.isArchived(),
+        responseCustomField.getEnumerationItems()
+    );}
 
 }

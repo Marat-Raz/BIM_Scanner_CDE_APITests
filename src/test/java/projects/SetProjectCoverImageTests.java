@@ -1,6 +1,6 @@
 package projects;
 
-import static models.project.ProjectType.RANDOM_PROJECT;
+import static dtomodels.project.ProjectType.RANDOM_PROJECT;
 import static org.apache.http.HttpStatus.SC_NO_CONTENT;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -8,14 +8,14 @@ import basetests.RestAssuredFilterSwitcher;
 import basetests.StartTests;
 import client.ProjectsClient;
 import client.base.Client;
+import dtomodels.project.Project;
+import dtomodels.project.ProjectFactory;
+import dtomodels.project.ResponseFromGetAllProjects;
+import dtomodels.project.ServerResponseProject;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import java.util.ArrayList;
 import java.util.List;
-import models.project.Project;
-import models.project.ProjectFactory;
-import models.project.ResponseFromGetAllProjects;
-import models.project.ServerResponseProject;
 import org.junit.jupiter.api.*;
 
 public class SetProjectCoverImageTests extends StartTests {
