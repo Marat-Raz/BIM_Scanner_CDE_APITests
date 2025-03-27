@@ -8,21 +8,17 @@ import dtomodels.projectroles.ProjectRole;
 import dtomodels.projectroles.ProjectRolesFactory;
 import dtomodels.projectroles.ResponseProjectRole;
 import io.restassured.response.ValidatableResponse;
-import java.util.List;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 
 public class ProjectRolesBaseTests extends StartTests {
 
   protected static ProjectRolesClient projectRolesClient = new ProjectRolesClient();
-  protected static ProjectRolesFactory rolesFactory = new ProjectRolesFactory();
   protected static ValidatableResponse createProjectRoleResponse;
   protected static ValidatableResponse getAllRolesResponse;
-  protected static ValidatableResponse deleteResponse;
   protected static ProjectRole defaultProjectRole;
   protected static ResponseProjectRole defaultResponseProjectRole;
   protected static String defaultProjectRoleId;
-  protected static List<ResponseProjectRole> allRolesList;
   protected static int projectRolesCount = 3;
 
   @BeforeAll

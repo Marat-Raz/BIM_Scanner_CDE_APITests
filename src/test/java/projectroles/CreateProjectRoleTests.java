@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 public class CreateProjectRoleTests extends ProjectRolesBaseTests {
 
   @Test
-  @Tag(value = "smoke")
+  @Tag(value = "positive")
   @DisplayName("Запрос на создание роли в проекте дает ответ 200")
   public void createProjectRoleTest() {
     statusCode = extractStatusCode(createProjectRoleResponse);

@@ -4,6 +4,7 @@ import static io.restassured.RestAssured.given;
 
 import client.base.Client;
 import dtomodels.projectroles.ProjectRole;
+import dtomodels.projectroles.projectrolestoedit.ProjectRoleToEdit;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 
@@ -55,7 +56,7 @@ public class ProjectRolesClient extends Client {
 
   @Step("Обновить роль проекта по ID")
   public ValidatableResponse updateProjectRole(String projectId, String roleId,
-      Object updatedRole) {
+      ProjectRoleToEdit updatedRole) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)

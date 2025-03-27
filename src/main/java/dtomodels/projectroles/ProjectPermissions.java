@@ -1,7 +1,7 @@
 package dtomodels.projectroles;
 
 public enum ProjectPermissions {
-
+// todo проверить работу каждого разрешения
   PROJECT_UPDATE("Project.Update"),
   PROJECT_UPDATE_RESPONSIBLE("Project.UpdateResponsible"),
 

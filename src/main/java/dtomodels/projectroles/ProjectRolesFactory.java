@@ -26,7 +26,7 @@ public class ProjectRolesFactory {
     }
   }
 
-  public static ProjectPermissions getRandomPermission() {
+  private static ProjectPermissions getRandomPermission() {
     ProjectPermissions[] permissions = ProjectPermissions.values();
     int randomIndex = new Random().nextInt(permissions.length);
     return permissions[randomIndex];
