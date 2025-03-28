@@ -13,7 +13,10 @@ import dtomodels.project.Project;
 import dtomodels.project.ProjectFactory;
 import dtomodels.project.ResponseFromGetAllProjects;
 import dtomodels.project.ServerResponseProject;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
 import io.qameta.allure.Step;
+import io.qameta.allure.Story;
 import io.restassured.RestAssured;
 import io.restassured.response.ValidatableResponse;
 import java.io.File;
@@ -22,6 +25,9 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.*;
 
+@Epic("Api interface CDE")
+@Feature("Раздел Projects(Проекты)")
+@Story("Получение/Скачивание обложки проекта")
 public class GetProjectCoverImageTests extends StartTests {
 
   private static ProjectFactory projectFactory = new ProjectFactory();

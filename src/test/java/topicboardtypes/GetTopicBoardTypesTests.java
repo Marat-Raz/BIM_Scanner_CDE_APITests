@@ -5,15 +5,24 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import client.TopicBoardTypesClient;
+import dtomodels.types.Types;
+import dtomodels.types.TypesFactory;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import io.restassured.response.ValidatableResponse;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-import dtomodels.types.Types;
-import dtomodels.types.TypesFactory;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 
+@Epic("Api interface CDE")
+@Feature("Раздел TopicBoardType(«Типы» в досках задач)")
+@Story("Получение «Типов» с доски задач")
 public class GetTopicBoardTypesTests extends TopicBoardTypeBaseTests {
 
   private static TopicBoardTypesClient topicBoardTypesClient = new TopicBoardTypesClient();

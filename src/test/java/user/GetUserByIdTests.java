@@ -6,14 +6,20 @@ import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import basetests.StartTests;
-import io.restassured.response.ValidatableResponse;
-import java.util.UUID;
 import dtomodels.error.ErrorRoot;
 import dtomodels.user.ResponseUser;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
+import io.restassured.response.ValidatableResponse;
+import java.util.UUID;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+@Epic("Api interface CDE")
+@Feature("Раздел User")
+@Story("Получение пользователя по id")
 public class GetUserByIdTests extends StartTests {
 
   private ValidatableResponse getUserResponse;

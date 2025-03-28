@@ -5,8 +5,6 @@ import static dtomodels.topics.TopicType.DEFAULT_TOPIC;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import io.restassured.response.ValidatableResponse;
-import java.util.ArrayList;
 import dtomodels.topicboards.ResponseTopicBoards;
 import dtomodels.topicboards.TopicBoards;
 import dtomodels.topicboards.TopicBoardsFactory;
@@ -14,8 +12,19 @@ import dtomodels.topics.ResponseFromGetAllTopics;
 import dtomodels.topics.ResponseTopics;
 import dtomodels.topics.Topics;
 import dtomodels.topics.TopicsFactory;
-import org.junit.jupiter.api.*;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
+import io.restassured.response.ValidatableResponse;
+import java.util.ArrayList;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 
+@Epic("Api interface CDE")
+@Feature("Раздел Topics(Задачи)")
+@Story("Получение всех задачи из проекта")
 public class GetTopicsInProjectTests extends TopicsBaseTests {
 
   private static Topics newTopic;

@@ -6,14 +6,20 @@ import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import basetests.StartTests;
-import io.restassured.response.ValidatableResponse;
 import dtomodels.error.ErrorRoot;
 import dtomodels.user.User;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
+import io.restassured.response.ValidatableResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+@Epic("Api interface CDE")
+@Feature("Раздел User")
+@Story("Изменение данных пользователя")
 public class ChangeUserDataTests extends StartTests {
 
   ValidatableResponse putResponse;

@@ -7,12 +7,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import basetests.StartTests;
 import client.AccountClient;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import io.restassured.response.ValidatableResponse;
 import dtomodels.error.ErrorRoot;
 import dtomodels.user.User;
 import dtomodels.user.UserCredentials;
 import org.junit.jupiter.api.*;
 
+@Epic("Api interface CDE")
+@Feature("Раздел Account(Аккаунт)")
+@Story("Регистрация пользователя")
 public class RegisterUserTests extends StartTests {
 
   private ValidatableResponse registerUserResponse;
@@ -69,6 +75,5 @@ public class RegisterUserTests extends StartTests {
         "' is already taken., Email '" + user.getEmail() +
         "' is already taken.", errorRoot.error.message);
   }
-
 
 }

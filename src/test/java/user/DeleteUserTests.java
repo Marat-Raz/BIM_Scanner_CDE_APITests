@@ -7,11 +7,17 @@ import static org.apache.http.HttpStatus.SC_NO_CONTENT;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import basetests.StartTests;
-import io.qameta.allure.Step;
-import io.restassured.response.ValidatableResponse;
 import dtomodels.user.User;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Step;
+import io.qameta.allure.Story;
+import io.restassured.response.ValidatableResponse;
 import org.junit.jupiter.api.*;
 
+@Epic("Api interface CDE")
+@Feature("Раздел User")
+@Story("Удаление пользователя")
 public class DeleteUserTests extends StartTests {
 
   private String testUserId;
