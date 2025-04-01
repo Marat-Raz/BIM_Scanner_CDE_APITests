@@ -18,6 +18,7 @@ public class Client {
   protected static final String API_ISSUES_BOARDS = "/api/issues/boards/";
   public static String DEFAULT_USER_ACCESS_TOKEN;
   public static String ADMIN_ACCESS_TOKEN;
+  public static int TIMEOUT = 300000;
 
   protected RequestSpecification getBaseSpec() {
     return new RequestSpecBuilder()
@@ -39,8 +40,8 @@ public class Client {
         .setBaseUri(BASE_URL)
         .setConfig(RestAssuredConfig.config()
             .httpClient(HttpClientConfig.httpClientConfig()
-                .setParam("http.socket.timeout", 300000)
-                .setParam("http.connection.timeout", 300000)))
+                .setParam("http.socket.timeout", TIMEOUT)
+                .setParam("http.connection.timeout", TIMEOUT)))
         .build();
   }
   protected RequestSpecification getMultipartSpecWithUtf8() {
