@@ -44,6 +44,7 @@ public class Client {
                 .setParam("http.connection.timeout", TIMEOUT)))
         .build();
   }
+
   protected RequestSpecification getMultipartSpecWithUtf8() {
     return new RequestSpecBuilder()
         .setContentType("multipart/form-data; boundary=----WebKitFormBoundary123456")
