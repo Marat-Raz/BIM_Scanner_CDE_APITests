@@ -6,20 +6,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import basetests.StartTests;
 import client.base.Client;
+import dtomodels.PaginatedResponse;
+import dtomodels.project.Project;
+import dtomodels.project.ProjectFactory;
+import dtomodels.project.ResponseProject;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import java.util.ArrayList;
-import java.util.List;
-<<<<<<< HEAD
-import dtomodels.project.Project;
-import dtomodels.project.ProjectFactory;
-import dtomodels.project.ServerResponseProject;
-=======
-import models.project.Project;
-import models.project.ProjectFactory;
-import models.project.ResponseFromGetAllProjects;
-import models.project.ServerResponseProject;
->>>>>>> 524f41cb87e19de1e5fae22e3311a10d5fcd343d
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -30,7 +23,6 @@ public class DeleteProjectByItsIdTests extends StartTests {
   private ValidatableResponse getAllProjectResponse;
   private ValidatableResponse deleteProjectResponse;
   private static ArrayList<Project> projectList = new ArrayList<Project>();
-  private static List<ServerResponseProject> serverResponseProjectList = new ArrayList<>();
   private static int numberOfProjects = 5;
 
   @BeforeAll
@@ -49,9 +41,9 @@ public class DeleteProjectByItsIdTests extends StartTests {
   @DisplayName("Удалить все проекты пользователя ADMIN")
   public void deleteProjectByItsIdTest() {
     getAllProjectResponse = projectsClient.getListOfProjects(Client.ADMIN_ACCESS_TOKEN);
-    serverResponseProjectList = getAllProjectResponse.extract().body()
-        .as(ResponseFromGetAllProjects.class).getItems();
-    for (ServerResponseProject project : serverResponseProjectList) {
+    PaginatedResponse<ResponseProject> projectPaginatedResponse =
+        getAllProjectResponse.extract().body().as(typeRef);
+    for (ResponseProject project : projectPaginatedResponse.getItems()) {
       deleteProjectResponse = projectsClient.deleteProjectByItsId(Client.ADMIN_ACCESS_TOKEN,
           project.getId());
       statusCode = extractStatusCode(deleteProjectResponse);
