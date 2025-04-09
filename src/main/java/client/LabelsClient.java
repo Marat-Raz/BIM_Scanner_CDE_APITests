@@ -3,10 +3,10 @@ package client;
 import static io.restassured.RestAssured.given;
 
 import client.base.Client;
+import dtomodels.labels.Label;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import java.util.Map;
-import models.labels.Label;
 
 public class LabelsClient extends Client {
 
@@ -56,7 +56,8 @@ public class LabelsClient extends Client {
   }
 
   @Step("Обновить существующую метку")
-  public ValidatableResponse updateLabelInProject(String projectId, String labelId, Label updatedLabel) {
+  public ValidatableResponse updateLabelInProject(String projectId, String labelId,
+      Label updatedLabel) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)

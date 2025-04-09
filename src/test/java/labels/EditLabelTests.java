@@ -3,10 +3,10 @@ package labels;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import dtomodels.labels.Label;
+import dtomodels.labels.LabelFactory;
+import dtomodels.labels.ResponseLabel;
 import io.restassured.response.ValidatableResponse;
-import models.labels.Label;
-import models.labels.LabelFactory;
-import models.labels.ResponseLabel;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;

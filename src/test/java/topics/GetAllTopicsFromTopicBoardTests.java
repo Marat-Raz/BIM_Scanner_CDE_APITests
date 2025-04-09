@@ -3,10 +3,10 @@ package topics;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import dtomodels.PaginatedResponse;
+import dtomodels.topics.ResponseTopics;
 import io.restassured.response.ValidatableResponse;
 import java.util.ArrayList;
-import dtomodels.topics.ResponseFromGetAllTopics;
-import dtomodels.topics.ResponseTopics;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -22,12 +22,12 @@ public class GetAllTopicsFromTopicBoardTests extends TopicsBaseTests {
     getListOfTopicsResponse = topicsClient.getListOfTopicsFromTopicBoardWithoutQueryOptions(
         topicBoardId);
     statusCode = extractStatusCode(getListOfTopicsResponse);
-    ResponseFromGetAllTopics responseFromGetAllTopics = getListOfTopicsResponse
-        .extract().as(ResponseFromGetAllTopics.class);
-    ArrayList<ResponseTopics> arrayOfTopics = responseFromGetAllTopics.getItems();
+    PaginatedResponse<ResponseTopics> paginatedResponse = getListOfTopicsResponse
+        .extract().as(PaginatedResponse.class);
+    ArrayList<ResponseTopics> arrayOfTopics = paginatedResponse.getItems();
 
     assertEquals(SC_OK, statusCode);
-    assertEquals(responseFromGetAllTopics.getTotalCount(),
+    assertEquals(paginatedResponse.getTotalCount(),
         arrayOfTopics.size()); // fixme нужно другим образом сравнить
   }
 

@@ -85,7 +85,7 @@ public class ProjectsClient extends Client {
   }
 
   @Step("Удалить проект по его id с токеном DEFAULT_USER")
-  public ValidatableResponse deleteProjectByItsId(String id) {
+  public ValidatableResponse deleteProjectByItsIdWithAdminToken(String id) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
@@ -133,7 +133,7 @@ public class ProjectsClient extends Client {
     return RestAssured.given()
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
-        .get(API_PROJECTS + projectId + "/cover") // "api/projects/projectId/cover"
+        .get(API_PROJECTS + projectId + "/cover")
         .then();
   }
 
@@ -148,11 +148,11 @@ public class ProjectsClient extends Client {
   }
 
   @Step("Задать изображение обложки проекта с токеном админа")
-  public ValidatableResponse setProjectCoverImage(String projectId) {
+  public ValidatableResponse setProjectCoverImage(String projectId, File file) {
     return given()
         .spec(multipartBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
-        .multiPart("coverImage", new File("src/main/resources/1.7mb.png"))
+        .multiPart("coverImage", file)
         // todo заменить название файла на переменную
         .when()
         .put(API_PROJECTS + projectId + "/cover")
@@ -160,11 +160,11 @@ public class ProjectsClient extends Client {
   }
 
   @Step("Задать изображение обложки проекта с токеном определенного пользователя")
-  public ValidatableResponse setProjectCoverImage(String token, String projectId) {
+  public ValidatableResponse setProjectCoverImage(String token, String projectId, File file) {
     return given()
         .spec(multipartBaseSpec())
         .auth().oauth2(token)
-        .multiPart("coverImage", new File("src/main/resources/1.7mb.png"))
+        .multiPart("coverImage", file)
         // todo заменить название файла на переменную
         .when()
         .put(API_PROJECTS + projectId + "/cover")

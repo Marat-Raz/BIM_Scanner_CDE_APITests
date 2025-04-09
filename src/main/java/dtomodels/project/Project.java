@@ -11,7 +11,6 @@ public class Project {
 
   private String name;
   private String description;
-  private String responsibleId;
   private String completionTime;
 
 }
