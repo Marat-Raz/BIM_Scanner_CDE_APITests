@@ -1,17 +1,17 @@
 package projects;
 
+import static client.base.Client.ADMIN_ACCESS_TOKEN;
 import static dtomodels.project.ProjectType.RANDOM_PROJECT;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import basetests.StartTests;
 import client.ProjectsClient;
-import client.base.Client;
+import dtomodels.project.Project;
+import dtomodels.project.ProjectFactory;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import java.util.ArrayList;
-import dtomodels.project.Project;
-import dtomodels.project.ProjectFactory;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -31,7 +31,7 @@ public class GetUsersProjectsTests extends StartTests {
       projectList.add(new ProjectFactory().createProject(RANDOM_PROJECT));
     }
     for (Project project : projectList) {
-      projectsClient.createProject(Client.ADMIN_ACCESS_TOKEN, project);
+      projectsClient.createProject(ADMIN_ACCESS_TOKEN, project);
     }
   }
 
@@ -40,7 +40,7 @@ public class GetUsersProjectsTests extends StartTests {
   @Tag(value = "smoke")
   @DisplayName("Получить список проектов для ADMIN")
   public void getProjectsForAdminTest() {
-    getAllProjectResponse = projectsClient.getListOfProjects(Client.ADMIN_ACCESS_TOKEN);
+    getAllProjectResponse = projectsClient.getListOfProjects(ADMIN_ACCESS_TOKEN);
     statusCode = extractStatusCode(getAllProjectResponse);
 
     assertEquals(SC_OK, statusCode);

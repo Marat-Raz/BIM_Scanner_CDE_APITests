@@ -13,10 +13,10 @@ public class ProjectWithConcurrencyStamp {
   private String completionTime;
   private String concurrencyStamp;
 
-  public ProjectWithConcurrencyStamp(Project project, String concurrencyStamp) {
+  public ProjectWithConcurrencyStamp(Project project, String responsibleId, String concurrencyStamp) {
     name = project.getName();
     description = project.getDescription();
-    responsibleId = project.getResponsibleId();
+    this.responsibleId = responsibleId;
     completionTime = project.getCompletionTime();
     this.concurrencyStamp = concurrencyStamp;
   }
