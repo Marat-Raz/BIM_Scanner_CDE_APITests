@@ -1,50 +1,29 @@
 stages:
   - test
   - deploy
-  - pages  # Добавляем отдельный этап для Pages
-
-variables:
-  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
-  API_BASE_URL: "https://cde-api.test.briodev.ru/"
-  CI_DEBUG_TRACE: "true"
-
-cache:
-  paths:
-    - .m2/repository/
 
 run-tests:
-  image: maven:3.9.9-amazoncorretto-21
   stage: test
-  tags:
-    - docker-on-host
+  image: maven:3.9.9-amazoncorretto-21
   script:
     - mvn clean test
-    - mvn allure:report
+    - mvn allure:report  # Генерируем отчет
   artifacts:
     paths:
-      - target/allure-results/  # Важно: сохраняем сырые данные Allure
+      - target/allure-results/  # Сырые данные Allure (обязательно!)
+    reports:
+      allure_report:  # Специальный тип артефакта для GitLab
+        - target/allure-results/  # Путь к результатам
     expire_in: 1 week
 
-generate-allure:
-  stage: deploy
-  image: maven:3.9.9-amazoncorretto-21
-  tags:
-    - docker-on-host
-  script:
-    - mvn allure:report  # Генерируем финальный HTML-отчет
-    - mkdir -p public/allure
-    - cp -r target/site/allure-maven-plugin/* public/allure/
-  artifacts:
-    paths:
-      - public/allure/
-  needs: ["run-tests"]  # Зависит от этапа run-tests
-
 pages:
-  stage: pages
+  stage: deploy
   script:
-    - echo "Allure report will be available at $CI_PAGES_URL/allure"
+    - mvn allure:report  # Повторная генерация HTML
+    - mkdir -p public
+    - cp -r target/site/allure-maven-plugin/* public/  # Для GitLab Pages
   artifacts:
     paths:
-      - public  # GitLab автоматически развернет содержимое public на Pages
+      - public
   only:
     - master
