@@ -3,7 +3,7 @@ package topiccomments;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import dtomodels.topiccomments.ResponseTopicComment;
+import dtomodels.comment.ResponseTopicComment;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;

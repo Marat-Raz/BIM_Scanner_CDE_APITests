@@ -1,13 +1,15 @@
 package projects;
 
+import static client.base.Client.ADMIN_ACCESS_TOKEN;
 import static dtomodels.project.ProjectType.RANDOM_PROJECT;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import basetests.StartTests;
-import client.base.Client;
 import dtomodels.project.Project;
+import dtomodels.project.ProjectFactory;
 import dtomodels.project.ProjectWithConcurrencyStamp;
+import dtomodels.project.ResponseProject;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Step;
@@ -23,14 +25,23 @@ import org.junit.jupiter.api.Test;
 @Story("Редактирование существующего проекта")
 public class UpdatesAnExistingProjectTests extends StartTests {
 
-  private static String concurrencyStamp;
+  private String concurrencyStamp;
+  private ValidatableResponse createProjectResponse;
   private ValidatableResponse putProjectResponse;
   private ProjectWithConcurrencyStamp projectWithConcurrencyStamp;
+  private Project testProject;
+  private String responsibleId;
+  private String testProjectId;
 
   @BeforeEach
-  @Step("Создать проект от имени ADMIN")
+  @Step("Создать проект от имени ADMIN и получить из ответа «concurrencyStamp» и «responsibleId»")
   public void getConcurrencyStamp() {
-    concurrencyStamp = createProjectResponse.extract().path("concurrencyStamp");
+    testProject = new ProjectFactory().createProject(RANDOM_PROJECT);
+    createProjectResponse = projectsClient.createProject(testProject);
+    ResponseProject responseProject = createProjectResponse.extract().as(ResponseProject.class);
+    concurrencyStamp = responseProject.getConcurrencyStamp();
+    testProjectId = responseProject.getId();
+    responsibleId = responseProject.getResponsible().getId();
   }
 
   @Test
@@ -38,14 +49,15 @@ public class UpdatesAnExistingProjectTests extends StartTests {
   @DisplayName("Изменить проект пользователя ADMIN")
   public void updatesAnExistingProjectTest() {
     Project newProject = projectFactory.createProject(RANDOM_PROJECT);
-    projectWithConcurrencyStamp = new ProjectWithConcurrencyStamp(newProject, concurrencyStamp);
-    putProjectResponse = projectsClient.putProjectByItsId(Client.ADMIN_ACCESS_TOKEN, projectId,
+    projectWithConcurrencyStamp =
+        new ProjectWithConcurrencyStamp(newProject, responsibleId, concurrencyStamp);
+    putProjectResponse = projectsClient.putProjectByItsId(ADMIN_ACCESS_TOKEN, testProjectId,
         projectWithConcurrencyStamp);
     statusCode = extractStatusCode(putProjectResponse);
     String changedProjectId = putProjectResponse.extract().path("id");
 
     assertEquals(SC_OK, statusCode);
-    assertEquals(projectId, changedProjectId);
+    assertEquals(testProjectId, changedProjectId);
   }
 }
 

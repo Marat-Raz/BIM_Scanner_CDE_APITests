@@ -22,6 +22,6 @@ public class AddTopicCommentsToTopicTests extends TopicsCommentsBaseTests {
     statusCode = extractStatusCode(addTopicsCommentsResponse);
 
     assertEquals(SC_OK, statusCode);
-    assertEquals(topicComment.getComment(), responseTopicComment.getComment());
+    assertEquals(comment.getComment(), responseTopicComment.getComment());
   }
 }

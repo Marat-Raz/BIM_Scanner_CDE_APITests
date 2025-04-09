@@ -1,15 +1,16 @@
 package projects;
 
+import static client.base.Client.ADMIN_ACCESS_TOKEN;
 import static dtomodels.project.ProjectType.RANDOM_PROJECT;
 import static org.apache.http.HttpStatus.SC_NO_CONTENT;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import basetests.StartTests;
 import client.base.Client;
+import dtomodels.PaginatedResponse;
 import dtomodels.project.Project;
 import dtomodels.project.ProjectFactory;
-import dtomodels.project.ResponseFromGetAllProjects;
-import dtomodels.project.ServerResponseProject;
+import dtomodels.project.ResponseProject;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Step;
@@ -30,8 +31,8 @@ public class DeleteProjectByItsIdTests extends StartTests {
   private ValidatableResponse getAllProjectResponse;
   private ValidatableResponse deleteProjectResponse;
   private static ArrayList<Project> projectList = new ArrayList<Project>();
-  private static List<ServerResponseProject> serverResponseProjectList = new ArrayList<>();
-  private static int numberOfProjects = 5;
+  private static List<ResponseProject> responseProjectList = new ArrayList<>();
+  private static int numberOfProjects = 3;
 
   @BeforeAll
   @Step("Создать проекты от имени ADMIN")
@@ -40,7 +41,7 @@ public class DeleteProjectByItsIdTests extends StartTests {
       projectList.add(new ProjectFactory().createProject(RANDOM_PROJECT));
     }
     for (Project project : projectList) {
-      projectsClient.createProject(Client.ADMIN_ACCESS_TOKEN, project);
+      projectsClient.createProject(ADMIN_ACCESS_TOKEN, project);
     }
   }
 
@@ -49,9 +50,9 @@ public class DeleteProjectByItsIdTests extends StartTests {
   @DisplayName("Удалить все проекты пользователя ADMIN")
   public void deleteProjectByItsIdTest() {
     getAllProjectResponse = projectsClient.getListOfProjects(Client.ADMIN_ACCESS_TOKEN);
-    serverResponseProjectList = getAllProjectResponse.extract().body()
-        .as(ResponseFromGetAllProjects.class).getItems();
-    for (ServerResponseProject project : serverResponseProjectList) {
+    PaginatedResponse<ResponseProject> projectPaginatedResponse =
+        getAllProjectResponse.extract().body().as(typeRef);
+    for (ResponseProject project : projectPaginatedResponse.getItems()) {
       deleteProjectResponse = projectsClient.deleteProjectByItsId(Client.ADMIN_ACCESS_TOKEN,
           project.getId());
       statusCode = extractStatusCode(deleteProjectResponse);

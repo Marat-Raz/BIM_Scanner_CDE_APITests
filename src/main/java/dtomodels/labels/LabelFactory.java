@@ -1,11 +1,11 @@
 package dtomodels.labels;
 
 import dtomodels.RandomColorInHex;
-import org.apache.commons.lang3.RandomStringUtils;
+import dtomodels.RandomWord;
 
 public class LabelFactory {
 
-  public String name = RandomStringUtils.randomAlphabetic(1, 256);
+  public String name = RandomWord.randomLatinCharacters(1, 256);
   public String color = RandomColorInHex.getRandomColorInHex();
 
   public Label createLabel(LabelType labelType) {

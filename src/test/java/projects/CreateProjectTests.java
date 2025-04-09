@@ -32,7 +32,6 @@ public class CreateProjectTests extends StartTests {
   @DisplayName("Создать проект без названия, без обязательного поля name")
   public void createProjectWithoutNameTest() {
     project = projectFactory.createProject(PROJECT_WITHOUT_NAME);
-    project.setResponsibleId(userId);
     createProjectResponse = projectsClient.createProject(project);
     statusCode = extractStatusCode(createProjectResponse);
 
@@ -43,7 +42,6 @@ public class CreateProjectTests extends StartTests {
   @DisplayName("Создать проект, где все параметры null")
   public void createProjectWithNullTest() {
     project = projectFactory.createProject(PROJECT_WITHOUT_DATA);
-    project.setResponsibleId(userId);
     createProjectResponse = projectsClient.createProject(project);
     statusCode = extractStatusCode(createProjectResponse);
 

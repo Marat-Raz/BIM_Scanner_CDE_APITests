@@ -16,11 +16,10 @@ public class Owner extends User {
       boolean isActive,
       boolean lockoutEnabled,
       String roleNames,
-      String password) {
-
+      String password
+  ) {
     super(userName, name, surname, email, phoneNumber, isActive,
         lockoutEnabled, new String[]{roleNames}, password);
-
   }
 
 }
