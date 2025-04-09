@@ -4,12 +4,12 @@ import static dtomodels.labels.LabelType.DEFAULT;
 
 import basetests.StartTests;
 import client.LabelsClient;
-import io.qameta.allure.Step;
-import io.restassured.response.ValidatableResponse;
-import java.util.ArrayList;
 import dtomodels.labels.Label;
 import dtomodels.labels.LabelFactory;
 import dtomodels.labels.ResponseLabel;
+import io.qameta.allure.Step;
+import io.restassured.response.ValidatableResponse;
+import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeAll;
 
 public class LabelBaseTests extends StartTests {
@@ -37,5 +37,5 @@ public class LabelBaseTests extends StartTests {
     }
     labelId = responseLabels.get(0).getId();
   }
-  
+
 }

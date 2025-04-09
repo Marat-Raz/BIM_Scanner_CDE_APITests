@@ -1,5 +1,6 @@
 package projects;
 
+import static client.base.Client.ADMIN_ACCESS_TOKEN;
 import static constants.CommonConstants.PNG_FILE;
 import static dtomodels.project.ProjectType.RANDOM_PROJECT;
 import static org.apache.http.HttpStatus.SC_NO_CONTENT;
@@ -8,7 +9,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import basetests.RestAssuredLogging;
 import basetests.StartTests;
 import client.ProjectsClient;
-import client.base.Client;
 import dtomodels.project.Project;
 import dtomodels.project.ProjectFactory;
 import io.qameta.allure.Step;
@@ -28,7 +28,7 @@ public class DeleteProjectCoverImageTests extends StartTests {
   @Step("Создать проект от имени ADMIN")
   public static void createProject() {// todo перенести в ProjectBaseTest
     Project project = projectFactory.createProject(RANDOM_PROJECT);
-    createProjectResponse = projectsClient.createProject(Client.ADMIN_ACCESS_TOKEN, project);
+    createProjectResponse = projectsClient.createProject(ADMIN_ACCESS_TOKEN, project);
     projectId = createProjectResponse.extract().path("id");
   }
 
@@ -52,5 +52,6 @@ public class DeleteProjectCoverImageTests extends StartTests {
 
     assertEquals(SC_NO_CONTENT, statusCode);
   }
+
 }
 

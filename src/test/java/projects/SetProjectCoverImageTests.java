@@ -1,5 +1,6 @@
 package projects;
 
+import static client.base.Client.ADMIN_ACCESS_TOKEN;
 import static constants.CommonConstants.PNG_FILE;
 import static dtomodels.project.ProjectType.RANDOM_PROJECT;
 import static org.apache.http.HttpStatus.SC_NO_CONTENT;
@@ -33,7 +34,7 @@ public class SetProjectCoverImageTests extends StartTests {
   @Step("Создать проект от имени ADMIN")
   public static void createProject() {// todo перенести в ProjectBaseTest
     Project project = projectFactory.createProject(RANDOM_PROJECT);
-    createProjectResponse = projectsClient.createProject(Client.ADMIN_ACCESS_TOKEN, project);
+    createProjectResponse = projectsClient.createProject(ADMIN_ACCESS_TOKEN, project);
     projectId = createProjectResponse.extract().path("id");
   }
 

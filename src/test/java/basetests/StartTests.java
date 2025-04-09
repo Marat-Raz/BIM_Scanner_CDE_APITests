@@ -1,5 +1,6 @@
 package basetests;
 
+import static client.base.Client.ADMIN_ACCESS_TOKEN;
 import static dtomodels.project.ProjectType.DEFAULT_PROJECT;
 import static dtomodels.user.UserType.DEFAULT_USER;
 
@@ -53,7 +54,7 @@ public class StartTests {
         new AllureRestAssured());
     ValidatableResponse responseAdminToken =
         tokenClient.createToken(TokenBuilder.getTokenForAdminUser());
-    Client.ADMIN_ACCESS_TOKEN = responseAdminToken.extract().path("access_token");
+    ADMIN_ACCESS_TOKEN = responseAdminToken.extract().path("access_token");
 
     defaultUser = userFactory.createUser(DEFAULT_USER);
     baseResponse = userClient.createUser(defaultUser);
@@ -78,6 +79,7 @@ public class StartTests {
     for (ResponseProject project : projectPaginatedResponse.getItems()) {
       projectsClient.deleteProjectByItsId(Client.ADMIN_ACCESS_TOKEN,
           project.getId());
+
     }
   }
 

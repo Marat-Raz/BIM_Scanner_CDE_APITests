@@ -85,7 +85,7 @@ public class ProjectsClient extends Client {
   }
 
   @Step("Удалить проект по его id с токеном DEFAULT_USER")
-  public ValidatableResponse deleteProjectByItsId(String id) {
+  public ValidatableResponse deleteProjectByItsIdWithAdminToken(String id) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)

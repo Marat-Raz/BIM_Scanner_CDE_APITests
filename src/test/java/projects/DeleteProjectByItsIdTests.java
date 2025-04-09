@@ -1,5 +1,6 @@
 package projects;
 
+import static client.base.Client.ADMIN_ACCESS_TOKEN;
 import static dtomodels.project.ProjectType.RANDOM_PROJECT;
 import static org.apache.http.HttpStatus.SC_NO_CONTENT;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -13,6 +14,7 @@ import dtomodels.project.ResponseProject;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import java.util.ArrayList;
+import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -23,7 +25,8 @@ public class DeleteProjectByItsIdTests extends StartTests {
   private ValidatableResponse getAllProjectResponse;
   private ValidatableResponse deleteProjectResponse;
   private static ArrayList<Project> projectList = new ArrayList<Project>();
-  private static int numberOfProjects = 5;
+  private static List<ResponseProject> responseProjectList = new ArrayList<>();
+  private static int numberOfProjects = 3;
 
   @BeforeAll
   @Step("Создать проекты от имени ADMIN")
@@ -32,7 +35,7 @@ public class DeleteProjectByItsIdTests extends StartTests {
       projectList.add(new ProjectFactory().createProject(RANDOM_PROJECT));
     }
     for (Project project : projectList) {
-      projectsClient.createProject(Client.ADMIN_ACCESS_TOKEN, project);
+      projectsClient.createProject(ADMIN_ACCESS_TOKEN, project);
     }
   }
 
