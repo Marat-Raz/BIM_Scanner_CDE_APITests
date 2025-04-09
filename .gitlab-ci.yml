@@ -1,20 +1,7 @@
-# workflow describes basic conditions for pipeline to be created
-# see https://habr.com/ru/companies/selectel/articles/819509/
-workflow:
-  rules:
-    # create pipeline when started manually from web interface
-    - if: '$CI_PIPELINE_SOURCE == "web"'
-    # create pipeline for merge requests
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
-    # do NOT create pipeline for commits already handled by merge requests
-    - if: '$CI_COMMIT_BRANCH && $CI_OPEN_MERGE_REQUESTS'
-      when: never
-    # create pipeline for single commits or branches
-    - if: '$CI_COMMIT_BRANCH || $CI_COMMIT_TAG'
-
 stages:
   - test
   - deploy
+  - pages  # Добавляем отдельный этап для Pages
 
 variables:
   MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
@@ -32,29 +19,32 @@ run-tests:
     - docker-on-host
   script:
     - mvn clean test
-    - mvn allure:report # Генерация Allure-отчета
+    - mvn allure:report
   artifacts:
     paths:
-      - target/surefire-reports/
-      - target/allure-results/
-      - target/site/allure-maven-plugin/ # Папка с Allure-отчетом
-    reports:
-      junit:
-        - target/surefire-reports/TEST-*.xml
+      - target/allure-results/  # Важно: сохраняем сырые данные Allure
     expire_in: 1 week
 
-pages:
+generate-allure:
   stage: deploy
+  image: maven:3.9.9-amazoncorretto-21
   tags:
     - docker-on-host
-  needs:
-    - job: run-tests
-      artifacts: true
   script:
-    - mkdir public
-    - cp -r target/site/allure-maven-plugin/* public/ # Копируем Allure-отчет в папку public
+    - mvn allure:serve  # Генерируем финальный HTML-отчет
+    - mkdir -p public/allure
+    - cp -r target/site/allure-maven-plugin/* public/allure/
   artifacts:
     paths:
-      - public
+      - public/allure/
+  needs: ["run-tests"]  # Зависит от этапа run-tests
+
+pages:
+  stage: pages
+  script:
+    - echo "Allure report will be available at $CI_PAGES_URL/allure"
+  artifacts:
+    paths:
+      - public  # GitLab автоматически развернет содержимое public на Pages
   only:
-    - master # Запускать только для ветки master
+    - master
