@@ -31,7 +31,7 @@ generate-allure:
   tags:
     - docker-on-host
   script:
-    - mvn allure:serve  # Генерируем финальный HTML-отчет
+    - mvn allure:report  # Генерируем финальный HTML-отчет
     - mkdir -p public/allure
     - cp -r target/site/allure-maven-plugin/* public/allure/
   artifacts:
