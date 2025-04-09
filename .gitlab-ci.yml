@@ -45,6 +45,11 @@ run-tests:
 
 pages:
   stage: deploy
+  tags:
+    - docker-on-host
+  needs:
+    - job: run-tests
+      artifacts: true
   script:
     - mkdir public
     - cp -r target/site/allure-maven-plugin/* public/ # Копируем Allure-отчет в папку public
