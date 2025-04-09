@@ -11,11 +11,17 @@ import basetests.StartTests;
 import client.ProjectsClient;
 import dtomodels.project.Project;
 import dtomodels.project.ProjectFactory;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
 import io.qameta.allure.Step;
+import io.qameta.allure.Story;
 import io.restassured.response.ValidatableResponse;
 import java.io.File;
 import org.junit.jupiter.api.*;
 
+@Epic("Api interface CDE")
+@Feature("Раздел Projects(Проекты)")
+@Story("Удаление обложки проекта")
 public class DeleteProjectCoverImageTests extends StartTests {
 
   private static ProjectFactory projectFactory = new ProjectFactory();

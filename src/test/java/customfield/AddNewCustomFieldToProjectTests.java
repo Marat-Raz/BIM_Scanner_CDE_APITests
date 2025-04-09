@@ -1,34 +1,30 @@
 package customfield;
 
-import static dtomodels.customfields.CustomFieldType.ENUMERATION;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import basetests.StartTests;
-import client.CustomFieldsClient;
+import dtomodels.customfields.ResponseCustomField;
+import dtomodels.customfields.enumerationitem.EnumerationItem;
+import dtomodels.customfields.enumerationitem.ResponseEnumerationItem;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import io.restassured.response.ValidatableResponse;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import dtomodels.customfields.CustomField;
-import dtomodels.customfields.CustomFieldFactory;
-import dtomodels.customfields.ResponseCustomField;
-import dtomodels.customfields.enumerationitem.EnumerationItem;
-import dtomodels.customfields.enumerationitem.ResponseEnumerationItem;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+@Epic("Api interface CDE")
+@Feature("Раздел CustomFields(Кастомные поля)")
+@Story("Добавление кастомного поля")
 public class AddNewCustomFieldToProjectTests extends CustomFieldsBaseTests {
 
   private ValidatableResponse addResponse;
-
-  @BeforeEach
-  public void createCustomField() {
-  }
 
   @Test
   @Tag(value = "smoke")

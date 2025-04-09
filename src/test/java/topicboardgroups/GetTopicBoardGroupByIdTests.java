@@ -5,13 +5,19 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import client.TopicBoardGroupsClient;
+import dtomodels.topicboardsgroup.ResponseTopicBoardGroup;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import io.restassured.response.ValidatableResponse;
 import java.util.List;
-import dtomodels.topicboardsgroup.ResponseTopicBoardGroup;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+@Epic("Api interface CDE")
+@Feature("Раздел TopicBoardGroups(Группа досок задач)")
+@Story("Получение группы досок задач по id")
 public class GetTopicBoardGroupByIdTests extends TopicBoardGroupBaseTests {
 
   private static List<ResponseTopicBoardGroup> responseTopicBoardGroupList;

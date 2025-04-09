@@ -8,12 +8,18 @@ import dtomodels.customfields.customfieldsintopicbords.CustomFieldOnTopicBoards;
 import dtomodels.customfields.customfieldsintopicbords.CustomFieldOnTopicBoardsFactory;
 import dtomodels.customfields.customfieldsintopicbords.CustomFieldsOnTopicBoards;
 import dtomodels.topicboards.ResponseTopicBoards;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import io.restassured.response.ValidatableResponse;
 import java.util.ArrayList;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+@Epic("Api interface CDE")
+@Feature("Раздел TopicBoards(Доски задач)")
+@Story("Добавление кастомных полей в доску задач")
 public class AddCustomFieldsToTopicBoardTests extends TopicBoardsBaseTests {
 
   private static ValidatableResponse getTopicBoardResponse;

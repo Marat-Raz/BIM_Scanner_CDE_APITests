@@ -4,10 +4,16 @@ import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import dtomodels.projectroles.ResponseProjectRole;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+@Epic("Api interface CDE")
+@Feature("Раздел ProjectRoles(Роли в проекте)")
+@Story("Получение всех ролей в проекте")
 public class GetAllProjectRoles extends ProjectRolesBaseTests {
 
   @Test

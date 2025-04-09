@@ -5,6 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import dtomodels.customfields.ResponseCustomField;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import io.restassured.response.ValidatableResponse;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,6 +15,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+@Epic("Api interface CDE")
+@Feature("Раздел CustomFields(Кастомные поля)")
+@Story("Получение кастомных полей")
 public class GetCustomFieldsTests extends CustomFieldsBaseTests {
 
   private ValidatableResponse getResponse;

@@ -14,11 +14,17 @@ import dtomodels.PaginatedResponse;
 import dtomodels.project.Project;
 import dtomodels.project.ProjectFactory;
 import dtomodels.project.ResponseProject;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
 import io.qameta.allure.Step;
+import io.qameta.allure.Story;
 import io.restassured.response.ValidatableResponse;
 import java.io.File;
 import org.junit.jupiter.api.*;
 
+@Epic("Api interface CDE")
+@Feature("Раздел Projects(Проекты)")
+@Story("Установить обложку проекта")
 public class SetProjectCoverImageTests extends StartTests {
 // todo https://software-testing.ru/library/testing/testing-for-beginners/3318-six-tips-and-four-tools-for-file-upload
 

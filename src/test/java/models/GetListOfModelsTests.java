@@ -6,12 +6,18 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dtomodels.PaginatedResponse;
 import dtomodels.models.ResponseModel;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import io.restassured.response.ValidatableResponse;
 import java.util.ArrayList;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+@Epic("Api interface CDE")
+@Feature("Раздел Models(Модели)")
+@Story("Получение списка моделей")
 public class GetListOfModelsTests extends ModelsBaseTests {
 
   private ValidatableResponse getModelsResponse;

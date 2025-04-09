@@ -11,7 +11,10 @@ import dtomodels.PaginatedResponse;
 import dtomodels.project.Project;
 import dtomodels.project.ProjectFactory;
 import dtomodels.project.ResponseProject;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
 import io.qameta.allure.Step;
+import io.qameta.allure.Story;
 import io.restassured.response.ValidatableResponse;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +23,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+@Epic("Api interface CDE")
+@Feature("Раздел Projects(Проекты)")
+@Story("Удаление проекта")
 public class DeleteProjectByItsIdTests extends StartTests {
 
   private ValidatableResponse getAllProjectResponse;
