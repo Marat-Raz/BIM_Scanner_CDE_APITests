@@ -1,22 +1,18 @@
 package dtomodels.user;
 
-import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
-@AllArgsConstructor
 @Getter
 @Setter
-public class User {
+@ToString
+@EqualsAndHashCode
+public class User extends CdeUserDto {
 
-  protected String userName;
-  protected String name;
-  protected String surname;
-  protected String email;
-  protected String phoneNumber;
-  protected boolean isActive;
-  protected boolean lockoutEnabled;
-  protected String[] roleNames;
-  protected String password;
-
+  public User(String userName, String name, String surname, String email, boolean isActive,
+      String creationTime, String id) {
+    super(userName, name, surname, email, isActive, creationTime, id);
+  }
 }

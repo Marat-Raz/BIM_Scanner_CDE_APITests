@@ -7,9 +7,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class ProjectMember {
+public class CdeUpdateProjectMemberDto {
 
-  private String userId;
-  private String roleId;
+  public String roleId;
 
 }

@@ -12,17 +12,17 @@ import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import io.restassured.response.ValidatableResponse;
 import dtomodels.error.ErrorRoot;
-import dtomodels.user.User;
+import dtomodels.user.AbpIdentityUserCreateDto;
 import dtomodels.user.UserCredentials;
 import org.junit.jupiter.api.*;
 
 @Epic("Api interface CDE")
 @Feature("Раздел Account(Аккаунт)")
 @Story("Регистрация пользователя")
-public class RegisterUserTests extends StartTests {
+public class RegisterAbpIdentityUserCreateDtoTests extends StartTests {
 
   private ValidatableResponse registerUserResponse;
-  private static User testUser;
+  private static AbpIdentityUserCreateDto testAbpIdentityUserCreateDto;
   private AccountClient accountClient = new AccountClient();
 
   /*
@@ -34,12 +34,12 @@ public class RegisterUserTests extends StartTests {
 
   @BeforeAll
   public static void createUser() {
-    testUser = userFactory.createUser(NEW_USER);
+    testAbpIdentityUserCreateDto = userFactory.createUser(NEW_USER);
   }
 
   @AfterAll
   public static void deleteUser() {
-    ValidatableResponse response = userClient.getUserByUserName(testUser.getUserName());
+    ValidatableResponse response = userClient.getUserByUserName(testAbpIdentityUserCreateDto.getUserName());
     String id = response.extract().path("id");
     userClient.deleteUser(id);
   }
@@ -48,31 +48,32 @@ public class RegisterUserTests extends StartTests {
   @Tag(value = "smoke")
   @DisplayName("Регистрация нового пользователя")
   public void newUserRegistrationTest() {
-    registerUserResponse = accountClient.registerUser(UserCredentials.from(testUser));
+    registerUserResponse = accountClient.registerUser(UserCredentials.from(
+        testAbpIdentityUserCreateDto));
     statusCode = extractStatusCode(registerUserResponse);
     String userName = registerUserResponse.extract().path("userName");
 
     assertEquals(SC_OK, statusCode);
-    assertEquals(testUser.getUserName(), userName);
+    assertEquals(testAbpIdentityUserCreateDto.getUserName(), userName);
   }
 
   @Test
   @DisplayName("Повторная регистрация пользователя")
   public void registrationOfPreviouslyRegisteredUserTest() {
-    User user = userFactory.createUser(NEW_USER);
-    accountClient.registerUser(UserCredentials.from(user));
-    registerUserResponse = accountClient.registerUser(UserCredentials.from(user));
+    AbpIdentityUserCreateDto abpIdentityUserCreateDto = userFactory.createUser(NEW_USER);
+    accountClient.registerUser(UserCredentials.from(abpIdentityUserCreateDto));
+    registerUserResponse = accountClient.registerUser(UserCredentials.from(abpIdentityUserCreateDto));
 
     int newStatusCode = extractStatusCode(registerUserResponse);
     errorRoot = registerUserResponse.extract().body().as(ErrorRoot.class);
 
-    ValidatableResponse response = userClient.getUserByUserName(user.getUserName());
+    ValidatableResponse response = userClient.getUserByUserName(abpIdentityUserCreateDto.getUserName());
     String id = response.extract().path("id");
     userClient.deleteUser(id);
 
     assertEquals(SC_FORBIDDEN, newStatusCode);
-    assertEquals("Username '" + user.getUserName() +
-        "' is already taken., Email '" + user.getEmail() +
+    assertEquals("Username '" + abpIdentityUserCreateDto.getUserName() +
+        "' is already taken., Email '" + abpIdentityUserCreateDto.getEmail() +
         "' is already taken.", errorRoot.error.message);
   }
 

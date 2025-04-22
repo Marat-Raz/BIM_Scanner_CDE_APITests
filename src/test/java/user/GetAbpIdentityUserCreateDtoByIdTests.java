@@ -18,9 +18,9 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 @Epic("Api interface CDE")
-@Feature("Раздел User")
+@Feature("Раздел AbpIdentityUserCreateDto")
 @Story("Получение пользователя по id")
-public class GetUserByIdTests extends StartTests {
+public class GetAbpIdentityUserCreateDtoByIdTests extends StartTests {
 
   private ValidatableResponse getUserResponse;
 
@@ -33,8 +33,8 @@ public class GetUserByIdTests extends StartTests {
     ResponseUser responseUser = getUserResponse.extract().as(ResponseUser.class);
 
     assertEquals(SC_OK, statusCode);
-    assertEquals(defaultUser.getUserName(), responseUser.getUserName());
-    assertEquals(defaultUser.getEmail(), responseUser.getEmail());
+    assertEquals(defaultAbpIdentityUserCreateDto.getUserName(), responseUser.getUserName());
+    assertEquals(defaultAbpIdentityUserCreateDto.getEmail(), responseUser.getEmail());
   }
 
 

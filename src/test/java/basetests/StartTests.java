@@ -14,7 +14,7 @@ import dtomodels.project.Project;
 import dtomodels.project.ProjectFactory;
 import dtomodels.project.ResponseProject;
 import dtomodels.token.TokenBuilder;
-import dtomodels.user.User;
+import dtomodels.user.AbpIdentityUserCreateDto;
 import dtomodels.user.UserFactory;
 import io.qameta.allure.Step;
 import io.qameta.allure.restassured.AllureRestAssured;
@@ -35,7 +35,7 @@ public class StartTests {
   protected static UserClient userClient = new UserClient();
   protected static TypeRef<PaginatedResponse<ResponseProject>> typeRef = new TypeRef<>() {
   };
-  protected static User defaultUser;
+  protected static AbpIdentityUserCreateDto defaultAbpIdentityUserCreateDto;
   protected static ValidatableResponse baseResponse;
   protected static ValidatableResponse createProjectResponse;
   protected static Project defaultProject;
@@ -56,15 +56,15 @@ public class StartTests {
         tokenClient.createToken(TokenBuilder.getTokenForAdminUser());
     ADMIN_ACCESS_TOKEN = responseAdminToken.extract().path("access_token");
 
-    defaultUser = userFactory.createUser(DEFAULT_USER);
-    baseResponse = userClient.createUser(defaultUser);
+    defaultAbpIdentityUserCreateDto = userFactory.createUser(DEFAULT_USER);
+    baseResponse = userClient.createUser(defaultAbpIdentityUserCreateDto);
     userId = baseResponse.extract().path("id");
 
     defaultProject = projectFactory.createProject(DEFAULT_PROJECT);
     createProjectResponse = projectsClient.createProject(defaultProject);
     projectId = createProjectResponse.extract().path("id");
 
-    // todo выдать для user права на создание проектов раздел permission
+    // todo выдать для abpIdentityUserCreateDto права на создание проектов раздел permission
   }
 
   @AfterAll
@@ -79,8 +79,8 @@ public class StartTests {
     for (ResponseProject project : projectPaginatedResponse.getItems()) {
       projectsClient.deleteProjectByItsId(Client.ADMIN_ACCESS_TOKEN,
           project.getId());
-
     }
+    // todo удалить всех пользователей
   }
 
   @Step("Получаем код ответа")
@@ -89,9 +89,3 @@ public class StartTests {
   }
 
 }
-/*
-todo внедрить
-    @Epic("Web interface")
-    @Feature("Essential features")
-    @Story("Authentication")
- */
