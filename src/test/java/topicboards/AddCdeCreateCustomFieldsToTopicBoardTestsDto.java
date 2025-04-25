@@ -1,0 +1,57 @@
+package topicboards;
+
+import static dtomodels.customfields.updatetopicboardcustomfields.CustomFieldOnTopicBoardsType.IS_ENABLED;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import dto.generated.CdeModifyTopicBoardCustomFieldDto;
+import dtomodels.customfields.updatetopicboardcustomfields.CustomFieldOnTopicBoardsFactory;
+import dto.generated.CdeUpdateTopicBoardCustomFieldsDto;
+import dtomodels.topicboards.ResponseTopicBoards;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
+import io.restassured.response.ValidatableResponse;
+import java.util.ArrayList;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
+
+@Epic("Api interface CDE")
+@Feature("Раздел TopicBoards(Доски задач)")
+@Story("Добавление кастомных полей в доску задач")
+public class AddCustomFieldsToTopicBoardTests extends TopicBoardsBaseTests {
+
+  private static ValidatableResponse getTopicBoardResponse;
+  private static ArrayList<CdeModifyTopicBoardCustomFieldDto> existsCustomFields;
+
+  @Test
+  @Tag(value = "smoke")
+  @DisplayName("Добавление кастомных полей в доску задач")
+  public void editCustomFieldsOfTopicBoardTest() {
+    CustomFieldOnTopicBoardsFactory customFieldOnTopicBoardsFactory = new CustomFieldOnTopicBoardsFactory();
+    CdeModifyTopicBoardCustomFieldDto cdeModifyTopicBoardCustomFieldDto = customFieldOnTopicBoardsFactory
+        .createCustomFieldOnTopicBoardsById(customFieldId, IS_ENABLED);
+
+    CdeUpdateTopicBoardCustomFieldsDto cdeUpdateTopicBoardCustomFieldsDto = new CdeUpdateTopicBoardCustomFieldsDto(
+        cdeModifyTopicBoardCustomFieldDto);
+    editCustomFieldResponse = topicBoardsClient
+        .editTopicBoardCustomFields(projectId, topicBoardId, cdeUpdateTopicBoardCustomFieldsDto);
+
+    getTopicBoardResponse = topicBoardsClient.getTopicBoard(projectId, topicBoardId);
+    responseTopicBoard = getTopicBoardResponse.extract()
+        .as(ResponseTopicBoards.class);
+
+    existsCustomFields = responseTopicBoard.getCustomFields();
+
+    assertAll(
+        () -> assertEquals(customFieldId, existsCustomFields.get(0).getId())
+    );
+  }
+
+// комментарии будут удалены позже.
+//  todo создать проект, создать кастомные поля в проекте, создать доску задач,
+//   получить список кастомных полей в этом проекте, переедать в запросе все кастомные поля,
+//   включая те, которые хотим изменить
+
+}

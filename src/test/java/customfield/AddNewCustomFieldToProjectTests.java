@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import dtomodels.customfields.ResponseCustomField;
-import dtomodels.customfields.enumerationitem.EnumerationItem;
-import dtomodels.customfields.enumerationitem.ResponseEnumerationItem;
+import dto.generated.CdeCustomFieldDto;
+import dto.generated.CdeAddEnumerationCustomFieldItemDto;
+import dto.generated.CdeEnumerationCustomFieldItemDto;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Test;
 @Epic("Api interface CDE")
 @Feature("Раздел CustomFields(Кастомные поля)")
 @Story("Добавление кастомного поля")
-public class AddNewCustomFieldToProjectTests extends CustomFieldsBaseTests {
+public class AddNewCdeCreateCustomFieldDtoToCdeCreateProjectDtoTests extends CustomFieldsBaseTests {
 
   private ValidatableResponse addResponse;
 
@@ -30,20 +30,20 @@ public class AddNewCustomFieldToProjectTests extends CustomFieldsBaseTests {
   @Tag(value = "smoke")
   @DisplayName("Добавить новое кастомное поле в проект")
   public void addNewCustomFieldToProjectTest() {
-    addResponse = customFieldsClient.addNewCustomFieldToProject(projectId, customField);
+    addResponse = customFieldsClient.addNewCustomFieldToProject(projectId, cdeCreateCustomFieldDto);
     statusCode = extractStatusCode(addResponse);
-    ResponseCustomField responseCustomField = addResponse.extract().as(ResponseCustomField.class);
-    ArrayList<ResponseEnumerationItem> responseEnumerationItems =
-        responseCustomField.getEnumerationItems();
+    CdeCustomFieldDto cdeCustomFieldDto = addResponse.extract().as(CdeCustomFieldDto.class);
+    ArrayList<CdeEnumerationCustomFieldItemDto> cdeEnumerationCustomFieldItemDtos =
+        cdeCustomFieldDto.getEnumerationItems();
 
-    List<EnumerationItem> enumerationItems = customField.getEnumerationItems();
+    List<CdeAddEnumerationCustomFieldItemDto> cdeAddEnumerationCustomFieldItemDtos = cdeCreateCustomFieldDto.getCdeAddEnumerationCustomFieldItemDtos();
     List<String> expectedEnumerationItemName = new ArrayList<>();
-    for (EnumerationItem enumerationItem : enumerationItems) {
-      expectedEnumerationItemName.add(enumerationItem.getName());
+    for (CdeAddEnumerationCustomFieldItemDto cdeAddEnumerationCustomFieldItemDto : cdeAddEnumerationCustomFieldItemDtos) {
+      expectedEnumerationItemName.add(cdeAddEnumerationCustomFieldItemDto.getName());
     }
 
     List<String> actualEnumerationItemName = new ArrayList<>();
-    for (ResponseEnumerationItem enumerationItem : responseEnumerationItems) {
+    for (CdeEnumerationCustomFieldItemDto enumerationItem : cdeEnumerationCustomFieldItemDtos) {
       actualEnumerationItemName.add(enumerationItem.getName());
     }
 
@@ -52,15 +52,15 @@ public class AddNewCustomFieldToProjectTests extends CustomFieldsBaseTests {
 
     assertEquals(SC_OK, statusCode);
     assertAll(
-        () -> assertEquals(responseCustomField.getType(),
-            customField.getType().toString().toLowerCase()),
-        () -> assertEquals(responseCustomField.getName(), customField.getName()),
+        () -> assertEquals(cdeCustomFieldDto.getType(),
+            cdeCreateCustomFieldDto.getType().toString().toLowerCase()),
+        () -> assertEquals(cdeCustomFieldDto.getName(), cdeCreateCustomFieldDto.getName()),
         () -> assertTrue(expectedEnumerationItemName.equals(actualEnumerationItemName))
 
     );
   }
   // todo реализовать получение id кастомных полей
   // todo реализовать () -> assertEquals(new HashSet<>(expectedStatuses), new HashSet<>(actualStatuses))
-  //  как в GetTopicBoardStatusesTests
+  //  как в GetTopicBoardCdeCreateOrUpdateTopicBoardStatusDtoTests
 
 }

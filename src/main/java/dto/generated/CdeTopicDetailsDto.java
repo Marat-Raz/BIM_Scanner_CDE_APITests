@@ -1,0 +1,22 @@
+package dto.generated;
+    private String id;
+    private String serverAssignedId;
+    private String creationTime;
+    private CdeUserDto creator;
+    private String lastModificationTime;
+    private CdeUserDto lastModifier;
+    private String title;
+    private String description;
+    private String dueDate;
+    private CdeUserDto assignedTo;
+    private String topicBoardId;
+    private String concurrencyStamp;
+    private CdeTopicBoardTypeDto type;
+    private CdeTopicBoardStatusDto status;
+    private CdeTopicBoardPriorityDto priority;
+    private ArrayList<CdeCustomFieldValueDto> customFields;
+    private ArrayList<CdeLabelDto> labels;
+    private ArrayList<CdeTopicViewpointDto> viewpoints;
+    private ArrayList<CdeTopicModelReferenceDto> models;
+    private Integer numberOfComments;
+}
