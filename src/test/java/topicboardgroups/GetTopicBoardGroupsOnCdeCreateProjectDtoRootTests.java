@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import basetests.StartTests;
 import client.TopicBoardGroupsClient;
-import dtomodels.topicboardsgroup.ResponseTopicBoardGroup;
-import dtomodels.topicboardsgroup.TopicBoardsGroup;
+import dto.generated.CdeTopicBoardGroupDto;
+import dto.generated.CdeCreateTopicBoardGroupDto;
 import dtomodels.topicboardsgroup.TopicBoardsGroupFactory;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
@@ -24,10 +24,10 @@ import org.junit.jupiter.api.Test;
 @Epic("Api interface CDE")
 @Feature("Раздел TopicBoardGroups(Группа досок задач)")
 @Story("Получение группы досок задач в корне проекта")
-public class GetTopicBoardGroupsOnProjectRootTests extends StartTests {
+public class GetTopicBoardGroupsOnCdeCreateProjectDtoRootTests extends StartTests {
 
-  private static ArrayList<TopicBoardsGroup> topicBoardGroupsList = new ArrayList<>();
-  private static List<ResponseTopicBoardGroup> responseTopicBoardGroupList;
+  private static ArrayList<CdeCreateTopicBoardGroupDto> topicBoardGroupsList = new ArrayList<>();
+  private static List<CdeTopicBoardGroupDto> cdeTopicBoardGroupDtoList;
   private static final int countOfTopicBoardsGroup = 5;
   private static TopicBoardGroupsClient topicBoardGroupsClient = new TopicBoardGroupsClient();
   private ValidatableResponse getTopicBoardGroupsResponse;
@@ -39,9 +39,9 @@ public class GetTopicBoardGroupsOnProjectRootTests extends StartTests {
       topicBoardGroupsList.add(new TopicBoardsGroupFactory()
           .createTopicBoardsGroup(DEFAULT_TOPIC_BOARDS_GROUP));
     }
-    for (TopicBoardsGroup topicBoardsGroup : topicBoardGroupsList) {
+    for (CdeCreateTopicBoardGroupDto cdeCreateTopicBoardGroupDto : topicBoardGroupsList) {
       topicBoardGroupsClient.createNewTopicBoardsGroup(projectId,
-          topicBoardsGroup);
+          cdeCreateTopicBoardGroupDto);
     }
   }
 
@@ -52,13 +52,13 @@ public class GetTopicBoardGroupsOnProjectRootTests extends StartTests {
     getTopicBoardGroupsResponse = topicBoardGroupsClient
         .getRootTopicBoardGroupsAndBoards(projectId);
     // todo создать доски и получить список этих досок тоже
-    responseTopicBoardGroupList = List.of(getTopicBoardGroupsResponse.extract().body()
-        .as(ResponseTopicBoardGroup[].class));
+    cdeTopicBoardGroupDtoList = List.of(getTopicBoardGroupsResponse.extract().body()
+        .as(CdeTopicBoardGroupDto[].class));
     statusCode = extractStatusCode(getTopicBoardGroupsResponse);
 
     assertEquals(countOfTopicBoardsGroup,
-        responseTopicBoardGroupList.size()); // fixme а если в проекте будут группы досок до нашего теста?
-    assertNotNull(responseTopicBoardGroupList);
+        cdeTopicBoardGroupDtoList.size()); // fixme а если в проекте будут группы досок до нашего теста?
+    assertNotNull(cdeTopicBoardGroupDtoList);
   }
 
 }

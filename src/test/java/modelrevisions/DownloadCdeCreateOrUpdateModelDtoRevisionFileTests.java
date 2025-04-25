@@ -14,7 +14,7 @@ import java.io.File;
 import java.io.IOException;
 import org.junit.jupiter.api.*;
 
-public class DownloadModelRevisionFileTests extends ModelRevisionsBaseTests {
+public class DownloadCdeCreateOrUpdateModelDtoRevisionFileTests extends ModelRevisionsBaseTests {
 
   private ValidatableResponse downloadModelRevisionResponse;
   private File resultFile;

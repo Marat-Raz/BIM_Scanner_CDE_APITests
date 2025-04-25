@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 @Epic("Api interface CDE")
 @Feature("Раздел CustomFields(Кастомные поля)")
 @Story("Редактирование кастомного поля")
-public class EditCdeCreateCustomFieldDtoTests extends CustomFieldsBaseTests {
+public class EditCustomFieldTests extends CustomFieldsBaseTests {
 
   private ValidatableResponse editResponse;
   private CdeUpdateCustomFieldDto updateCustomField;

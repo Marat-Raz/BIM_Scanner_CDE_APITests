@@ -9,8 +9,8 @@ import dtomodels.PaginatedResponse;
 import dto.generated.CdeTopicBoardDto;
 import dto.generated.CdeCreateTopicBoardDto;
 import dtomodels.topicboards.TopicBoardsFactory;
-import dtomodels.topics.CdeCreateTopicDto;
-import dtomodels.topics.Topics;
+import dto.generated.CdeTopicDetailsDto;
+import dto.generated.CdeCreateTopicDto;
 import dtomodels.topics.TopicsFactory;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
@@ -25,9 +25,9 @@ import org.junit.jupiter.api.Test;
 @Epic("Api interface CDE")
 @Feature("Раздел Topics(Задачи)")
 @Story("Получение всех задачи из проекта")
-public class GetTopicsInCdeCreateProjectDtoTests extends TopicsBaseTests {
+public class GetCdeCreateTopicDtoInCdeCreateProjectDtoTests extends CdeCreateTopicDtoBaseTests {
 
-  private static Topics newTopic;
+  private static CdeCreateTopicDto newTopic;
   private static ValidatableResponse createTopicBoardsResponse;
   private ValidatableResponse getListOfTopicsFromProjectResponse;
 
@@ -48,9 +48,9 @@ public class GetTopicsInCdeCreateProjectDtoTests extends TopicsBaseTests {
     getListOfTopicsFromProjectResponse = topicsClient
         .getTopicsInProjectWithoutQueryOptions(projectId);
     statusCode = extractStatusCode(getListOfTopicsFromProjectResponse);
-    PaginatedResponse<CdeCreateTopicDto> paginatedResponse = getListOfTopicsFromProjectResponse
+    PaginatedResponse<CdeTopicDetailsDto> paginatedResponse = getListOfTopicsFromProjectResponse
         .extract().as(PaginatedResponse.class);
-    ArrayList<CdeCreateTopicDto> arrayOfTopics = paginatedResponse.getItems();
+    ArrayList<CdeTopicDetailsDto> arrayOfTopics = paginatedResponse.getItems();
 
     assertEquals(SC_OK, statusCode);
     assertEquals(paginatedResponse.getTotalCount(),

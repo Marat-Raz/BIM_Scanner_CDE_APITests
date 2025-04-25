@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dtomodels.PaginatedResponse;
-import dtomodels.models.ResponseModel;
+import dto.generated.CdeModelDto;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
@@ -28,9 +28,9 @@ public class GetListOfModelsTests extends ModelsBaseTests {
   public void getModelsTest() {
     getModelsResponse = modelsClient.getListOfModelsInProjectWithoutQueryOptions(projectId);
     statusCode = extractStatusCode(getModelsResponse);
-    PaginatedResponse<ResponseModel> paginatedResponse = getModelsResponse
+    PaginatedResponse<CdeModelDto> paginatedResponse = getModelsResponse
         .extract().as(PaginatedResponse.class);
-    ArrayList<ResponseModel> arrayOfModel = paginatedResponse.getItems();
+    ArrayList<CdeModelDto> arrayOfModel = paginatedResponse.getItems();
 
     assertEquals(SC_OK, statusCode);
     assertTrue(arrayOfModel.size() > 0);

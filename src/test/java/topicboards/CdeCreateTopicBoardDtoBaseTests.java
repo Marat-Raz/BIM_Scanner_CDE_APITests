@@ -1,6 +1,6 @@
 package topicboards;
 
-import static dtomodels.customfields.CustomFieldType.TEXT;
+import static dto.generated.CdeCustomFieldType.TEXT;
 import static dtomodels.topicboards.TopicBoardsType.DEFAULT_TOPIC_BOARDS;
 
 import basetests.StartTests;
@@ -10,13 +10,13 @@ import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import dto.generated.CdeCreateCustomFieldDto;
 import dtomodels.customfields.CustomFieldFactory;
-import dtomodels.topicboards.ResponseTopicBoards;
-import dtomodels.topicboards.TopicBoards;
+import dto.generated.CdeTopicBoardDto;
+import dto.generated.CdeCreateTopicBoardDto;
 import dtomodels.topicboards.TopicBoardsFactory;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 
-public class TopicBoardsBaseTests extends StartTests {
+public class CdeCreateTopicBoardDtoBaseTests extends StartTests {
 
   protected static CustomFieldsClient customFieldsClient = new CustomFieldsClient();
   protected static TopicBoardsClient topicBoardsClient = new TopicBoardsClient();
@@ -26,8 +26,8 @@ public class TopicBoardsBaseTests extends StartTests {
   protected static CdeCreateCustomFieldDto cdeCreateCustomFieldDto;
   protected static String customFieldId;
   protected ValidatableResponse createTopicBoardsResponse;
-  protected ResponseTopicBoards responseTopicBoard;
-  protected TopicBoards topicBoard;
+  protected CdeTopicBoardDto responseTopicBoard;
+  protected CdeCreateTopicBoardDto topicBoard;
   protected String topicBoardId;
 
   @BeforeAll
@@ -44,7 +44,7 @@ public class TopicBoardsBaseTests extends StartTests {
   public void createTopicBoard() {
     topicBoard = topicBoardsFactory.createTopicBoards(DEFAULT_TOPIC_BOARDS);
     createTopicBoardsResponse = topicBoardsClient.createNewTopicBoard(projectId, topicBoard);
-    responseTopicBoard = createTopicBoardsResponse.extract().as(ResponseTopicBoards.class);
+    responseTopicBoard = createTopicBoardsResponse.extract().as(CdeTopicBoardDto.class);
     topicBoardId = responseTopicBoard.getId();
   }
 

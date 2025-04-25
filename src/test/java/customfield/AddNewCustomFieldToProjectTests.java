@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Test;
 @Epic("Api interface CDE")
 @Feature("Раздел CustomFields(Кастомные поля)")
 @Story("Добавление кастомного поля")
-public class AddNewCdeCreateCustomFieldDtoToCdeCreateProjectDtoTests extends CustomFieldsBaseTests {
+public class AddNewCustomFieldToProjectTests extends CustomFieldsBaseTests {
 
   private ValidatableResponse addResponse;
 
@@ -30,20 +30,20 @@ public class AddNewCdeCreateCustomFieldDtoToCdeCreateProjectDtoTests extends Cus
   @Tag(value = "smoke")
   @DisplayName("Добавить новое кастомное поле в проект")
   public void addNewCustomFieldToProjectTest() {
-    addResponse = customFieldsClient.addNewCustomFieldToProject(projectId, cdeCreateCustomFieldDto);
+    addResponse = customFieldsClient.addNewCustomFieldToProject(projectId, createCustomField);
     statusCode = extractStatusCode(addResponse);
-    CdeCustomFieldDto cdeCustomFieldDto = addResponse.extract().as(CdeCustomFieldDto.class);
-    ArrayList<CdeEnumerationCustomFieldItemDto> cdeEnumerationCustomFieldItemDtos =
-        cdeCustomFieldDto.getEnumerationItems();
+    CdeCustomFieldDto customField = addResponse.extract().as(CdeCustomFieldDto.class);
+    ArrayList<CdeEnumerationCustomFieldItemDto> enumerationItemsArray =
+        customField.getEnumerationItems();
 
-    List<CdeAddEnumerationCustomFieldItemDto> cdeAddEnumerationCustomFieldItemDtos = cdeCreateCustomFieldDto.getCdeAddEnumerationCustomFieldItemDtos();
+    List<CdeAddEnumerationCustomFieldItemDto> enumerationItemsList = createCustomField.getEnumerationItems();
     List<String> expectedEnumerationItemName = new ArrayList<>();
-    for (CdeAddEnumerationCustomFieldItemDto cdeAddEnumerationCustomFieldItemDto : cdeAddEnumerationCustomFieldItemDtos) {
+    for (CdeAddEnumerationCustomFieldItemDto cdeAddEnumerationCustomFieldItemDto : enumerationItemsList) {
       expectedEnumerationItemName.add(cdeAddEnumerationCustomFieldItemDto.getName());
     }
 
     List<String> actualEnumerationItemName = new ArrayList<>();
-    for (CdeEnumerationCustomFieldItemDto enumerationItem : cdeEnumerationCustomFieldItemDtos) {
+    for (CdeEnumerationCustomFieldItemDto enumerationItem : enumerationItemsArray) {
       actualEnumerationItemName.add(enumerationItem.getName());
     }
 
@@ -52,9 +52,9 @@ public class AddNewCdeCreateCustomFieldDtoToCdeCreateProjectDtoTests extends Cus
 
     assertEquals(SC_OK, statusCode);
     assertAll(
-        () -> assertEquals(cdeCustomFieldDto.getType(),
-            cdeCreateCustomFieldDto.getType().toString().toLowerCase()),
-        () -> assertEquals(cdeCustomFieldDto.getName(), cdeCreateCustomFieldDto.getName()),
+        () -> assertEquals(customField.getType(),
+            createCustomField.getType().toString().toLowerCase()),
+        () -> assertEquals(customField.getName(), createCustomField.getName()),
         () -> assertTrue(expectedEnumerationItemName.equals(actualEnumerationItemName))
 
     );

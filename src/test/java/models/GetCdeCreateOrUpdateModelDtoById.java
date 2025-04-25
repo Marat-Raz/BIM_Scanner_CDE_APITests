@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import dtomodels.models.ResponseModel;
+import dto.generated.CdeModelDto;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
 @Epic("Api interface CDE")
 @Feature("Раздел Models(Модели)")
 @Story("Получение модели по id")
-public class GetModelById extends ModelsBaseTests {
+public class GetCdeCreateOrUpdateModelDtoById extends ModelsBaseTests {
 
   private ValidatableResponse getResponse;
 
@@ -27,11 +27,11 @@ public class GetModelById extends ModelsBaseTests {
   public void getModelByIdTest() {
     getResponse = modelsClient.getModelById(projectId, defaultModelId);
     statusCode = extractStatusCode(getResponse);
-    ResponseModel testModel = getResponse.extract().as(ResponseModel.class);
+    CdeModelDto testModel = getResponse.extract().as(CdeModelDto.class);
 
     assertEquals(SC_OK, statusCode);
     assertAll(
-        () -> assertEquals(defaultResponseModel.getName(), testModel.getName()),
+        () -> assertEquals(defaultCdeModelDto.getName(), testModel.getName()),
         () -> assertNotNull(testModel.getId())
     );
   }

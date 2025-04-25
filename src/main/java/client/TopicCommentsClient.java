@@ -3,9 +3,9 @@ package client;
 import static io.restassured.RestAssured.given;
 
 import client.base.Client;
+import dto.generated.CdeCreateTopicCommentDto;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
-import dtomodels.comment.Comment;
 
 public class TopicCommentsClient extends Client {
 
@@ -13,11 +13,11 @@ public class TopicCommentsClient extends Client {
   private final String COMMENTS = "/comments/";
 
   @Step("Создать комментарий к задаче")
-  public ValidatableResponse createTopicComment(String topicBoardId, String topicId, Comment comment) {
+  public ValidatableResponse createTopicComment(String topicBoardId, String topicId, CdeCreateTopicCommentDto createTopicCommentDto) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
-        .body(comment)
+        .body(createTopicCommentDto)
         .when()
         .post(API_PROJECTS + topicBoardId + TOPICS + topicId + COMMENTS)
         .then();
@@ -44,11 +44,11 @@ public class TopicCommentsClient extends Client {
   }
 
   @Step("Обновить комментарий к задаче по ID")
-  public ValidatableResponse updateTopicComment(String topicBoardId, String topicId, String topicCommentId, Comment updatedComment) {
+  public ValidatableResponse updateTopicComment(String topicBoardId, String topicId, String topicCommentId, CdeCreateTopicCommentDto updatedCreateTopicCommentDto) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
-        .body(updatedComment)
+        .body(updatedCreateTopicCommentDto)
         .when()
         .put(API_PROJECTS + topicBoardId + TOPICS + topicId + COMMENTS + topicCommentId)
         .then();

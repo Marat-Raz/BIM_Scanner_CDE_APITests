@@ -5,7 +5,7 @@ import static io.restassured.RestAssured.given;
 import client.base.Client;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
-import dtomodels.priorities.Priorities;
+import dto.generated.CdeCreateOrUpdateTopicBoardPriorityDto;
 
 public class TopicBoardPrioritiesClient extends Client {
 
@@ -22,7 +22,7 @@ public class TopicBoardPrioritiesClient extends Client {
   }
 
   @Step("Добавить приоритет на доску задач")
-  public ValidatableResponse addTopicBoardPriorities(String topicBoardId, Priorities priority) {
+  public ValidatableResponse addTopicBoardPriorities(String topicBoardId, CdeCreateOrUpdateTopicBoardPriorityDto priority) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
@@ -34,11 +34,11 @@ public class TopicBoardPrioritiesClient extends Client {
 
   @Step("Редактировать приоритет на доске задач")
   public ValidatableResponse editTopicBoardPriorities(String topicBoardId, String prioritiesId,
-      Priorities editedPriorities) {
+      CdeCreateOrUpdateTopicBoardPriorityDto editedCdeCreateOrUpdateTopicBoardPriorityDto) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
-        .body(editedPriorities)
+        .body(editedCdeCreateOrUpdateTopicBoardPriorityDto)
         .when()
         .put(API_ISSUES_BOARDS + topicBoardId + PRIORITIES + prioritiesId)
         .then();

@@ -24,8 +24,8 @@ public class AddStatusToTopicBoardTests extends TopicBoardStatusBaseTests {
 
     assertEquals(SC_OK, statusCode);
     assertAll(
-        () -> assertEquals(status.getName(), responseStatuses.getName()),
-        () -> assertEquals(status.getColor(), responseStatuses.getColor())
+        () -> assertEquals(status.getName(), cdeTopicBoardStatusDto.getName()),
+        () -> assertEquals(status.getColor(), cdeTopicBoardStatusDto.getColor())
     );
   }
 }

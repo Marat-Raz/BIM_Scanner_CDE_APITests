@@ -14,7 +14,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-public class DtoGenerator {
+public class DtoGeneratorVer1 {
 
   public static void main(String[] args) {
     String inputJson = "src/main/resources/swagger.json";

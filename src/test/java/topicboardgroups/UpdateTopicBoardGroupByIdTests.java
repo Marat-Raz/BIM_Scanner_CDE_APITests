@@ -7,8 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import basetests.StartTests;
 import client.TopicBoardGroupsClient;
-import dtomodels.topicboardsgroup.ResponseTopicBoardGroup;
-import dtomodels.topicboardsgroup.TopicBoardsGroup;
+import dto.generated.CdeTopicBoardGroupDto;
+import dto.generated.CdeCreateTopicBoardGroupDto;
 import dtomodels.topicboardsgroup.TopicBoardsGroupFactory;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
@@ -26,7 +26,7 @@ import org.junit.jupiter.api.Test;
 public class UpdateTopicBoardGroupByIdTests extends StartTests {
 
   private TopicBoardsGroupFactory topicBoardsGroupFactory = new TopicBoardsGroupFactory();
-  private TopicBoardsGroup topicBoardsGroup;
+  private CdeCreateTopicBoardGroupDto cdeCreateTopicBoardGroupDto;
   private TopicBoardGroupsClient topicBoardGroupsClient = new TopicBoardGroupsClient();
   private ValidatableResponse createTopicBoardsGroupResponse;
   private ValidatableResponse updateTopicBoardGroupResponse;
@@ -35,9 +35,9 @@ public class UpdateTopicBoardGroupByIdTests extends StartTests {
   @BeforeEach
   @Step("Создать  в проекте группу досок задач")
   public void createTopicBoardGroupsOnProject() {
-    topicBoardsGroup = topicBoardsGroupFactory.createTopicBoardsGroup(DEFAULT_TOPIC_BOARDS_GROUP);
+    cdeCreateTopicBoardGroupDto = topicBoardsGroupFactory.createTopicBoardsGroup(DEFAULT_TOPIC_BOARDS_GROUP);
     createTopicBoardsGroupResponse = topicBoardGroupsClient.createNewTopicBoardsGroup(projectId,
-        topicBoardsGroup);
+        cdeCreateTopicBoardGroupDto);
     topicBoardsGroupId = createTopicBoardsGroupResponse.extract().path("id");
   }
 
@@ -45,19 +45,19 @@ public class UpdateTopicBoardGroupByIdTests extends StartTests {
   @Tag(value = "smoke")
   @DisplayName("Изменить группу досок задач по его id")
   public void updateTopicBoardGroupByIdTest() {
-    TopicBoardsGroup newTopicBoardsGroup = topicBoardsGroup;
-    newTopicBoardsGroup.setName("newName");
+    CdeCreateTopicBoardGroupDto newCdeCreateTopicBoardGroupDto = cdeCreateTopicBoardGroupDto;
+    newCdeCreateTopicBoardGroupDto.setName("newName");
     updateTopicBoardGroupResponse = topicBoardGroupsClient
-        .updateTopicBoardGroup(projectId, topicBoardsGroupId, newTopicBoardsGroup);
+        .updateTopicBoardGroup(projectId, topicBoardsGroupId, newCdeCreateTopicBoardGroupDto);
     statusCode = extractStatusCode(updateTopicBoardGroupResponse);
-    ResponseTopicBoardGroup responseTopicBoardGroup = updateTopicBoardGroupResponse
-        .extract().as(ResponseTopicBoardGroup.class);
+    CdeTopicBoardGroupDto cdeTopicBoardGroupDto = updateTopicBoardGroupResponse
+        .extract().as(CdeTopicBoardGroupDto.class);
 
     assertEquals(SC_OK, statusCode);
     assertAll(
-        () -> assertEquals(newTopicBoardsGroup.getName(), responseTopicBoardGroup.getName()),
-        () -> assertEquals(topicBoardsGroupId, responseTopicBoardGroup.getId()),
-        () -> assertEquals(projectId, responseTopicBoardGroup.projectId)
+        () -> assertEquals(newCdeCreateTopicBoardGroupDto.getName(), cdeTopicBoardGroupDto.getName()),
+        () -> assertEquals(topicBoardsGroupId, cdeTopicBoardGroupDto.getId()),
+        () -> assertEquals(projectId, cdeTopicBoardGroupDto.projectId)
     );
   }
 

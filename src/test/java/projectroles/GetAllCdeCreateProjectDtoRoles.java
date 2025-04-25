@@ -3,7 +3,7 @@ package projectroles;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import dtomodels.projectroles.ResponseProjectRole;
+import dto.generated.CdeProjectRoleDto;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 @Epic("Api interface CDE")
 @Feature("Раздел ProjectRoles(Роли в проекте)")
 @Story("Получение всех ролей в проекте")
-public class GetAllProjectRoles extends ProjectRolesBaseTests {
+public class GetAllCdeCreateProjectDtoRoles extends ProjectRolesBaseTests {
 
   @Test
   @Tag(value = "positive")
@@ -22,7 +22,7 @@ public class GetAllProjectRoles extends ProjectRolesBaseTests {
   public void getAllProjectRolesTest() {
     getAllRolesResponse = projectRolesClient.getProjectRolesWithoutQueryOptions(projectId);
     statusCode = extractStatusCode(getAllRolesResponse);
-    ResponseProjectRole[] roleArray = getAllRolesResponse.extract().as(ResponseProjectRole[].class);
+    CdeProjectRoleDto[] roleArray = getAllRolesResponse.extract().as(CdeProjectRoleDto[].class);
 
     assertEquals(SC_OK, statusCode);
     assertEquals(projectRolesCount, roleArray.length);

@@ -7,8 +7,8 @@ import io.qameta.allure.Step;
 import io.restassured.RestAssured;
 import io.restassured.response.ValidatableResponse;
 import java.io.File;
-import dtomodels.project.Project;
-import dtomodels.project.ProjectWithConcurrencyStamp;
+import dto.generated.CdeCreateProjectDto;
+import dto.generated.CdeUpdateProjectDto;
 
 public class ProjectsClient extends Client {
 
@@ -43,22 +43,22 @@ public class ProjectsClient extends Client {
   }
 
   @Step("Создать проект с токеном пользователя ADMIN")
-  public ValidatableResponse createProject(Project project) {
+  public ValidatableResponse createProject(CdeCreateProjectDto cdeCreateProjectDto) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
-        .body(project)
+        .body(cdeCreateProjectDto)
         .when()
         .post(API_PROJECTS)
         .then();
   }
 
   @Step("Создать проект по токену определенного пользователя")
-  public ValidatableResponse createProject(String token, Project project) {
+  public ValidatableResponse createProject(String token, CdeCreateProjectDto cdeCreateProjectDto) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(token)
-        .body(project)
+        .body(cdeCreateProjectDto)
         .when()
         .post(API_PROJECTS)
         .then();
@@ -106,7 +106,7 @@ public class ProjectsClient extends Client {
 
   @Step("Изменить проект по его id")
   public ValidatableResponse putProjectByItsId(String id,
-      ProjectWithConcurrencyStamp project) {
+      CdeUpdateProjectDto project) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
@@ -118,7 +118,7 @@ public class ProjectsClient extends Client {
 
   @Step("Изменить проект по его id с токеном определенного пользователя")
   public ValidatableResponse putProjectByItsId(String token, String id,
-      ProjectWithConcurrencyStamp newProject) {
+      CdeUpdateProjectDto newProject) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)

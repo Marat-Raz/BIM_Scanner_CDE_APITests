@@ -10,11 +10,11 @@ import client.TopicsClient;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import java.util.ArrayList;
-import dtomodels.topicboards.ResponseTopicBoards;
-import dtomodels.topicboards.TopicBoards;
+import dto.generated.CdeTopicBoardDto;
+import dto.generated.CdeCreateTopicBoardDto;
 import dtomodels.topicboards.TopicBoardsFactory;
-import dtomodels.topics.ResponseTopics;
-import dtomodels.topics.Topics;
+import dto.generated.CdeTopicDetailsDto;
+import dto.generated.CdeCreateTopicDto;
 import dtomodels.topics.TopicsFactory;
 import org.junit.jupiter.api.BeforeAll;
 
@@ -23,12 +23,12 @@ public class TopicEventsBaseTests extends StartTests {
   protected static TopicBoardsClient topicBoardsClient = new TopicBoardsClient();
   protected static TopicBoardsFactory topicBoardsFactory = new TopicBoardsFactory();
   protected TopicEventsClient topicEventsClient = new TopicEventsClient();
-  protected static TopicBoards topicBoard;
+  protected static CdeCreateTopicBoardDto topicBoard;
   protected static ValidatableResponse createTopicBoardsResponse;
   protected static ValidatableResponse addTopicsResponse;
   protected static TopicsClient topicsClient = new TopicsClient();
   protected static String defaultTopicId;
-  protected static ResponseTopics responseTopic;
+  protected static CdeTopicDetailsDto responseTopic;
   protected static String topicBoardId;
 
   @BeforeAll
@@ -36,21 +36,21 @@ public class TopicEventsBaseTests extends StartTests {
   public static void createTopicBoardAndTopic() {
     topicBoard = topicBoardsFactory.createTopicBoards(DEFAULT_TOPIC_BOARDS);
     createTopicBoardsResponse = topicBoardsClient.createNewTopicBoard(projectId, topicBoard);
-    ResponseTopicBoards responseTopicBoards =
-        createTopicBoardsResponse.extract().as(ResponseTopicBoards.class);
-    topicBoardId = responseTopicBoards.getId();
+    CdeTopicBoardDto cdeTopicBoardDto =
+        createTopicBoardsResponse.extract().as(CdeTopicBoardDto.class);
+    topicBoardId = cdeTopicBoardDto.getId();
 
-    ArrayList<Topics> topicList = new ArrayList<>();
+    ArrayList<CdeCreateTopicDto> topicList = new ArrayList<>();
     for (int i = 0; i < 3; i++) {
       topicList.add(new TopicsFactory().createTopic(DEFAULT_TOPIC));
     }
-    ArrayList<ResponseTopics> responseTopicsArray = new ArrayList<>();
-    for (Topics topic : topicList) {
+    ArrayList<CdeTopicDetailsDto> cdeTopicDetailsDtoArray = new ArrayList<>();
+    for (CdeCreateTopicDto topic : topicList) {
       addTopicsResponse = topicsClient.createTopicOnTopicBoard(topicBoardId, topic);
-      responseTopic = addTopicsResponse.extract().as(ResponseTopics.class);
-      responseTopicsArray.add(responseTopic);
+      responseTopic = addTopicsResponse.extract().as(CdeTopicDetailsDto.class);
+      cdeTopicDetailsDtoArray.add(responseTopic);
     }
-    defaultTopicId = responseTopicsArray.get(0).getId();
+    defaultTopicId = cdeTopicDetailsDtoArray.get(0).getId();
   }
 
 }

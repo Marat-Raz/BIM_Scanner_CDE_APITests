@@ -6,7 +6,7 @@ import static org.apache.http.HttpStatus.SC_UNPROCESSABLE_ENTITY;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import basetests.StartTests;
-import dtomodels.project.Project;
+import dto.generated.CdeCreateProjectDto;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
@@ -16,9 +16,9 @@ import org.junit.jupiter.api.Test;
 @Epic("Api interface CDE")
 @Feature("Раздел Projects(Проекты)")
 @Story("Создание проекта")
-public class CreateProjectTests extends StartTests {
+public class CreateCdeCreateProjectDtoTests extends StartTests {
 
-  Project project;
+  CdeCreateProjectDto cdeCreateProjectDto;
 /*
 // todo создать проект со всеми параметрами
 // todo проверить создание проекта!
@@ -31,8 +31,8 @@ public class CreateProjectTests extends StartTests {
   @Test
   @DisplayName("Создать проект без названия, без обязательного поля name")
   public void createProjectWithoutNameTest() {
-    project = projectFactory.createProject(PROJECT_WITHOUT_NAME);
-    createProjectResponse = projectsClient.createProject(project);
+    cdeCreateProjectDto = projectFactory.createProject(PROJECT_WITHOUT_NAME);
+    createProjectResponse = projectsClient.createProject(cdeCreateProjectDto);
     statusCode = extractStatusCode(createProjectResponse);
 
     assertEquals(SC_UNPROCESSABLE_ENTITY, statusCode);
@@ -41,8 +41,8 @@ public class CreateProjectTests extends StartTests {
   @Test
   @DisplayName("Создать проект, где все параметры null")
   public void createProjectWithNullTest() {
-    project = projectFactory.createProject(PROJECT_WITHOUT_DATA);
-    createProjectResponse = projectsClient.createProject(project);
+    cdeCreateProjectDto = projectFactory.createProject(PROJECT_WITHOUT_DATA);
+    createProjectResponse = projectsClient.createProject(cdeCreateProjectDto);
     statusCode = extractStatusCode(createProjectResponse);
 
     assertEquals(SC_UNPROCESSABLE_ENTITY, statusCode);

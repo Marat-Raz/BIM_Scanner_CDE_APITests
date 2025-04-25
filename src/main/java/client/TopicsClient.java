@@ -6,8 +6,8 @@ import client.base.Client;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import java.util.Map;
-import dtomodels.topics.ResponseTopics;
-import dtomodels.topics.Topics;
+import dto.generated.CdeTopicDetailsDto;
+import dto.generated.CdeCreateTopicDto;
 
 public class TopicsClient extends Client {
 
@@ -37,7 +37,7 @@ public class TopicsClient extends Client {
   }
 
   @Step("Создать задачу в доске задач")
-  public ValidatableResponse createTopicOnTopicBoard(String topicBoardId, Topics topic) {
+  public ValidatableResponse createTopicOnTopicBoard(String topicBoardId, CdeCreateTopicDto topic) {
     // todo необходимо сформировать список опций/фильтров для этого запроса
     return given()
         .spec(getBaseSpec())
@@ -82,7 +82,7 @@ public class TopicsClient extends Client {
 
   @Step("Обновить задачу в доске задач по ID")
   public ValidatableResponse updateTopicOnTopicBoard(String topicBoardId,
-      String topicId, ResponseTopics updatedTopic) {
+      String topicId, CdeTopicDetailsDto updatedTopic) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)

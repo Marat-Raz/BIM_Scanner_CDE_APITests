@@ -6,10 +6,10 @@ import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import basetests.StartTests;
-import dtomodels.project.Project;
+import dto.generated.CdeCreateProjectDto;
 import dtomodels.project.ProjectFactory;
-import dtomodels.project.ProjectWithConcurrencyStamp;
-import dtomodels.project.ResponseProject;
+import dto.generated.CdeUpdateProjectDto;
+import dto.generated.CdeProjectDto;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Step;
@@ -23,36 +23,36 @@ import org.junit.jupiter.api.Test;
 @Epic("Api interface CDE")
 @Feature("Раздел Projects(Проекты)")
 @Story("Редактирование существующего проекта")
-public class UpdatesAnExistingProjectTests extends StartTests {
+public class UpdatesAnExistingCdeCreateProjectDtoTests extends StartTests {
 
   private String concurrencyStamp;
   private ValidatableResponse createProjectResponse;
   private ValidatableResponse putProjectResponse;
-  private ProjectWithConcurrencyStamp projectWithConcurrencyStamp;
-  private Project testProject;
+  private CdeUpdateProjectDto cdeUpdateProjectDto;
+  private CdeCreateProjectDto testCdeCreateProjectDto;
   private String responsibleId;
   private String testProjectId;
 
   @BeforeEach
   @Step("Создать проект от имени ADMIN и получить из ответа «concurrencyStamp» и «responsibleId»")
   public void getConcurrencyStamp() {
-    testProject = new ProjectFactory().createProject(RANDOM_PROJECT);
-    createProjectResponse = projectsClient.createProject(testProject);
-    ResponseProject responseProject = createProjectResponse.extract().as(ResponseProject.class);
-    concurrencyStamp = responseProject.getConcurrencyStamp();
-    testProjectId = responseProject.getId();
-    responsibleId = responseProject.getResponsible().getId();
+    testCdeCreateProjectDto = new ProjectFactory().createProject(RANDOM_PROJECT);
+    createProjectResponse = projectsClient.createProject(testCdeCreateProjectDto);
+    CdeProjectDto cdeProjectDto = createProjectResponse.extract().as(CdeProjectDto.class);
+    concurrencyStamp = cdeProjectDto.getConcurrencyStamp();
+    testProjectId = cdeProjectDto.getId();
+    responsibleId = cdeProjectDto.getResponsible().getId();
   }
 
   @Test
   @Tag(value = "smoke")
   @DisplayName("Изменить проект пользователя ADMIN")
   public void updatesAnExistingProjectTest() {
-    Project newProject = projectFactory.createProject(RANDOM_PROJECT);
-    projectWithConcurrencyStamp =
-        new ProjectWithConcurrencyStamp(newProject, responsibleId, concurrencyStamp);
+    CdeCreateProjectDto newCdeCreateProjectDto = projectFactory.createProject(RANDOM_PROJECT);
+    cdeUpdateProjectDto =
+        new CdeUpdateProjectDto(newCdeCreateProjectDto, responsibleId, concurrencyStamp);
     putProjectResponse = projectsClient.putProjectByItsId(ADMIN_ACCESS_TOKEN, testProjectId,
-        projectWithConcurrencyStamp);
+        cdeUpdateProjectDto);
     statusCode = extractStatusCode(putProjectResponse);
     String changedProjectId = putProjectResponse.extract().path("id");
 

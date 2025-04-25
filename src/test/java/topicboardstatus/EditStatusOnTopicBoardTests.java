@@ -3,8 +3,8 @@ package topicboardstatus;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import dtomodels.statuses.ResponseStatuses;
-import dtomodels.statuses.Statuses;
+import dto.generated.CdeCreateOrUpdateTopicBoardStatusDto;
+import dto.generated.CdeTopicBoardStatusDto;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
@@ -24,13 +24,13 @@ public class EditStatusOnTopicBoardTests extends TopicBoardStatusBaseTests {
   @Tag(value = "smoke")
   @DisplayName("Редактировать параметр «name» статуса в доске задач")
   public void editStatusInTopicBoardTest() {
-    Statuses editableStatus = status;
+    CdeCreateOrUpdateTopicBoardStatusDto editableStatus = status;
     editableStatus.setName("newName");
     editStatusResponse = topicBoardStatusClient
         .editTopicBoardStatuses(topicBoardId, statusId, editableStatus);
     statusCode = extractStatusCode(editStatusResponse);
-    ResponseStatuses editedStatusFromResponse =
-        editStatusResponse.extract().as(ResponseStatuses.class);
+    CdeTopicBoardStatusDto editedStatusFromResponse =
+        editStatusResponse.extract().as(CdeTopicBoardStatusDto.class);
 
     assertEquals(SC_OK, statusCode);
     assertEquals(editableStatus.getName(), editedStatusFromResponse.getName());

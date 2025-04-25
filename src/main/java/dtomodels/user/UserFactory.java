@@ -2,6 +2,7 @@ package dtomodels.user;
 
 import static constants.CommonConstants.REAL_EMAIL;
 
+import dto.generated.AbpIdentityUserCreateDto;
 import dtomodels.RandomWord;
 
 public class UserFactory {
@@ -18,29 +19,29 @@ public class UserFactory {
   private String password = RandomWord.generatePassword(8, 128);
   // todo нужно обязательность символов указывать: цифры, прописные, строчные, спецсимволы
 
-  public User createUser(UserType userType) {
+  public AbpIdentityUserCreateDto createUser(UserType userType) {
     switch (userType) {
       case USER_WITHOUT_EMAIL:
-        return new User(userName, name, surname, null, phoneNumber, active,
+        return new AbpIdentityUserCreateDto(userName, name, surname, null, phoneNumber, active,
             lockoutEnabled, null, password);
       case USER_WITHOUT_PASSWORD:
-        return new User(userName, name, surname, emailAddress, phoneNumber, active,
+        return new AbpIdentityUserCreateDto(userName, name, surname, emailAddress, phoneNumber, active,
             lockoutEnabled, null, null);
       case USER_WITHOUT_USERNAME:
-        return new User(null, name, surname, emailAddress, phoneNumber, active,
+        return new AbpIdentityUserCreateDto(null, name, surname, emailAddress, phoneNumber, active,
             lockoutEnabled, null, null);
       case NEW_USER:
-        return new User("newUser_" + RandomWord.randomLatinCharacters(0, 247),
+        return new AbpIdentityUserCreateDto("newUser_" + RandomWord.randomLatinCharacters(0, 247),
             RandomWord.randomLatinCharacters(0, 64), RandomWord.randomAllCharacters(0, 64),
             "newEmail" + RandomWord.randomLatinAndNumberCharacters(3, 239) + "@mail.com",
             phoneNumber, active, lockoutEnabled, roleNames,
             "newPassword" + RandomWord.randomAllCharacters(8, 117));
       case USER_WITH_REAL_E_MAIL:
-        return new User(userName, name, surname, REAL_EMAIL, phoneNumber, active,
+        return new AbpIdentityUserCreateDto(userName, name, surname, REAL_EMAIL, phoneNumber, active,
             lockoutEnabled, roleNames, password);
       case DEFAULT_USER:
       default:
-        return new User(userName, name, surname, emailAddress, phoneNumber, active,
+        return new AbpIdentityUserCreateDto(userName, name, surname, emailAddress, phoneNumber, active,
             lockoutEnabled, roleNames, password);
     }
   }

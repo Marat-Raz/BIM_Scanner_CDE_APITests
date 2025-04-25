@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 @Epic("Api interface CDE")
 @Feature("Раздел CustomFields(Кастомные поля)")
 @Story("Получение элементов кастомных полей перечисления")
-public class GetEnumerationCustomFieldItemsTests extends CustomFieldsBaseTests {
+public class GetEnumerationCdeCreateCustomFieldDtoItemsTests extends CustomFieldsBaseTests {
 
   private ValidatableResponse getResponse;
 

@@ -4,8 +4,8 @@ import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import dtomodels.topicboards.ResponseTopicBoards;
-import dtomodels.topicboards.TopicBoards;
+import dto.generated.CdeTopicBoardDto;
+import dto.generated.CdeCreateTopicBoardDto;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
 @Epic("Api interface CDE")
 @Feature("Раздел TopicBoards(Доски задач)")
 @Story("Редактирование доски задач")
-public class UpdateTopicBoardByIdTests extends TopicBoardsBaseTests {
+public class UpdateTopicBoardByIdTests extends CdeCreateTopicBoardDtoBaseTests {
 
   private ValidatableResponse updateTopicBoardResponse;
 
@@ -25,19 +25,19 @@ public class UpdateTopicBoardByIdTests extends TopicBoardsBaseTests {
   @Tag(value = "smoke")
   @DisplayName("Изменить группу досок задач по его id")
   public void updateTopicBoardByIdTest() {
-    TopicBoards newTopicBoard = topicBoard;
+    CdeCreateTopicBoardDto newTopicBoard = topicBoard;
     newTopicBoard.setName("newName");
     updateTopicBoardResponse = topicBoardsClient
         .updateTopicBoard(projectId, topicBoardId, newTopicBoard);
     statusCode = extractStatusCode(updateTopicBoardResponse);
-    ResponseTopicBoards responseTopicBoards = updateTopicBoardResponse.extract()
-        .as(ResponseTopicBoards.class);
+    CdeTopicBoardDto cdeTopicBoardDto = updateTopicBoardResponse.extract()
+        .as(CdeTopicBoardDto.class);
 
     assertEquals(SC_OK, statusCode);
     assertAll(
-        () -> assertEquals(newTopicBoard.getName(), responseTopicBoards.getName()),
-        () -> assertEquals(topicBoardId, responseTopicBoards.getId()),
-        () -> assertEquals(projectId, responseTopicBoards.projectId)
+        () -> assertEquals(newTopicBoard.getName(), cdeTopicBoardDto.getName()),
+        () -> assertEquals(topicBoardId, cdeTopicBoardDto.getId()),
+        () -> assertEquals(projectId, cdeTopicBoardDto.projectId)
     );
   }
 

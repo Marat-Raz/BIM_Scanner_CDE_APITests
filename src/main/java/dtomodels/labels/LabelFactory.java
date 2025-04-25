@@ -1,5 +1,7 @@
 package dtomodels.labels;
 
+import dto.generated.CdeCreateLabelDto;
+import dto.generated.CdeLabelDto;
 import dtomodels.RandomColorInHex;
 import dtomodels.RandomWord;
 
@@ -8,20 +10,20 @@ public class LabelFactory {
   public String name = RandomWord.randomLatinCharacters(1, 256);
   public String color = RandomColorInHex.getRandomColorInHex();
 
-  public Label createLabel(LabelType labelType) {
+  public CdeCreateLabelDto createLabel(LabelType labelType) {
     switch (labelType) {
       case WITHOUT_NAME:
-        return new Label(null, color);
+        return new CdeCreateLabelDto(null, color);
       case WITHOUT_COLOR:
-        return new Label(name, null);
+        return new CdeCreateLabelDto(name, null);
       case DEFAULT:
       default:
-        return new Label(name, color);
+        return new CdeCreateLabelDto(name, color);
     }
   }
 
-  public Label from(ResponseLabel responseLabel) {
-    return new Label(responseLabel.getName(), responseLabel.getColor());
+  public CdeCreateLabelDto from(CdeLabelDto cdeLabelDto) {
+    return new CdeCreateLabelDto(cdeLabelDto.getName(), cdeLabelDto.getColor());
   }
 
 }

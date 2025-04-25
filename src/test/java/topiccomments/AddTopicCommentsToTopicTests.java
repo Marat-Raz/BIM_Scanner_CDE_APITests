@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 @Epic("Api interface CDE")
 @Feature("Раздел TopicComments(Комментарии к задачам)")
 @Story("Добавление комментария к задаче")
-public class AddTopicCommentsToTopicTests extends TopicsCommentsBaseTests {
+public class AddTopicCommentsToTopicTests extends CdeCreateTopicDtoCommentsBaseTests {
 
   @Test
   @Tag(value = "smoke")
@@ -22,6 +22,6 @@ public class AddTopicCommentsToTopicTests extends TopicsCommentsBaseTests {
     statusCode = extractStatusCode(addTopicsCommentsResponse);
 
     assertEquals(SC_OK, statusCode);
-    assertEquals(comment.getComment(), responseTopicComment.getComment());
+    assertEquals(createTopicCommentDto.getComment(), cdeTopicCommentDto.getComment());
   }
 }

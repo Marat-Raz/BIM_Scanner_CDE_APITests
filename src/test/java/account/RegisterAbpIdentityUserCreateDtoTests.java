@@ -12,17 +12,17 @@ import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import io.restassured.response.ValidatableResponse;
 import dto.generated.AbpRemoteServiceErrorResponse;
-import dtomodels.user.User;
-import dtomodels.user.UserCredentials;
+import dto.generated.AbpIdentityUserCreateDto;
+import dto.generated.AbpRegisterDto;
 import org.junit.jupiter.api.*;
 
 @Epic("Api interface CDE")
 @Feature("Раздел Account(Аккаунт)")
 @Story("Регистрация пользователя")
-public class RegisterUserTests extends StartTests {
+public class RegisterAbpIdentityUserCreateDtoTests extends StartTests {
 
   private ValidatableResponse registerUserResponse;
-  private static User testUser;
+  private static AbpIdentityUserCreateDto testUser;
   private AccountClient accountClient = new AccountClient();
 
   /*
@@ -48,7 +48,8 @@ public class RegisterUserTests extends StartTests {
   @Tag(value = "smoke")
   @DisplayName("Регистрация нового пользователя")
   public void newUserRegistrationTest() {
-    registerUserResponse = accountClient.registerUser(UserCredentials.from(testUser));
+    registerUserResponse = accountClient.registerUser(AbpRegisterDto.from(
+        testUser));
     statusCode = extractStatusCode(registerUserResponse);
     String userName = registerUserResponse.extract().path("userName");
 
@@ -59,21 +60,21 @@ public class RegisterUserTests extends StartTests {
   @Test
   @DisplayName("Повторная регистрация пользователя")
   public void registrationOfPreviouslyRegisteredUserTest() {
-    User user = userFactory.createUser(NEW_USER);
-    accountClient.registerUser(UserCredentials.from(user));
-    registerUserResponse = accountClient.registerUser(UserCredentials.from(user));
+    AbpIdentityUserCreateDto duplicatedUser = userFactory.createUser(NEW_USER);
+    accountClient.registerUser(AbpRegisterDto.from(duplicatedUser));
+    registerUserResponse = accountClient.registerUser(AbpRegisterDto.from(duplicatedUser));
 
     int newStatusCode = extractStatusCode(registerUserResponse);
     abpRemoteServiceErrorResponse = registerUserResponse.extract().body().as(
         AbpRemoteServiceErrorResponse.class);
 
-    ValidatableResponse response = userClient.getUserByUserName(user.getUserName());
+    ValidatableResponse response = userClient.getUserByUserName(duplicatedUser.getUserName());
     String id = response.extract().path("id");
     userClient.deleteUser(id);
 
     assertEquals(SC_FORBIDDEN, newStatusCode);
-    assertEquals("Username '" + user.getUserName() +
-        "' is already taken., Email '" + user.getEmail() +
+    assertEquals("Username '" + duplicatedUser.getUserName() +
+        "' is already taken., Email '" + duplicatedUser.getEmail() +
         "' is already taken.", abpRemoteServiceErrorResponse.abpRemoteServiceErrorInfo.message);
   }
 

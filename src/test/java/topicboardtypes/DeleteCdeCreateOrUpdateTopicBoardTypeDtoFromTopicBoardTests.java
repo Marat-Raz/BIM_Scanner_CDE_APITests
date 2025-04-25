@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 @Epic("Api interface CDE")
 @Feature("Раздел TopicBoardType(«Типы» в досках задач)")
 @Story("Удаление «Типов» с доски задач")
-public class DeleteTypesFromTopicBoardTests extends TopicBoardTypeBaseTests {
+public class DeleteCdeCreateOrUpdateTopicBoardTypeDtoFromTopicBoardTests extends TopicBoardTypeBaseTests {
 
   private static ValidatableResponse deleteTypesResponse;
 

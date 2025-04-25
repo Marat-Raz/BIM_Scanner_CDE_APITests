@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import dto.generated.CdeModifyTopicBoardCustomFieldDto;
 import dtomodels.customfields.updatetopicboardcustomfields.CustomFieldOnTopicBoardsFactory;
 import dto.generated.CdeUpdateTopicBoardCustomFieldsDto;
-import dtomodels.topicboards.ResponseTopicBoards;
+import dto.generated.CdeTopicBoardDto;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Test;
 @Epic("Api interface CDE")
 @Feature("Раздел TopicBoards(Доски задач)")
 @Story("Добавление кастомных полей в доску задач")
-public class AddCustomFieldsToTopicBoardTests extends TopicBoardsBaseTests {
+public class AddCdeCreateCustomFieldsToTopicBoardTestsDto extends CdeCreateTopicBoardDtoBaseTests {
 
   private static ValidatableResponse getTopicBoardResponse;
   private static ArrayList<CdeModifyTopicBoardCustomFieldDto> existsCustomFields;
@@ -40,7 +40,7 @@ public class AddCustomFieldsToTopicBoardTests extends TopicBoardsBaseTests {
 
     getTopicBoardResponse = topicBoardsClient.getTopicBoard(projectId, topicBoardId);
     responseTopicBoard = getTopicBoardResponse.extract()
-        .as(ResponseTopicBoards.class);
+        .as(CdeTopicBoardDto.class);
 
     existsCustomFields = responseTopicBoard.getCustomFields();
 

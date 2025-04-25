@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import client.TopicBoardTypesClient;
-import dtomodels.types.Types;
+import dto.generated.CdeCreateOrUpdateTopicBoardTypeDto;
 import dtomodels.types.TypesFactory;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
@@ -23,11 +23,11 @@ import org.junit.jupiter.api.Test;
 @Epic("Api interface CDE")
 @Feature("Раздел TopicBoardType(«Типы» в досках задач)")
 @Story("Получение «Типов» с доски задач")
-public class GetTopicBoardTypesTests extends TopicBoardTypeBaseTests {
+public class GetTopicBoardCdeCreateOrUpdateTopicBoardTypeDtoTests extends TopicBoardTypeBaseTests {
 
   private static TopicBoardTypesClient topicBoardTypesClient = new TopicBoardTypesClient();
   private ValidatableResponse getAllTypes;
-  private static List<Types> expectedTypes = new ArrayList<>();
+  private static List<CdeCreateOrUpdateTopicBoardTypeDto> expectedTypes = new ArrayList<>();
 
   @BeforeEach
   public void addTypesToTopicBoards() {
@@ -35,7 +35,7 @@ public class GetTopicBoardTypesTests extends TopicBoardTypeBaseTests {
     for (int i = 0; i < 5; i++) {
       expectedTypes.add(new TypesFactory().createTypes(DEFAULT));
     }
-    for (Types type : expectedTypes) {
+    for (CdeCreateOrUpdateTopicBoardTypeDto type : expectedTypes) {
       addTypesResponse = topicBoardTypesClient.addTopicBoardTypes(topicBoardId, type);
     }
   }
@@ -45,7 +45,8 @@ public class GetTopicBoardTypesTests extends TopicBoardTypeBaseTests {
   @DisplayName("Получить все приоритеты доски задач")
   public void getTopicBoardTypesTest() {
     getAllTypes = topicBoardTypesClient.getTopicBoardTypes(topicBoardId);
-    List<Types> actualTypes = Arrays.asList(getAllTypes.extract().as(Types[].class));
+    List<CdeCreateOrUpdateTopicBoardTypeDto> actualTypes = Arrays.asList(getAllTypes.extract().as(
+        CdeCreateOrUpdateTopicBoardTypeDto[].class));
 
     assertAll(
         () -> assertEquals(new HashSet<>(expectedTypes), new HashSet<>(actualTypes))

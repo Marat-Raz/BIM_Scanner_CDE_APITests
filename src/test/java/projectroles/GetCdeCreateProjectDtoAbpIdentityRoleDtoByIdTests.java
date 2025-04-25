@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 @Epic("Api interface CDE")
 @Feature("Раздел ProjectRoles(Роли в проекте)")
 @Story("Получение роли в проекте по id")
-public class GetCdeCreateProjectDtoRoleByIdTests extends ProjectRolesBaseTests {
+public class GetCdeCreateProjectDtoAbpIdentityRoleDtoByIdTests extends ProjectRolesBaseTests {
 
   private ValidatableResponse getProjectRoleResponse;
 

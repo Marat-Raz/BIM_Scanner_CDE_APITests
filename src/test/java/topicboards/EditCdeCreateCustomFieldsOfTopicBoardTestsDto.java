@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import dto.generated.CdeModifyTopicBoardCustomFieldDto;
 import dtomodels.customfields.updatetopicboardcustomfields.CustomFieldOnTopicBoardsFactory;
 import dto.generated.CdeUpdateTopicBoardCustomFieldsDto;
-import dtomodels.topicboards.ResponseTopicBoards;
+import dto.generated.CdeTopicBoardDto;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Step;
@@ -21,7 +21,7 @@ import org.junit.jupiter.api.Test;
 @Epic("Api interface CDE")
 @Feature("Раздел TopicBoards(Доски задач)")
 @Story("Редактирование кастомных полей в доске задач")
-public class EditCustomFieldsOfTopicBoardTests extends TopicBoardsBaseTests {
+public class EditCdeCreateCustomFieldsOfTopicBoardTestsDto extends CdeCreateTopicBoardDtoBaseTests {
 
   private static ValidatableResponse editCustomFieldResponse;
   private static ValidatableResponse getTopicBoardResponse;
@@ -41,7 +41,7 @@ public class EditCustomFieldsOfTopicBoardTests extends TopicBoardsBaseTests {
 
     getTopicBoardResponse = topicBoardsClient.getTopicBoard(projectId, topicBoardId);
     responseTopicBoard = getTopicBoardResponse.extract()
-        .as(ResponseTopicBoards.class);
+        .as(CdeTopicBoardDto.class);
 
     existsCustomFields = responseTopicBoard.getCustomFields();
 
@@ -59,10 +59,10 @@ public class EditCustomFieldsOfTopicBoardTests extends TopicBoardsBaseTests {
         existsCustomFields);
     editCustomFieldResponse = topicBoardsClient
         .editTopicBoardCustomFields(projectId, topicBoardId, cdeUpdateTopicBoardCustomFieldsDto);
-    ResponseTopicBoards responseTopicBoards = editCustomFieldResponse.extract()
-        .as(ResponseTopicBoards.class);
+    CdeTopicBoardDto cdeTopicBoardDto = editCustomFieldResponse.extract()
+        .as(CdeTopicBoardDto.class);
 
-    ArrayList<CdeModifyTopicBoardCustomFieldDto> actualCustomField = responseTopicBoards.getCustomFields();
+    ArrayList<CdeModifyTopicBoardCustomFieldDto> actualCustomField = cdeTopicBoardDto.getCustomFields();
 
     assertAll(
         () -> assertEquals(expectedTxt, actualCustomField.get(0).getDefaultValue())

@@ -5,7 +5,7 @@ import static io.restassured.RestAssured.given;
 import client.base.Client;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
-import dtomodels.types.Types;
+import dto.generated.CdeCreateOrUpdateTopicBoardTypeDto;
 
 public class TopicBoardTypesClient extends Client {
 
@@ -22,7 +22,7 @@ public class TopicBoardTypesClient extends Client {
   }
 
   @Step("Добавить тип задачи на доску задач")
-  public ValidatableResponse addTopicBoardTypes(String topicBoardId, Types type) {
+  public ValidatableResponse addTopicBoardTypes(String topicBoardId, CdeCreateOrUpdateTopicBoardTypeDto type) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
@@ -34,11 +34,11 @@ public class TopicBoardTypesClient extends Client {
 
   @Step("Редактировать тип задачи на доске задач")
   public ValidatableResponse editTopicBoardTypes(String topicBoardId, String typeId,
-      Types editedTypes) {
+      CdeCreateOrUpdateTopicBoardTypeDto editedCdeCreateOrUpdateTopicBoardTypeDto) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
-        .body(editedTypes)
+        .body(editedCdeCreateOrUpdateTopicBoardTypeDto)
         .when()
         .put(API_ISSUES_BOARDS + topicBoardId + TYPES + typeId)
         .then();

@@ -4,7 +4,7 @@ import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import dtomodels.topics.ResponseTopics;
+import dto.generated.CdeTopicDetailsDto;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 @Epic("Api interface CDE")
 @Feature("Раздел Topics(Задачи)")
 @Story("Добавление задачи в доску задач")
-public class AddTopicsToTopicBoardTests extends TopicsBaseTests {
+public class AddCdeCreateTopicDtoToTopicBoardTests extends CdeCreateTopicDtoBaseTests {
 
   @Test
   @Tag(value = "smoke")
@@ -23,12 +23,12 @@ public class AddTopicsToTopicBoardTests extends TopicsBaseTests {
   public void addTopicsToTopicBoardTest() {
     addTopicsResponse = topicsClient.createTopicOnTopicBoard(topicBoardId, topic);
     statusCode = extractStatusCode(addTopicsResponse);
-    ResponseTopics responseTopics = addTopicsResponse.extract().as(ResponseTopics.class);
+    CdeTopicDetailsDto cdeTopicDetailsDto = addTopicsResponse.extract().as(CdeTopicDetailsDto.class);
 
     assertEquals(SC_OK, statusCode);
     assertAll(
-        () -> assertEquals(topic.getTitle(), responseTopics.getTitle()),
-        () -> assertEquals(topic.getDescription(), responseTopics.getDescription())
+        () -> assertEquals(topic.getTitle(), cdeTopicDetailsDto.getTitle()),
+        () -> assertEquals(topic.getDescription(), cdeTopicDetailsDto.getDescription())
     );
   }
 }

@@ -1,4 +1,15 @@
 package dto.generated;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import java.util.ArrayList;
+
+@AllArgsConstructor
+@Getter
+@Setter
+public class CdeCreateTopicDto {
+
     private String title;
     private String description;
     private String dueDate;
@@ -9,4 +20,3 @@ package dto.generated;
     private ArrayList<CdeSetCustomFieldValueDto> customFields;
     private ArrayList<String> labels;
 }
-

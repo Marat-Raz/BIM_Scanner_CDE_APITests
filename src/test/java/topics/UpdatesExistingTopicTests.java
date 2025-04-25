@@ -4,7 +4,7 @@ import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import client.TopicsClient;
-import dtomodels.topics.ResponseTopics;
+import dto.generated.CdeTopicDetailsDto;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 @Epic("Api interface CDE")
 @Feature("Раздел Topics(Задачи)")
 @Story("Обновление задачи в доске задач")
-public class UpdatesExistingTopicTests extends TopicsBaseTests {
+public class UpdatesExistingTopicTests extends CdeCreateTopicDtoBaseTests {
 
   private static TopicsClient topicsClient = new TopicsClient();
   private ValidatableResponse updateTopicByIdResponse;
@@ -28,7 +28,7 @@ public class UpdatesExistingTopicTests extends TopicsBaseTests {
     responseTopic.setTitle("new Title");
     updateTopicByIdResponse = topicsClient
         .updateTopicOnTopicBoard(topicBoardId, responseTopic.getId(), responseTopic);
-    ResponseTopics updatedTopics = updateTopicByIdResponse.extract().as(ResponseTopics.class);
+    CdeTopicDetailsDto updatedTopics = updateTopicByIdResponse.extract().as(CdeTopicDetailsDto.class);
     statusCode = extractStatusCode(updateTopicByIdResponse);
 
     assertEquals(SC_OK, statusCode);

@@ -6,11 +6,11 @@ import basetests.RestAssuredLogging;
 import basetests.StartTests;
 import client.ModelRevisionsClient;
 import client.ModelsClient;
-import dtomodels.comment.Comment;
-import dtomodels.models.Model;
+import dto.generated.CdeCreateTopicCommentDto;
+import dto.generated.CdeCreateOrUpdateModelDto;
 import dtomodels.models.ModelFileFormat;
 import dtomodels.models.ModelsFactory;
-import dtomodels.models.modelrevisions.ResponseModelRevisions;
+import dto.generated.CdeModelRevisionDto;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import java.io.File;
@@ -29,9 +29,9 @@ public class ModelRevisionsBaseTests extends StartTests {
   protected static ModelsFactory modelsFactory = new ModelsFactory();
   protected static ValidatableResponse createModelResponse;
   protected static ValidatableResponse uploadModelFileResponse;
-  protected static ResponseModelRevisions responseModelRevisions;
+  protected static CdeModelRevisionDto cdeModelRevisionDto;
   protected static String modelId;
-  protected static List<ResponseModelRevisions> modelRevisionsArrayFromResponse = new ArrayList<>();
+  protected static List<CdeModelRevisionDto> modelRevisionsArrayFromResponse = new ArrayList<>();
   protected static int modelRevisionCount = 3;
   private static File modelFile =
       new File("src/main/resources/upload/Gladilova_AC_(IFC2x3).ifc");
@@ -41,15 +41,15 @@ public class ModelRevisionsBaseTests extends StartTests {
   @BeforeAll
   @Step("Создание модели и загрузка файлов перед тестами")
   public static void setUpModel() {
-    Model model = modelsFactory.createNameForModel(DEFAULT);
-    createModelResponse = modelsClient.createModelInProject(projectId, model);
+    CdeCreateOrUpdateModelDto cdeCreateOrUpdateModelDto = modelsFactory.createNameForModel(DEFAULT);
+    createModelResponse = modelsClient.createModelInProject(projectId, cdeCreateOrUpdateModelDto);
     modelId = createModelResponse.extract().path("id");
     RestAssuredLogging.setupMinimalLogging();
     for (int i = 0; i < modelRevisionCount; i++) {
       uploadModelFileResponse = modelRevisionsClient
-          .uploadNewModelFile(projectId, modelId, modelFile, new Comment("comment №" + i));
-      responseModelRevisions = uploadModelFileResponse.extract().as(ResponseModelRevisions.class);
-      modelRevisionsArrayFromResponse.add(responseModelRevisions);
+          .uploadNewModelFile(projectId, modelId, modelFile, new CdeCreateTopicCommentDto("createTopicCommentDto №" + i));
+      cdeModelRevisionDto = uploadModelFileResponse.extract().as(CdeModelRevisionDto.class);
+      modelRevisionsArrayFromResponse.add(cdeModelRevisionDto);
     }
     RestAssuredLogging.restoreOriginalFilters();
   }

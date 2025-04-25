@@ -3,10 +3,10 @@ package client;
 import static io.restassured.RestAssured.given;
 
 import client.base.Client;
-import dtomodels.customfields.customfieldstoedit.CustomFieldToEdit;
+import dto.generated.CdeUpdateCustomFieldDto;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
-import dtomodels.customfields.CustomField;
+import dto.generated.CdeCreateCustomFieldDto;
 import java.util.Map;
 
 
@@ -25,11 +25,11 @@ public class CustomFieldsClient extends Client {
   }
 
   @Step("Создать кастомное поле в проекте")
-  public ValidatableResponse addNewCustomFieldToProject(String projectId, CustomField customField) {
+  public ValidatableResponse addNewCustomFieldToProject(String projectId, CdeCreateCustomFieldDto cdeCreateCustomFieldDto) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
-        .body(customField)
+        .body(cdeCreateCustomFieldDto)
         .when()
         .post(API_PROJECTS + projectId + CUSTOM_FIELDS)
         .then();
@@ -47,11 +47,11 @@ public class CustomFieldsClient extends Client {
 
   @Step("Обновить кастомное поле по ID")
   public ValidatableResponse editCustomField(String projectId, String customFieldId,
-      CustomFieldToEdit customFieldToEdit) {
+      CdeUpdateCustomFieldDto cdeUpdateCustomFieldDto) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
-        .body(customFieldToEdit)
+        .body(cdeUpdateCustomFieldDto)
         .when()
         .patch(API_PROJECTS + projectId + CUSTOM_FIELDS + customFieldId)
         .then();

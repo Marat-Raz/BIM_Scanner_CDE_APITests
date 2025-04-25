@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 @Epic("Api interface CDE")
 @Feature("Раздел Models(Модели)")
 @Story("Создание модели в проекте")
-public class CreateModelTests extends ModelsBaseTests {
+public class CreateCdeCreateOrUpdateModelDtoTests extends ModelsBaseTests {
 
   @Test
   @Tag(value = "smoke")
@@ -25,8 +25,8 @@ public class CreateModelTests extends ModelsBaseTests {
 
     assertEquals(SC_OK, statusCode);
     assertAll(
-        () -> assertEquals(defaultModel.getName(), defaultResponseModel.getName()),
-        () -> assertNotNull(defaultResponseModel.getId())
+        () -> assertEquals(defaultCdeCreateOrUpdateModelDto.getName(), defaultCdeModelDto.getName()),
+        () -> assertNotNull(defaultCdeModelDto.getId())
     );
   }
 }

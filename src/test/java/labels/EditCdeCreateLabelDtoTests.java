@@ -3,9 +3,9 @@ package labels;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import dtomodels.labels.Label;
+import dto.generated.CdeCreateLabelDto;
 import dtomodels.labels.LabelFactory;
-import dtomodels.labels.ResponseLabel;
+import dto.generated.CdeLabelDto;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
 @Epic("Api interface CDE")
 @Feature("Раздел Labels(Метки)")
 @Story("Редактирование метки")
-public class EditLabelTests extends LabelBaseTests {
+public class EditCdeCreateLabelDtoTests extends LabelBaseTests {
 
   private ValidatableResponse putResponse;
   private ValidatableResponse getResponse;
@@ -28,18 +28,18 @@ public class EditLabelTests extends LabelBaseTests {
   @DisplayName("Изменить метку проекта по id - код 200")
   public void editLabelByIdTest() {
     getResponse = labelsClient.getListOfLabelInProjectWithoutQueryOptions(projectId);
-    ResponseLabel[] responseLabelsArray = getResponse.extract().as(ResponseLabel[].class);
-    labelId = responseLabelsArray[0].getId();
+    CdeLabelDto[] cdeLabelsArrayDto = getResponse.extract().as(CdeLabelDto[].class);
+    labelId = cdeLabelsArrayDto[0].getId();
 
-    Label newLabel = labelFactory.from(responseLabelsArray[0]);
-    newLabel.setName("It's new name");
+    CdeCreateLabelDto newCdeCreateLabelDto = labelFactory.from(cdeLabelsArrayDto[0]);
+    newCdeCreateLabelDto.setName("It's new name");
 
-    putResponse = labelsClient.updateLabelInProject(projectId, labelId, newLabel);
+    putResponse = labelsClient.updateLabelInProject(projectId, labelId, newCdeCreateLabelDto);
     statusCode = extractStatusCode(putResponse);
-    ResponseLabel actualLabel = putResponse.extract().as(ResponseLabel.class);
+    CdeLabelDto actualLabel = putResponse.extract().as(CdeLabelDto.class);
 
     assertEquals(SC_OK, statusCode);
-    assertEquals(newLabel.getName(), actualLabel.getName());
+    assertEquals(newCdeCreateLabelDto.getName(), actualLabel.getName());
   }
 
 }

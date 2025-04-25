@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import basetests.RestAssuredLogging;
 import basetests.StartTests;
 import client.ProjectsClient;
-import dtomodels.project.Project;
+import dto.generated.CdeCreateProjectDto;
 import dtomodels.project.ProjectFactory;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
@@ -22,7 +22,7 @@ import org.junit.jupiter.api.*;
 @Epic("Api interface CDE")
 @Feature("Раздел Projects(Проекты)")
 @Story("Удаление обложки проекта")
-public class DeleteProjectCoverImageTests extends StartTests {
+public class DeleteCdeCreateProjectDtoCoverImageTests extends StartTests {
 
   private static ProjectFactory projectFactory = new ProjectFactory();
   private static ProjectsClient projectsClient = new ProjectsClient();
@@ -33,8 +33,8 @@ public class DeleteProjectCoverImageTests extends StartTests {
   @BeforeAll
   @Step("Создать проект от имени ADMIN")
   public static void createProject() {// todo перенести в ProjectBaseTest
-    Project project = projectFactory.createProject(RANDOM_PROJECT);
-    createProjectResponse = projectsClient.createProject(ADMIN_ACCESS_TOKEN, project);
+    CdeCreateProjectDto cdeCreateProjectDto = projectFactory.createProject(RANDOM_PROJECT);
+    createProjectResponse = projectsClient.createProject(ADMIN_ACCESS_TOKEN, cdeCreateProjectDto);
     projectId = createProjectResponse.extract().path("id");
   }
 

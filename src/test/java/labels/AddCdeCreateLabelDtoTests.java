@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 @Epic("Api interface CDE")
 @Feature("Раздел Labels(Метки)")
 @Story("Добавление метки в проекте")
-public class AddLabelTests extends LabelBaseTests {
+public class AddCdeCreateLabelDtoTests extends LabelBaseTests {
 
   @Test
   @Tag(value = "smoke")
@@ -25,9 +25,9 @@ public class AddLabelTests extends LabelBaseTests {
 
     assertEquals(SC_OK, statusCode);
     assertAll(
-        () -> assertEquals(label.getName(), responseLabel.getName()),
-        () -> assertEquals(label.getColor(), responseLabel.getColor()),
-        () -> assertNotNull(responseLabel.getId())
+        () -> assertEquals(cdeCreateLabelDto.getName(), cdeLabelDto.getName()),
+        () -> assertEquals(cdeCreateLabelDto.getColor(), cdeLabelDto.getColor()),
+        () -> assertNotNull(cdeLabelDto.getId())
     );
   }
 

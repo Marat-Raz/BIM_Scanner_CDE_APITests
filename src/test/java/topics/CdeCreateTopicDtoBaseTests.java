@@ -11,13 +11,13 @@ import io.restassured.response.ValidatableResponse;
 import dto.generated.CdeTopicBoardDto;
 import dto.generated.CdeCreateTopicBoardDto;
 import dtomodels.topicboards.TopicBoardsFactory;
-import dtomodels.topics.CdeCreateTopicDto;
-import dtomodels.topics.Topics;
+import dto.generated.CdeTopicDetailsDto;
+import dto.generated.CdeCreateTopicDto;
 import dtomodels.topics.TopicsFactory;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 
-public class TopicsBaseTests extends StartTests {
+public class CdeCreateTopicDtoBaseTests extends StartTests {
 
   protected static TopicBoardsClient topicBoardsClient = new TopicBoardsClient();
   protected static TopicBoardsFactory topicBoardsFactory = new TopicBoardsFactory();
@@ -27,9 +27,9 @@ public class TopicsBaseTests extends StartTests {
   protected static TopicsFactory topicsFactory = new TopicsFactory();
   protected static String topicBoardId;
   protected ValidatableResponse addTopicsResponse;
-  protected Topics topic;
+  protected CdeCreateTopicDto topic;
   protected String defaultTopicId;
-  protected CdeCreateTopicDto responseTopic;
+  protected CdeTopicDetailsDto responseTopic;
 
   @BeforeAll
   @Step("Создаем доску задач в проекте")
@@ -46,7 +46,7 @@ public class TopicsBaseTests extends StartTests {
   public void addTopic() {
     topic = topicsFactory.createTopic(DEFAULT_TOPIC);
     addTopicsResponse = topicsClient.createTopicOnTopicBoard(topicBoardId, topic);
-    responseTopic = addTopicsResponse.extract().as(CdeCreateTopicDto.class);
+    responseTopic = addTopicsResponse.extract().as(CdeTopicDetailsDto.class);
     defaultTopicId = responseTopic.getId();
   }
 

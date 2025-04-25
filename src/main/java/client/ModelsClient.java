@@ -3,7 +3,7 @@ package client;
 import static io.restassured.RestAssured.given;
 
 import client.base.Client;
-import dtomodels.models.Model;
+import dto.generated.CdeCreateOrUpdateModelDto;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import java.util.Map;
@@ -35,11 +35,11 @@ public class ModelsClient extends Client {
   }
 
   @Step("Создать модель в проекте")
-  public ValidatableResponse createModelInProject(String projectId, Model model) {
+  public ValidatableResponse createModelInProject(String projectId, CdeCreateOrUpdateModelDto cdeCreateOrUpdateModelDto) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
-        .body(model)
+        .body(cdeCreateOrUpdateModelDto)
         .when()
         .post(API_PROJECTS + projectId + MODELS)
         .then();
@@ -57,11 +57,11 @@ public class ModelsClient extends Client {
 
   @Step("Обновить модель по ID")
   public ValidatableResponse updateModelById(String projectId, String modelId,
-      Model updatedModel) {
+      CdeCreateOrUpdateModelDto updatedCdeCreateOrUpdateModelDto) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
-        .body(updatedModel)
+        .body(updatedCdeCreateOrUpdateModelDto)
         .when()
         .put(API_PROJECTS + projectId + MODELS + modelId)
         .then();

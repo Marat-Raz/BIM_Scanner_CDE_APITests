@@ -14,7 +14,8 @@ import org.junit.jupiter.api.Test;
 @Epic("Api interface CDE")
 @Feature("Раздел TopicBoardPriority(«Приоритеты» в доске задач)")
 @Story("удаление «Приоритета» с доски задач")
-public class DeletePrioritiesFromTopicBoardTests extends TopicBoardPrioritiesBaseTests {
+public class DeleteCdeCreateOrUpdateTopicBoardPriorityDtoFromTopicBoardTests extends
+    TopicBoardCdeCreateOrUpdateTopicBoardPriorityDtoBaseTests {
 
   private static ValidatableResponse deletePrioritiesResponse;
 

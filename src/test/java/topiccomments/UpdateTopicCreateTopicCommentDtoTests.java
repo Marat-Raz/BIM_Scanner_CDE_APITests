@@ -3,8 +3,8 @@ package topiccomments;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import dtomodels.comment.Comment;
-import dtomodels.comment.ResponseTopicComment;
+import dto.generated.CdeCreateTopicCommentDto;
+import dto.generated.CdeTopicCommentDto;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 @Epic("Api interface CDE")
 @Feature("Раздел TopicComments(Комментарии к задачам)")
 @Story("Обновление(изменение) комментария к задаче")
-public class UpdateTopicCommentTests extends TopicsCommentsBaseTests {
+public class UpdateTopicCreateTopicCommentDtoTests extends CdeCreateTopicDtoCommentsBaseTests {
 
   private ValidatableResponse updateTopicCommentResponse;
 
@@ -24,16 +24,16 @@ public class UpdateTopicCommentTests extends TopicsCommentsBaseTests {
   @Tag(value = "smoke")
   @DisplayName("Обновить комментарий к задаче")
   public void updateTopicCommentTest() {
-    Comment newComment = comment;
-    comment.setComment("New comment");
+    CdeCreateTopicCommentDto newCreateTopicCommentDto = createTopicCommentDto;
+    createTopicCommentDto.setComment("New createTopicCommentDto");
     updateTopicCommentResponse = topicCommentsClient
-        .updateTopicComment(topicBoardId, defaultTopicId, topicCommentId, newComment);
+        .updateTopicComment(topicBoardId, defaultTopicId, topicCommentId, newCreateTopicCommentDto);
     statusCode = extractStatusCode(updateTopicCommentResponse);
-    responseTopicComment = updateTopicCommentResponse.extract().as(ResponseTopicComment.class);
-    String expectedTopicCommentId = responseTopicComment.getId();
+    cdeTopicCommentDto = updateTopicCommentResponse.extract().as(CdeTopicCommentDto.class);
+    String expectedTopicCommentId = cdeTopicCommentDto.getId();
 
     assertEquals(SC_OK, statusCode);
     assertEquals(topicCommentId, expectedTopicCommentId);
-    assertEquals(comment.getComment(), responseTopicComment.getComment());
+    assertEquals(createTopicCommentDto.getComment(), cdeTopicCommentDto.getComment());
   }
 }

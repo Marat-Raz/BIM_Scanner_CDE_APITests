@@ -7,7 +7,7 @@ import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import io.restassured.response.ValidatableResponse;
-import dtomodels.customfields.ResponseCustomField;
+import dto.generated.CdeCustomFieldDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 @Epic("Api interface CDE")
 @Feature("Раздел CustomFields(Кастомные поля)")
 @Story("Получение кастомного поля по id")
-public class GetCustomFieldByIdTests extends CustomFieldsBaseTests {
+public class GetCdeCreateCustomFieldDtoByIdTests extends CustomFieldsBaseTests {
 
   private ValidatableResponse getResponse;
 
@@ -27,10 +27,10 @@ public class GetCustomFieldByIdTests extends CustomFieldsBaseTests {
   public void getCustomFieldByIdTest() {
     getResponse = customFieldsClient.getCustomFieldById(projectId, customFieldId);
     statusCode = extractStatusCode(getResponse);
-    ResponseCustomField responseCustomField = getResponse.extract().as(ResponseCustomField.class);
+    CdeCustomFieldDto cdeCustomFieldDto = getResponse.extract().as(CdeCustomFieldDto.class);
 
     assertEquals(SC_OK, statusCode);
-    assertEquals(customFieldId, responseCustomField.getId());
+    assertEquals(customFieldId, cdeCustomFieldDto.getId());
   }
 
 }

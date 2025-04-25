@@ -5,7 +5,7 @@ import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import basetests.StartTests;
-import dtomodels.project.Project;
+import dto.generated.CdeCreateProjectDto;
 import dtomodels.project.ProjectFactory;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
@@ -24,17 +24,17 @@ import org.junit.jupiter.api.Test;
 public class GetAllProjectsTests extends StartTests {
 
   private ValidatableResponse getAllProjectResponse;
-  private static ArrayList<Project> projectList = new ArrayList<Project>();
+  private static ArrayList<CdeCreateProjectDto> cdeCreateProjectDtoList = new ArrayList<CdeCreateProjectDto>();
   private static int numberOfProjects = 5;
 
   @BeforeAll
   @Step("Создать несколько проектов для теста")
   public static void createProjects() {
     for (int i = 0; i < numberOfProjects; i++) {
-      projectList.add(new ProjectFactory().createProject(RANDOM_PROJECT));
+      cdeCreateProjectDtoList.add(new ProjectFactory().createProject(RANDOM_PROJECT));
     }
-    for (Project project : projectList) {
-      projectsClient.createProject(project);
+    for (CdeCreateProjectDto cdeCreateProjectDto : cdeCreateProjectDtoList) {
+      projectsClient.createProject(cdeCreateProjectDto);
     }
   }
 

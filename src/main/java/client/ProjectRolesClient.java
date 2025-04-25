@@ -3,8 +3,8 @@ package client;
 import static io.restassured.RestAssured.given;
 
 import client.base.Client;
-import dtomodels.projectroles.ProjectRole;
-import dtomodels.projectroles.projectrolestoedit.ProjectRoleToEdit;
+import dto.generated.CdeCreateProjectRoleDto;
+import dto.generated.CdeUpdateProjectRoleDto;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 
@@ -34,11 +34,11 @@ public class ProjectRolesClient extends Client {
   }
 
   @Step("Создать новую роль проекта")
-  public ValidatableResponse createProjectRole(String projectId, ProjectRole projectRole) {
+  public ValidatableResponse createProjectRole(String projectId, CdeCreateProjectRoleDto cdeCreateProjectRoleDto) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
-        .body(projectRole)
+        .body(cdeCreateProjectRoleDto)
         .when()
         .post(API_PROJECTS + projectId + ROLES)
         .then();
@@ -56,7 +56,7 @@ public class ProjectRolesClient extends Client {
 
   @Step("Обновить роль проекта по ID")
   public ValidatableResponse updateProjectRole(String projectId, String roleId,
-      ProjectRoleToEdit updatedRole) {
+      CdeUpdateProjectRoleDto updatedRole) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)

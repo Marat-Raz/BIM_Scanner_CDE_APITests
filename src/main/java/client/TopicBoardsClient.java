@@ -5,8 +5,8 @@ import static io.restassured.RestAssured.given;
 import client.base.Client;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
-import dtomodels.topicboards.TopicBoards;
-import dtomodels.customfields.customfieldsintopicbords.CustomFieldsOnTopicBoards;
+import dto.generated.CdeCreateTopicBoardDto;
+import dto.generated.CdeUpdateTopicBoardCustomFieldsDto;
 
 public class TopicBoardsClient extends Client {
 
@@ -24,7 +24,7 @@ public class TopicBoardsClient extends Client {
 
   @Step("Создать доску задач в проекте")
   public ValidatableResponse createNewTopicBoard(String projectId,
-      TopicBoards topicBoard) {
+      CdeCreateTopicBoardDto topicBoard) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
@@ -36,7 +36,7 @@ public class TopicBoardsClient extends Client {
 
   @Step("Изменить доску задач")
   public ValidatableResponse updateTopicBoard(String projectId,
-      String topicBoardId, TopicBoards topicBoard) {
+      String topicBoardId, CdeCreateTopicBoardDto topicBoard) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
@@ -48,11 +48,11 @@ public class TopicBoardsClient extends Client {
 
   @Step("Редактировать кастомные поля доски задач")
   public ValidatableResponse editTopicBoardCustomFields(String projectId,
-      String topicBoardId, CustomFieldsOnTopicBoards customFieldsOnTopicBoards) {
+      String topicBoardId, CdeUpdateTopicBoardCustomFieldsDto cdeUpdateTopicBoardCustomFieldsDto) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
-        .body(customFieldsOnTopicBoards)
+        .body(cdeUpdateTopicBoardCustomFieldsDto)
         .when()
         .patch(API_PROJECTS + projectId + ISSUES_BOARDS + topicBoardId)
         .then();

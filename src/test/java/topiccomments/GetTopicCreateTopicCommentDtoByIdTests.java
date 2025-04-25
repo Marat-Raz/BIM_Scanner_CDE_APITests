@@ -3,7 +3,7 @@ package topiccomments;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import dtomodels.comment.ResponseTopicComment;
+import dto.generated.CdeTopicCommentDto;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 @Epic("Api interface CDE")
 @Feature("Раздел TopicComments(Комментарии к задачам)")
 @Story("Получение комментария к задаче по id")
-public class GetTopicCommentByIdTests extends TopicsCommentsBaseTests {
+public class GetTopicCreateTopicCommentDtoByIdTests extends CdeCreateTopicDtoCommentsBaseTests {
 
   private ValidatableResponse getsTopicCommentsById;
 
@@ -26,9 +26,9 @@ public class GetTopicCommentByIdTests extends TopicsCommentsBaseTests {
     getsTopicCommentsById = topicCommentsClient
         .getTopicCommentById(topicBoardId, defaultTopicId, topicCommentId);
     statusCode = extractStatusCode(getsTopicCommentsById);
-    responseTopicComment = getsTopicCommentsById.extract()
-        .as(ResponseTopicComment.class);
-    String newTopicCommentId = responseTopicComment.getId();
+    cdeTopicCommentDto = getsTopicCommentsById.extract()
+        .as(CdeTopicCommentDto.class);
+    String newTopicCommentId = cdeTopicCommentDto.getId();
 
     assertEquals(SC_OK, statusCode);
     assertEquals(topicCommentId, newTopicCommentId);

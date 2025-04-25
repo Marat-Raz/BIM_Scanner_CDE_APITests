@@ -5,16 +5,16 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import dtomodels.models.ResponseModelConversionStatus;
+import dto.generated.CdeModelConversionStatusDto;
 import io.restassured.response.ValidatableResponse;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-public class GetStatusOfModelConversionTests extends ModelRevisionsBaseTests {
+public class GetStatusOfCdeCreateOrUpdateModelDtoConversionTests extends ModelRevisionsBaseTests {
 
   private ValidatableResponse getStatusOfModelConversionResponse;
-  private ResponseModelConversionStatus responseModelConversionStatus;
+  private CdeModelConversionStatusDto cdeModelConversionStatusDto;
 
   @Test
   @Tag(value = "positive")
@@ -24,13 +24,13 @@ public class GetStatusOfModelConversionTests extends ModelRevisionsBaseTests {
     getStatusOfModelConversionResponse = modelRevisionsClient
         .getModelConversionStatus(projectId, modelId, modelVersion);
     statusCode = extractStatusCode(getStatusOfModelConversionResponse);
-    responseModelConversionStatus = getStatusOfModelConversionResponse.extract()
-        .as(ResponseModelConversionStatus.class);
+    cdeModelConversionStatusDto = getStatusOfModelConversionResponse.extract()
+        .as(CdeModelConversionStatusDto.class);
 
     assertEquals(SC_OK, statusCode);
     assertAll(
-        () -> assertEquals(modelVersion, responseModelConversionStatus.getVersion()),
-        () -> assertNotNull(responseModelConversionStatus.getId())
+        () -> assertEquals(modelVersion, cdeModelConversionStatusDto.getVersion()),
+        () -> assertNotNull(cdeModelConversionStatusDto.getId())
     );
   }
 

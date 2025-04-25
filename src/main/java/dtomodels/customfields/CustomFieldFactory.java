@@ -1,38 +1,42 @@
 package dtomodels.customfields;
 
-import static dtomodels.customfields.CustomFieldType.*;
+import static dto.generated.CdeCustomFieldType.*;
 import static dtomodels.customfields.enumerationitem.EnumerationItemType.DEFAULT;
 
-import dtomodels.customfields.enumerationitem.EnumerationItemFactory;
-import java.util.List;
+import dto.generated.CdeAddEnumerationCustomFieldItemDto;
+import dto.generated.CdeCreateCustomFieldDto;
+import dto.generated.CdeCustomFieldType;
 import dtomodels.RandomWord;
-import dtomodels.customfields.enumerationitem.EnumerationItem;
+import dtomodels.customfields.enumerationitem.EnumerationItemFactory;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CustomFieldFactory {
 
   private String name = RandomWord.randomAllCharacters(1, 256);
   private String description = RandomWord.randomAllCharacters(1, 100); // Can up to 10000 characters
-  public CustomFieldType type;
-  public List<EnumerationItem> enumerationItems =
+  public CdeCustomFieldType type;
+  public List<CdeAddEnumerationCustomFieldItemDto> cdeAddEnumerationCustomFieldItemDto =
       List.of(new EnumerationItemFactory().createNameForEnumerationItem(DEFAULT),
           new EnumerationItemFactory().createNameForEnumerationItem(DEFAULT),
           new EnumerationItemFactory().createNameForEnumerationItem(DEFAULT));
 
-  public CustomField createCustomField(CustomFieldType customFieldType) {
+  public CdeCreateCustomFieldDto createCustomField(CdeCustomFieldType customFieldType) {
     switch (customFieldType) {
       case INTEGER:
-        return new CustomField(name, description, INTEGER, null);
+        return new CdeCreateCustomFieldDto(name, description, INTEGER, null);
       case DECIMAL:
-        return new CustomField(name, description, DECIMAL, null);
+        return new CdeCreateCustomFieldDto(name, description, DECIMAL, null);
       case DATE:
-        return new CustomField(name, description, DATE, null);
+        return new CdeCreateCustomFieldDto(name, description, DATE, null);
       case BOOL:
-        return new CustomField(name, description, BOOL, null);
+        return new CdeCreateCustomFieldDto(name, description, BOOL, null);
       case ENUMERATION:
-        return new CustomField(name, description, ENUMERATION, enumerationItems);
+        return new CdeCreateCustomFieldDto(name, description, ENUMERATION,
+            (ArrayList<CdeAddEnumerationCustomFieldItemDto>) cdeAddEnumerationCustomFieldItemDto);
       case TEXT:
       default:
-        return new CustomField(name, description, TEXT, null);
+        return new CdeCreateCustomFieldDto(name, description, TEXT, null);
     }
   }
 

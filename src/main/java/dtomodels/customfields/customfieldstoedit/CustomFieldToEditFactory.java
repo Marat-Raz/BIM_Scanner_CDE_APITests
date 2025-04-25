@@ -1,6 +1,6 @@
 package dtomodels.customfields.customfieldstoedit;
 
-import dtomodels.customfields.enumerationitem.ResponseEnumerationItem;
+import dto.generated.CdeEnumerationCustomFieldItemDto;
 import java.util.ArrayList;
 
 public class CustomFieldToEditFactory {
@@ -8,7 +8,7 @@ public class CustomFieldToEditFactory {
   public String name;
   public String description;
   public boolean archived;
-  public ArrayList<ResponseEnumerationItem> enumerationItems;
+  public ArrayList<CdeEnumerationCustomFieldItemDto> enumerationItems;
 
 // todo реализовать create метод
 

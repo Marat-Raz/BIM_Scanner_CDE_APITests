@@ -3,7 +3,7 @@ package client;
 import static io.restassured.RestAssured.given;
 
 import client.base.Client;
-import dtomodels.labels.Label;
+import dto.generated.CdeCreateLabelDto;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import java.util.Map;
@@ -13,11 +13,11 @@ public class LabelsClient extends Client {
   private final String LABELS = "/labels/";
 
   @Step("Создать метку в проекте")
-  public ValidatableResponse createLabelInProject(String projectId, Label label) {
+  public ValidatableResponse createLabelInProject(String projectId, CdeCreateLabelDto cdeCreateLabelDto) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
-        .body(label)
+        .body(cdeCreateLabelDto)
         .when()
         .post(API_PROJECTS + projectId + LABELS)
         .then();
@@ -57,11 +57,11 @@ public class LabelsClient extends Client {
 
   @Step("Обновить существующую метку")
   public ValidatableResponse updateLabelInProject(String projectId, String labelId,
-      Label updatedLabel) {
+      CdeCreateLabelDto updatedCdeCreateLabelDto) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
-        .body(updatedLabel)
+        .body(updatedCdeCreateLabelDto)
         .when()
         .put(API_PROJECTS + projectId + LABELS + labelId)
         .then();

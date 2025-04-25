@@ -1,5 +1,6 @@
 package dtomodels.topicevents;
 
+import dto.generated.CdeTopicEventDto;
 import java.util.ArrayList;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,9 +11,9 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class ResponseTopicEventList {
+public class ResponseTopicEventList { // todo заменить на PaginatedResponse
 
   public int totalCount;
-  public ArrayList<ResponseTopicEvent> items;
+  public ArrayList<CdeTopicEventDto> items;
 
 }

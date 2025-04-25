@@ -10,9 +10,9 @@ import basetests.RestAssuredLogging;
 import basetests.StartTests;
 import client.ProjectsClient;
 import dtomodels.PaginatedResponse;
-import dtomodels.project.Project;
+import dto.generated.CdeCreateProjectDto;
 import dtomodels.project.ProjectFactory;
-import dtomodels.project.ResponseProject;
+import dto.generated.CdeProjectDto;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Step;
@@ -26,7 +26,7 @@ import org.junit.jupiter.api.*;
 @Epic("Api interface CDE")
 @Feature("Раздел Projects(Проекты)")
 @Story("Получение/Скачивание обложки проекта")
-public class GetProjectCoverImageTests extends StartTests {
+public class GetCdeCreateProjectDtoCoverImageTests extends StartTests {
 
   private static ProjectFactory projectFactory = new ProjectFactory();
   private static ProjectsClient projectsClient = new ProjectsClient();
@@ -39,8 +39,8 @@ public class GetProjectCoverImageTests extends StartTests {
   @BeforeAll
   @Step("Создать проект от имени ADMIN")
   public static void createProject() { // todo перенести в ProjectBaseTest
-    Project project = projectFactory.createProject(RANDOM_PROJECT);
-    createProjectResponse = projectsClient.createProject(ADMIN_ACCESS_TOKEN, project);
+    CdeCreateProjectDto cdeCreateProjectDto = projectFactory.createProject(RANDOM_PROJECT);
+    createProjectResponse = projectsClient.createProject(ADMIN_ACCESS_TOKEN, cdeCreateProjectDto);
     projectId = createProjectResponse.extract().path("id");
   }
 
@@ -58,9 +58,9 @@ public class GetProjectCoverImageTests extends StartTests {
   @Step("Получить все проекты в системе и удалить все проекты всех пользователей после тестов")
   public static void deleteAllProjects() {// todo перенести в ProjectBaseTest
     getAllProjectResponse = projectsClient.getListOfProjects(ADMIN_ACCESS_TOKEN);
-    PaginatedResponse<ResponseProject> projectPaginatedResponse =
+    PaginatedResponse<CdeProjectDto> projectPaginatedResponse =
         getAllProjectResponse.extract().body().as(typeRef);
-    for (ResponseProject project : projectPaginatedResponse.getItems()) {
+    for (CdeProjectDto project : projectPaginatedResponse.getItems()) {
       projectsClient.deleteProjectByItsId(ADMIN_ACCESS_TOKEN, project.getId());
     }
   }

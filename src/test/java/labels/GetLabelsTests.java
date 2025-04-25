@@ -4,7 +4,7 @@ import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import dtomodels.labels.ResponseLabel;
+import dto.generated.CdeLabelDto;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
@@ -26,10 +26,10 @@ public class GetLabelsTests extends LabelBaseTests {
   public void getLabelFromProjectTest() {
     getResponse = labelsClient.getListOfLabelInProjectWithoutQueryOptions(projectId);
     statusCode = extractStatusCode(getResponse);
-    ResponseLabel[] responseLabelsArray = getResponse.extract().as(ResponseLabel[].class);
+    CdeLabelDto[] cdeLabelsArrayDto = getResponse.extract().as(CdeLabelDto[].class);
 
     assertEquals(SC_OK, statusCode);
-    assertTrue(responseLabelsArray.length > 0);
+    assertTrue(cdeLabelsArrayDto.length > 0);
   }
 
 }

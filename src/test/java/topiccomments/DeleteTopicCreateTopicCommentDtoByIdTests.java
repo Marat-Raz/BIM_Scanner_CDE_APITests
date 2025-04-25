@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 @Epic("Api interface CDE")
 @Feature("Раздел TopicComments(Комментарии к задачам)")
 @Story("Удаление комментария к задаче")
-public class DeleteTopicCommentByIdTests extends TopicsCommentsBaseTests {
+public class DeleteTopicCreateTopicCommentDtoByIdTests extends CdeCreateTopicDtoCommentsBaseTests {
 
   private ValidatableResponse deleteTopicCommentResponse;
 

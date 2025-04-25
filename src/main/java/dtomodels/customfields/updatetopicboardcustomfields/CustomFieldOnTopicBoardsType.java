@@ -1,4 +1,4 @@
-package dtomodels.customfields.customfieldsintopicbords;
+package dtomodels.customfields.updatetopicboardcustomfields;
 
 public enum CustomFieldOnTopicBoardsType {
   IS_ENABLED,

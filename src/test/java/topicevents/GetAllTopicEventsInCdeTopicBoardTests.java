@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 @Epic("Api interface CDE")
 @Feature("Раздел TopicEvents(Уведомления в задачах)")
 @Story("Получение всех уведомлений задач в определенной доске задач")
-public class GetAllTopicEventsInTopicBoardTests extends TopicEventsBaseTests {
+public class GetAllTopicEventsInCdeTopicBoardTests extends TopicEventsBaseTests {
 
   private ValidatableResponse getAllTopicEventsResponse;
 

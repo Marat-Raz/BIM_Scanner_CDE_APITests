@@ -3,8 +3,8 @@ package topicboardtypes;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import dtomodels.types.ResponseTypes;
-import dtomodels.types.Types;
+import dto.generated.CdeTopicBoardTypeDto;
+import dto.generated.CdeCreateOrUpdateTopicBoardTypeDto;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 @Epic("Api interface CDE")
 @Feature("Раздел TopicBoardType(«Типы» в досках задач)")
 @Story("Редактирование «Типов» в доске задач")
-public class EditTypesInTopicBoardTests extends TopicBoardTypeBaseTests {
+public class EditCdeCreateOrUpdateTopicBoardTypeDtoInTopicBoardTests extends TopicBoardTypeBaseTests {
 
   private static ValidatableResponse editTypeResponse;
 
@@ -24,13 +24,13 @@ public class EditTypesInTopicBoardTests extends TopicBoardTypeBaseTests {
   @Tag(value = "smoke")
   @DisplayName("Редактировать параметр «name» типа задач в доске задач")
   public void editTypesInTopicBoardTest() {
-    Types editableType = type;
+    CdeCreateOrUpdateTopicBoardTypeDto editableType = type;
     editableType.setName("newName");
     editTypeResponse = topicBoardTypesClient
         .editTopicBoardTypes(topicBoardId, typeId, editableType);
     statusCode = extractStatusCode(editTypeResponse);
-    ResponseTypes editedTypeFromResponse =
-        editTypeResponse.extract().as(ResponseTypes.class);
+    CdeTopicBoardTypeDto editedTypeFromResponse =
+        editTypeResponse.extract().as(CdeTopicBoardTypeDto.class);
 
     assertEquals(SC_OK, statusCode);
     assertEquals(editableType.getName(), editedTypeFromResponse.getName());

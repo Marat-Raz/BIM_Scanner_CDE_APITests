@@ -4,14 +4,14 @@ import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import dtomodels.PaginatedResponse;
-import dtomodels.models.modelrevisions.ResponseModelRevisions;
+import dto.generated.CdeModelRevisionDto;
 import io.restassured.response.ValidatableResponse;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-public class GetListOfModelRevisionsTests extends ModelRevisionsBaseTests {
+public class GetListOfCdeCreateOrUpdateModelDtoRevisionsTests extends ModelRevisionsBaseTests {
 
   private ValidatableResponse getListOfModelRevisionsResponse;
 
@@ -22,9 +22,9 @@ public class GetListOfModelRevisionsTests extends ModelRevisionsBaseTests {
     getListOfModelRevisionsResponse = modelRevisionsClient.getListOfModelRevisionsWithoutQueryOptions(
         projectId, modelId);
     statusCode = extractStatusCode(getListOfModelRevisionsResponse);
-    PaginatedResponse<ResponseModelRevisions> paginatedResponse = getListOfModelRevisionsResponse
+    PaginatedResponse<CdeModelRevisionDto> paginatedResponse = getListOfModelRevisionsResponse
         .extract().as(PaginatedResponse.class);
-    List<ResponseModelRevisions> arrayOfModelRevisions = paginatedResponse.getItems();
+    List<CdeModelRevisionDto> arrayOfModelRevisions = paginatedResponse.getItems();
 
     assertEquals(SC_OK, statusCode);
     assertEquals(modelRevisionCount, paginatedResponse.getTotalCount());

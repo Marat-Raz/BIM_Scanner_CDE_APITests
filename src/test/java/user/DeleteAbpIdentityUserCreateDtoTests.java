@@ -7,7 +7,7 @@ import static org.apache.http.HttpStatus.SC_NO_CONTENT;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import basetests.StartTests;
-import dtomodels.user.User;
+import dto.generated.AbpIdentityUserCreateDto;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Step;
@@ -18,24 +18,24 @@ import org.junit.jupiter.api.*;
 @Epic("Api interface CDE")
 @Feature("Раздел User")
 @Story("Удаление пользователя")
-public class DeleteUserTests extends StartTests {
+public class DeleteAbpIdentityUserCreateDtoTests extends StartTests {
 
   private String testUserId;
   private ValidatableResponse deleteResponse;
-  private User testUser;
+  private AbpIdentityUserCreateDto testAbpIdentityUserCreateDto;
 
   @BeforeEach
   @Step("Создаем пользователя testUser")
   public void createTestUser() {
-    testUser = userFactory.createUser(NEW_USER);
-    ValidatableResponse response = userClient.createUser(testUser);
+    testAbpIdentityUserCreateDto = userFactory.createUser(NEW_USER);
+    ValidatableResponse response = userClient.createUser(testAbpIdentityUserCreateDto);
     testUserId = response.extract().path("id");
   }
 
   @AfterEach
   @Step("Удаляем пользователя testUser")
   public void deleteTestUser() {
-    if (testUser != null) {
+    if (testAbpIdentityUserCreateDto != null) {
       deleteResponse = userClient.deleteUser(testUserId);
     }
   }
@@ -46,7 +46,7 @@ public class DeleteUserTests extends StartTests {
   public void deleteTestUserTest() {
     deleteResponse = userClient.deleteUser(testUserId);
     statusCode = extractStatusCode(deleteResponse);
-    testUser = null; // чтобы в @AfterEach повторно не удалять этого пользователя
+    testAbpIdentityUserCreateDto = null; // чтобы в @AfterEach повторно не удалять этого пользователя
 
     assertEquals(SC_NO_CONTENT, statusCode);
   }

@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 @Epic("Api interface CDE")
 @Feature("Раздел ProjectRoles(Роли в проекте)")
 @Story("Удаление роли из проекта")
-public class DeleteCdeCreateProjectDtoRoleByIdTests extends ProjectRolesBaseTests {
+public class DeleteCdeCreateProjectDtoAbpIdentityRoleDtoByIdTests extends ProjectRolesBaseTests {
 
   private ValidatableResponse deleteProjectRoleResponse;
 

@@ -8,26 +8,26 @@ import client.TopicBoardPrioritiesClient;
 import client.TopicBoardsClient;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
-import dtomodels.priorities.Priorities;
+import dto.generated.CdeCreateOrUpdateTopicBoardPriorityDto;
 import dtomodels.priorities.PrioritiesFactory;
-import dtomodels.topicboards.ResponseTopicBoards;
-import dtomodels.topicboards.TopicBoards;
+import dto.generated.CdeTopicBoardDto;
+import dto.generated.CdeCreateTopicBoardDto;
 import dtomodels.topicboards.TopicBoardsFactory;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 
-public class TopicBoardPrioritiesBaseTests extends StartTests {
+public class TopicBoardCdeCreateOrUpdateTopicBoardPriorityDtoBaseTests extends StartTests {
 
   protected static TopicBoardsClient topicBoardsClient = new TopicBoardsClient();
   protected static TopicBoardsFactory topicBoardsFactory = new TopicBoardsFactory();
   protected static TopicBoardPrioritiesClient topicBoardPrioritiesClient
       = new TopicBoardPrioritiesClient();
   protected static PrioritiesFactory prioritiesFactory = new PrioritiesFactory();
-  protected static TopicBoards topicBoard;
+  protected static CdeCreateTopicBoardDto topicBoard;
   protected static ValidatableResponse createTopicBoardsResponse;
   protected static String topicBoardId;
   protected ValidatableResponse addPrioritiesResponse;
-  protected Priorities priority;
+  protected CdeCreateOrUpdateTopicBoardPriorityDto priority;
   protected String priorityId;
 
   @BeforeAll
@@ -35,9 +35,9 @@ public class TopicBoardPrioritiesBaseTests extends StartTests {
   public static void createTopicBoard() {
     topicBoard = topicBoardsFactory.createTopicBoards(DEFAULT_TOPIC_BOARDS);
     createTopicBoardsResponse = topicBoardsClient.createNewTopicBoard(projectId, topicBoard);
-    ResponseTopicBoards responseTopicBoards =
-        createTopicBoardsResponse.extract().as(ResponseTopicBoards.class);
-    topicBoardId = responseTopicBoards.getId();
+    CdeTopicBoardDto cdeTopicBoardDto =
+        createTopicBoardsResponse.extract().as(CdeTopicBoardDto.class);
+    topicBoardId = cdeTopicBoardDto.getId();
   }
 
   @BeforeEach

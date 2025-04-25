@@ -4,7 +4,7 @@ import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import dtomodels.types.ResponseTypes;
+import dto.generated.CdeTopicBoardTypeDto;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
@@ -22,12 +22,12 @@ public class AddTypeToTopicBoardTests extends TopicBoardTypeBaseTests {
   @DisplayName("Создать тип задач в доске задач дает код ответа 200")
   public void addTypesToTopicBoardTest() {
     statusCode = extractStatusCode(addTypesResponse);
-    ResponseTypes responseTypes = addTypesResponse.extract().as(ResponseTypes.class);
+    CdeTopicBoardTypeDto cdeTopicBoardTypeDto = addTypesResponse.extract().as(CdeTopicBoardTypeDto.class);
 
     assertEquals(SC_OK, statusCode);
     assertAll(
-        () -> assertEquals(type.getName(), responseTypes.getName()),
-        () -> assertEquals(type.getColor(), responseTypes.getColor())
+        () -> assertEquals(type.getName(), cdeTopicBoardTypeDto.getName()),
+        () -> assertEquals(type.getColor(), cdeTopicBoardTypeDto.getColor())
     );
   }
 }

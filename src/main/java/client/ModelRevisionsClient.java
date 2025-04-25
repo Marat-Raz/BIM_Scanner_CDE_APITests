@@ -3,7 +3,7 @@ package client;
 import static io.restassured.RestAssured.given;
 
 import client.base.Client;
-import dtomodels.comment.Comment;
+import dto.generated.CdeCreateTopicCommentDto;
 import dtomodels.models.ModelFileFormat;
 import io.qameta.allure.Step;
 import io.restassured.builder.MultiPartSpecBuilder;
@@ -45,10 +45,10 @@ public class ModelRevisionsClient extends Client {
       String projectId,
       String modelId,
       File modelFile,
-      Comment comment
+      CdeCreateTopicCommentDto createTopicCommentDto
   ) {
-    MultiPartSpecification commentPart = new MultiPartSpecBuilder(comment.getComment())
-        .controlName("comment")
+    MultiPartSpecification commentPart = new MultiPartSpecBuilder(createTopicCommentDto.getComment())
+        .controlName("createTopicCommentDto")
         .mimeType("text/plain")
         .charset("UTF-8")
         .build();
@@ -78,11 +78,11 @@ public class ModelRevisionsClient extends Client {
       String projectId,
       String modelId,
       int modelVersion,
-      Comment comment) {
+      CdeCreateTopicCommentDto createTopicCommentDto) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
-        .body(comment)
+        .body(createTopicCommentDto)
         .when()
         .put(API_PROJECTS + projectId + MODELS + modelId + REVISIONS + modelVersion)
         .then();

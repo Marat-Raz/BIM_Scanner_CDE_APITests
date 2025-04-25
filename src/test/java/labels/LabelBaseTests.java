@@ -4,9 +4,9 @@ import static dtomodels.labels.LabelType.DEFAULT;
 
 import basetests.StartTests;
 import client.LabelsClient;
-import dtomodels.labels.Label;
+import dto.generated.CdeCreateLabelDto;
 import dtomodels.labels.LabelFactory;
-import dtomodels.labels.ResponseLabel;
+import dto.generated.CdeLabelDto;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import java.util.ArrayList;
@@ -16,10 +16,10 @@ public class LabelBaseTests extends StartTests {
 
   protected static LabelsClient labelsClient = new LabelsClient();
   protected static ValidatableResponse baseAddResponse;
-  protected static Label label;
-  protected static ArrayList<Label> labels = new ArrayList<>();
-  protected static ArrayList<ResponseLabel> responseLabels = new ArrayList<>();
-  protected static ResponseLabel responseLabel;
+  protected static CdeCreateLabelDto cdeCreateLabelDto;
+  protected static ArrayList<CdeCreateLabelDto> cdeCreateLabelDtos = new ArrayList<>();
+  protected static ArrayList<CdeLabelDto> cdeLabelDtos = new ArrayList<>();
+  protected static CdeLabelDto cdeLabelDto;
   protected static String labelId;
   protected static final int labelsCount = 3;
 
@@ -27,15 +27,15 @@ public class LabelBaseTests extends StartTests {
   @Step("Создаем метку в проекте")
   public static void addLabelToProject() {
     for (int i = 0; i < labelsCount; i++) {
-      label = new LabelFactory().createLabel(DEFAULT);
-      labels.add(label);
+      cdeCreateLabelDto = new LabelFactory().createLabel(DEFAULT);
+      cdeCreateLabelDtos.add(cdeCreateLabelDto);
     }
-    for (Label label : labels) {
-      baseAddResponse = labelsClient.createLabelInProject(projectId, label);
-      responseLabel = baseAddResponse.extract().as(ResponseLabel.class);
-      responseLabels.add(responseLabel);
+    for (CdeCreateLabelDto cdeCreateLabelDto : cdeCreateLabelDtos) {
+      baseAddResponse = labelsClient.createLabelInProject(projectId, cdeCreateLabelDto);
+      cdeLabelDto = baseAddResponse.extract().as(CdeLabelDto.class);
+      cdeLabelDtos.add(cdeLabelDto);
     }
-    labelId = responseLabels.get(0).getId();
+    labelId = cdeLabelDtos.get(0).getId();
   }
 
 }

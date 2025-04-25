@@ -6,7 +6,7 @@ import client.base.Client;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import java.util.Map;
-import dtomodels.projectmember.ProjectMember;
+import dto.generated.CdeAddProjectMemberDto;
 
 public class ProjectMembersClient extends Client {
 
@@ -45,7 +45,7 @@ private static final String MEMBERS = "/members/";
   }
 
   @Step("Добавить участника в проект")
-  public ValidatableResponse addProjectMember(String projectId, ProjectMember member) {
+  public ValidatableResponse addProjectMember(String projectId, CdeAddProjectMemberDto member) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)

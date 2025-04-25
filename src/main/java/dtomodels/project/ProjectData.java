@@ -1,11 +1,12 @@
 package dtomodels.project;
 
+import dto.generated.CdeCreateProjectDto;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class ProjectData {
+public class ProjectData { // todo кандидат на удаление
 
   private String description;
   private String name;
@@ -15,8 +16,8 @@ public class ProjectData {
     this.name = name;
   }
 
-  public static ProjectData from(Project project) {
-    return new ProjectData(project.getDescription(), project.getName());
+  public static ProjectData from(CdeCreateProjectDto cdeCreateProjectDto) {
+    return new ProjectData(cdeCreateProjectDto.getDescription(), cdeCreateProjectDto.getName());
   }
 
 }

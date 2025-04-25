@@ -4,7 +4,7 @@ import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import dtomodels.topicboards.ResponseTopicBoards;
+import dto.generated.CdeTopicBoardDto;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
@@ -15,21 +15,21 @@ import org.junit.jupiter.api.Test;
 @Epic("Api interface CDE")
 @Feature("Раздел TopicBoards(Доски задач)")
 @Story("Создание доски задач")
-public class CreateTopicBoardTests extends TopicBoardsBaseTests {
+public class CreateTopicBoardTests extends CdeCreateTopicBoardDtoBaseTests {
 
   @Test
   @Tag(value = "smoke")
   @DisplayName("Создать доску задач в корне проекта дает код ответа 200")
   public void createNewTopicBoardTest() {
     statusCode = extractStatusCode(createTopicBoardsResponse);
-    ResponseTopicBoards responseTopicBoards =
-        createTopicBoardsResponse.extract().as(ResponseTopicBoards.class);
+    CdeTopicBoardDto cdeTopicBoardDto =
+        createTopicBoardsResponse.extract().as(CdeTopicBoardDto.class);
 
     assertEquals(SC_OK, statusCode);
     assertAll(
-        () -> assertEquals("TopicBoard", responseTopicBoards.type),
-        () -> assertEquals(topicBoard.getName(), responseTopicBoards.name),
-        () -> assertEquals(projectId, responseTopicBoards.projectId)
+        () -> assertEquals("TopicBoard", cdeTopicBoardDto.type),
+        () -> assertEquals(topicBoard.getName(), cdeTopicBoardDto.name),
+        () -> assertEquals(projectId, cdeTopicBoardDto.projectId)
     );
   }
 

@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 @Epic("Api interface CDE")
 @Feature("Раздел TopicBoardGroups(Группа досок задач)")
 @Story("Создание группы досок задач")
-public class CreateTopicBoardsGroupTests extends TopicBoardGroupBaseTests {
+public class CreateCdeCreateTopicBoardDtoGroupTests extends TopicBoardGroupBaseTests {
 // todo   private ValidatableResponse createResponse;
 
   @Test
@@ -26,9 +26,9 @@ public class CreateTopicBoardsGroupTests extends TopicBoardGroupBaseTests {
 
     assertEquals(SC_OK, statusCode);
     assertAll(
-        () -> assertEquals("TopicBoardGroup", responseTopicBoardGroup.type),
-        () -> assertEquals(topicBoardsGroup.getName(), responseTopicBoardGroup.name),
-        () -> assertEquals(projectId, responseTopicBoardGroup.projectId)
+        () -> assertEquals("TopicBoardGroup", cdeTopicBoardGroupDto.type),
+        () -> assertEquals(cdeCreateTopicBoardGroupDto.getName(), cdeTopicBoardGroupDto.name),
+        () -> assertEquals(projectId, cdeTopicBoardGroupDto.projectId)
     );
   }
 

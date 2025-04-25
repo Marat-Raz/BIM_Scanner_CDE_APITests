@@ -16,13 +16,13 @@ import dto.generated.CdeCreateTopicBoardDto;
 import dtomodels.topicboards.TopicBoardsFactory;
 import dto.generated.CdeTopicCommentDto;
 import dtomodels.comment.CommentsFactory;
-import dtomodels.topics.CdeCreateTopicDto;
-import dtomodels.topics.Topics;
+import dto.generated.CdeTopicDetailsDto;
+import dto.generated.CdeCreateTopicDto;
 import dtomodels.topics.TopicsFactory;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 
-public class TopicsCommentsBaseTests extends StartTests {
+public class CdeCreateTopicDtoCommentsBaseTests extends StartTests {
 
   protected static TopicBoardsClient topicBoardsClient = new TopicBoardsClient();
   protected static TopicBoardsFactory topicBoardsFactory = new TopicBoardsFactory();
@@ -34,9 +34,9 @@ public class TopicsCommentsBaseTests extends StartTests {
   protected static ValidatableResponse createTopicBoardsResponse;
   protected static ValidatableResponse addTopicsResponse;
   protected static ValidatableResponse addTopicsCommentsResponse;
-  protected static Topics topic;
+  protected static CdeCreateTopicDto topic;
   protected static CdeCreateTopicCommentDto createTopicCommentDto;
-  protected static CdeCreateTopicDto responseTopic;
+  protected static CdeTopicDetailsDto responseTopic;
   protected static CdeTopicCommentDto cdeTopicCommentDto;
   protected static String topicBoardId;
   protected static String defaultTopicId;
@@ -53,7 +53,7 @@ public class TopicsCommentsBaseTests extends StartTests {
 
     topic = topicsFactory.createTopic(DEFAULT_TOPIC);
     addTopicsResponse = topicsClient.createTopicOnTopicBoard(topicBoardId, topic);
-    responseTopic = addTopicsResponse.extract().as(CdeCreateTopicDto.class);
+    responseTopic = addTopicsResponse.extract().as(CdeTopicDetailsDto.class);
     defaultTopicId = responseTopic.getId();
   }
 

@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import client.TopicBoardsClient;
-import dtomodels.topicboards.ResponseTopicBoards;
+import dto.generated.CdeTopicBoardDto;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
 @Epic("Api interface CDE")
 @Feature("Раздел TopicBoards(Доски задач)")
 @Story("Получение доску задач по id")
-public class GetTopicBoardByIdTests extends TopicBoardsBaseTests {
+public class GetTopicBoardByIdTests extends CdeCreateTopicBoardDtoBaseTests {
 
   private static TopicBoardsClient topicBoardsClient = new TopicBoardsClient();
   private ValidatableResponse getTopicBoardResponse;
@@ -29,7 +29,7 @@ public class GetTopicBoardByIdTests extends TopicBoardsBaseTests {
     getTopicBoardResponse = topicBoardsClient.getTopicBoard(projectId, topicBoardId);
     statusCode = extractStatusCode(getTopicBoardResponse);
     responseTopicBoard = getTopicBoardResponse.extract()
-        .as(ResponseTopicBoards.class);
+        .as(CdeTopicBoardDto.class);
 
     assertEquals(SC_OK, statusCode);
     assertAll(

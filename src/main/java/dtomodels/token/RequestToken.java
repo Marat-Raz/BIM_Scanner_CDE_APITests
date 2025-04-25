@@ -6,7 +6,7 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @Builder
-public class RequestToken {
+public class RequestToken { // todo генерировать dto для Foundation API v1.1
 
   private String grantType;
   private String username;

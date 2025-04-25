@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import basetests.StartTests;
 import client.ProjectsClient;
-import dtomodels.project.Project;
+import dto.generated.CdeCreateProjectDto;
 import dtomodels.project.ProjectFactory;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
@@ -27,17 +27,17 @@ public class GetUsersProjectsTests extends StartTests {
 
   private static ValidatableResponse getAllProjectResponse;
   private static ProjectsClient projectsClient = new ProjectsClient();
-  private static ArrayList<Project> projectList = new ArrayList<Project>();
+  private static ArrayList<CdeCreateProjectDto> cdeCreateProjectDtoList = new ArrayList<CdeCreateProjectDto>();
   private static int numberOfProjects = 5;
 
   @BeforeAll
   @Step("Создать несколько проектов от имени ADMIN")
   public static void createProjects() { // todo рассмотреть вынос этого метода в Steps
     for (int i = 0; i < numberOfProjects; i++) {
-      projectList.add(new ProjectFactory().createProject(RANDOM_PROJECT));
+      cdeCreateProjectDtoList.add(new ProjectFactory().createProject(RANDOM_PROJECT));
     }
-    for (Project project : projectList) {
-      projectsClient.createProject(ADMIN_ACCESS_TOKEN, project);
+    for (CdeCreateProjectDto cdeCreateProjectDto : cdeCreateProjectDtoList) {
+      projectsClient.createProject(ADMIN_ACCESS_TOKEN, cdeCreateProjectDto);
     }
   }
 

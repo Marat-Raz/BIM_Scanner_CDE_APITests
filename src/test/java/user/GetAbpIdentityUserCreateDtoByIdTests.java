@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import basetests.StartTests;
 import dto.generated.AbpRemoteServiceErrorResponse;
-import dtomodels.user.ResponseUser;
+import dto.generated.AbpIdentityUserDto;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Test;
 @Epic("Api interface CDE")
 @Feature("Раздел User")
 @Story("Получение пользователя по id")
-public class GetUserByIdTests extends StartTests {
+public class GetAbpIdentityUserCreateDtoByIdTests extends StartTests {
 
   private ValidatableResponse getUserResponse;
 
@@ -30,11 +30,11 @@ public class GetUserByIdTests extends StartTests {
   public void getUserByIdTest() {
     getUserResponse = userClient.getUserById(userId);
     statusCode = extractStatusCode(getUserResponse);
-    ResponseUser responseUser = getUserResponse.extract().as(ResponseUser.class);
+    AbpIdentityUserDto abpIdentityUserDto = getUserResponse.extract().as(AbpIdentityUserDto.class);
 
     assertEquals(SC_OK, statusCode);
-    assertEquals(defaultUser.getUserName(), responseUser.getUserName());
-    assertEquals(defaultUser.getEmail(), responseUser.getEmail());
+    assertEquals(defaultAbpIdentityUserCreateDto.getUserName(), abpIdentityUserDto.getUserName());
+    assertEquals(defaultAbpIdentityUserCreateDto.getEmail(), abpIdentityUserDto.getEmail());
   }
 
 

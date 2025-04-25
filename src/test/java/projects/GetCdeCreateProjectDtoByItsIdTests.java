@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 @Epic("Api interface CDE")
 @Feature("Раздел Projects(Проекты)")
 @Story("Получение проекта по id")
-public class GetProjectByItsIdTests extends StartTests {
+public class GetCdeCreateProjectDtoByItsIdTests extends StartTests {
 
   private ValidatableResponse getProjectResponse;
   private String requestProjectId;

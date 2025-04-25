@@ -1,5 +1,6 @@
 package dtomodels.projectroles;
 
+import dto.generated.CdeCreateProjectRoleDto;
 import dtomodels.RandomWord;
 import java.util.List;
 import java.util.Random;
@@ -10,19 +11,19 @@ public class ProjectRolesFactory {
   private List<String> permissions = List.of("Project.Update");
   private List<String> randomPermissions = List.of(getRandomPermission().toString());
 
-  public ProjectRole createRole(ProjectRolesTypeByRequestStructure roleType) {
+  public CdeCreateProjectRoleDto createRole(ProjectRolesTypeByRequestStructure roleType) {
     switch (roleType) {
       case ROLE_WITHOUT_NAME:
-        return new ProjectRole(null, true, permissions);
+        return new CdeCreateProjectRoleDto(null, true, permissions);
       case ROLE_WITHOUT_IS_DEFAULT:
-        return new ProjectRole(name, null, permissions);
+        return new CdeCreateProjectRoleDto(name, null, permissions);
       case ROLE_WITHOUT_PERMISSIONS:
-        return new ProjectRole(name, true, null);
+        return new CdeCreateProjectRoleDto(name, true, null);
       case RANDOM_ROLE:
-        return new ProjectRole(name, true, randomPermissions);
+        return new CdeCreateProjectRoleDto(name, true, randomPermissions);
       case DEFAULT_ROLE:
       default:
-        return new ProjectRole(name, true, permissions);
+        return new CdeCreateProjectRoleDto(name, true, permissions);
     }
   }
 

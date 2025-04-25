@@ -3,7 +3,7 @@ package topicboardpriorities;
 import static dtomodels.priorities.PrioritiesType.DEFAULT;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import dtomodels.priorities.Priorities;
+import dto.generated.CdeCreateOrUpdateTopicBoardPriorityDto;
 import dtomodels.priorities.PrioritiesFactory;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
@@ -21,9 +21,10 @@ import org.junit.jupiter.api.Test;
 @Epic("Api interface CDE")
 @Feature("Раздел TopicBoardPriority(«Приоритеты» в доске задач)")
 @Story("Получение «Приоритетов» с доски задач")
-public class GetTopicBoardPrioritiesTests extends TopicBoardPrioritiesBaseTests {
+public class GetTopicBoardCdeCreateOrUpdateTopicBoardPriorityDtoTests extends
+    TopicBoardCdeCreateOrUpdateTopicBoardPriorityDtoBaseTests {
 
-  private static List<Priorities> expectedPriorities = new ArrayList<>();
+  private static List<CdeCreateOrUpdateTopicBoardPriorityDto> expectedPriorities = new ArrayList<>();
   private ValidatableResponse getAllPriorities;
 
   @BeforeEach
@@ -32,7 +33,7 @@ public class GetTopicBoardPrioritiesTests extends TopicBoardPrioritiesBaseTests 
     for (int i = 0; i < 5; i++) {
       expectedPriorities.add(new PrioritiesFactory().createPriorities(DEFAULT));
     }
-    for (Priorities priority : expectedPriorities) {
+    for (CdeCreateOrUpdateTopicBoardPriorityDto priority : expectedPriorities) {
       addPrioritiesResponse = topicBoardPrioritiesClient.addTopicBoardPriorities(topicBoardId,
           priority);
     }
@@ -43,8 +44,8 @@ public class GetTopicBoardPrioritiesTests extends TopicBoardPrioritiesBaseTests 
   @DisplayName("Получить все приоритеты доски задач")
   public void getTopicBoardPrioritiesTest() {
     getAllPriorities = topicBoardPrioritiesClient.getTopicBoardPriorities(topicBoardId);
-    List<Priorities> actualPriorities = Arrays.asList(
-        getAllPriorities.extract().as(Priorities[].class));
+    List<CdeCreateOrUpdateTopicBoardPriorityDto> actualPriorities = Arrays.asList(
+        getAllPriorities.extract().as(CdeCreateOrUpdateTopicBoardPriorityDto[].class));
 
     assertEquals(new HashSet<>(expectedPriorities), new HashSet<>(actualPriorities));
   }

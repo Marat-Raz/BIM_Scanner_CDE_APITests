@@ -3,9 +3,9 @@ package client;
 import static io.restassured.RestAssured.given;
 
 import client.base.Client;
+import dto.generated.CdeCreateOrUpdateTopicBoardStatusDto;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
-import dtomodels.statuses.Statuses;
 
 public class TopicBoardStatusClient extends Client {
 
@@ -22,7 +22,7 @@ public class TopicBoardStatusClient extends Client {
   }
 
   @Step("Добавить статус на доску задач")
-  public ValidatableResponse addTopicBoardStatuses(String topicBoardId, Statuses status) {
+  public ValidatableResponse addTopicBoardStatuses(String topicBoardId, CdeCreateOrUpdateTopicBoardStatusDto status) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
@@ -34,7 +34,7 @@ public class TopicBoardStatusClient extends Client {
 
   @Step("Редактировать статус на доске задач")
   public ValidatableResponse editTopicBoardStatuses(String topicBoardId, String statusId,
-      Statuses editedStatus) {
+      CdeCreateOrUpdateTopicBoardStatusDto editedStatus) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)

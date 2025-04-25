@@ -1,5 +1,6 @@
 package dtomodels.topics;
 
+import dto.generated.CdeCreateTopicDto;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
@@ -22,20 +23,20 @@ public class TopicsFactory {
   public ListOfCustomField customFields;
   public ArrayList<String> labels;
 
-  public Topics createTopic(TopicType topicType) {
+  public CdeCreateTopicDto createTopic(TopicType topicType) {
     switch (topicType) {
       case TOPIC_WITHOUT_TITLE:
-        return new Topics(null, description, dueDate, assignedToId, typeId, statusId,
+        return new CdeCreateTopicDto(null, description, dueDate, assignedToId, typeId, statusId,
             priorityId, customFields, labels);
       case TOPIC_WITHOUT_DATA:
-        return new Topics(null, null, null, null, null,
+        return new CdeCreateTopicDto(null, null, null, null, null,
             null, null, null, null);
       case RANDOM_TOPIC:
-        return new Topics(RandomWord.randomAllCharacters(1, 256), description, dueDate,
+        return new CdeCreateTopicDto(RandomWord.randomAllCharacters(1, 256), description, dueDate,
             assignedToId, typeId, statusId, priorityId, customFields, labels);
       case DEFAULT_TOPIC:
       default:
-        return new Topics(title, description, dueDate, assignedToId, typeId, statusId, priorityId,
+        return new CdeCreateTopicDto(title, description, dueDate, assignedToId, typeId, statusId, priorityId,
             customFields, labels);
     }
   }

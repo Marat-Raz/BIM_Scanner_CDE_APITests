@@ -1,8 +1,14 @@
 package dto.generated;
-    private ArrayList<CdeModifyTopicBoardCustomFieldDto> customFields;
-}
 
-  public void addCustomFieldToEdit(CdeModifyTopicBoardCustomFieldDto customField) {
-    this.customFields.add(customField);
-  }
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import java.util.ArrayList;
+
+@AllArgsConstructor
+@Getter
+@Setter
+public class CdeUpdateTopicBoardCustomFieldsDto {
+
+    private ArrayList<CdeModifyTopicBoardCustomFieldDto> customFields;
 }

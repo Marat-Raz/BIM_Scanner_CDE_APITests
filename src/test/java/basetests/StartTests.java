@@ -9,12 +9,12 @@ import client.TokenClient;
 import client.UserClient;
 import client.base.Client;
 import dtomodels.PaginatedResponse;
-import dtomodels.error.ErrorRoot;
-import dtomodels.project.Project;
+import dto.generated.AbpRemoteServiceErrorResponse;
+import dto.generated.CdeCreateProjectDto;
 import dtomodels.project.ProjectFactory;
-import dtomodels.project.ResponseProject;
+import dto.generated.CdeProjectDto;
 import dtomodels.token.TokenBuilder;
-import dtomodels.user.User;
+import dto.generated.AbpIdentityUserCreateDto;
 import dtomodels.user.UserFactory;
 import io.qameta.allure.Step;
 import io.qameta.allure.restassured.AllureRestAssured;
@@ -33,15 +33,15 @@ public class StartTests {
   protected static ProjectFactory projectFactory = new ProjectFactory();
   protected static UserFactory userFactory = new UserFactory();
   protected static UserClient userClient = new UserClient();
-  protected static TypeRef<PaginatedResponse<ResponseProject>> typeRef = new TypeRef<>() {
+  protected static TypeRef<PaginatedResponse<CdeProjectDto>> typeRef = new TypeRef<>() {
   };
-  protected static User defaultUser;
+  protected static AbpIdentityUserCreateDto defaultAbpIdentityUserCreateDto;
   protected static ValidatableResponse baseResponse;
   protected static ValidatableResponse createProjectResponse;
-  protected static Project defaultProject;
+  protected static CdeCreateProjectDto defaultCdeCreateProjectDto;
   protected static String projectId;
   protected static String userId;
-  protected ErrorRoot errorRoot;
+  protected AbpRemoteServiceErrorResponse abpRemoteServiceErrorResponse;
   protected int statusCode;
 
   @BeforeAll
@@ -56,12 +56,12 @@ public class StartTests {
         tokenClient.createToken(TokenBuilder.getTokenForAdminUser());
     ADMIN_ACCESS_TOKEN = responseAdminToken.extract().path("access_token");
 
-    defaultUser = userFactory.createUser(DEFAULT_USER);
-    baseResponse = userClient.createUser(defaultUser);
+    defaultAbpIdentityUserCreateDto = userFactory.createUser(DEFAULT_USER);
+    baseResponse = userClient.createUser(defaultAbpIdentityUserCreateDto);
     userId = baseResponse.extract().path("id");
 
-    defaultProject = projectFactory.createProject(DEFAULT_PROJECT);
-    createProjectResponse = projectsClient.createProject(defaultProject);
+    defaultCdeCreateProjectDto = projectFactory.createProject(DEFAULT_PROJECT);
+    createProjectResponse = projectsClient.createProject(defaultCdeCreateProjectDto);
     projectId = createProjectResponse.extract().path("id");
 
     // todo выдать для user права на создание проектов раздел permission
@@ -74,9 +74,9 @@ public class StartTests {
     userClient.deleteUser(userId);
     ValidatableResponse getAllProjectResponse =
         projectsClient.getListOfProjects(Client.ADMIN_ACCESS_TOKEN);
-    PaginatedResponse<ResponseProject> projectPaginatedResponse =
+    PaginatedResponse<CdeProjectDto> projectPaginatedResponse =
         getAllProjectResponse.extract().body().as(typeRef);
-    for (ResponseProject project : projectPaginatedResponse.getItems()) {
+    for (CdeProjectDto project : projectPaginatedResponse.getItems()) {
       projectsClient.deleteProjectByItsId(Client.ADMIN_ACCESS_TOKEN,
           project.getId());
 

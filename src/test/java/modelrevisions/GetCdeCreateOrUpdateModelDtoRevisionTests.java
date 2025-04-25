@@ -4,13 +4,13 @@ import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import dtomodels.models.modelrevisions.ResponseModelRevisions;
+import dto.generated.CdeModelRevisionDto;
 import io.restassured.response.ValidatableResponse;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-public class GetModelRevisionTests extends ModelRevisionsBaseTests {
+public class GetCdeCreateOrUpdateModelDtoRevisionTests extends ModelRevisionsBaseTests {
 
   private ValidatableResponse getModelRevisionResponse;
 
@@ -22,8 +22,8 @@ public class GetModelRevisionTests extends ModelRevisionsBaseTests {
     getModelRevisionResponse = modelRevisionsClient
         .getModelRevisionByVersion(projectId, modelId, modelVersion);
     statusCode = extractStatusCode(getModelRevisionResponse);
-    ResponseModelRevisions modelRevisions = getModelRevisionResponse.extract()
-        .as(ResponseModelRevisions.class);
+    CdeModelRevisionDto modelRevisions = getModelRevisionResponse.extract()
+        .as(CdeModelRevisionDto.class);
 
     assertEquals(SC_OK, statusCode);
     assertAll(

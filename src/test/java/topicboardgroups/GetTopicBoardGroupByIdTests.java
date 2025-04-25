@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import client.TopicBoardGroupsClient;
-import dtomodels.topicboardsgroup.ResponseTopicBoardGroup;
+import dto.generated.CdeTopicBoardGroupDto;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Test;
 @Story("Получение группы досок задач по id")
 public class GetTopicBoardGroupByIdTests extends TopicBoardGroupBaseTests {
 
-  private static List<ResponseTopicBoardGroup> responseTopicBoardGroupList;
+  private static List<CdeTopicBoardGroupDto> cdeTopicBoardGroupDtoList;
   private static TopicBoardGroupsClient topicBoardGroupsClient = new TopicBoardGroupsClient();
   private ValidatableResponse getTopicBoardGroupResponse;
 
@@ -31,14 +31,14 @@ public class GetTopicBoardGroupByIdTests extends TopicBoardGroupBaseTests {
     getTopicBoardGroupResponse = topicBoardGroupsClient
         .getTopicBoardGroupById(projectId, topicBoardsGroupId, false);
     statusCode = extractStatusCode(getTopicBoardGroupResponse);
-    responseTopicBoardGroupList = List.of(getTopicBoardGroupResponse.extract()
-        .as(ResponseTopicBoardGroup[].class));
+    cdeTopicBoardGroupDtoList = List.of(getTopicBoardGroupResponse.extract()
+        .as(CdeTopicBoardGroupDto[].class));
 
     assertEquals(SC_OK, statusCode);
     assertAll(
-        () -> assertEquals("TopicBoardGroup", responseTopicBoardGroupList.get(0).type),
-        () -> assertEquals(topicBoardsGroup.getName(), responseTopicBoardGroupList.get(0).name),
-        () -> assertEquals(projectId, responseTopicBoardGroupList.get(0).projectId)
+        () -> assertEquals("TopicBoardGroup", cdeTopicBoardGroupDtoList.get(0).type),
+        () -> assertEquals(cdeCreateTopicBoardGroupDto.getName(), cdeTopicBoardGroupDtoList.get(0).name),
+        () -> assertEquals(projectId, cdeTopicBoardGroupDtoList.get(0).projectId)
     );
   }
 

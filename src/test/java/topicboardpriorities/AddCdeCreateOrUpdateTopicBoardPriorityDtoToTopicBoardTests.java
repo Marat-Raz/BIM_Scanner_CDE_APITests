@@ -4,7 +4,7 @@ import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import dtomodels.priorities.ResponsePriorities;
+import dto.generated.CdeTopicBoardPriorityDto;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
@@ -15,7 +15,8 @@ import org.junit.jupiter.api.Test;
 @Epic("Api interface CDE")
 @Feature("Раздел TopicBoardPriority(«Приоритеты» в доске задач)")
 @Story("Добавление «Приоритета» в доску задач")
-public class AddPrioritiesToTopicBoardTests extends TopicBoardPrioritiesBaseTests {
+public class AddCdeCreateOrUpdateTopicBoardPriorityDtoToTopicBoardTests extends
+    TopicBoardCdeCreateOrUpdateTopicBoardPriorityDtoBaseTests {
 
 
   @Test
@@ -23,13 +24,13 @@ public class AddPrioritiesToTopicBoardTests extends TopicBoardPrioritiesBaseTest
   @DisplayName("Создать приоритет в доске задач")
   public void addPrioritiesToTopicBoardTest() {
     statusCode = extractStatusCode(addPrioritiesResponse);
-    ResponsePriorities responsePriorities = addPrioritiesResponse.extract()
-        .as(ResponsePriorities.class);
+    CdeTopicBoardPriorityDto cdeTopicBoardPriorityDto = addPrioritiesResponse.extract()
+        .as(CdeTopicBoardPriorityDto.class);
 
     assertEquals(SC_OK, statusCode);
     assertAll(
-        () -> assertEquals(priority.getName(), responsePriorities.getName()),
-        () -> assertEquals(priority.getColor(), responsePriorities.getColor())
+        () -> assertEquals(priority.getName(), cdeTopicBoardPriorityDto.getName()),
+        () -> assertEquals(priority.getColor(), cdeTopicBoardPriorityDto.getColor())
     );
   }
 }

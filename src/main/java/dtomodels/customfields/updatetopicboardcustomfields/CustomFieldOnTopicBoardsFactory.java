@@ -1,4 +1,4 @@
-package dtomodels.customfields.customfieldsintopicbords;
+package dtomodels.customfields.updatetopicboardcustomfields;
 
 import dto.generated.CdeModifyTopicBoardCustomFieldDto;
 

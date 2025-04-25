@@ -8,7 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-public class UploadModelFileTests extends ModelRevisionsBaseTests {
+public class UploadCdeCreateOrUpdateModelDtoFileTests extends ModelRevisionsBaseTests {
 
   @Test
   @Tag(value = "positive")
@@ -18,7 +18,7 @@ public class UploadModelFileTests extends ModelRevisionsBaseTests {
 
     assertEquals(SC_OK, statusCode);
     assertAll(
-        () -> assertEquals(modelId, responseModelRevisions.getModelId())
+        () -> assertEquals(modelId, cdeModelRevisionDto.getModelId())
     );
   }
 }

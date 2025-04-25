@@ -4,7 +4,7 @@ import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import dtomodels.PaginatedResponse;
-import dtomodels.topics.CdeCreateTopicDto;
+import dto.generated.CdeTopicDetailsDto;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
 @Epic("Api interface CDE")
 @Feature("Раздел Topics(Задачи)")
 @Story("Получение всех задач с доски задач")
-public class GetAllTopicsFromTopicBoardTests extends TopicsBaseTests {
+public class GetAllCdeCreateTopicDtoFromTopicBoardTests extends CdeCreateTopicDtoBaseTests {
 
   private ValidatableResponse getListOfTopicsResponse;
 
@@ -28,9 +28,9 @@ public class GetAllTopicsFromTopicBoardTests extends TopicsBaseTests {
     getListOfTopicsResponse = topicsClient.getListOfTopicsFromTopicBoardWithoutQueryOptions(
         topicBoardId);
     statusCode = extractStatusCode(getListOfTopicsResponse);
-    PaginatedResponse<CdeCreateTopicDto> paginatedResponse = getListOfTopicsResponse
+    PaginatedResponse<CdeTopicDetailsDto> paginatedResponse = getListOfTopicsResponse
         .extract().as(PaginatedResponse.class);
-    ArrayList<CdeCreateTopicDto> arrayOfTopics = paginatedResponse.getItems();
+    ArrayList<CdeTopicDetailsDto> arrayOfTopics = paginatedResponse.getItems();
 
     assertEquals(SC_OK, statusCode);
     assertEquals(paginatedResponse.getTotalCount(),

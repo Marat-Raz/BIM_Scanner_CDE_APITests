@@ -5,7 +5,7 @@ import static io.restassured.RestAssured.given;
 import client.base.Client;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
-import dtomodels.topicboardsgroup.TopicBoardsGroup;
+import dto.generated.CdeCreateTopicBoardGroupDto;
 
 public class TopicBoardGroupsClient extends Client {
 
@@ -23,11 +23,11 @@ public class TopicBoardGroupsClient extends Client {
 
   @Step("Создать группу досок задач в проекте")
   public ValidatableResponse createNewTopicBoardsGroup(String projectId,
-      TopicBoardsGroup topicBoardsGroup) {
+      CdeCreateTopicBoardGroupDto cdeCreateTopicBoardGroupDto) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
-        .body(topicBoardsGroup)
+        .body(cdeCreateTopicBoardGroupDto)
         .when()
         .post(API_PROJECTS + projectId + BOARD_GROUPS)
         .then();
@@ -47,11 +47,11 @@ public class TopicBoardGroupsClient extends Client {
 
   @Step("Изменить группу досок задач")
   public ValidatableResponse updateTopicBoardGroup(String projectId,
-      String groupId, TopicBoardsGroup topicBoardsGroup) {
+      String groupId, CdeCreateTopicBoardGroupDto cdeCreateTopicBoardGroupDto) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
-        .body(topicBoardsGroup)
+        .body(cdeCreateTopicBoardGroupDto)
         .when()
         .put(API_PROJECTS + projectId + BOARD_GROUPS + groupId)
         .then();

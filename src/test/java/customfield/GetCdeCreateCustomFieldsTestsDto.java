@@ -4,7 +4,7 @@ import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import dtomodels.customfields.ResponseCustomField;
+import dto.generated.CdeCustomFieldDto;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
 @Epic("Api interface CDE")
 @Feature("Раздел CustomFields(Кастомные поля)")
 @Story("Получение кастомных полей")
-public class GetCustomFieldsTests extends CustomFieldsBaseTests {
+public class GetCdeCreateCustomFieldsTestsDto extends CustomFieldsBaseTests {
 
   private ValidatableResponse getResponse;
   private Map<String, String> queryParams = new HashMap<>();
@@ -33,8 +33,8 @@ public class GetCustomFieldsTests extends CustomFieldsBaseTests {
     queryParams.put("archive", archiveType[0]);
     getResponse = customFieldsClient.getCustomFields(projectId, queryParams);
     statusCode = extractStatusCode(getResponse);
-    ResponseCustomField[] arrayOfCustomField = getResponse.extract()
-        .as(ResponseCustomField[].class);
+    CdeCustomFieldDto[] arrayOfCustomField = getResponse.extract()
+        .as(CdeCustomFieldDto[].class);
 
     assertEquals(SC_OK, statusCode);
     assertNotNull(arrayOfCustomField);
