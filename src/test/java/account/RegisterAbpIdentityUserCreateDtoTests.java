@@ -75,7 +75,7 @@ public class RegisterAbpIdentityUserCreateDtoTests extends StartTests {
     assertEquals(SC_FORBIDDEN, newStatusCode);
     assertEquals("Username '" + duplicatedUser.getUserName() +
         "' is already taken., Email '" + duplicatedUser.getEmail() +
-        "' is already taken.", abpRemoteServiceErrorResponse.abpRemoteServiceErrorInfo.message);
+        "' is already taken.", abpRemoteServiceErrorResponse.getError().getMessage());
   }
 
 }

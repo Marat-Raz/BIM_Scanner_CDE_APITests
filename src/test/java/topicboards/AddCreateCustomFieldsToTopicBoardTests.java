@@ -5,9 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import dto.generated.CdeModifyTopicBoardCustomFieldDto;
-import dtomodels.customfields.updatetopicboardcustomfields.CustomFieldOnTopicBoardsFactory;
-import dto.generated.CdeUpdateTopicBoardCustomFieldsDto;
+import dto.generated.CdeTopicBoardCustomFieldDto;
 import dto.generated.CdeTopicBoardDto;
+import dto.generated.CdeUpdateTopicBoardCustomFieldsDto;
+import dtomodels.customfields.updatetopicboardcustomfields.CustomFieldOnTopicBoardsFactory;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
@@ -20,21 +21,24 @@ import org.junit.jupiter.api.Test;
 @Epic("Api interface CDE")
 @Feature("Раздел TopicBoards(Доски задач)")
 @Story("Добавление кастомных полей в доску задач")
-public class AddCdeCreateCustomFieldsToTopicBoardTestsDto extends CdeCreateTopicBoardDtoBaseTests {
+public class AddCreateCustomFieldsToTopicBoardTests extends CreateTopicBoardBaseTests {
 
   private static ValidatableResponse getTopicBoardResponse;
-  private static ArrayList<CdeModifyTopicBoardCustomFieldDto> existsCustomFields;
+  private static ArrayList<CdeTopicBoardCustomFieldDto> existsCustomFields;
 
   @Test
   @Tag(value = "smoke")
   @DisplayName("Добавление кастомных полей в доску задач")
   public void editCustomFieldsOfTopicBoardTest() {
     CustomFieldOnTopicBoardsFactory customFieldOnTopicBoardsFactory = new CustomFieldOnTopicBoardsFactory();
-    CdeModifyTopicBoardCustomFieldDto cdeModifyTopicBoardCustomFieldDto = customFieldOnTopicBoardsFactory
+    CdeModifyTopicBoardCustomFieldDto customField = customFieldOnTopicBoardsFactory
         .createCustomFieldOnTopicBoardsById(customFieldId, IS_ENABLED);
 
-    CdeUpdateTopicBoardCustomFieldsDto cdeUpdateTopicBoardCustomFieldsDto = new CdeUpdateTopicBoardCustomFieldsDto(
-        cdeModifyTopicBoardCustomFieldDto);
+    ArrayList<CdeModifyTopicBoardCustomFieldDto> fieldsList = new ArrayList<>();
+    fieldsList.add(customField);
+    CdeUpdateTopicBoardCustomFieldsDto cdeUpdateTopicBoardCustomFieldsDto =
+        new CdeUpdateTopicBoardCustomFieldsDto(fieldsList);
+
     editCustomFieldResponse = topicBoardsClient
         .editTopicBoardCustomFields(projectId, topicBoardId, cdeUpdateTopicBoardCustomFieldsDto);
 

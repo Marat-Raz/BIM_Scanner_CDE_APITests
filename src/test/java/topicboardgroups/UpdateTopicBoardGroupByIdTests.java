@@ -57,7 +57,7 @@ public class UpdateTopicBoardGroupByIdTests extends StartTests {
     assertAll(
         () -> assertEquals(newCdeCreateTopicBoardGroupDto.getName(), cdeTopicBoardGroupDto.getName()),
         () -> assertEquals(topicBoardsGroupId, cdeTopicBoardGroupDto.getId()),
-        () -> assertEquals(projectId, cdeTopicBoardGroupDto.projectId)
+        () -> assertEquals(projectId, cdeTopicBoardGroupDto.getProjectId())
     );
   }
 

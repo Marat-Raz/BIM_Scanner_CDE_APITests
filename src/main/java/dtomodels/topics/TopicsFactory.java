@@ -1,12 +1,12 @@
 package dtomodels.topics;
 
 import dto.generated.CdeCreateTopicDto;
+import dto.generated.CdeSetCustomFieldValueDto;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import dtomodels.RandomWord;
-import dtomodels.customfields.ListOfCustomField;
 
 public class TopicsFactory {
 
@@ -20,7 +20,7 @@ public class TopicsFactory {
   public String typeId;
   public String statusId;
   public String priorityId;
-  public ListOfCustomField customFields;
+  public ArrayList<CdeSetCustomFieldValueDto> customFields;
   public ArrayList<String> labels;
 
   public CdeCreateTopicDto createTopic(TopicType topicType) {

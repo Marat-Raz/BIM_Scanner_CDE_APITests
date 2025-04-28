@@ -47,9 +47,9 @@ public class GetAbpIdentityUserCreateDtoByIdTests extends StartTests {
         AbpRemoteServiceErrorResponse.class);
 
     assertEquals(SC_BAD_REQUEST, statusCode);
-    assertEquals("Your request is not valid!", abpRemoteServiceErrorResponse.abpRemoteServiceErrorInfo.message);
+    assertEquals("Your request is not valid!", abpRemoteServiceErrorResponse.getError().getMessage());
     assertEquals("The following errors were detected during validation.\n"
-        + " - The value 'userId' is not valid.\n", abpRemoteServiceErrorResponse.abpRemoteServiceErrorInfo.details);
+        + " - The value 'userId' is not valid.\n", abpRemoteServiceErrorResponse.getError().getDetails());
   }
 
   @Test
@@ -64,7 +64,7 @@ public class GetAbpIdentityUserCreateDtoByIdTests extends StartTests {
 
     assertEquals(SC_NOT_FOUND, statusCode);
     assertEquals("There is no entity IdentityUser with id = "
-        + wrongId + "!", abpRemoteServiceErrorResponse.abpRemoteServiceErrorInfo.message);
+        + wrongId + "!", abpRemoteServiceErrorResponse.getError().getMessage());
   }
 
 }

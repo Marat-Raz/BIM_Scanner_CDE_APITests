@@ -6,17 +6,18 @@ import static dtomodels.topicboards.TopicBoardsType.DEFAULT_TOPIC_BOARDS;
 import basetests.StartTests;
 import client.CustomFieldsClient;
 import client.TopicBoardsClient;
+import dto.generated.CdeCreateCustomFieldDto;
+import dto.generated.CdeCreateTopicBoardDto;
+import dto.generated.CdeTopicBoardDetailsDto;
+import dto.generated.CdeTopicBoardDto;
+import dtomodels.customfields.CustomFieldFactory;
+import dtomodels.topicboards.TopicBoardsFactory;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
-import dto.generated.CdeCreateCustomFieldDto;
-import dtomodels.customfields.CustomFieldFactory;
-import dto.generated.CdeTopicBoardDto;
-import dto.generated.CdeCreateTopicBoardDto;
-import dtomodels.topicboards.TopicBoardsFactory;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 
-public class CdeCreateTopicBoardDtoBaseTests extends StartTests {
+public class CreateTopicBoardBaseTests extends StartTests {
 
   protected static CustomFieldsClient customFieldsClient = new CustomFieldsClient();
   protected static TopicBoardsClient topicBoardsClient = new TopicBoardsClient();

@@ -1,5 +1,7 @@
 package dto.generated;
 
+import static constants.CommonConstants.APP_NAME;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,7 +11,6 @@ import lombok.Setter;
 @Setter
 public class AbpRegisterDto {
 
-  private Object extraProperties;
   private String userName;
   private String emailAddress;
   private String password;

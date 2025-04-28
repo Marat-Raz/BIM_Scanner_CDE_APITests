@@ -9,7 +9,20 @@ import lombok.Setter;
 @Setter
 public class CdeEnumerationCustomFieldItemDto {
 
-    private String id;
-    private String name;
-    private Boolean disabled;
+  private String id;
+  private String name;
+  private Boolean disabled;
+
+  public static CdeAddOrUpdateEnumerationCustomFieldItemDto
+  convert(CdeEnumerationCustomFieldItemDto source) {
+    if (source == null) {
+      return null;
+    }
+
+    return new CdeAddOrUpdateEnumerationCustomFieldItemDto(
+        source.getId(),
+        source.getName(),
+        source.getDisabled()
+    );
+  }
 }

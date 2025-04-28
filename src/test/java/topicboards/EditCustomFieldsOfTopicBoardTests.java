@@ -4,10 +4,8 @@ import static dtomodels.customfields.updatetopicboardcustomfields.CustomFieldOnT
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import dto.generated.CdeModifyTopicBoardCustomFieldDto;
+import dto.generated.*;
 import dtomodels.customfields.updatetopicboardcustomfields.CustomFieldOnTopicBoardsFactory;
-import dto.generated.CdeUpdateTopicBoardCustomFieldsDto;
-import dto.generated.CdeTopicBoardDto;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Step;
@@ -21,48 +19,54 @@ import org.junit.jupiter.api.Test;
 @Epic("Api interface CDE")
 @Feature("Раздел TopicBoards(Доски задач)")
 @Story("Редактирование кастомных полей в доске задач")
-public class EditCdeCreateCustomFieldsOfTopicBoardTestsDto extends CdeCreateTopicBoardDtoBaseTests {
+public class EditCustomFieldsOfTopicBoardTests extends CreateTopicBoardBaseTests {
 
   private static ValidatableResponse editCustomFieldResponse;
-  private static ValidatableResponse getTopicBoardResponse;
-  private static ArrayList<CdeModifyTopicBoardCustomFieldDto> existsCustomFields = new ArrayList<>();
+  private static ValidatableResponse patchTopicBoardResponse;
+  private static ArrayList<CdeTopicBoardCustomFieldDto> existsCustomFields = new ArrayList<>();
 
   @BeforeEach
   @Step("Добавить кастомные поля в доску задач")
   public void createProject() {
     CustomFieldOnTopicBoardsFactory customFieldOnTopicBoardsFactory = new CustomFieldOnTopicBoardsFactory();
-    CdeModifyTopicBoardCustomFieldDto cdeModifyTopicBoardCustomFieldDto = customFieldOnTopicBoardsFactory
+    CdeModifyTopicBoardCustomFieldDto customField = customFieldOnTopicBoardsFactory
         .createCustomFieldOnTopicBoardsById(customFieldId, IS_ENABLED);
 
-    CdeUpdateTopicBoardCustomFieldsDto cdeUpdateTopicBoardCustomFieldsDto = new CdeUpdateTopicBoardCustomFieldsDto(
-        cdeModifyTopicBoardCustomFieldDto);
+    ArrayList<CdeModifyTopicBoardCustomFieldDto> customFieldArray = new ArrayList<>();
+    customFieldArray.add(customField);
+
+    CdeUpdateTopicBoardCustomFieldsDto cdeUpdateTopicBoardCustomFieldsDto =
+        new CdeUpdateTopicBoardCustomFieldsDto(customFieldArray);
     editCustomFieldResponse = topicBoardsClient
         .editTopicBoardCustomFields(projectId, topicBoardId, cdeUpdateTopicBoardCustomFieldsDto);
 
-    getTopicBoardResponse = topicBoardsClient.getTopicBoard(projectId, topicBoardId);
-    responseTopicBoard = getTopicBoardResponse.extract()
+    patchTopicBoardResponse = topicBoardsClient.getTopicBoard(projectId, topicBoardId);
+    responseTopicBoard = patchTopicBoardResponse.extract()
         .as(CdeTopicBoardDto.class);
 
     existsCustomFields = responseTopicBoard.getCustomFields();
-
   }
 
   @Test
   @DisplayName("Редактирование кастомных полей в доске задач")
   public void editCustomFieldsOfTopicBoardTest() {
-    CdeModifyTopicBoardCustomFieldDto editableCustomField = existsCustomFields.get(0);
+    CdeTopicBoardCustomFieldDto editableCustomField = existsCustomFields.get(0);
     String expectedTxt = "new Test Value";
     editableCustomField.setDefaultValue(expectedTxt);
-
     existsCustomFields.set(0, editableCustomField);
+
+    ArrayList<CdeModifyTopicBoardCustomFieldDto> editableCustomFieldArray = new ArrayList<>();
+    editableCustomFieldArray.add(CdeTopicBoardCustomFieldDto.convert(editableCustomField));
+
     CdeUpdateTopicBoardCustomFieldsDto cdeUpdateTopicBoardCustomFieldsDto = new CdeUpdateTopicBoardCustomFieldsDto(
-        existsCustomFields);
+        editableCustomFieldArray);
+
     editCustomFieldResponse = topicBoardsClient
         .editTopicBoardCustomFields(projectId, topicBoardId, cdeUpdateTopicBoardCustomFieldsDto);
-    CdeTopicBoardDto cdeTopicBoardDto = editCustomFieldResponse.extract()
+    responseTopicBoard = editCustomFieldResponse.extract()
         .as(CdeTopicBoardDto.class);
 
-    ArrayList<CdeModifyTopicBoardCustomFieldDto> actualCustomField = cdeTopicBoardDto.getCustomFields();
+    ArrayList<CdeTopicBoardCustomFieldDto> actualCustomField = responseTopicBoard.getCustomFields();
 
     assertAll(
         () -> assertEquals(expectedTxt, actualCustomField.get(0).getDefaultValue())

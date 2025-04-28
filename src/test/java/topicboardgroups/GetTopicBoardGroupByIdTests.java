@@ -36,9 +36,9 @@ public class GetTopicBoardGroupByIdTests extends TopicBoardGroupBaseTests {
 
     assertEquals(SC_OK, statusCode);
     assertAll(
-        () -> assertEquals("TopicBoardGroup", cdeTopicBoardGroupDtoList.get(0).type),
-        () -> assertEquals(cdeCreateTopicBoardGroupDto.getName(), cdeTopicBoardGroupDtoList.get(0).name),
-        () -> assertEquals(projectId, cdeTopicBoardGroupDtoList.get(0).projectId)
+        () -> assertEquals("TopicBoardGroup", cdeTopicBoardGroupDtoList.get(0).getType()),
+        () -> assertEquals(cdeCreateTopicBoardGroupDto.getName(), cdeTopicBoardGroupDtoList.get(0).getName()),
+        () -> assertEquals(projectId, cdeTopicBoardGroupDtoList.get(0).getProjectId())
     );
   }
 

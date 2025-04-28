@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 @Epic("Api interface CDE")
 @Feature("Раздел TopicBoards(Доски задач)")
 @Story("Удаление доски задач")
-public class DeleteTopicBoardByIdTests extends CdeCreateTopicBoardDtoBaseTests {
+public class DeleteTopicBoardByIdTests extends CreateTopicBoardBaseTests {
 
   private static ValidatableResponse deleteTopicBoardResponse;
 

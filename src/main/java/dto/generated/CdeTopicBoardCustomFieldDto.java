@@ -13,4 +13,19 @@ public class CdeTopicBoardCustomFieldDto {
     private Boolean isEnabled;
     private Boolean isRequired;
     private String defaultValue;
+
+
+    public static CdeModifyTopicBoardCustomFieldDto
+    convert(CdeTopicBoardCustomFieldDto source) {
+        if (source == null) {
+            return null;
+        }
+
+        return new CdeModifyTopicBoardCustomFieldDto(
+            source.getId(),
+            source.getIsEnabled(),
+            source.getIsRequired(),
+            source.getDefaultValue()
+        );
+    }
 }

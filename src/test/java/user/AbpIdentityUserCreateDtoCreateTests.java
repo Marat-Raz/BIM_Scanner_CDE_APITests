@@ -46,7 +46,7 @@ public class AbpIdentityUserCreateDtoCreateTests extends StartTests {
     // todo ввести константы для текстов
     assertEquals("Username '" + defaultAbpIdentityUserCreateDto.getUserName() +
         "' is already taken., Email '" + defaultAbpIdentityUserCreateDto.getEmail() +
-        "' is already taken.", abpRemoteServiceErrorResponse.abpRemoteServiceErrorInfo.message);
+        "' is already taken.", abpRemoteServiceErrorResponse.getError().getMessage());
   }
 
   @Test
@@ -58,9 +58,9 @@ public class AbpIdentityUserCreateDtoCreateTests extends StartTests {
     statusCode = extractStatusCode(wrongResponse);
 
     assertEquals(SC_BAD_REQUEST, statusCode);
-    assertEquals("Your request is not valid!", abpRemoteServiceErrorResponse.abpRemoteServiceErrorInfo.message);
+    assertEquals("Your request is not valid!", abpRemoteServiceErrorResponse.getError().getMessage());
     assertEquals("The following errors were detected during validation.\n"
-        + " - The Email field is required.\n", abpRemoteServiceErrorResponse.abpRemoteServiceErrorInfo.details);
+        + " - The Email field is required.\n", abpRemoteServiceErrorResponse.getError().getDetails());
   }
 
   @Test
@@ -72,9 +72,9 @@ public class AbpIdentityUserCreateDtoCreateTests extends StartTests {
     statusCode = extractStatusCode(wrongResponse);
 
     assertEquals(SC_BAD_REQUEST, statusCode);
-    assertEquals("Your request is not valid!", abpRemoteServiceErrorResponse.abpRemoteServiceErrorInfo.message);
+    assertEquals("Your request is not valid!", abpRemoteServiceErrorResponse.getError().getMessage());
     assertEquals("The following errors were detected during validation.\n"
-        + " - The Password field is required.\n", abpRemoteServiceErrorResponse.abpRemoteServiceErrorInfo.details);
+        + " - The Password field is required.\n", abpRemoteServiceErrorResponse.getError().getDetails());
   }
 
   @Test
@@ -86,9 +86,9 @@ public class AbpIdentityUserCreateDtoCreateTests extends StartTests {
     statusCode = extractStatusCode(wrongResponse);
 
     assertEquals(SC_BAD_REQUEST, statusCode);
-    assertEquals("Your request is not valid!", abpRemoteServiceErrorResponse.abpRemoteServiceErrorInfo.message);
+    assertEquals("Your request is not valid!", abpRemoteServiceErrorResponse.getError().getMessage());
     assertEquals("The following errors were detected during validation.\n"
         + " - The Password field is required.\n"
-        + " - The UserName field is required.\n", abpRemoteServiceErrorResponse.abpRemoteServiceErrorInfo.details);
+        + " - The UserName field is required.\n", abpRemoteServiceErrorResponse.getError().getDetails());
   }
 }

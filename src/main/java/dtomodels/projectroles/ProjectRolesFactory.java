@@ -2,14 +2,15 @@ package dtomodels.projectroles;
 
 import dto.generated.CdeCreateProjectRoleDto;
 import dtomodels.RandomWord;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class ProjectRolesFactory {
 
   private String name = RandomWord.randomLatinAndNumberCharacters(1, 256);
-  private List<String> permissions = List.of("Project.Update");
-  private List<String> randomPermissions = List.of(getRandomPermission().toString());
+  private ArrayList<String> permissions = new ArrayList<>(List.of("Project.Update"));
+  private ArrayList<String> randomPermissions = new ArrayList<>(List.of(getRandomPermission().toString()));
 
   public CdeCreateProjectRoleDto createRole(ProjectRolesTypeByRequestStructure roleType) {
     switch (roleType) {

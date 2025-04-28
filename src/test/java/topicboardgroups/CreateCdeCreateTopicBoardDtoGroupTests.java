@@ -26,9 +26,9 @@ public class CreateCdeCreateTopicBoardDtoGroupTests extends TopicBoardGroupBaseT
 
     assertEquals(SC_OK, statusCode);
     assertAll(
-        () -> assertEquals("TopicBoardGroup", cdeTopicBoardGroupDto.type),
-        () -> assertEquals(cdeCreateTopicBoardGroupDto.getName(), cdeTopicBoardGroupDto.name),
-        () -> assertEquals(projectId, cdeTopicBoardGroupDto.projectId)
+        () -> assertEquals("TopicBoardGroup", cdeTopicBoardGroupDto.getType()),
+        () -> assertEquals(cdeCreateTopicBoardGroupDto.getName(), cdeTopicBoardGroupDto.getName()),
+        () -> assertEquals(projectId, cdeTopicBoardGroupDto.getProjectId())
     );
   }
 

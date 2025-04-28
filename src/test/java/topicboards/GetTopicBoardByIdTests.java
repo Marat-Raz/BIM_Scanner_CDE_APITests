@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
 @Epic("Api interface CDE")
 @Feature("Раздел TopicBoards(Доски задач)")
 @Story("Получение доску задач по id")
-public class GetTopicBoardByIdTests extends CdeCreateTopicBoardDtoBaseTests {
+public class GetTopicBoardByIdTests extends CreateTopicBoardBaseTests {
 
   private static TopicBoardsClient topicBoardsClient = new TopicBoardsClient();
   private ValidatableResponse getTopicBoardResponse;
@@ -33,8 +33,8 @@ public class GetTopicBoardByIdTests extends CdeCreateTopicBoardDtoBaseTests {
 
     assertEquals(SC_OK, statusCode);
     assertAll(
-        () -> assertEquals(topicBoard.getName(), responseTopicBoard.name),
-        () -> assertEquals(projectId, responseTopicBoard.projectId)
+        () -> assertEquals(topicBoard.getName(), responseTopicBoard.getName()),
+        () -> assertEquals(projectId, responseTopicBoard.getProjectId())
     );
   }
 
