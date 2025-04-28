@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 @Epic("Api interface CDE")
 @Feature("Раздел TopicComments(Комментарии к задачам)")
 @Story("Добавление комментария к задаче")
-public class AddTopicCommentsToTopicTests extends CdeCreateTopicDtoCommentsBaseTests {
+public class AddTopicCommentsToTopicTests extends CreateTopicCommentsBaseTests {
 
   @Test
   @Tag(value = "smoke")

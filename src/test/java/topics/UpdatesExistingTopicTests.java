@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 @Epic("Api interface CDE")
 @Feature("Раздел Topics(Задачи)")
 @Story("Обновление задачи в доске задач")
-public class UpdatesExistingTopicTests extends CdeCreateTopicDtoBaseTests {
+public class UpdatesExistingTopicTests extends TopicBaseTests {
 
   private static TopicsClient topicsClient = new TopicsClient();
   private ValidatableResponse updateTopicByIdResponse;

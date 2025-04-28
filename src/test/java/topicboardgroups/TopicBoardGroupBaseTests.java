@@ -17,7 +17,7 @@ public class TopicBoardGroupBaseTests extends StartTests {
   protected static TopicBoardsGroupFactory topicBoardsGroupFactory = new TopicBoardsGroupFactory();
   protected static ValidatableResponse createTopicBoardsGroupResponse;
   protected static TopicBoardGroupsClient topicBoardGroupsClient = new TopicBoardGroupsClient();
-  protected static CdeTopicBoardGroupDto cdeTopicBoardGroupDto;
+  protected static CdeTopicBoardGroupDto topicBoardGroup;
   protected static String topicBoardsGroupId;
 
   @BeforeAll
@@ -26,8 +26,8 @@ public class TopicBoardGroupBaseTests extends StartTests {
     cdeCreateTopicBoardGroupDto = topicBoardsGroupFactory.createTopicBoardsGroup(DEFAULT_TOPIC_BOARDS_GROUP);
     createTopicBoardsGroupResponse = topicBoardGroupsClient
         .createNewTopicBoardsGroup(projectId, cdeCreateTopicBoardGroupDto);
-    cdeTopicBoardGroupDto =
+    topicBoardGroup =
         createTopicBoardsGroupResponse.extract().as(CdeTopicBoardGroupDto.class);
-    topicBoardsGroupId = cdeTopicBoardGroupDto.getId();
+    topicBoardsGroupId = topicBoardGroup.getId();
   }
 }

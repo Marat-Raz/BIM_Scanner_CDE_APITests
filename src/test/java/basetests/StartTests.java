@@ -8,13 +8,13 @@ import client.ProjectsClient;
 import client.TokenClient;
 import client.UserClient;
 import client.base.Client;
-import dtomodels.PaginatedResponse;
+import dto.generated.AbpIdentityUserCreateDto;
 import dto.generated.AbpRemoteServiceErrorResponse;
 import dto.generated.CdeCreateProjectDto;
-import dtomodels.project.ProjectFactory;
 import dto.generated.CdeProjectDto;
+import dtomodels.PaginatedResponse;
+import dtomodels.project.ProjectFactory;
 import dtomodels.token.TokenBuilder;
-import dto.generated.AbpIdentityUserCreateDto;
 import dtomodels.user.UserFactory;
 import io.qameta.allure.Step;
 import io.qameta.allure.restassured.AllureRestAssured;
@@ -33,15 +33,16 @@ public class StartTests {
   protected static ProjectFactory projectFactory = new ProjectFactory();
   protected static UserFactory userFactory = new UserFactory();
   protected static UserClient userClient = new UserClient();
-  protected static TypeRef<PaginatedResponse<CdeProjectDto>> typeRef = new TypeRef<>() {
-  };
-  protected static AbpIdentityUserCreateDto defaultAbpIdentityUserCreateDto;
+  protected static TypeRef<PaginatedResponse<CdeProjectDto>> typeRef =
+      new TypeRef<>() {
+      };
+  protected static AbpIdentityUserCreateDto defaultUser;
   protected static ValidatableResponse baseResponse;
   protected static ValidatableResponse createProjectResponse;
-  protected static CdeCreateProjectDto defaultCdeCreateProjectDto;
+  protected static CdeCreateProjectDto defaultProject;
   protected static String projectId;
   protected static String userId;
-  protected AbpRemoteServiceErrorResponse abpRemoteServiceErrorResponse;
+  protected AbpRemoteServiceErrorResponse errorResponse;
   protected int statusCode;
 
   @BeforeAll
@@ -56,12 +57,12 @@ public class StartTests {
         tokenClient.createToken(TokenBuilder.getTokenForAdminUser());
     ADMIN_ACCESS_TOKEN = responseAdminToken.extract().path("access_token");
 
-    defaultAbpIdentityUserCreateDto = userFactory.createUser(DEFAULT_USER);
-    baseResponse = userClient.createUser(defaultAbpIdentityUserCreateDto);
+    defaultUser = userFactory.createUser(DEFAULT_USER);
+    baseResponse = userClient.createUser(defaultUser);
     userId = baseResponse.extract().path("id");
 
-    defaultCdeCreateProjectDto = projectFactory.createProject(DEFAULT_PROJECT);
-    createProjectResponse = projectsClient.createProject(defaultCdeCreateProjectDto);
+    defaultProject = projectFactory.createProject(DEFAULT_PROJECT);
+    createProjectResponse = projectsClient.createProject(defaultProject);
     projectId = createProjectResponse.extract().path("id");
 
     // todo выдать для user права на создание проектов раздел permission

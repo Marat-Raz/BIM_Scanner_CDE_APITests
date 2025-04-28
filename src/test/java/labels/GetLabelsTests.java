@@ -26,10 +26,10 @@ public class GetLabelsTests extends LabelBaseTests {
   public void getLabelFromProjectTest() {
     getResponse = labelsClient.getListOfLabelInProjectWithoutQueryOptions(projectId);
     statusCode = extractStatusCode(getResponse);
-    CdeLabelDto[] cdeLabelsArrayDto = getResponse.extract().as(CdeLabelDto[].class);
+    CdeLabelDto[] labelsArray = getResponse.extract().as(CdeLabelDto[].class);
 
     assertEquals(SC_OK, statusCode);
-    assertTrue(cdeLabelsArrayDto.length > 0);
+    assertTrue(labelsArray.length > 0);
   }
 
 }

@@ -1,39 +1,39 @@
-package topicboardtypes;
+package topics;
 
 import static dtomodels.topicboards.TopicBoardsType.DEFAULT_TOPIC_BOARDS;
-import static dtomodels.types.TypesType.DEFAULT;
+import static dtomodels.topics.TopicType.DEFAULT_TOPIC;
 
 import basetests.StartTests;
-import client.TopicBoardTypesClient;
 import client.TopicBoardsClient;
+import client.TopicsClient;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import dto.generated.CdeTopicBoardDto;
 import dto.generated.CdeCreateTopicBoardDto;
 import dtomodels.topicboards.TopicBoardsFactory;
-import dto.generated.CdeTopicBoardTypeDto;
-import dto.generated.CdeCreateOrUpdateTopicBoardTypeDto;
-import dtomodels.types.TypesFactory;
+import dto.generated.CdeTopicDetailsDto;
+import dto.generated.CdeCreateTopicDto;
+import dtomodels.topics.TopicsFactory;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 
-public class TopicBoardTypeBaseTests extends StartTests {
+public class TopicBaseTests extends StartTests {
 
   protected static TopicBoardsClient topicBoardsClient = new TopicBoardsClient();
   protected static TopicBoardsFactory topicBoardsFactory = new TopicBoardsFactory();
-  protected static TopicBoardTypesClient topicBoardTypesClient = new TopicBoardTypesClient();
-  protected static TypesFactory typesFactory = new TypesFactory();
   protected static CdeCreateTopicBoardDto topicBoard;
   protected static ValidatableResponse createTopicBoardsResponse;
+  protected static TopicsClient topicsClient = new TopicsClient();
+  protected static TopicsFactory topicsFactory = new TopicsFactory();
   protected static String topicBoardId;
-  protected ValidatableResponse addTypesResponse;
-  protected CdeCreateOrUpdateTopicBoardTypeDto type;
-  protected String typeId;
-  protected CdeTopicBoardTypeDto topicBoardType;
+  protected ValidatableResponse addTopicsResponse;
+  protected CdeCreateTopicDto topic;
+  protected String defaultTopicId;
+  protected CdeTopicDetailsDto responseTopic;
 
   @BeforeAll
   @Step("Создаем доску задач в проекте")
-  public static void createTopicBoardAndAddType() {
+  public static void createTopicBoardAndTopic() {
     topicBoard = topicBoardsFactory.createTopicBoards(DEFAULT_TOPIC_BOARDS);
     createTopicBoardsResponse = topicBoardsClient.createNewTopicBoard(projectId, topicBoard);
     CdeTopicBoardDto cdeTopicBoardDto =
@@ -42,12 +42,12 @@ public class TopicBoardTypeBaseTests extends StartTests {
   }
 
   @BeforeEach
-  @Step("Добавляем типы в доску задач")
-  public void addType() {
-    type = typesFactory.createTypes(DEFAULT);
-    addTypesResponse = topicBoardTypesClient.addTopicBoardTypes(topicBoardId, type);
-    topicBoardType = addTypesResponse.extract().as(CdeTopicBoardTypeDto.class);
-    typeId = topicBoardType.getId();
+  @Step("Добавляем задачу в доску задач")
+  public void addTopic() {
+    topic = topicsFactory.createTopic(DEFAULT_TOPIC);
+    addTopicsResponse = topicsClient.createTopicOnTopicBoard(topicBoardId, topic);
+    responseTopic = addTopicsResponse.extract().as(CdeTopicDetailsDto.class);
+    defaultTopicId = responseTopic.getId();
   }
 
 }

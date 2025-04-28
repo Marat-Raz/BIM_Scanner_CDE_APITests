@@ -26,7 +26,7 @@ import org.junit.jupiter.api.Test;
 public class UpdateTopicBoardGroupByIdTests extends StartTests {
 
   private TopicBoardsGroupFactory topicBoardsGroupFactory = new TopicBoardsGroupFactory();
-  private CdeCreateTopicBoardGroupDto cdeCreateTopicBoardGroupDto;
+  private CdeCreateTopicBoardGroupDto createTopicBoardGroup;
   private TopicBoardGroupsClient topicBoardGroupsClient = new TopicBoardGroupsClient();
   private ValidatableResponse createTopicBoardsGroupResponse;
   private ValidatableResponse updateTopicBoardGroupResponse;
@@ -35,9 +35,9 @@ public class UpdateTopicBoardGroupByIdTests extends StartTests {
   @BeforeEach
   @Step("Создать  в проекте группу досок задач")
   public void createTopicBoardGroupsOnProject() {
-    cdeCreateTopicBoardGroupDto = topicBoardsGroupFactory.createTopicBoardsGroup(DEFAULT_TOPIC_BOARDS_GROUP);
+    createTopicBoardGroup = topicBoardsGroupFactory.createTopicBoardsGroup(DEFAULT_TOPIC_BOARDS_GROUP);
     createTopicBoardsGroupResponse = topicBoardGroupsClient.createNewTopicBoardsGroup(projectId,
-        cdeCreateTopicBoardGroupDto);
+        createTopicBoardGroup);
     topicBoardsGroupId = createTopicBoardsGroupResponse.extract().path("id");
   }
 
@@ -45,7 +45,7 @@ public class UpdateTopicBoardGroupByIdTests extends StartTests {
   @Tag(value = "smoke")
   @DisplayName("Изменить группу досок задач по его id")
   public void updateTopicBoardGroupByIdTest() {
-    CdeCreateTopicBoardGroupDto newCdeCreateTopicBoardGroupDto = cdeCreateTopicBoardGroupDto;
+    CdeCreateTopicBoardGroupDto newCdeCreateTopicBoardGroupDto = createTopicBoardGroup;
     newCdeCreateTopicBoardGroupDto.setName("newName");
     updateTopicBoardGroupResponse = topicBoardGroupsClient
         .updateTopicBoardGroup(projectId, topicBoardsGroupId, newCdeCreateTopicBoardGroupDto);

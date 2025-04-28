@@ -1,39 +1,38 @@
-package topicboardtypes;
+package topicboardpriorities;
 
+import static dtomodels.priorities.PrioritiesType.DEFAULT;
 import static dtomodels.topicboards.TopicBoardsType.DEFAULT_TOPIC_BOARDS;
-import static dtomodels.types.TypesType.DEFAULT;
 
 import basetests.StartTests;
-import client.TopicBoardTypesClient;
+import client.TopicBoardPrioritiesClient;
 import client.TopicBoardsClient;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
+import dto.generated.CdeCreateOrUpdateTopicBoardPriorityDto;
+import dtomodels.priorities.PrioritiesFactory;
 import dto.generated.CdeTopicBoardDto;
 import dto.generated.CdeCreateTopicBoardDto;
 import dtomodels.topicboards.TopicBoardsFactory;
-import dto.generated.CdeTopicBoardTypeDto;
-import dto.generated.CdeCreateOrUpdateTopicBoardTypeDto;
-import dtomodels.types.TypesFactory;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 
-public class TopicBoardTypeBaseTests extends StartTests {
+public class TopicBoardPriorityBaseTests extends StartTests {
 
   protected static TopicBoardsClient topicBoardsClient = new TopicBoardsClient();
   protected static TopicBoardsFactory topicBoardsFactory = new TopicBoardsFactory();
-  protected static TopicBoardTypesClient topicBoardTypesClient = new TopicBoardTypesClient();
-  protected static TypesFactory typesFactory = new TypesFactory();
+  protected static TopicBoardPrioritiesClient topicBoardPrioritiesClient
+      = new TopicBoardPrioritiesClient();
+  protected static PrioritiesFactory prioritiesFactory = new PrioritiesFactory();
   protected static CdeCreateTopicBoardDto topicBoard;
   protected static ValidatableResponse createTopicBoardsResponse;
   protected static String topicBoardId;
-  protected ValidatableResponse addTypesResponse;
-  protected CdeCreateOrUpdateTopicBoardTypeDto type;
-  protected String typeId;
-  protected CdeTopicBoardTypeDto topicBoardType;
+  protected ValidatableResponse addPrioritiesResponse;
+  protected CdeCreateOrUpdateTopicBoardPriorityDto priority;
+  protected String priorityId;
 
   @BeforeAll
-  @Step("Создаем доску задач в проекте")
-  public static void createTopicBoardAndAddType() {
+  @Step("Создать в проекте доску задач")
+  public static void createTopicBoard() {
     topicBoard = topicBoardsFactory.createTopicBoards(DEFAULT_TOPIC_BOARDS);
     createTopicBoardsResponse = topicBoardsClient.createNewTopicBoard(projectId, topicBoard);
     CdeTopicBoardDto cdeTopicBoardDto =
@@ -42,12 +41,12 @@ public class TopicBoardTypeBaseTests extends StartTests {
   }
 
   @BeforeEach
-  @Step("Добавляем типы в доску задач")
-  public void addType() {
-    type = typesFactory.createTypes(DEFAULT);
-    addTypesResponse = topicBoardTypesClient.addTopicBoardTypes(topicBoardId, type);
-    topicBoardType = addTypesResponse.extract().as(CdeTopicBoardTypeDto.class);
-    typeId = topicBoardType.getId();
+  @Step("Добавить в доску задач приоритеты")
+  public void addPrioritiesToTopicBoard() {
+    priority = prioritiesFactory.createPriorities(DEFAULT);
+    addPrioritiesResponse = topicBoardPrioritiesClient.addTopicBoardPriorities(topicBoardId,
+        priority);
+    priorityId = addPrioritiesResponse.extract().path("id");
   }
 
 }

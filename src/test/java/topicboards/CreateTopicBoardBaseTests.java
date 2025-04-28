@@ -8,7 +8,6 @@ import client.CustomFieldsClient;
 import client.TopicBoardsClient;
 import dto.generated.CdeCreateCustomFieldDto;
 import dto.generated.CdeCreateTopicBoardDto;
-import dto.generated.CdeTopicBoardDetailsDto;
 import dto.generated.CdeTopicBoardDto;
 import dtomodels.customfields.CustomFieldFactory;
 import dtomodels.topicboards.TopicBoardsFactory;

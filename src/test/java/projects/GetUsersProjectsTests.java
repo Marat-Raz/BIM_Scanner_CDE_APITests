@@ -27,16 +27,16 @@ public class GetUsersProjectsTests extends StartTests {
 
   private static ValidatableResponse getAllProjectResponse;
   private static ProjectsClient projectsClient = new ProjectsClient();
-  private static ArrayList<CdeCreateProjectDto> cdeCreateProjectDtoList = new ArrayList<CdeCreateProjectDto>();
+  private static ArrayList<CdeCreateProjectDto> createProjectDtoList = new ArrayList<CdeCreateProjectDto>();
   private static int numberOfProjects = 5;
 
   @BeforeAll
   @Step("Создать несколько проектов от имени ADMIN")
   public static void createProjects() { // todo рассмотреть вынос этого метода в Steps
     for (int i = 0; i < numberOfProjects; i++) {
-      cdeCreateProjectDtoList.add(new ProjectFactory().createProject(RANDOM_PROJECT));
+      createProjectDtoList.add(new ProjectFactory().createProject(RANDOM_PROJECT));
     }
-    for (CdeCreateProjectDto cdeCreateProjectDto : cdeCreateProjectDtoList) {
+    for (CdeCreateProjectDto cdeCreateProjectDto : createProjectDtoList) {
       projectsClient.createProject(ADMIN_ACCESS_TOKEN, cdeCreateProjectDto);
     }
   }

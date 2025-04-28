@@ -65,7 +65,7 @@ public class RegisterAbpIdentityUserCreateDtoTests extends StartTests {
     registerUserResponse = accountClient.registerUser(AbpRegisterDto.from(duplicatedUser));
 
     int newStatusCode = extractStatusCode(registerUserResponse);
-    abpRemoteServiceErrorResponse = registerUserResponse.extract().body().as(
+    errorResponse = registerUserResponse.extract().body().as(
         AbpRemoteServiceErrorResponse.class);
 
     ValidatableResponse response = userClient.getUserByUserName(duplicatedUser.getUserName());
@@ -75,7 +75,7 @@ public class RegisterAbpIdentityUserCreateDtoTests extends StartTests {
     assertEquals(SC_FORBIDDEN, newStatusCode);
     assertEquals("Username '" + duplicatedUser.getUserName() +
         "' is already taken., Email '" + duplicatedUser.getEmail() +
-        "' is already taken.", abpRemoteServiceErrorResponse.getError().getMessage());
+        "' is already taken.", errorResponse.getError().getMessage());
   }
 
 }

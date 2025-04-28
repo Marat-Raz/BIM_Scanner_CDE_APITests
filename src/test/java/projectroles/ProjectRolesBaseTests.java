@@ -16,20 +16,20 @@ public class ProjectRolesBaseTests extends StartTests {
   protected static ProjectRolesClient projectRolesClient = new ProjectRolesClient();
   protected static ValidatableResponse createProjectRoleResponse;
   protected static ValidatableResponse getAllRolesResponse;
-  protected static CdeCreateProjectRoleDto defaultCdeCreateProjectRoleDto;
-  protected static CdeProjectRoleDto defaultCdeProjectRoleDto;
+  protected static CdeCreateProjectRoleDto defaultCreateProjectRole;
+  protected static CdeProjectRoleDto defaultProjectRole;
   protected static String defaultProjectRoleId;
   protected static int projectRolesCount = 3;
 
   @BeforeAll
   public static void createDefaultProjectRole() {
     for (int i = 0; i < projectRolesCount; i++) {
-      defaultCdeCreateProjectRoleDto = new ProjectRolesFactory().createRole(RANDOM_ROLE);
+      defaultCreateProjectRole = new ProjectRolesFactory().createRole(RANDOM_ROLE);
       createProjectRoleResponse = projectRolesClient.createProjectRole(projectId,
-          defaultCdeCreateProjectRoleDto);
-      defaultCdeProjectRoleDto = createProjectRoleResponse.extract()
+          defaultCreateProjectRole);
+      defaultProjectRole = createProjectRoleResponse.extract()
           .as(CdeProjectRoleDto.class);
-      defaultProjectRoleId = defaultCdeProjectRoleDto.getId();
+      defaultProjectRoleId = defaultProjectRole.getId();
     }
   }
 

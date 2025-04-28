@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Test;
 @Story("Получение группы досок задач по id")
 public class GetTopicBoardGroupByIdTests extends TopicBoardGroupBaseTests {
 
-  private static List<CdeTopicBoardGroupDto> cdeTopicBoardGroupDtoList;
+  private static List<CdeTopicBoardGroupDto> topicBoardGroupList;
   private static TopicBoardGroupsClient topicBoardGroupsClient = new TopicBoardGroupsClient();
   private ValidatableResponse getTopicBoardGroupResponse;
 
@@ -31,14 +31,14 @@ public class GetTopicBoardGroupByIdTests extends TopicBoardGroupBaseTests {
     getTopicBoardGroupResponse = topicBoardGroupsClient
         .getTopicBoardGroupById(projectId, topicBoardsGroupId, false);
     statusCode = extractStatusCode(getTopicBoardGroupResponse);
-    cdeTopicBoardGroupDtoList = List.of(getTopicBoardGroupResponse.extract()
+    topicBoardGroupList = List.of(getTopicBoardGroupResponse.extract()
         .as(CdeTopicBoardGroupDto[].class));
 
     assertEquals(SC_OK, statusCode);
     assertAll(
-        () -> assertEquals("TopicBoardGroup", cdeTopicBoardGroupDtoList.get(0).getType()),
-        () -> assertEquals(cdeCreateTopicBoardGroupDto.getName(), cdeTopicBoardGroupDtoList.get(0).getName()),
-        () -> assertEquals(projectId, cdeTopicBoardGroupDtoList.get(0).getProjectId())
+        () -> assertEquals("TopicBoardGroup", topicBoardGroupList.get(0).getType()),
+        () -> assertEquals(cdeCreateTopicBoardGroupDto.getName(), topicBoardGroupList.get(0).getName()),
+        () -> assertEquals(projectId, topicBoardGroupList.get(0).getProjectId())
     );
   }
 

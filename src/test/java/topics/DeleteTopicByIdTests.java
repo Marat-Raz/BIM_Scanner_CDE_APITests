@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 @Epic("Api interface CDE")
 @Feature("Раздел Topics(Задачи)")
 @Story("Удаление задачи из доски задач")
-public class DeleteTopicByIdTests extends CdeCreateTopicDtoBaseTests {
+public class DeleteTopicByIdTests extends TopicBaseTests {
 
   private ValidatableResponse deleteTopicByIdResponse;
 

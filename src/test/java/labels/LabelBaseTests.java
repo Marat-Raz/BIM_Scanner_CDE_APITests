@@ -16,9 +16,9 @@ public class LabelBaseTests extends StartTests {
 
   protected static LabelsClient labelsClient = new LabelsClient();
   protected static ValidatableResponse baseAddResponse;
-  protected static CdeCreateLabelDto cdeCreateLabelDto;
-  protected static ArrayList<CdeCreateLabelDto> cdeCreateLabelDtos = new ArrayList<>();
-  protected static ArrayList<CdeLabelDto> cdeLabelDtos = new ArrayList<>();
+  protected static CdeCreateLabelDto createLabelDto;
+  protected static ArrayList<CdeCreateLabelDto> cdeCreateLabels = new ArrayList<>();
+  protected static ArrayList<CdeLabelDto> cdeLabels = new ArrayList<>();
   protected static CdeLabelDto cdeLabelDto;
   protected static String labelId;
   protected static final int labelsCount = 3;
@@ -27,15 +27,15 @@ public class LabelBaseTests extends StartTests {
   @Step("Создаем метку в проекте")
   public static void addLabelToProject() {
     for (int i = 0; i < labelsCount; i++) {
-      cdeCreateLabelDto = new LabelFactory().createLabel(DEFAULT);
-      cdeCreateLabelDtos.add(cdeCreateLabelDto);
+      createLabelDto = new LabelFactory().createLabel(DEFAULT);
+      cdeCreateLabels.add(createLabelDto);
     }
-    for (CdeCreateLabelDto cdeCreateLabelDto : cdeCreateLabelDtos) {
+    for (CdeCreateLabelDto cdeCreateLabelDto : cdeCreateLabels) {
       baseAddResponse = labelsClient.createLabelInProject(projectId, cdeCreateLabelDto);
       cdeLabelDto = baseAddResponse.extract().as(CdeLabelDto.class);
-      cdeLabelDtos.add(cdeLabelDto);
+      cdeLabels.add(cdeLabelDto);
     }
-    labelId = cdeLabelDtos.get(0).getId();
+    labelId = cdeLabels.get(0).getId();
   }
 
 }

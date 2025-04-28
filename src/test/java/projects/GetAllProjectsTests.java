@@ -24,16 +24,16 @@ import org.junit.jupiter.api.Test;
 public class GetAllProjectsTests extends StartTests {
 
   private ValidatableResponse getAllProjectResponse;
-  private static ArrayList<CdeCreateProjectDto> cdeCreateProjectDtoList = new ArrayList<CdeCreateProjectDto>();
+  private static ArrayList<CdeCreateProjectDto> createProjectList = new ArrayList<CdeCreateProjectDto>();
   private static int numberOfProjects = 5;
 
   @BeforeAll
   @Step("Создать несколько проектов для теста")
   public static void createProjects() {
     for (int i = 0; i < numberOfProjects; i++) {
-      cdeCreateProjectDtoList.add(new ProjectFactory().createProject(RANDOM_PROJECT));
+      createProjectList.add(new ProjectFactory().createProject(RANDOM_PROJECT));
     }
-    for (CdeCreateProjectDto cdeCreateProjectDto : cdeCreateProjectDtoList) {
+    for (CdeCreateProjectDto cdeCreateProjectDto : createProjectList) {
       projectsClient.createProject(cdeCreateProjectDto);
     }
   }

@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
 @Epic("Api interface CDE")
 @Feature("Раздел TopicComments(Комментарии к задачам)")
 @Story("Получение всех комментариев к задаче")
-public class GetsListOfTopicCommentsTests extends CdeCreateTopicDtoCommentsBaseTests {
+public class GetsListOfTopicCommentsTests extends CreateTopicCommentsBaseTests {
 
   private ValidatableResponse getsTopicComments;
   List<CdeTopicCommentDto> arrayOfTopicComments = new ArrayList<>();

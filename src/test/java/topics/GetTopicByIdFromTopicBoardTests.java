@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 @Epic("Api interface CDE")
 @Feature("Раздел Topics(Задачи)")
 @Story("Получение задач по id из доски задач")
-public class GetTopicByIdFromTopicBoardTests extends CdeCreateTopicDtoBaseTests {
+public class GetTopicByIdFromTopicBoardTests extends TopicBaseTests {
 
   private ValidatableResponse getTopicByIdResponse;
 
