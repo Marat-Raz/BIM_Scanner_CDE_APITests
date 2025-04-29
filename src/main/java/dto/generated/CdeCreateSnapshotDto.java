@@ -1,14 +1,17 @@
 package dto.generated;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import dto.generated.CdeSnapshotType;
 
 @AllArgsConstructor
 @Getter
 @Setter
+@EqualsAndHashCode
 public class CdeCreateSnapshotDto {
 
-    private CdeSnapshotType snapshotType;
-    private String snapshotData;
+    public CdeSnapshotType snapshotType;
+    public String snapshotData;
 }

@@ -1,16 +1,18 @@
 package dto.generated;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 @AllArgsConstructor
 @Getter
 @Setter
+@EqualsAndHashCode
 public class AbpSendTestEmailInput {
 
-    private String senderEmailAddress;
-    private String targetEmailAddress;
-    private String subject;
-    private String body;
+    public String senderEmailAddress;
+    public String targetEmailAddress;
+    public String subject;
+    public String body;
 }

@@ -87,6 +87,12 @@ public class RandomWord {
       password.append(c);
     }
 
+    if (!containsDigit(password.toString())) {
+      // Заменяем один случайный символ на цифру
+      int replaceIndex = random.nextInt(password.length());
+      password.setCharAt(replaceIndex, getRandomChar(DIGITS));
+    }
+
     return password.toString();
   }
 
@@ -95,4 +101,12 @@ public class RandomWord {
     return charSet.charAt(randomIndex);
   }
 
+  private static boolean containsDigit(String password) {
+    for (char c : password.toCharArray()) {
+      if (Character.isDigit(c)) {
+        return true;
+      }
+    }
+    return false;
+  }
 }

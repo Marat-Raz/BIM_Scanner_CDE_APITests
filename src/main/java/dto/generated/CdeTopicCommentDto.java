@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import dto.generated.CdeUserDto;
 
 @AllArgsConstructor
 @Getter
@@ -11,12 +12,11 @@ import lombok.Setter;
 @EqualsAndHashCode
 public class CdeTopicCommentDto {
 
-  private String id;
-  private String topicId;
-  private String creationTime;
-  private CdeUserDto creator;
-  private String lastModificationTime;
-  private CdeUserDto lastModifier;
-  private String comment;
-
+    public String id;
+    public String topicId;
+    public String creationTime;
+    public CdeUserDto creator;
+    public String lastModificationTime;
+    public CdeUserDto lastModifier;
+    public String comment;
 }

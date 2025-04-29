@@ -1,17 +1,24 @@
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Iterator;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Map.Entry;
-
+import java.util.Set;
 
 public class DtoGenerator {
+
+  private static final Set<String> imports = new HashSet<>();
+  private static final Set<String> customTypes = new HashSet<>();
+  private static JsonObject rootSchemas;
 
   public static void main(String[] args) {
     String inputJson = "src/main/resources/swagger.json";
@@ -32,132 +39,168 @@ public class DtoGenerator {
   }
 
   public static void generateDtoClasses(String inputJson, String outputDir) throws IOException {
-    ObjectMapper mapper = new ObjectMapper();
-    JsonNode rootNode = mapper.readTree(new File(inputJson));
+    JsonElement rootElement = JsonParser.parseReader(new FileReader(inputJson));
+    JsonObject rootObject = rootElement.getAsJsonObject();
 
-    if (rootNode.has("components") && rootNode.get("components").has("schemas")) {
-      JsonNode schemas = rootNode.get("components").get("schemas");
+    if (rootObject.has("components") && rootObject.get("components").getAsJsonObject()
+        .has("schemas")) {
+      rootSchemas = rootObject.get("components").getAsJsonObject().get("schemas").getAsJsonObject();
 
-      Iterator<Entry<String, JsonNode>> fields = schemas.fields();
-      while (fields.hasNext()) {
-        Map.Entry<String, JsonNode> entry = fields.next();
-        String originalDtoName = entry.getKey();
-        String normalizedDtoName = normalizeClassName(originalDtoName);
-
-        generateJavaClass(normalizedDtoName, entry.getValue(), outputDir);
+      for (Map.Entry<String, JsonElement> entry : rootSchemas.entrySet()) {
+        String dtoName = entry.getKey();
+        String normalizedDtoName = normalizeClassName(dtoName);
+        generateJavaClass(normalizedDtoName, entry.getValue().getAsJsonObject(), outputDir);
       }
     }
   }
 
-  private static void generateJavaClass(String dtoName, JsonNode dtoNode, String outputDir)
+  private static void generateJavaClass(String dtoName, JsonObject dtoNode, String outputDir)
       throws IOException {
-    File javaFile = new File(outputDir + File.separator + dtoName + ".java");
-    try (FileWriter writer = new FileWriter(javaFile)) {
+    imports.clear();
+    customTypes.clear();
 
-      writer.write("package dto.generated;\n\n");
+    File javaFile = new File(outputDir + File.separator + dtoName + ".java");
+
+    createNewClass(javaFile, dtoName, dtoNode);
+  }
+
+  private static void createNewClass(File javaFile, String dtoName, JsonObject dtoNode)
+      throws IOException {
+    try (PrintWriter writer = new PrintWriter(javaFile)) {
+      Map<String, String> allFields = collectAllFields(dtoNode);
+
+      writer.println("package dto.generated;\n");
 
       if (dtoNode.has("enum")) {
         generateEnumClass(writer, dtoName, dtoNode);
         return;
       }
 
-      writer.write("import lombok.AllArgsConstructor;\n");
-      writer.write("import lombok.Getter;\n");
-      writer.write("import lombok.Setter;\n");
+      writer.println("import lombok.AllArgsConstructor;");
+      writer.println("import lombok.EqualsAndHashCode;");
+      writer.println("import lombok.Getter;");
+      writer.println("import lombok.Setter;");
 
-      if (checkIfNeedsArrayListImport(dtoNode)) {
-        writer.write("import java.util.ArrayList;\n");
+      if (allFields.values().stream().anyMatch(t -> t.contains("List"))) {
+        writer.println("import java.util.ArrayList;");
       }
-      writer.write("\n");
+      if (allFields.values().stream().anyMatch(t -> t.contains("Map"))) {
+        writer.println("import java.util.Map;");
+      }
 
-      writer.write("@AllArgsConstructor\n");
-      writer.write("@Getter\n");
-      writer.write("@Setter\n");
-      writer.write("public class " + dtoName + " {\n\n");
-
-      if (dtoNode.has("properties")) {
-        JsonNode properties = dtoNode.get("properties");
-        Iterator<Map.Entry<String, JsonNode>> props = properties.fields();
-
-        while (props.hasNext()) {
-          Map.Entry<String, JsonNode> prop = props.next();
-          String propName = prop.getKey();
-          String propType = getJavaType(prop.getValue());
-
-          writer.write("    private " + propType + " " + propName + ";\n");
+      for (String type : customTypes) {
+        if (!type.equals(dtoName)) {
+          writer.println("import dto.generated." + type + ";");
         }
       }
-      writer.write("}\n");
+
+      writer.println();
+      writer.println("@AllArgsConstructor");
+      writer.println("@Getter");
+      writer.println("@Setter");
+      writer.println("@EqualsAndHashCode");
+      writer.println("public class " + dtoName + " {");
+      writer.println();
+
+      for (Map.Entry<String, String> entry : allFields.entrySet()) {
+        writer.println("    public " + entry.getValue() + " " + entry.getKey() + ";");
+      }
+
+      writer.println("}");
     }
   }
 
-  private static void generateEnumClass(FileWriter writer, String enumName, JsonNode dtoNode)
-      throws IOException {
-    writer.write("public enum " + enumName + " {\n");
+  private static Map<String, String> collectAllFields(JsonObject dtoNode) {
+    Map<String, String> allFields = new LinkedHashMap<>();
 
-    JsonNode enumValues = dtoNode.get("enum");
-    if (enumValues.isArray()) {
-      for (int i = 0; i < enumValues.size(); i++) {
-        String value = enumValues.get(i).asText();
-        // Сохраняем оригинальное название значения enum
-        writer.write("    " + value.toUpperCase().replaceAll("-", "_"));
-        if (i < enumValues.size() - 1) {
-          writer.write(",");
+    if (dtoNode.has("allOf")) {
+      for (JsonElement parent : dtoNode.get("allOf").getAsJsonArray()) {
+        if (parent.isJsonObject() && parent.getAsJsonObject().has("$ref")) {
+          String ref = parent.getAsJsonObject().get("$ref").getAsString();
+          String parentName = extractClassName(ref);
+          JsonElement parentSchema = rootSchemas.get(parentName);
+          if (parentSchema != null) {
+            allFields.putAll(collectAllFields(parentSchema.getAsJsonObject()));
+          }
+        } else if (parent.isJsonObject() && parent.getAsJsonObject().has("properties")) {
+          collectFields(parent.getAsJsonObject(), allFields);
         }
-        writer.write("\n");
       }
     }
-    writer.write("}\n");
-  }
 
-  private static boolean checkIfNeedsArrayListImport(JsonNode dtoNode) {
     if (dtoNode.has("properties")) {
-      JsonNode properties = dtoNode.get("properties");
-      Iterator<Map.Entry<String, JsonNode>> props = properties.fields();
-      while (props.hasNext()) {
-        Map.Entry<String, JsonNode> prop = props.next();
-        JsonNode propValue = prop.getValue();
-        if (propValue.has("type") && "array".equals(propValue.get("type").asText())) {
-          return true;
-        }
-      }
+      collectFields(dtoNode, allFields);
     }
-    return false;
+
+    // Исключаем поле extraProperties
+    allFields.remove("extraProperties");
+
+    return allFields;
   }
 
-  private static String getJavaType(JsonNode propertyNode) {
+  private static void collectFields(JsonObject node, Map<String, String> fields) {
+    JsonObject properties = node.get("properties").getAsJsonObject();
+    for (Map.Entry<String, JsonElement> prop : properties.entrySet()) {
+      String fieldName = prop.getKey();
+      // Пропускаем extraProperties
+      if (!"extraProperties".equals(fieldName)) {
+        fields.put(fieldName, getJavaType(prop.getValue().getAsJsonObject()));
+      }
+    }
+  }
+
+  private static void generateEnumClass(PrintWriter writer, String enumName, JsonObject dtoNode) {
+    writer.println("public enum " + enumName + " {");
+    writer.println();
+
+    if (dtoNode.has("enum")) {
+      JsonArray enumValues = dtoNode.get("enum").getAsJsonArray();
+      for (int i = 0; i < enumValues.size(); i++) {
+        String value = enumValues.get(i).getAsString();
+        writer.print("    " + value.toUpperCase().replaceAll("-", "_"));
+        if (i < enumValues.size() - 1) {
+          writer.print(",");
+        }
+        writer.println();
+      }
+    }
+    writer.println("}");
+  }
+
+  private static String getJavaType(JsonObject propertyNode) {
     if (propertyNode.has("$ref")) {
-      String ref = propertyNode.get("$ref").asText();
-      return normalizeClassName(extractClassName(ref));
+      String ref = propertyNode.get("$ref").getAsString();
+      String className = normalizeClassName(extractClassName(ref));
+      customTypes.add(className);
+      return className;
     }
 
     if (propertyNode.has("type")) {
-      String type = propertyNode.get("type").asText();
+      String type = propertyNode.get("type").getAsString();
       switch (type) {
         case "string":
-          if (propertyNode.has("format")) {
-            String format = propertyNode.get("format").asText();
-            if ("date-time".equals(format)) {
-              return "String";
-            } else if ("date".equals(format)) {
-              return "String";
-            }
-          }
-          if (propertyNode.has("enum")) {
-            return "String"; // Для строковых enum
-          }
           return "String";
         case "integer":
-          return propertyNode.has("format") && propertyNode.get("format").asText().equals("int64")
-              ? "Long" : "Integer";
+          return
+              propertyNode.has("format") && "int64".equals(propertyNode.get("format").getAsString())
+                  ? "Long" : "Integer";
         case "number":
           return "Double";
         case "boolean":
           return "Boolean";
         case "array":
-          JsonNode items = propertyNode.get("items");
+          JsonObject items = propertyNode.get("items").getAsJsonObject();
           String itemType = getJavaType(items);
+          imports.add("java.util.ArrayList");
           return "ArrayList<" + itemType + ">";
+        case "object":
+          if (propertyNode.has("additionalProperties")) {
+            imports.add("java.util.Map");
+            JsonElement additionalProps = propertyNode.get("additionalProperties");
+            String valueType = getJavaType(additionalProps.getAsJsonObject());
+            return "Map<String, " + valueType + ">";
+          }
+          return "Object";
       }
     }
     return "Object";
@@ -173,7 +216,7 @@ public class DtoGenerator {
       return "UnknownType";
     }
 
-    String normalized = originalName.replaceAll("[^a-zA-Z0-9_$]", "");
+    String normalized = originalName.replaceAll("[^a-zA-Z0-9]", "_");
     normalized = normalized.replaceAll("_+", "_");
     normalized = normalized.replaceAll("^_|_$", "");
 
@@ -181,10 +224,6 @@ public class DtoGenerator {
       normalized = "C" + normalized;
     }
 
-    if (normalized.isEmpty()) {
-      return "UnknownType";
-    }
-
-    return normalized.substring(0, 1).toUpperCase() + normalized.substring(1);
+    return normalized.isEmpty() ? "UnknownType" : normalized;
   }
 }

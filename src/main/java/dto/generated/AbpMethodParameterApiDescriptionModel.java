@@ -1,18 +1,20 @@
 package dto.generated;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 @AllArgsConstructor
 @Getter
 @Setter
+@EqualsAndHashCode
 public class AbpMethodParameterApiDescriptionModel {
 
-    private String name;
-    private String typeAsString;
-    private String type;
-    private String typeSimple;
-    private Boolean isOptional;
-    private Object defaultValue;
+    public String name;
+    public String typeAsString;
+    public String type;
+    public String typeSimple;
+    public Boolean isOptional;
+    public Object defaultValue;
 }

@@ -1,19 +1,20 @@
 package dto.generated;
 
-import java.util.List;
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import java.util.ArrayList;
 
 @AllArgsConstructor
 @Getter
 @Setter
+@EqualsAndHashCode
 public class CdeProjectRoleDto {
 
-  private String id;
-  private String name;
-  private Boolean isDefault;
-  private String concurrencyStamp;
-  private List<String> permissions;
-
+    public String id;
+    public String name;
+    public Boolean isDefault;
+    public String concurrencyStamp;
+    public ArrayList<String> permissions;
 }

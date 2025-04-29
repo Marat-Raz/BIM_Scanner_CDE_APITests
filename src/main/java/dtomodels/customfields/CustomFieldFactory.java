@@ -9,17 +9,19 @@ import dto.generated.CdeCustomFieldType;
 import dtomodels.RandomWord;
 import dtomodels.customfields.enumerationitem.EnumerationItemFactory;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
 public class CustomFieldFactory {
 
   private String name = RandomWord.randomAllCharacters(1, 256);
   private String description = RandomWord.randomAllCharacters(1, 100); // Can up to 10000 characters
   public CdeCustomFieldType type;
-  public List<CdeAddEnumerationCustomFieldItemDto> cdeAddEnumerationCustomFieldItemDto =
-      List.of(new EnumerationItemFactory().createNameForEnumerationItem(DEFAULT),
+  public ArrayList<CdeAddEnumerationCustomFieldItemDto> enumerationItem =
+      new ArrayList<>(Arrays.asList(
           new EnumerationItemFactory().createNameForEnumerationItem(DEFAULT),
-          new EnumerationItemFactory().createNameForEnumerationItem(DEFAULT));
+          new EnumerationItemFactory().createNameForEnumerationItem(DEFAULT),
+          new EnumerationItemFactory().createNameForEnumerationItem(DEFAULT)
+      ));
 
   public CdeCreateCustomFieldDto createCustomField(CdeCustomFieldType customFieldType) {
     switch (customFieldType) {
@@ -32,8 +34,7 @@ public class CustomFieldFactory {
       case BOOL:
         return new CdeCreateCustomFieldDto(name, description, BOOL, null);
       case ENUMERATION:
-        return new CdeCreateCustomFieldDto(name, description, ENUMERATION,
-            (ArrayList<CdeAddEnumerationCustomFieldItemDto>) cdeAddEnumerationCustomFieldItemDto);
+        return new CdeCreateCustomFieldDto(name, description, ENUMERATION, enumerationItem);
       case TEXT:
       default:
         return new CdeCreateCustomFieldDto(name, description, TEXT, null);

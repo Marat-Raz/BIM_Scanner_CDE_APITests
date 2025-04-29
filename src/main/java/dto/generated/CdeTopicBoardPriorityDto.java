@@ -1,15 +1,17 @@
 package dto.generated;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 @AllArgsConstructor
 @Getter
 @Setter
+@EqualsAndHashCode
 public class CdeTopicBoardPriorityDto {
 
-    private String id;
-    private String name;
-    private String color;
+    public String id;
+    public String name;
+    public String color;
 }

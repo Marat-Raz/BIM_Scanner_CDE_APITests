@@ -1,14 +1,17 @@
 package dto.generated;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import java.util.ArrayList;
+import dto.generated.CdeModifyTopicBoardCustomFieldDto;
 
 @AllArgsConstructor
 @Getter
 @Setter
+@EqualsAndHashCode
 public class CdeUpdateTopicBoardCustomFieldsDto {
 
-    private ArrayList<CdeModifyTopicBoardCustomFieldDto> customFields;
+    public ArrayList<CdeModifyTopicBoardCustomFieldDto> customFields;
 }

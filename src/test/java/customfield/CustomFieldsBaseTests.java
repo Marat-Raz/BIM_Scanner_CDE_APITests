@@ -29,7 +29,12 @@ public class CustomFieldsBaseTests extends StartTests {
       CdeCustomFieldDto cdeCustomFieldDto = addResponse.extract().as(CdeCustomFieldDto.class);
       customFieldArrayList.add(cdeCustomFieldDto);
     }
-    customFieldId = customFieldArrayList.get(0).getId();
+    //customFieldId = customFieldArrayList.get(0).getId();
+    if (!customFieldArrayList.isEmpty()) {
+      customFieldId = customFieldArrayList.get(0).getId();
+    } else {
+      throw new IllegalStateException("Не удалось создать ни одного кастомного поля");
+    }
   }
 
 }

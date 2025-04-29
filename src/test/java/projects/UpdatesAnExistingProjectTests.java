@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import basetests.StartTests;
 import dto.generated.CdeCreateProjectDto;
+import dto.helpers.DtoConverter;
 import dtomodels.project.ProjectFactory;
 import dto.generated.CdeUpdateProjectDto;
 import dto.generated.CdeProjectDto;
@@ -30,6 +31,7 @@ public class UpdatesAnExistingProjectTests extends StartTests {
   private ValidatableResponse putProjectResponse;
   private CdeUpdateProjectDto updateProject;
   private CdeCreateProjectDto testCreateProject;
+  CdeProjectDto cdeProjectDto;
   private String responsibleId;
   private String testProjectId;
 
@@ -38,7 +40,7 @@ public class UpdatesAnExistingProjectTests extends StartTests {
   public void getConcurrencyStamp() {
     testCreateProject = new ProjectFactory().createProject(RANDOM_PROJECT);
     createProjectResponse = projectsClient.createProject(testCreateProject);
-    CdeProjectDto cdeProjectDto = createProjectResponse.extract().as(CdeProjectDto.class);
+    cdeProjectDto = createProjectResponse.extract().as(CdeProjectDto.class);
     concurrencyStamp = cdeProjectDto.getConcurrencyStamp();
     testProjectId = cdeProjectDto.getId();
     responsibleId = cdeProjectDto.getResponsible().getId();
@@ -48,9 +50,9 @@ public class UpdatesAnExistingProjectTests extends StartTests {
   @Tag(value = "smoke")
   @DisplayName("Изменить проект пользователя ADMIN")
   public void updatesAnExistingProjectTest() {
-    CdeCreateProjectDto newCdeCreateProjectDto = projectFactory.createProject(RANDOM_PROJECT);
-    updateProject =
-        new CdeUpdateProjectDto(newCdeCreateProjectDto, responsibleId, concurrencyStamp);
+    cdeProjectDto.setName("new Name");
+    updateProject = DtoConverter.convertDto(cdeProjectDto);
+
     putProjectResponse = projectsClient.putProjectByItsId(ADMIN_ACCESS_TOKEN, testProjectId,
         updateProject);
     statusCode = extractStatusCode(putProjectResponse);

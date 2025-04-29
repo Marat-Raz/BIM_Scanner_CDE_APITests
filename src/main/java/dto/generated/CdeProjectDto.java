@@ -1,25 +1,26 @@
 package dto.generated;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import dto.generated.CdeUserDto;
 
 @AllArgsConstructor
 @Getter
 @Setter
+@EqualsAndHashCode
 public class CdeProjectDto {
 
-  private String id;
-  private String creationTime;
-  private String creatorId;
-  private String lastModificationTime;
-  private String lastModifierId;
-  private String name;
-  private String description;
-  private String completionTime;
-  private String concurrencyStamp;
-  private CdeUserDto owner;
-  private CdeUserDto responsible;
-
+    public String id;
+    public String creationTime;
+    public String creatorId;
+    public String lastModificationTime;
+    public String lastModifierId;
+    public String name;
+    public String description;
+    public String completionTime;
+    public String concurrencyStamp;
+    public CdeUserDto owner;
+    public CdeUserDto responsible;
 }
-

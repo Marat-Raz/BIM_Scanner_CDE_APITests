@@ -1,21 +1,24 @@
 package dto.generated;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import dto.generated.AbpDateTimeFormatDto;
 
 @AllArgsConstructor
 @Getter
 @Setter
+@EqualsAndHashCode
 public class AbpCurrentCultureDto {
 
-    private String displayName;
-    private String englishName;
-    private String threeLetterIsoLanguageName;
-    private String twoLetterIsoLanguageName;
-    private Boolean isRightToLeft;
-    private String cultureName;
-    private String name;
-    private String nativeName;
-    private AbpDateTimeFormatDto dateTimeFormat;
+    public String displayName;
+    public String englishName;
+    public String threeLetterIsoLanguageName;
+    public String twoLetterIsoLanguageName;
+    public Boolean isRightToLeft;
+    public String cultureName;
+    public String name;
+    public String nativeName;
+    public AbpDateTimeFormatDto dateTimeFormat;
 }

@@ -1,14 +1,17 @@
 package dto.generated;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import java.util.Map;
 
 @AllArgsConstructor
 @Getter
 @Setter
+@EqualsAndHashCode
 public class AbpExtensionPropertyAttributeDto {
 
-    private String typeSimple;
-    private Object config;
+    public String typeSimple;
+    public Map<String, Object> config;
 }

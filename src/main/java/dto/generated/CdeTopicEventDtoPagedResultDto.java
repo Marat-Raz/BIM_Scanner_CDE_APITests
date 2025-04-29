@@ -1,15 +1,18 @@
 package dto.generated;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import java.util.ArrayList;
+import dto.generated.CdeTopicEventDto;
 
 @AllArgsConstructor
 @Getter
 @Setter
-public class CdeTopicEventDtoPagedResultDto { // todo заменить на PaginatedResponse
+@EqualsAndHashCode
+public class CdeTopicEventDtoPagedResultDto {
 
-    private ArrayList<CdeTopicEventDto> items;
-    private Long totalCount;
+    public ArrayList<CdeTopicEventDto> items;
+    public Long totalCount;
 }

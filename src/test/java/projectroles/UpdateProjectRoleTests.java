@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import dto.generated.CdeProjectRoleDto;
 import dto.generated.CdeUpdateProjectRoleDto;
+import dto.helpers.DtoConverter;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
@@ -25,7 +26,7 @@ public class UpdateProjectRoleTests extends ProjectRolesBaseTests {
   @Tag(value = "positive")
   @DisplayName("Запрос на обновление роли в проекте дает ответ 200")
   public void updateProjectRoleTest() {
-    CdeUpdateProjectRoleDto editedRole = CdeUpdateProjectRoleDto.from(defaultProjectRole);
+    CdeUpdateProjectRoleDto editedRole = DtoConverter.convertDto(defaultProjectRole);
     editedRole.setName("new name");
     updateProjectRoleResponse = projectRolesClient
         .updateProjectRole(projectId, defaultProjectRoleId, editedRole);

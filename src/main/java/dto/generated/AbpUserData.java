@@ -1,23 +1,24 @@
 package dto.generated;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 @AllArgsConstructor
 @Getter
 @Setter
+@EqualsAndHashCode
 public class AbpUserData {
 
-    private String id;
-    private String tenantId;
-    private String userName;
-    private String name;
-    private String surname;
-    private Boolean isActive;
-    private String email;
-    private Boolean emailConfirmed;
-    private String phoneNumber;
-    private Boolean phoneNumberConfirmed;
-    private Object extraProperties;
+    public String id;
+    public String tenantId;
+    public String userName;
+    public String name;
+    public String surname;
+    public Boolean isActive;
+    public String email;
+    public Boolean emailConfirmed;
+    public String phoneNumber;
+    public Boolean phoneNumberConfirmed;
 }

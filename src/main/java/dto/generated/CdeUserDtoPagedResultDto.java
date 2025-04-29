@@ -1,15 +1,18 @@
 package dto.generated;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import java.util.ArrayList;
+import dto.generated.CdeUserDto;
 
 @AllArgsConstructor
 @Getter
 @Setter
+@EqualsAndHashCode
 public class CdeUserDtoPagedResultDto {
 
-    private ArrayList<CdeUserDto> items;
-    private Long totalCount;
+    public ArrayList<CdeUserDto> items;
+    public Long totalCount;
 }

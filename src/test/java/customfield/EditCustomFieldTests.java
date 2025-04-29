@@ -3,6 +3,7 @@ package customfield;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import dto.helpers.DtoConverter;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
@@ -25,7 +26,7 @@ public class EditCustomFieldTests extends CustomFieldsBaseTests {
   @Tag(value = "smoke")
   @DisplayName("Изменить параметры кастомного поля")
   public void editCustomFieldsTest() {
-    updateCustomField = CdeUpdateCustomFieldDto.from(customFieldArrayList.get(0));
+    updateCustomField = DtoConverter.convertDto(customFieldArrayList.get(0));
     updateCustomField.setName("New name");
     editResponse = customFieldsClient.editCustomField(projectId, customFieldId,
         updateCustomField);

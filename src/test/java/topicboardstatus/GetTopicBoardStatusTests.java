@@ -28,13 +28,13 @@ public class GetTopicBoardStatusTests extends TopicBoardStatusBaseTests {
 
   @BeforeEach
   public void addStatusesToTopicBoard() {
-    expectedStatuses.add(status);
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 3; i++) {
       expectedStatuses.add(new StatusesFactory().createStatuses(DEFAULT));
     }
     for (CdeCreateOrUpdateTopicBoardStatusDto status : expectedStatuses) {
       addStatusResponse = topicBoardStatusClient.addTopicBoardStatuses(topicBoardId, status);
     }
+    expectedStatuses.add(status);
   }
 
   @Test

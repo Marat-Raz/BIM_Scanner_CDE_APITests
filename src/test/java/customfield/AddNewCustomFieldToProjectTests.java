@@ -36,13 +36,13 @@ public class AddNewCustomFieldToProjectTests extends CustomFieldsBaseTests {
     ArrayList<CdeEnumerationCustomFieldItemDto> enumerationItemsArray =
         customField.getEnumerationItems();
 
-    List<CdeAddEnumerationCustomFieldItemDto> enumerationItemsList = createCustomField.getEnumerationItems();
-    List<String> expectedEnumerationItemName = new ArrayList<>();
+    ArrayList<CdeAddEnumerationCustomFieldItemDto> enumerationItemsList = createCustomField.getEnumerationItems();
+    ArrayList<String> expectedEnumerationItemName = new ArrayList<>();
     for (CdeAddEnumerationCustomFieldItemDto cdeAddEnumerationCustomFieldItemDto : enumerationItemsList) {
       expectedEnumerationItemName.add(cdeAddEnumerationCustomFieldItemDto.getName());
     }
 
-    List<String> actualEnumerationItemName = new ArrayList<>();
+    ArrayList<String> actualEnumerationItemName = new ArrayList<>();
     for (CdeEnumerationCustomFieldItemDto enumerationItem : enumerationItemsArray) {
       actualEnumerationItemName.add(enumerationItem.getName());
     }

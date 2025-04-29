@@ -7,19 +7,19 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import basetests.StartTests;
 import client.AccountClient;
+import dto.helpers.DtoConverter;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import io.restassured.response.ValidatableResponse;
 import dto.generated.AbpRemoteServiceErrorResponse;
 import dto.generated.AbpIdentityUserCreateDto;
-import dto.generated.AbpRegisterDto;
 import org.junit.jupiter.api.*;
 
 @Epic("Api interface CDE")
 @Feature("Раздел Account(Аккаунт)")
 @Story("Регистрация пользователя")
-public class RegisterAbpIdentityUserCreateDtoTests extends StartTests {
+public class RegisterUserTests extends StartTests {
 
   private ValidatableResponse registerUserResponse;
   private static AbpIdentityUserCreateDto testUser;
@@ -48,7 +48,7 @@ public class RegisterAbpIdentityUserCreateDtoTests extends StartTests {
   @Tag(value = "smoke")
   @DisplayName("Регистрация нового пользователя")
   public void newUserRegistrationTest() {
-    registerUserResponse = accountClient.registerUser(AbpRegisterDto.from(
+    registerUserResponse = accountClient.registerUser(DtoConverter.convertDto(
         testUser));
     statusCode = extractStatusCode(registerUserResponse);
     String userName = registerUserResponse.extract().path("userName");
@@ -61,8 +61,8 @@ public class RegisterAbpIdentityUserCreateDtoTests extends StartTests {
   @DisplayName("Повторная регистрация пользователя")
   public void registrationOfPreviouslyRegisteredUserTest() {
     AbpIdentityUserCreateDto duplicatedUser = userFactory.createUser(NEW_USER);
-    accountClient.registerUser(AbpRegisterDto.from(duplicatedUser));
-    registerUserResponse = accountClient.registerUser(AbpRegisterDto.from(duplicatedUser));
+    accountClient.registerUser(DtoConverter.convertDto(duplicatedUser));
+    registerUserResponse = accountClient.registerUser(DtoConverter.convertDto(duplicatedUser));
 
     int newStatusCode = extractStatusCode(registerUserResponse);
     errorResponse = registerUserResponse.extract().body().as(

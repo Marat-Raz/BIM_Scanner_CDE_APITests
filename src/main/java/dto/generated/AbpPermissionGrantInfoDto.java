@@ -1,19 +1,22 @@
 package dto.generated;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import java.util.ArrayList;
+import dto.generated.AbpProviderInfoDto;
 
 @AllArgsConstructor
 @Getter
 @Setter
+@EqualsAndHashCode
 public class AbpPermissionGrantInfoDto {
 
-    private String name;
-    private String displayName;
-    private String parentName;
-    private Boolean isGranted;
-    private ArrayList<String> allowedProviders;
-    private ArrayList<AbpProviderInfoDto> grantedProviders;
+    public String name;
+    public String displayName;
+    public String parentName;
+    public Boolean isGranted;
+    public ArrayList<String> allowedProviders;
+    public ArrayList<AbpProviderInfoDto> grantedProviders;
 }

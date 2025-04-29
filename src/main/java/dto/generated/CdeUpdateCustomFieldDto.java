@@ -1,33 +1,20 @@
 package dto.generated;
 
-import java.util.ArrayList;
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import java.util.ArrayList;
+import dto.generated.CdeAddOrUpdateEnumerationCustomFieldItemDto;
 
 @AllArgsConstructor
 @Getter
 @Setter
+@EqualsAndHashCode
 public class CdeUpdateCustomFieldDto {
 
-  private String name;
-  private String description;
-  private Boolean archived;
-  private ArrayList<CdeAddOrUpdateEnumerationCustomFieldItemDto> enumerationItems;
-
-  public static CdeUpdateCustomFieldDto from(CdeCustomFieldDto responseCustomField) {
-    ArrayList<CdeAddOrUpdateEnumerationCustomFieldItemDto> enumerationItemsArray = new ArrayList<>();
-    for (int i = 0; i < responseCustomField.getEnumerationItems().size(); i++) {
-      enumerationItemsArray.add(CdeEnumerationCustomFieldItemDto
-          .convert(responseCustomField.getEnumerationItems().get(i)));
-    }
-
-    return new CdeUpdateCustomFieldDto(
-        responseCustomField.getName(),
-        responseCustomField.getDescription(),
-        responseCustomField.getArchived(),
-        enumerationItemsArray
-        );
-  }
-
+    public String name;
+    public String description;
+    public Boolean archived;
+    public ArrayList<CdeAddOrUpdateEnumerationCustomFieldItemDto> enumerationItems;
 }

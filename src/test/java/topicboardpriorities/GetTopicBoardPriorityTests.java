@@ -21,21 +21,21 @@ import org.junit.jupiter.api.Test;
 @Epic("Api interface CDE")
 @Feature("Раздел TopicBoardPriority(«Приоритеты» в доске задач)")
 @Story("Получение «Приоритетов» с доски задач")
-public class GetTopicBoardTopicBoardPriorityTests extends TopicBoardPriorityBaseTests {
+public class GetTopicBoardPriorityTests extends TopicBoardPriorityBaseTests {
 
   private static List<CdeCreateOrUpdateTopicBoardPriorityDto> expectedPriorities = new ArrayList<>();
   private ValidatableResponse getAllPriorities;
 
   @BeforeEach
   public void addPriorityToTopicBoard() {
-    expectedPriorities.add(priority);
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 3; i++) {
       expectedPriorities.add(new PrioritiesFactory().createPriorities(DEFAULT));
     }
     for (CdeCreateOrUpdateTopicBoardPriorityDto priority : expectedPriorities) {
       addPrioritiesResponse = topicBoardPrioritiesClient.addTopicBoardPriorities(topicBoardId,
           priority);
     }
+    expectedPriorities.add(priority);
   }
 
   @Test

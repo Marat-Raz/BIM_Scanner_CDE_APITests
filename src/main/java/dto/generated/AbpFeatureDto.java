@@ -1,20 +1,24 @@
 package dto.generated;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import dto.generated.AbpFeatureProviderDto;
+import dto.generated.AbpIStringValueType;
 
 @AllArgsConstructor
 @Getter
 @Setter
+@EqualsAndHashCode
 public class AbpFeatureDto {
 
-    private String name;
-    private String displayName;
-    private String value;
-    private AbpFeatureProviderDto provider;
-    private String description;
-    private AbpIStringValueType valueType;
-    private Integer depth;
-    private String parentName;
+    public String name;
+    public String displayName;
+    public String value;
+    public AbpFeatureProviderDto provider;
+    public String description;
+    public AbpIStringValueType valueType;
+    public Integer depth;
+    public String parentName;
 }

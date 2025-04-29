@@ -1,16 +1,17 @@
 package dto.generated;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 @AllArgsConstructor
 @Getter
 @Setter
+@EqualsAndHashCode
 public class CdeCreateProjectDto {
 
-  private String name;
-  private String description;
-  private String completionTime;
-
+    public String name;
+    public String description;
+    public String completionTime;
 }

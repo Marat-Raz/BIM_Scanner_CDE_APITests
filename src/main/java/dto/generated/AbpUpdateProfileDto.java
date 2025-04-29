@@ -1,19 +1,20 @@
 package dto.generated;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 @AllArgsConstructor
 @Getter
 @Setter
+@EqualsAndHashCode
 public class AbpUpdateProfileDto {
 
-    private Object extraProperties;
-    private String userName;
-    private String email;
-    private String name;
-    private String surname;
-    private String phoneNumber;
-    private String concurrencyStamp;
+    public String userName;
+    public String email;
+    public String name;
+    public String surname;
+    public String phoneNumber;
+    public String concurrencyStamp;
 }

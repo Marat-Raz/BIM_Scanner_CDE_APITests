@@ -1,17 +1,19 @@
 package dto.generated;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 @AllArgsConstructor
 @Getter
 @Setter
+@EqualsAndHashCode
 public class ProblemDetails {
 
-    private String type;
-    private String title;
-    private Integer status;
-    private String detail;
-    private String instance;
+    public String type;
+    public String title;
+    public Integer status;
+    public String detail;
+    public String instance;
 }

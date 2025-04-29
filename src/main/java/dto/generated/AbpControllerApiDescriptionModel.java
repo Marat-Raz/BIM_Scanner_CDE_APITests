@@ -1,21 +1,26 @@
 package dto.generated;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import java.util.ArrayList;
+import java.util.Map;
+import dto.generated.AbpControllerInterfaceApiDescriptionModel;
+import dto.generated.AbpActionApiDescriptionModel;
 
 @AllArgsConstructor
 @Getter
 @Setter
+@EqualsAndHashCode
 public class AbpControllerApiDescriptionModel {
 
-    private String controllerName;
-    private String controllerGroupName;
-    private Boolean isRemoteService;
-    private Boolean isIntegrationService;
-    private String apiVersion;
-    private String type;
-    private ArrayList<AbpControllerInterfaceApiDescriptionModel> interfaces;
-    private Object actions;
+    public String controllerName;
+    public String controllerGroupName;
+    public Boolean isRemoteService;
+    public Boolean isIntegrationService;
+    public String apiVersion;
+    public String type;
+    public ArrayList<AbpControllerInterfaceApiDescriptionModel> interfaces;
+    public Map<String, AbpActionApiDescriptionModel> actions;
 }

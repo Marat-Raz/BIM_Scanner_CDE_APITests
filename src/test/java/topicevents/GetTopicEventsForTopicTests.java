@@ -4,7 +4,7 @@ import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import dtomodels.topicevents.ResponseTopicEventList;
+import dtomodels.PaginatedResponse;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
@@ -26,11 +26,11 @@ public class GetTopicEventsForTopicTests extends TopicEventsBaseTests {
   public void getTopicEventsInTopicBoardTest() {
     getTopicEventsResponse = topicEventsClient
         .getTopicEventsForSpecificTopicWithoutQueryParams(topicBoardId, defaultTopicId);
-    ResponseTopicEventList responseTopicEventList = getTopicEventsResponse.extract()
-        .as(ResponseTopicEventList.class);
+    PaginatedResponse topicEventList = getTopicEventsResponse.extract()
+        .as(PaginatedResponse.class);
     statusCode = extractStatusCode(getTopicEventsResponse);
 
     assertEquals(SC_OK, statusCode);
-    assertNotNull(responseTopicEventList.getItems());
+    assertNotNull(topicEventList.getItems());
   }
 }

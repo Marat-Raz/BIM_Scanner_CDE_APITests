@@ -31,13 +31,13 @@ public class GetTopicBoardTypeTests extends TopicBoardTypeBaseTests {
 
   @BeforeEach
   public void addTypesToTopicBoards() {
-    expectedTypes.add(type);
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 3; i++) {
       expectedTypes.add(new TypesFactory().createTypes(DEFAULT));
     }
     for (CdeCreateOrUpdateTopicBoardTypeDto type : expectedTypes) {
       addTypesResponse = topicBoardTypesClient.addTopicBoardTypes(topicBoardId, type);
     }
+    expectedTypes.add(type);
   }
 
   @Test

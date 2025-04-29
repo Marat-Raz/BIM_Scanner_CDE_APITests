@@ -1,19 +1,21 @@
 package dto.generated;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 @AllArgsConstructor
 @Getter
 @Setter
+@EqualsAndHashCode
 public class CdeAddOrUpdateExternalLoginProviderSettingsDto {
 
-    private String name;
-    private Boolean isEnabled;
-    private Boolean shouldLogoutFromProvider;
-    private String displayName;
-    private String authority;
-    private String clientId;
-    private String clientSecret;
+    public String name;
+    public Boolean isEnabled;
+    public Boolean shouldLogoutFromProvider;
+    public String displayName;
+    public String authority;
+    public String clientId;
+    public String clientSecret;
 }

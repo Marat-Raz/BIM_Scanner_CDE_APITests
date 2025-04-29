@@ -1,19 +1,21 @@
 package dto.generated;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 @AllArgsConstructor
 @Getter
 @Setter
+@EqualsAndHashCode
 public class AbpDateTimeFormatDto {
 
-    private String calendarAlgorithmType;
-    private String dateTimeFormatLong;
-    private String shortDatePattern;
-    private String fullDateTimePattern;
-    private String dateSeparator;
-    private String shortTimePattern;
-    private String longTimePattern;
+    public String calendarAlgorithmType;
+    public String dateTimeFormatLong;
+    public String shortDatePattern;
+    public String fullDateTimePattern;
+    public String dateSeparator;
+    public String shortTimePattern;
+    public String longTimePattern;
 }

@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import dto.generated.*;
+import dto.helpers.DtoConverter;
 import dtomodels.customfields.updatetopicboardcustomfields.CustomFieldOnTopicBoardsFactory;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
@@ -56,7 +57,7 @@ public class EditCustomFieldsOfTopicBoardTests extends CreateTopicBoardBaseTests
     existsCustomFields.set(0, editableCustomField);
 
     ArrayList<CdeModifyTopicBoardCustomFieldDto> editableCustomFieldArray = new ArrayList<>();
-    editableCustomFieldArray.add(CdeTopicBoardCustomFieldDto.convert(editableCustomField));
+    editableCustomFieldArray.add(DtoConverter.convertDto(editableCustomField));
 
     CdeUpdateTopicBoardCustomFieldsDto cdeUpdateTopicBoardCustomFieldsDto = new CdeUpdateTopicBoardCustomFieldsDto(
         editableCustomFieldArray);

@@ -1,21 +1,24 @@
 package dto.generated;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import java.util.ArrayList;
+import dto.generated.CdeEnumerationCustomFieldItemDto;
 
 @AllArgsConstructor
 @Getter
 @Setter
+@EqualsAndHashCode
 public class CdeTopicBoardCustomFieldDetailsDto {
 
-    private String id;
-    private Boolean isEnabled;
-    private Boolean isRequired;
-    private String defaultValue;
-    private String type;
-    private String name;
-    private String description;
-    private ArrayList<CdeEnumerationCustomFieldItemDto> enumerationItems;
+    public String id;
+    public Boolean isEnabled;
+    public Boolean isRequired;
+    public String defaultValue;
+    public String type;
+    public String name;
+    public String description;
+    public ArrayList<CdeEnumerationCustomFieldItemDto> enumerationItems;
 }

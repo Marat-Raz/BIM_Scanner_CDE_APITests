@@ -1,20 +1,23 @@
 package dto.generated;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import java.util.ArrayList;
+import dto.generated.CdeTopicBoardCustomFieldDto;
 
 @AllArgsConstructor
 @Getter
 @Setter
+@EqualsAndHashCode
 public class CdeTopicBoardDto {
 
-    private String id;
-    private String projectId;
-    private String parentGroupId;
-    private String name;
-    private String description;
-    private ArrayList<CdeTopicBoardCustomFieldDto> customFields;
-    private String type;
+    public String type;
+    public String id;
+    public String projectId;
+    public String parentGroupId;
+    public String name;
+    public String description;
+    public ArrayList<CdeTopicBoardCustomFieldDto> customFields;
 }

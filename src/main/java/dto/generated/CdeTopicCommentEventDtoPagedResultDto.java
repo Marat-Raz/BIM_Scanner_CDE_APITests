@@ -1,15 +1,18 @@
 package dto.generated;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import java.util.ArrayList;
+import dto.generated.CdeTopicCommentEventDto;
 
 @AllArgsConstructor
 @Getter
 @Setter
+@EqualsAndHashCode
 public class CdeTopicCommentEventDtoPagedResultDto {
 
-    private ArrayList<CdeTopicCommentEventDto> items;
-    private Long totalCount;
+    public ArrayList<CdeTopicCommentEventDto> items;
+    public Long totalCount;
 }

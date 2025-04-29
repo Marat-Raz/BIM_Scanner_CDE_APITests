@@ -1,20 +1,20 @@
 package dto.generated;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 @AllArgsConstructor
 @Getter
 @Setter
+@EqualsAndHashCode
 public class AbpIdentityRoleDto {
 
-  private Object extraProperties;
-  private String id;
-  private String name;
-  private Boolean isDefault;
-  private Boolean isStatic;
-  private Boolean isPublic;
-  private String concurrencyStamp;
-
+    public String id;
+    public String name;
+    public Boolean isDefault;
+    public Boolean isStatic;
+    public Boolean isPublic;
+    public String concurrencyStamp;
 }

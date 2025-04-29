@@ -1,15 +1,18 @@
 package dto.generated;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import java.util.ArrayList;
+import dto.generated.AbpTenantDto;
 
 @AllArgsConstructor
 @Getter
 @Setter
+@EqualsAndHashCode
 public class AbpTenantDtoPagedResultDto {
 
-    private ArrayList<AbpTenantDto> items;
-    private Long totalCount;
+    public ArrayList<AbpTenantDto> items;
+    public Long totalCount;
 }

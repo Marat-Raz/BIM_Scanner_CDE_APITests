@@ -1,19 +1,23 @@
 package dto.generated;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import dto.generated.CdeJobStatus;
+import dto.generated.CdeUserDto;
 
 @AllArgsConstructor
 @Getter
 @Setter
+@EqualsAndHashCode
 public class CdeModelRevisionDto {
 
-    private String modelId;
-    private Integer version;
-    private String modelName;
-    private String comment;
-    private String creationTime;
-    private CdeUserDto createdBy;
-    private CdeJobStatus status;
+    public String modelId;
+    public Integer version;
+    public String modelName;
+    public String comment;
+    public String creationTime;
+    public CdeUserDto createdBy;
+    public CdeJobStatus status;
 }

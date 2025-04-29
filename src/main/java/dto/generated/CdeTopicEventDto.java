@@ -1,17 +1,21 @@
 package dto.generated;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import java.util.ArrayList;
+import dto.generated.CdeTopicEventItemDto;
+import dto.generated.CdeUserDto;
 
 @AllArgsConstructor
 @Getter
 @Setter
+@EqualsAndHashCode
 public class CdeTopicEventDto {
 
-    private String topicId;
-    private String creationTime;
-    private CdeUserDto author;
-    private ArrayList<CdeTopicEventItemDto> events;
+    public String topicId;
+    public String creationTime;
+    public CdeUserDto author;
+    public ArrayList<CdeTopicEventItemDto> events;
 }
