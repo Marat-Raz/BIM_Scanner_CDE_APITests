@@ -7,7 +7,7 @@ import static org.apache.http.HttpStatus.SC_NO_CONTENT;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import basetests.StartTests;
-import dtomodels.user.User;
+import dtomodels.user.AbpIdentityUserCreateDto;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Step;
@@ -16,43 +16,43 @@ import io.restassured.response.ValidatableResponse;
 import org.junit.jupiter.api.*;
 
 @Epic("Api interface CDE")
-@Feature("Раздел User")
+@Feature("Раздел AbpIdentityUserCreateDto")
 @Story("Удаление пользователя")
-public class DeleteUserTests extends StartTests {
+public class DeleteAbpIdentityUserCreateDtoTests extends StartTests {
 
   private String testUserId;
   private ValidatableResponse deleteResponse;
-  private User testUser;
+  private AbpIdentityUserCreateDto testAbpIdentityUserCreateDto;
 
   @BeforeEach
-  @Step("Создаем пользователя testUser")
+  @Step("Создаем пользователя testAbpIdentityUserCreateDto")
   public void createTestUser() {
-    testUser = userFactory.createUser(NEW_USER);
-    ValidatableResponse response = userClient.createUser(testUser);
+    testAbpIdentityUserCreateDto = userFactory.createUser(NEW_USER);
+    ValidatableResponse response = userClient.createUser(testAbpIdentityUserCreateDto);
     testUserId = response.extract().path("id");
   }
 
   @AfterEach
-  @Step("Удаляем пользователя testUser")
+  @Step("Удаляем пользователя testAbpIdentityUserCreateDto")
   public void deleteTestUser() {
-    if (testUser != null) {
+    if (testAbpIdentityUserCreateDto != null) {
       deleteResponse = userClient.deleteUser(testUserId);
     }
   }
 
   @Test
   @Tag(value = "smoke")
-  @DisplayName("Удалить пользователя testUser")
+  @DisplayName("Удалить пользователя testAbpIdentityUserCreateDto")
   public void deleteTestUserTest() {
     deleteResponse = userClient.deleteUser(testUserId);
     statusCode = extractStatusCode(deleteResponse);
-    testUser = null; // чтобы в @AfterEach повторно не удалять этого пользователя
+    testAbpIdentityUserCreateDto = null; // чтобы в @AfterEach повторно не удалять этого пользователя
 
     assertEquals(SC_NO_CONTENT, statusCode);
   }
 
   @Test
-  @DisplayName("Удалить пользователя testUser при не верном id")
+  @DisplayName("Удалить пользователя testAbpIdentityUserCreateDto при не верном id")
   public void deleteTestUserWithWrongIdTest() {
     String wrongId = "idTestUser";
     deleteResponse = userClient.deleteUser(wrongId);
@@ -67,7 +67,7 @@ public class DeleteUserTests extends StartTests {
   }
 
   @Test
-  @DisplayName("Удалить пользователя testUser при отсутствующем id")
+  @DisplayName("Удалить пользователя testAbpIdentityUserCreateDto при отсутствующем id")
   public void deleteTestUserWithoutIdTest() {
     deleteResponse = userClient.deleteUserWithoutId();
     statusCode = extractStatusCode(deleteResponse);

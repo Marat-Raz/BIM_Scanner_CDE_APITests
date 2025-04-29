@@ -32,8 +32,8 @@ public class UserCredentials {
     return appName;
   }
 
-  public static UserCredentials from(User user) {
-    return new UserCredentials(user.getUserName(), user.getEmail(), user.getPassword(), APP_NAME);
+  public static UserCredentials from(AbpIdentityUserCreateDto abpIdentityUserCreateDto) {
+    return new UserCredentials(abpIdentityUserCreateDto.getUserName(), abpIdentityUserCreateDto.getEmail(), abpIdentityUserCreateDto.getPassword(), APP_NAME);
   }
 
 }

@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 @Epic("Api interface CDE")
 @Feature("Раздел ProjectRoles(Роли в проекте)")
 @Story("Получение всех ролей в проекте")
-public class GetAllProjectRoles extends ProjectRolesBaseTests {
+public class GetAllProjectRolesTests extends ProjectRolesBaseTests {
 
   @Test
   @Tag(value = "positive")

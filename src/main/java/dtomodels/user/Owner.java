@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Owner extends User {
+public class Owner extends AbpIdentityUserCreateDto {
 
   public Owner(
       String userName,

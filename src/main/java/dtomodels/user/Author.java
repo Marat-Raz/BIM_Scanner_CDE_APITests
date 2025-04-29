@@ -1,22 +1,16 @@
 package dtomodels.user;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@AllArgsConstructor
 @Getter
 @Setter
 @ToString
-public class Author {
+public class Author extends CdeUserDto {
 
-  public String userName;
-  public String name;
-  public String surname;
-  public String email;
-  public boolean isActive;
-  public String creationTime;
-  public String id;
-
+  public Author(String userName, String name, String surname, String email, boolean isActive,
+      String creationTime, String id) {
+    super(userName, name, surname, email, isActive, creationTime, id);
+  }
 }

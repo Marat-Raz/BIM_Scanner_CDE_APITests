@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import basetests.StartTests;
 import dtomodels.error.ErrorRoot;
-import dtomodels.user.User;
+import dtomodels.user.AbpIdentityUserCreateDto;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
@@ -18,23 +18,23 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 @Epic("Api interface CDE")
-@Feature("Раздел User")
+@Feature("Раздел AbpIdentityUserCreateDto")
 @Story("Изменение данных пользователя")
-public class ChangeUserDataTests extends StartTests {
+public class ChangeAbpIdentityUserCreateDtoDataTests extends StartTests {
 
   ValidatableResponse putResponse;
-  User newUser;
+  AbpIdentityUserCreateDto newAbpIdentityUserCreateDto;
 
   @BeforeEach
   public void createNewUser() {
-    newUser = userFactory.createUser(NEW_USER);
+    newAbpIdentityUserCreateDto = userFactory.createUser(NEW_USER);
   }
 
   @Test
   @Tag(value = "smoke")
   @DisplayName("Изменить данные пользователя - userName и password")
   public void changeUserDataTests() {
-    putResponse = userClient.changeUser(newUser, userId);
+    putResponse = userClient.changeUser(newAbpIdentityUserCreateDto, userId);
     statusCode = putResponse.extract().statusCode();
 
     assertEquals(SC_OK, statusCode);
@@ -43,9 +43,9 @@ public class ChangeUserDataTests extends StartTests {
   @Test
   @DisplayName("Изменить данные пользователя - userName, без передачи параметра email")
   public void changeUsernameWithoutEmailTests() {
-    User userWithoutEmail = newUser;
-    userWithoutEmail.setEmail(null);
-    putResponse = userClient.changeUser(userWithoutEmail, userId);
+    AbpIdentityUserCreateDto abpIdentityUserCreateDtoWithoutEmail = newAbpIdentityUserCreateDto;
+    abpIdentityUserCreateDtoWithoutEmail.setEmail(null);
+    putResponse = userClient.changeUser(abpIdentityUserCreateDtoWithoutEmail, userId);
     statusCode = extractStatusCode(putResponse);
     errorRoot = putResponse.extract().body().as(ErrorRoot.class);
 
@@ -58,7 +58,7 @@ public class ChangeUserDataTests extends StartTests {
   @Test
   @DisplayName("Изменить данные пользователя - userName")
   public void changeUsernameWithEmailTests() {
-    putResponse = userClient.changeUser(newUser, userId);
+    putResponse = userClient.changeUser(newAbpIdentityUserCreateDto, userId);
     statusCode = extractStatusCode(putResponse);
 
     assertEquals(SC_OK, statusCode);
@@ -67,7 +67,7 @@ public class ChangeUserDataTests extends StartTests {
   @Test
   @DisplayName("Изменить данные пользователя - email")
   public void changeEmailWithUsernameTests() {
-    putResponse = userClient.changeUser(defaultUser, userId);
+    putResponse = userClient.changeUser(defaultAbpIdentityUserCreateDto, userId);
     statusCode = extractStatusCode(putResponse);
 
     assertEquals(SC_OK, statusCode);
@@ -76,9 +76,9 @@ public class ChangeUserDataTests extends StartTests {
   @Test
   @DisplayName("Изменить данные пользователя - email, без передачи параметра userName")
   public void changeEmailWithoutUsernameTests() {
-    User userWithoutUserName = newUser;
-    userWithoutUserName.setUserName(null);
-    putResponse = userClient.changeUser(userWithoutUserName, userId);
+    AbpIdentityUserCreateDto userWithoutAbpIdentityUserCreateDtoName = newAbpIdentityUserCreateDto;
+    userWithoutAbpIdentityUserCreateDtoName.setUserName(null);
+    putResponse = userClient.changeUser(userWithoutAbpIdentityUserCreateDtoName, userId);
     int statusCode = extractStatusCode(putResponse);
     errorRoot = putResponse.extract().body().as(ErrorRoot.class);
 

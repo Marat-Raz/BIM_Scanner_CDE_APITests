@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
 @Epic("Api interface CDE")
 @Feature("Раздел Models(Модели)")
 @Story("Получение модели по id")
-public class GetModelById extends ModelsBaseTests {
+public class GetModelByIdTests extends ModelsBaseTests {
 
   private ValidatableResponse getResponse;
 

@@ -2,7 +2,7 @@ package dtomodels.token;
 
 import lombok.Getter;
 import lombok.Setter;
-import dtomodels.user.User;
+import dtomodels.user.AbpIdentityUserCreateDto;
 import static constants.CommonConstants.ADMIN;
 import static constants.CommonConstants.ADMIN_P;
 import static constants.CommonConstants.GRANT_TYPE;
@@ -29,11 +29,11 @@ public class TokenBuilder {
         .build();
   }
 
-  public static RequestToken getTokenForUser(User user) {
+  public static RequestToken getTokenForUser(AbpIdentityUserCreateDto abpIdentityUserCreateDto) {
     return RequestToken.builder()
         .grantType(grantType)
-        .username(user.getUserName())
-        .password(user.getPassword())
+        .username(abpIdentityUserCreateDto.getUserName())
+        .password(abpIdentityUserCreateDto.getPassword())
         .scope(scope)
         .clientId(clientId)
         .clientSecret(clientSecret)
