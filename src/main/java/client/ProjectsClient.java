@@ -153,7 +153,6 @@ public class ProjectsClient extends Client {
         .spec(multipartBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .multiPart("coverImage", file)
-        // todo заменить название файла на переменную
         .when()
         .put(API_PROJECTS + projectId + "/cover")
         .then();
@@ -165,7 +164,6 @@ public class ProjectsClient extends Client {
         .spec(multipartBaseSpec())
         .auth().oauth2(token)
         .multiPart("coverImage", file)
-        // todo заменить название файла на переменную
         .when()
         .put(API_PROJECTS + projectId + "/cover")
         .then();

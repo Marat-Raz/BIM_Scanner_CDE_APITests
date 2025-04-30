@@ -16,7 +16,6 @@ public class TopicsClient extends Client {
   @Step("Получить список задач определенной доски задач")
   public ValidatableResponse getListOfTopicsFromTopicBoard(String topicBoardId,
       Map<String, Object> queryParams) {
-    // todo реализовать тесты для этого метода
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)

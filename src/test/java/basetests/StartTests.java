@@ -90,9 +90,3 @@ public class StartTests {
   }
 
 }
-/*
-todo внедрить
-    @Epic("Web interface")
-    @Feature("Essential features")
-    @Story("Authentication")
- */
