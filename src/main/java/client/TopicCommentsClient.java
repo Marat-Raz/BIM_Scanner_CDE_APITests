@@ -19,7 +19,7 @@ public class TopicCommentsClient extends Client {
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .body(createTopicCommentDto)
         .when()
-        .post(API_PROJECTS + topicBoardId + TOPICS + topicId + COMMENTS)
+        .post(API_ISSUES_BOARDS + topicBoardId + TOPICS + topicId + COMMENTS)
         .then();
   }
 
@@ -29,7 +29,7 @@ public class TopicCommentsClient extends Client {
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
-        .get(API_PROJECTS + topicBoardId + TOPICS + topicId + COMMENTS)
+        .get(API_ISSUES_BOARDS + topicBoardId + TOPICS + topicId + COMMENTS)
         .then();
   }
 
@@ -39,7 +39,7 @@ public class TopicCommentsClient extends Client {
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
-        .get(API_PROJECTS + topicBoardId + TOPICS + topicId + COMMENTS + topicCommentId)
+        .get(API_ISSUES_BOARDS + topicBoardId + TOPICS + topicId + COMMENTS + topicCommentId)
         .then();
   }
 
@@ -50,7 +50,7 @@ public class TopicCommentsClient extends Client {
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .body(updatedCreateTopicCommentDto)
         .when()
-        .put(API_PROJECTS + topicBoardId + TOPICS + topicId + COMMENTS + topicCommentId)
+        .put(API_ISSUES_BOARDS + topicBoardId + TOPICS + topicId + COMMENTS + topicCommentId)
         .then();
   }
 
@@ -60,7 +60,7 @@ public class TopicCommentsClient extends Client {
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)
         .when()
-        .delete(API_PROJECTS + topicBoardId + TOPICS + topicId + COMMENTS + topicCommentId)
+        .delete(API_ISSUES_BOARDS + topicBoardId + TOPICS + topicId + COMMENTS + topicCommentId)
         .then();
   }
 

@@ -9,8 +9,8 @@ import static org.apache.http.HttpStatus.SC_OK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import basetests.StartTests;
-import dto.generated.AbpRemoteServiceErrorResponse;
 import dto.generated.AbpIdentityUserCreateDto;
+import dto.generated.AbpRemoteServiceErrorResponse;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 @Epic("Api interface CDE")
-@Feature("Раздел User")
+@Feature("Раздел AbpIdentityUserCreateDto")
 @Story("Создание пользователя")
 public class UserCreateTests extends StartTests {
 
@@ -52,7 +52,8 @@ public class UserCreateTests extends StartTests {
   @Test
   @DisplayName("Создать пользователя и не заполнить одно из обязательных полей - email")
   public void createUserWithoutEmailTest() {
-    AbpIdentityUserCreateDto abpIdentityUserCreateDtoWithoutEmail = userFactory.createUser(USER_WITHOUT_EMAIL);
+    AbpIdentityUserCreateDto abpIdentityUserCreateDtoWithoutEmail = userFactory.createUser(
+        USER_WITHOUT_EMAIL);
     wrongResponse = userClient.createUser(abpIdentityUserCreateDtoWithoutEmail);
     errorResponse = wrongResponse.extract().body().as(AbpRemoteServiceErrorResponse.class);
     statusCode = extractStatusCode(wrongResponse);
@@ -66,7 +67,8 @@ public class UserCreateTests extends StartTests {
   @Test
   @DisplayName("Создать пользователя и не заполнить одно из обязательных полей - password")
   public void createUserWithoutPasswordTest() {
-    AbpIdentityUserCreateDto abpIdentityUserCreateDtoWithoutPassword = userFactory.createUser(USER_WITHOUT_PASSWORD);
+    AbpIdentityUserCreateDto abpIdentityUserCreateDtoWithoutPassword = userFactory.createUser(
+        USER_WITHOUT_PASSWORD);
     wrongResponse = userClient.createUser(abpIdentityUserCreateDtoWithoutPassword);
     errorResponse = wrongResponse.extract().body().as(AbpRemoteServiceErrorResponse.class);
     statusCode = extractStatusCode(wrongResponse);
@@ -80,7 +82,8 @@ public class UserCreateTests extends StartTests {
   @Test
   @DisplayName("Создать пользователя и не заполнить одно из обязательных полей - userName")
   public void createUserWithoutNameTest() {
-    AbpIdentityUserCreateDto userWithoutAbpIdentityUserCreateDtoName = userFactory.createUser(USER_WITHOUT_USERNAME);
+    AbpIdentityUserCreateDto userWithoutAbpIdentityUserCreateDtoName = userFactory.createUser(
+        USER_WITHOUT_USERNAME);
     wrongResponse = userClient.createUser(userWithoutAbpIdentityUserCreateDtoName);
     errorResponse = wrongResponse.extract().body().as(AbpRemoteServiceErrorResponse.class);
     statusCode = extractStatusCode(wrongResponse);

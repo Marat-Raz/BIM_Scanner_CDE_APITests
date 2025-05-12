@@ -24,8 +24,8 @@ public class UpdateTopicCreateTopicCommentTests extends CreateTopicCommentsBaseT
   @Tag(value = "smoke")
   @DisplayName("Обновить комментарий к задаче")
   public void updateTopicCommentTest() {
-    CdeCreateTopicCommentDto newTopicComment = createTopicCommentDto;
-    createTopicCommentDto.setComment("New createTopicCommentDto");
+    CdeCreateTopicCommentDto newTopicComment = createTopicComment;
+    createTopicComment.setComment("New createTopicCommentDto");
     updateTopicCommentResponse = topicCommentsClient
         .updateTopicComment(topicBoardId, defaultTopicId, topicCommentId, newTopicComment);
     statusCode = extractStatusCode(updateTopicCommentResponse);
@@ -34,6 +34,6 @@ public class UpdateTopicCreateTopicCommentTests extends CreateTopicCommentsBaseT
 
     assertEquals(SC_OK, statusCode);
     assertEquals(topicCommentId, expectedTopicCommentId);
-    assertEquals(createTopicCommentDto.getComment(), cdeTopicCommentDto.getComment());
+    assertEquals(createTopicComment.getComment(), cdeTopicCommentDto.getComment());
   }
 }

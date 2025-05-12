@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 @Epic("Api interface CDE")
-@Feature("Раздел User")
+@Feature("Раздел AbpIdentityUserCreateDto")
 @Story("Изменение данных пользователя")
 public class ChangeUserDataTests extends StartTests {
 

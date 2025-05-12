@@ -65,7 +65,7 @@ public class StartTests {
     createProjectResponse = projectsClient.createProject(defaultProject);
     projectId = createProjectResponse.extract().path("id");
 
-    // todo выдать для user права на создание проектов раздел permission
+    // todo выдать для abpIdentityUserCreateDto права на создание проектов раздел permission
   }
 
   @AfterAll
@@ -80,8 +80,8 @@ public class StartTests {
     for (CdeProjectDto project : projectPaginatedResponse.getItems()) {
       projectsClient.deleteProjectByItsId(Client.ADMIN_ACCESS_TOKEN,
           project.getId());
-
     }
+    // todo удалить всех пользователей
   }
 
   @Step("Получаем код ответа")

@@ -3,9 +3,9 @@ package client;
 import static io.restassured.RestAssured.given;
 
 import client.base.Client;
+import dto.generated.AbpIdentityUserCreateDto;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
-import dto.generated.AbpIdentityUserCreateDto;
 
 public class UserClient extends Client {
 
@@ -22,7 +22,8 @@ public class UserClient extends Client {
   }
 
   @Step("Изменить данные пользователя") // todo уточнить по документации
-  public ValidatableResponse changeUser(AbpIdentityUserCreateDto abpIdentityUserCreateDto, String id) {
+  public ValidatableResponse changeUser(AbpIdentityUserCreateDto abpIdentityUserCreateDto,
+      String id) {
     return given()
         .spec(getBaseSpec())
         .auth().oauth2(ADMIN_ACCESS_TOKEN)

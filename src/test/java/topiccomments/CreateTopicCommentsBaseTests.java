@@ -35,7 +35,7 @@ public class CreateTopicCommentsBaseTests extends StartTests {
   protected static ValidatableResponse addTopicsResponse;
   protected static ValidatableResponse addTopicsCommentsResponse;
   protected static CdeCreateTopicDto topic;
-  protected static CdeCreateTopicCommentDto createTopicCommentDto;
+  protected static CdeCreateTopicCommentDto createTopicComment;
   protected static CdeTopicDetailsDto responseTopic;
   protected static CdeTopicCommentDto cdeTopicCommentDto;
   protected static String topicBoardId;
@@ -60,9 +60,9 @@ public class CreateTopicCommentsBaseTests extends StartTests {
   @BeforeEach
   @Step("Добавляем комментарии к задаче")
   public void addTopicComment() {
-    createTopicCommentDto = commentsFactory.createTopicComment(DEFAULT_TOPIC_COMMENT);
+    createTopicComment = commentsFactory.createTopicComment(DEFAULT_TOPIC_COMMENT);
     addTopicsCommentsResponse = topicCommentsClient
-        .createTopicComment(topicBoardId, defaultTopicId, createTopicCommentDto);
+        .createTopicComment(topicBoardId, defaultTopicId, createTopicComment);
     cdeTopicCommentDto = addTopicsCommentsResponse.extract().as(CdeTopicCommentDto.class);
     topicCommentId = cdeTopicCommentDto.getId();
   }

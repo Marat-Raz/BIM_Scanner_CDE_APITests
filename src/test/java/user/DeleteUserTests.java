@@ -17,7 +17,7 @@ import io.restassured.response.ValidatableResponse;
 import org.junit.jupiter.api.*;
 
 @Epic("Api interface CDE")
-@Feature("Раздел User")
+@Feature("Раздел AbpIdentityUserCreateDto")
 @Story("Удаление пользователя")
 public class DeleteUserTests extends StartTests {
 
@@ -26,7 +26,7 @@ public class DeleteUserTests extends StartTests {
   private AbpIdentityUserCreateDto testUser;
 
   @BeforeEach
-  @Step("Создаем пользователя testUser")
+  @Step("Создаем пользователя testAbpIdentityUserCreateDto")
   public void createTestUser() {
     testUser = new UserFactory().createUser(NEW_USER);
     ValidatableResponse response = userClient.createUser(testUser);
@@ -34,7 +34,7 @@ public class DeleteUserTests extends StartTests {
   }
 
   @AfterEach
-  @Step("Удаляем пользователя testUser")
+  @Step("Удаляем пользователя testAbpIdentityUserCreateDto")
   public void deleteTestUser() {
     if (testUser != null) {
       deleteResponse = userClient.deleteUser(testUserId);
@@ -43,7 +43,7 @@ public class DeleteUserTests extends StartTests {
 
   @Test
   @Tag(value = "smoke")
-  @DisplayName("Удалить пользователя testUser")
+  @DisplayName("Удалить пользователя testAbpIdentityUserCreateDto")
   public void deleteTestUserTest() {
     deleteResponse = userClient.deleteUser(testUserId);
     statusCode = extractStatusCode(deleteResponse);
@@ -53,7 +53,7 @@ public class DeleteUserTests extends StartTests {
   }
 
   @Test
-  @DisplayName("Удалить пользователя testUser при не верном id")
+  @DisplayName("Удалить пользователя testAbpIdentityUserCreateDto при не верном id")
   public void deleteTestUserWithWrongIdTest() {
     String wrongId = "idTestUser";
     deleteResponse = userClient.deleteUser(wrongId);
@@ -68,7 +68,7 @@ public class DeleteUserTests extends StartTests {
   }
 
   @Test
-  @DisplayName("Удалить пользователя testUser при отсутствующем id")
+  @DisplayName("Удалить пользователя testAbpIdentityUserCreateDto при отсутствующем id")
   public void deleteTestUserWithoutIdTest() {
     deleteResponse = userClient.deleteUserWithoutId();
     statusCode = extractStatusCode(deleteResponse);
