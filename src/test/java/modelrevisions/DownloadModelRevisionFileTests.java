@@ -8,12 +8,18 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import basetests.RestAssuredLogging;
 import dtomodels.models.ModelFileFormat;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
 import io.qameta.allure.Step;
+import io.qameta.allure.Story;
 import io.restassured.response.ValidatableResponse;
 import java.io.File;
 import java.io.IOException;
 import org.junit.jupiter.api.*;
 
+@Epic("Api interface CDE")
+@Feature("Раздел ModelRevisions(Ревизии моделей)")
+@Story("Изменение ревизии модели в проекте")
 public class DownloadModelRevisionFileTests extends ModelRevisionsBaseTests {
 
   private ValidatableResponse downloadModelRevisionResponse;

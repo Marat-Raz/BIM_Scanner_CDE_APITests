@@ -6,11 +6,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import dto.generated.CdeModelConversionStatusDto;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import io.restassured.response.ValidatableResponse;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+@Epic("Api interface CDE")
+@Feature("Раздел ModelRevisions(Ревизии моделей)")
+@Story("Получение статуса преобразования модели")
 public class GetStatusOfModelConversionTests extends ModelRevisionsBaseTests {
 
   private ValidatableResponse getStatusOfModelConversionResponse;

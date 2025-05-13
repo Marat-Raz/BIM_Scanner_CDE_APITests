@@ -6,11 +6,11 @@ import basetests.RestAssuredLogging;
 import basetests.StartTests;
 import client.ModelRevisionsClient;
 import client.ModelsClient;
-import dto.generated.CdeCreateTopicCommentDto;
 import dto.generated.CdeCreateOrUpdateModelDto;
+import dto.generated.CdeCreateTopicCommentDto;
+import dto.generated.CdeModelRevisionDto;
 import dtomodels.models.ModelFileFormat;
 import dtomodels.models.ModelsFactory;
-import dto.generated.CdeModelRevisionDto;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import java.io.File;
@@ -47,7 +47,8 @@ public class ModelRevisionsBaseTests extends StartTests {
     RestAssuredLogging.setupMinimalLogging();
     for (int i = 0; i < modelRevisionCount; i++) {
       uploadModelFileResponse = modelRevisionsClient
-          .uploadNewModelFile(projectId, modelId, modelFile, new CdeCreateTopicCommentDto("createTopicCommentDto №" + i));
+          .uploadNewModelFile(projectId, modelId, modelFile,
+              new CdeCreateTopicCommentDto("createTopicCommentDto №" + i));
       cdeModelRevisionDto = uploadModelFileResponse.extract().as(CdeModelRevisionDto.class);
       modelRevisionsArrayFromResponse.add(cdeModelRevisionDto);
     }
@@ -87,7 +88,8 @@ public class ModelRevisionsBaseTests extends StartTests {
     };
   }
 
-  protected File getDefaultDownloadPath(int version, ModelFileFormat format) { // todo вынести в Steps
+  protected File getDefaultDownloadPath(int version,
+      ModelFileFormat format) { // todo вынести в Steps
     String fileName = String.format("%s-v%d%s",
         FILE_BASE_NAME,
         version,

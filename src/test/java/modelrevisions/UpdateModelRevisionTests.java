@@ -5,11 +5,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import dto.generated.CdeCreateTopicCommentDto;
 import dto.generated.CdeModelRevisionDto;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import io.restassured.response.ValidatableResponse;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+@Epic("Api interface CDE")
+@Feature("Раздел ModelRevisions(Ревизии моделей)")
+@Story("Изменение ревизии модели")
 public class UpdateModelRevisionTests extends ModelRevisionsBaseTests {
 
   private ValidatableResponse updateModelRevisionResponse;
@@ -19,7 +25,8 @@ public class UpdateModelRevisionTests extends ModelRevisionsBaseTests {
   @DisplayName("Изменить ревизию модели - код ответа 200")
   public void updateModelRevisionTest() {
     int modelVersion = 2;
-    CdeCreateTopicCommentDto createTopicCommentDto = new CdeCreateTopicCommentDto("Changed createTopicCommentDto");
+    CdeCreateTopicCommentDto createTopicCommentDto = new CdeCreateTopicCommentDto(
+        "Changed createTopicCommentDto");
     updateModelRevisionResponse = modelRevisionsClient.changeModelRevisionComment(
         projectId,
         modelId,

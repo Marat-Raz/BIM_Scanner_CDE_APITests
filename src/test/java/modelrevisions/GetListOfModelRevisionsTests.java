@@ -5,12 +5,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import dtomodels.PaginatedResponse;
 import dto.generated.CdeModelRevisionDto;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import io.restassured.response.ValidatableResponse;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+@Epic("Api interface CDE")
+@Feature("Раздел ModelRevisions(Ревизии моделей)")
+@Story("Получение списка версий модели")
 public class GetListOfModelRevisionsTests extends ModelRevisionsBaseTests {
 
   private ValidatableResponse getListOfModelRevisionsResponse;
